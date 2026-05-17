@@ -4,11 +4,38 @@ The comprehensive skill for building on Celo. Ecosystem intelligence, developer 
 
 ## Install
 
+For Codex and OpenClaw (installs to `.agents/skills/`):
+
 ```bash
 npx skills add celo-org/celopedia-skills
 ```
 
-Works with Claude Code, Codex, and OpenClaw.
+### Claude Code
+
+Claude Code only discovers skills under `.claude/skills/` (project) or
+`~/.claude/skills/` (user), so `npx skills add` alone is not enough.
+Pick one of:
+
+**Option A — symlink (keeps `.agents/` as the source of truth, recommended on macOS/Linux):**
+
+```bash
+npx skills add celo-org/celopedia-skills
+mkdir -p .claude
+ln -s ../.agents/skills .claude/skills
+```
+
+**Option B — install directly under `.claude/skills/`:**
+
+```bash
+mkdir -p .claude/skills
+git clone --depth 1 https://github.com/celo-org/celopedia-skills.git /tmp/celopedia
+cp -r /tmp/celopedia/skills/celopedia-skill .claude/skills/
+rm -rf /tmp/celopedia
+```
+
+Restart Claude Code after installing — creating a new top-level `.claude/`
+directory mid-session is not picked up live. Verify with `/skills` or by
+asking "what skills are available?".
 
 ## What it does
 
