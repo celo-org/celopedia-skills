@@ -2,6 +2,12 @@
 
 For builders who want a minimal Next.js setup without Celo Composer's monorepo / Hardhat scaffolding. Produces a single Next.js app ready for MiniPay testing on ngrok.
 
+> Pairs with the canonical MiniPay docs:
+> - Project setup: https://docs.minipay.xyz/getting-started/project-setup.html
+> - Setup with React: https://docs.minipay.xyz/getting-started/setup-react.html
+> - Wallet connection: https://docs.minipay.xyz/getting-started/wallet-connection.html
+> - Test in MiniPay: https://docs.minipay.xyz/getting-started/test-in-minipay.html
+
 > **When to use this vs Celo Composer:** Use Composer (`npx @celo/celo-composer@latest create -t minipay`) if you want batteries-included (Hardhat, Foundry config, pre-wired wagmi/RainbowKit, monorepo layout). Use this guide if you want a clean single-app repo or are integrating MiniPay into an existing Next.js project.
 
 ---

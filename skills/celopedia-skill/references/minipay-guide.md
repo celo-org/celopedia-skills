@@ -1,6 +1,10 @@
 # MiniPay Development Guide
 
-> Source: docs.celo.org/build-on-celo/build-on-minipay/*
+> Sources:
+> - MiniPay docs (canonical): https://docs.minipay.xyz/
+> - docs.celo.org mirror: https://docs.celo.org/build-on-celo/build-on-minipay/*
+>
+> For the full page-by-page index of `docs.minipay.xyz`, see `minipay-docs-map.md`.
 
 MiniPay is a non-custodial stablecoin wallet integrated into Opera Mini and available as a standalone app on Android and iOS. It's the fastest growing wallet in the Global South with 14M+ activations, 300M+ stablecoin transactions, available in 60+ countries.
 
@@ -290,11 +294,16 @@ This is part of MiniPay's submission requirements — see `minipay-requirements.
 
 ## Deeplinks
 
+Host: `link.minipay.xyz`. Full table with all current deeplinks is in `minipay-docs-map.md` → _Deeplinks_.
+
 | Deeplink | URL | Purpose |
 |----------|-----|---------|
-| Deposit (Add Cash) | `https://minipay.opera.com/add_cash` | Redirect users with low balance to top up |
+| Add Cash | `https://link.minipay.xyz/add_cash` (optionally `?tokens=USDm,USDC,USDT`) | Redirect users with low balance to top up |
+| Open Mini App | `https://link.minipay.xyz/browse?url=xxx` | Deep-link into an approved Mini App |
+| MiniApps tab | `https://link.minipay.xyz/discover` | Jump to the discovery tab |
+| Transaction receipt | `https://link.minipay.xyz/receipt?tx=xxx[&celebrate]` | Show a receipt screen for a tx hash |
 
-> **Canonical list:** `https://docs.minipay.xyz/technical-references/deeplinks.html#available-deeplinks` — fetch before shipping; MiniPay publishes new deeplinks periodically.
+> **Canonical list:** https://docs.minipay.xyz/technical-references/deeplinks.html — fetch before shipping; MiniPay publishes new deeplinks periodically.
 >
 > **UI copy:** label this action **Deposit** in buttons/messages — not "Add Cash", "Onramp", or "Buy". See `minipay-requirements.md` §3.
 

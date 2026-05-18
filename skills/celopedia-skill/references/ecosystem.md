@@ -219,7 +219,6 @@ MiniPay is Celo's flagship stablecoin wallet, built into Opera Mini and also ava
 | App | Category | Description |
 |-----|----------|-------------|
 | BitGifty | Bill Payments | Stablecoin-powered bill payments (450K+ active users, 10+ countries) |
-| Bando | Vouchers & Bills | Local voucher and bill payment service |
 | Topcasters | Prediction Gaming | USDT-powered prediction market game (2.2M+ predictions, 138K+ users) |
 | Mdundo | Music Streaming | Africa's top music platform, subscriptions from $0.50 |
 | Gamifly | Gamified Rewards | Trivia and challenge app with stablecoin rewards |
