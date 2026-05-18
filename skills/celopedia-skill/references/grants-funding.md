@@ -10,6 +10,15 @@
 
 ## Currently Live Programs
 
+### Proof of Ship (Season 2)
+- **Type**: Monthly builder program for MiniApps on MiniPay (not a hackathon)
+- **Amount**: $5,000 USDT/month prize pool; max 2,000 USDT per project across the season
+- **Dates**: April 1 – June 30, 2026 (three monthly cycles)
+- **Host**: Celo Devs / Celo Public Goods (submissions on Talent App)
+- **Priority categories**: Games, Utility apps, X2Earn apps, AI Agents with MiniPay use cases
+- **Best for**: Builders shipping MiniApps with MiniPay hook on Celo mainnet (verified contract + open-source GitHub required)
+- **Links**: https://bit.ly/celo-proof-of-ship · https://talent.app/~/earn/celo-proof-of-ship
+
 ### Prezenti: Anchor Round
 
 - **Type**: Milestone-based grants
@@ -88,7 +97,8 @@
 
 | Building… | Recommended Program |
 |-----------|---------------------|
-| Any Celo project, milestone-based | **Prezenti Anchor Round** — up to $25K |
+| Building a MiniApp for MiniPay | Proof of Ship S2 ($5K/month) |
+| Project built on Celo, focus on MiniPay | **Prezenti Anchor Round** — up to $25K |
 | AI agents or agent-economy infrastructure | **Prezenti Frontier Pool (S2)** |
 | GoodDollar / UBI integration | **GoodBuilders S3** — $50K G$ |
 | Post-launch app with measurable traction (1K+ MAU / 500+ daily tx / $50K+ TVL / $5K+/mo revenue) | **Celo Builder Fund** — $25K SAFE |
