@@ -2,7 +2,7 @@
 
 > Source: https://www.celopg.eco/programs
 > Additional: https://docs.celo.org/build-on-celo/fund-your-project
-> Last updated: 2026-04-15 (cache — always fetch live per directive below)
+> Last updated: 2026-05-18 (cache — always fetch live per directive below)
 
 > ⚠️ **Live data required.** Program status (Live/Past), dates, rewards, and eligibility change frequently — often mid-quarter. **Always fetch the current list from `https://www.celopg.eco/programs` before answering any grant question.** The tables below are a cached reference and may be stale the moment a program's status flips. See `live-data-sources.md` §2 for the fetch command. For eligibility / submission cadence / rewards, extract from the live page — do not infer from this file.
 
@@ -20,14 +20,27 @@
 - **Links**: https://bit.ly/celo-proof-of-ship · https://talent.app/~/earn/celo-proof-of-ship
 
 ### Prezenti: Anchor Round
+
 - **Type**: Milestone-based grants
-- **Amount**: Up to 25K USD
+- **Amount**: Up to **$25K USD**
 - **Dates**: Feb 25 – Jun 30, 2026
 - **Host**: Prezenti
-- **Timeline**: 2-4 weeks for notification, rolling basis until funds disbursed
+- **Apply**: https://anchor.prezenti.xyz/
+- **Timeline**: 2–4 weeks for notification, rolling basis until funds are disbursed
 - **Best for**: Projects at various stages needing structured milestone funding
 
+### Prezenti: Frontier Pool (S2)
+
+- **Type**: Milestone-based grants for **AI & Agent Economy Infrastructure**
+- **Dates**: Open through **Jun 30, 2026**
+- **Host**: Prezenti
+- **Apply**: https://frontier.prezenti.xyz/
+- **Timeline**: Decisions within 2–4 weeks of submission, rolling basis until funds allocated
+- **Best for**: Projects building infrastructure for AI agents and the on-chain agent economy on Celo
+- **Note**: Prezenti encourages applicants to **discuss fit before applying**. See announcement: https://forum.celo.org/t/prezenti-season-2-update-introducing-the-frontier-pool-ai-agent-economy-infrastructure/13277
+
 ### GoodBuilders Season 3
+
 - **Type**: Continuous funding round
 - **Amount**: $50K USD in G$
 - **Dates**: Feb 5 – May 18, 2026
@@ -36,42 +49,22 @@
 - **Best for**: Projects integrating GoodDollar UBI token
 
 ### Celo Builder Fund
-- **Type**: Investment
-- **Amount**: $25K cUSD per project (potential for additional funding)
-- **Dates**: Jan 1 – Dec 31, 2026 (year-round)
-- **Host**: Celo Devs / Verda Ventures
-- **Contact**: team@verda.ventures
-- **Best for**: Venture-stage projects building on Celo
 
----
-
-## Other Funding Channels
-
-### Commons Builder Income
-- **Type**: Daily rewards for qualified builders
-- **Platform**: https://www.commonsprotocol.xyz/
-
-### Builder Rewards (Talent Protocol)
-- **Type**: Monthly rewards
-- **Amount**: 10,000 CELO/month pool
-- **Partnership**: Celo PG x Talent Protocol
-
-### Divvi (Proof of Impact)
-- **Type**: Automated gas fee revenue sharing based on onchain KPIs
-- **Platform**: https://www.divvi.xyz/
-- **Best for**: Live applications with measurable usage
-
-### Karma GAP
-- **Purpose**: Create a project profile to showcase contributions and build credibility
-- **Why**: Retroactive funding programs use Karma GAP to verify progress
-
-### Celo Camp
-- **Type**: Accelerator
-- **Website**: https://www.celocamp.com/
-- **Best for**: Early-stage projects seeking structured acceleration
-
-### Celo Africa DAO Incubator
-- **Type**: Incubator for African projects
+- **Type**: Investment via **Uncapped YC SAFE**
+- **Amount**: **$25K per project** (10–15 projects targeted)
+- **Dates**: Year-round, runs through **Dec 31, 2026**
+- **Host**: Celo Growth team
+- **Source**: https://www.celopg.eco/programs/celo-builder-fund
+- **Best for**: Projects in the **post-launch phase** (live MVP or v1) that are deployed to **Celo mainnet** with active GitHub development
+- **Eligibility — must meet at least 2 of 4 traction thresholds:**
+  - **1,000+ MAUs** (measured via on-chain usage or app analytics)
+  - **500+ daily transactions** sustained over a 2-week period
+  - **$50K+ TVL** (locked liquidity or usage-based lending/borrowing)
+  - **$5K+/month revenue** (total transaction volume or net GMV revenue)
+- **What's provided**: $25K seed funding, strategic growth support from the Celo Growth team, ecosystem exposure and investor introductions
+- **Graduation**: Projects hitting 10K+ MAU, $250K+ TVL, and sustained traction may access larger capital through **Verda**
+- **Required materials**: a deck and/or product demo plus quantitative traction data
+- **Contact**: lena.hierzi@celo.org
 
 ---
 
@@ -79,34 +72,33 @@
 
 | Program | Funding | Dates | Host |
 |---------|---------|-------|------|
-| Synthesis | 10K USDT | Mar 11-25, 2026 | Celo Devs |
-| Build Agents for Real World | $8.5K USDT | Mar 2-22, 2026 | Celo Public Goods |
-| Cel'EU Cirkvit S1 | 27K CELO | Nov-Dec 2025 | Celo Europe |
-| Gitcoin Grants 24 | $1.5M USD | Oct-Dec 2025 | Celo Public Goods |
-| Mini App Mondays | 250 + 1K CELO/week | Sep-Dec 2025 | Celo Devs |
-| Prezenti Peach Round | Up to 50K USD | Aug-Dec 2025 | Prezenti |
-| Support Streams S1 | 150K CELO + 150K OP | Sep 2025-Jan 2026 | Celo Public Goods |
-| Proof of Impact S1 | 250K CELO + 100K OP | Aug-Dec 2025 | Celo Public Goods |
-| Proof of Ship S1 | 30K cUSD + 100K CELO | Aug-Dec 2025 | Celo Devs |
-| GoodBuilders Round 2 | $70K G$ + 50K CELO | Jul-Oct 2025 | GoodDollar |
-| CeloPG & Farcaster | 50K CELO | May-Jul 2025 | Celo Public Goods |
-| USDGLO Flywheel | 6K USDGLO + 10K CELO | Jun-Jul 2025 | Glo Dollar |
-| Builder Rewards | 30K CELO | May-Jul 2025 | Celo Public Goods |
-| Support Streams S0 | 100K CELO | May-Jul 2025 | Celo Public Goods |
-| Proof of Impact S0 | 150K CELO | May-Jul 2025 | Celo Public Goods |
-| Proof of Ship (original) | 30K cUSD | Feb-Jul 2025 | Celo Devs |
+| Synthesis | 10K USDT | Mar 11–25, 2026 | Celo Devs |
+| Build Agents for Real World | $8.5K USDT | Mar 2–22, 2026 | Celo Public Goods |
+| Cel'EU Cirkvit S1 | 27K CELO | Nov–Dec 2025 | Celo Europe |
+| Gitcoin Grants 24 | $1.5M USD | Oct–Dec 2025 | Celo Public Goods |
+| Mini App Mondays | 250 + 1K CELO/week | Sep–Dec 2025 | Celo Devs |
+| Prezenti Peach Round | Up to 50K USD | Aug–Dec 2025 | Prezenti |
+| Support Streams S1 | 150K CELO + 150K OP | Sep 2025–Jan 2026 | Celo Public Goods |
+| Proof of Impact S1 | 250K CELO + 100K OP | Aug–Dec 2025 | Celo Public Goods |
+| Proof of Ship S1 | 30K cUSD + 100K CELO | Aug–Dec 2025 | Celo Devs |
+| GoodBuilders Round 2 | $70K G$ + 50K CELO | Jul–Oct 2025 | GoodDollar |
+| CeloPG & Farcaster | 50K CELO | May–Jul 2025 | Celo Public Goods |
+| USDGLO Flywheel | 6K USDGLO + 10K CELO | Jun–Jul 2025 | Glo Dollar |
+| Builder Rewards | 30K CELO | May–Jul 2025 | Celo Public Goods |
+| Support Streams S0 | 100K CELO | May–Jul 2025 | Celo Public Goods |
+| Proof of Impact S0 | 150K CELO | May–Jul 2025 | Celo Public Goods |
+| Proof of Ship (original) | 30K cUSD | Feb–Jul 2025 | Celo Devs |
+
+> Note: Prezenti applications have **moved from Charmverse to Tally**. Old Charmverse links are inactive — use `https://anchor.prezenti.xyz/` and `https://frontier.prezenti.xyz/` for new submissions. Announcement: https://forum.celo.org/t/prezenti-grant-applications-have-moved-to-tally/13318
 
 ---
 
 ## Grant Matchmaking Guide
 
-| Building... | Recommended Programs |
-|-------------|---------------------|
-| Building a MiniApp for MiniPay | Proof of Ship S2 ($5K/month, max 2K USDT/project) |
-| Any Celo project (milestone-based) | Prezenti Anchor Round (up to 25K) |
-| GoodDollar integration | GoodBuilders S3 ($50K G$) |
-| Venture-stage project | Celo Builder Fund ($25K cUSD) |
-| Live app with onchain usage | Divvi / Proof of Impact |
-| Active builder seeking daily rewards | Commons Builder Income |
-| Early-stage, need mentorship | Celo Camp (accelerator) |
-| Africa-focused | Celo Africa DAO Incubator |
+| Building… | Recommended Program |
+|-----------|---------------------|
+| Building a MiniApp for MiniPay | Proof of Ship S2 ($5K/month) |
+| Project built on Celo, focus on MiniPay | **Prezenti Anchor Round** — up to $25K |
+| AI agents or agent-economy infrastructure | **Prezenti Frontier Pool (S2)** |
+| GoodDollar / UBI integration | **GoodBuilders S3** — $50K G$ |
+| Post-launch app with measurable traction (1K+ MAU / 500+ daily tx / $50K+ TVL / $5K+/mo revenue) | **Celo Builder Fund** — $25K SAFE |
