@@ -109,7 +109,7 @@ Replace crypto-jargon with user-friendly terms everywhere a real user sees them 
 
 > Docs: https://docs.minipay.xyz/getting-started/submit-your-miniapp.html · https://docs.minipay.xyz/getting-started/best-practices.html (Performance, User Experience) · https://docs.minipay.xyz/getting-started/deployment.html
 
-- **Mobile-First Resolution** — the UI must be responsive and fully functional at **360w × 640h** (the original requirements PDF; MiniPay's submission doc cites **360 × 720** as the minimum — design for the smaller and verify on both). Use Chrome DevTools device mode to validate before submission.
+- **Mobile-First Resolution** — the UI must be responsive and fully functional at **360w × 640h**. This is the hard minimum from the readiness PDF, and the smaller of the two figures floating in MiniPay's public material — design and verify against 360 × 640. Use Chrome DevTools device mode to validate before submission.
 - **Asset Optimization** — use **SVG or WebP** for images. Avoid PNG/JPG for anything larger than a few KB.
 - **Performance Benchmarking** — submit a **PageSpeed Insights** score (`https://pagespeed.web.dev`) for your production URL with the form. Aim for 90+ on mobile. Low scores block listing.
 - **Network Transparency** — provide a full manifest of every **URL, subdomain, and origin** your app calls (JS, CSS, fonts, RPCs, APIs). MiniPay reviews this for supply-chain risk.
