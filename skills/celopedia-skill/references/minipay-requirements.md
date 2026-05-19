@@ -1,14 +1,17 @@
 # MiniPay Submission Requirements
 
-> Source: Opera MiniPay "Build for MiniPay: Developer Requirements" (official PDF).
-> Last updated: 2026-05-13.
+> Sources:
+> - Opera MiniPay "Build for MiniPay: Developer Requirements" (official PDF)
+> - MiniPay docs: https://docs.minipay.xyz/getting-started/submit-your-miniapp.html
+>
+> Last updated: 2026-05-18.
 
 Getting a Mini App listed in MiniPay is a **two-stage process**:
 
 1. **Intake form** — submit basic app info at `https://minipay.to/mini-apps`. If the app looks promising, the MiniPay team books a first call with you.
 2. **Readiness form** — after the first call, MiniPay sends a full readiness form. The checklist in Stage 2 below is what they will assess against.
 
-For how to build each piece, see `minipay-guide.md`, `minipay-templates.md`, and `minipay-scaffold-from-scratch.md`.
+For how to build each piece, see `minipay-guide.md`, `minipay-templates.md`, and `minipay-scaffold-from-scratch.md`. For the full canonical docs index, see `minipay-docs-map.md`.
 
 ---
 
@@ -72,17 +75,23 @@ Everything below is what MiniPay assesses against in the readiness form **after 
 
 ### 1. Seamless User Experience
 
-- **Zero-Click Connect** — do **not** show a "Connect Wallet" button inside MiniPay. Auto-retrieve the wallet address from `window.ethereum`. Pattern: `minipay-templates.md` §1; detection: `minipay-guide.md` → MiniPay Detection.
-- **No Message Signing** — do **not** prompt users to `personal_sign` or `eth_signTypedData` to access or authenticate. MiniPay does not support these methods. See `minipay-guide.md` → Important Constraints #4.
-- **Phone-First Identity** — **never display raw `0x…` addresses** as the primary identifier. Show the phone number (resolved via ODIS → FederatedAttestations), an app-specific alias, or a truncated form only as a secondary hint. Lookup flow: `odis-socialconnect.md` and `minipay-guide.md` → Phone Number → Address Resolution.
+> Docs: https://docs.minipay.xyz/getting-started/wallet-connection.html · https://docs.minipay.xyz/getting-started/best-practices.html
+
+- **Zero-Click Connect** — do **not** show a "Connect Wallet" button inside MiniPay. Auto-retrieve the wallet address from `window.ethereum`. Pattern: `minipay-templates.md` §1; detection: `minipay-guide.md` → MiniPay Detection; docs: https://docs.minipay.xyz/getting-started/wallet-connection.html.
+- **No Message Signing** — do **not** prompt users to `personal_sign` or `eth_signTypedData` to access or authenticate. MiniPay does not support these methods. See `minipay-guide.md` → Important Constraints #4 and the wallet-connection doc above.
+- **Phone-First Identity** — **never display raw `0x…` addresses** as the primary identifier. Show the phone number (resolved via ODIS → FederatedAttestations), an app-specific alias, or a truncated form only as a secondary hint. Lookup flow: `odis-socialconnect.md` and `minipay-guide.md` → Phone Number → Address Resolution; docs: https://docs.minipay.xyz/technical-references/phone-number-lookup.html.
 
 ### 2. Currency & Stablecoin Logic
 
-- **Token Support** — supported tokens are **USDT, USDC, and USDm only**. **Never display or require the CELO token**; MiniPay handles fees automatically via CIP-64 fee abstraction.
-- **Dynamic Adaptation** — adapt to the user's **preferred stablecoin** (the one they hold the most of). Working helper: `minipay-templates.md` §6 — Preferred Stablecoin Selection.
+> Docs: https://docs.minipay.xyz/technical-references/retrieve-balance.html · https://docs.minipay.xyz/technical-references/gas-estimation.html · https://docs.minipay.xyz/faq.html (Q9, Q11)
+
+- **Token Support** — supported tokens are **USDT, USDC, and USDm only**. **Never display or require the CELO token**; MiniPay handles fees automatically via CIP-64 fee abstraction. See `faq.html` Q11.
+- **Dynamic Adaptation** — adapt to the user's **preferred stablecoin** (the one they hold the most of). Working helper: `minipay-templates.md` §6 — Preferred Stablecoin Selection. Balance lookup: https://docs.minipay.xyz/technical-references/retrieve-balance.html.
 - **Graceful Degradation** — if your app only supports one stablecoin, show a clear explainer ("This app accepts USDC only. Swap in MiniPay first.") instead of a broken interface.
 
 ### 3. User-Facing Copy (strict)
+
+> Docs: https://docs.minipay.xyz/getting-started/submit-your-miniapp.html · https://docs.minipay.xyz/getting-started/best-practices.html (Transaction UX)
 
 Replace crypto-jargon with user-friendly terms everywhere a real user sees them (buttons, tooltips, error messages, copy):
 
@@ -98,20 +107,26 @@ Replace crypto-jargon with user-friendly terms everywhere a real user sees them 
 
 ### 4. Technical Performance & Optimization
 
-- **Mobile-First Resolution** — the UI must be responsive and fully functional at **360w × 640h**. Use Chrome DevTools device mode to validate before submission.
+> Docs: https://docs.minipay.xyz/getting-started/submit-your-miniapp.html · https://docs.minipay.xyz/getting-started/best-practices.html (Performance, User Experience) · https://docs.minipay.xyz/getting-started/deployment.html
+
+- **Mobile-First Resolution** — the UI must be responsive and fully functional at **360w × 640h**. This is the hard minimum from the readiness PDF, and the smaller of the two figures floating in MiniPay's public material — design and verify against 360 × 640. Use Chrome DevTools device mode to validate before submission.
 - **Asset Optimization** — use **SVG or WebP** for images. Avoid PNG/JPG for anything larger than a few KB.
 - **Performance Benchmarking** — submit a **PageSpeed Insights** score (`https://pagespeed.web.dev`) for your production URL with the form. Aim for 90+ on mobile. Low scores block listing.
 - **Network Transparency** — provide a full manifest of every **URL, subdomain, and origin** your app calls (JS, CSS, fonts, RPCs, APIs). MiniPay reviews this for supply-chain risk.
 
 ### 5. Smart Contract Standards
 
+> Docs: https://docs.minipay.xyz/getting-started/smart-contracts.html
+
 - **Public Verification** — all your contract source code must be **verified on Celoscan** (`https://celoscan.io`) so users can inspect it. How-to: `builder-guide.md` → Verification.
 - **Transaction Samples** — for every user-facing method your app uses, provide a **sample transaction link on Celoscan** with the submission.
 
 ### 6. Integration & Support
 
-- **Code Guidelines** — use the patterns in this skill (`minipay-guide.md`, `minipay-templates.md`). They mirror the canonical MiniPay Developer Documentation.
-- **Low-Balance Handling** — when a user cannot complete an action because their balance is too low, **redirect to the MiniPay Deposit deeplink** rather than showing an error. Deeplink: `https://minipay.opera.com/add_cash`. Canonical deeplink list: `https://docs.minipay.xyz/technical-references/deeplinks.html#available-deeplinks` — fetch before shipping; new deeplinks are added periodically.
+> Docs: https://docs.minipay.xyz/technical-references/deeplinks.html · https://docs.minipay.xyz/getting-started/best-practices.html (Error Handling)
+
+- **Code Guidelines** — use the patterns in this skill (`minipay-guide.md`, `minipay-templates.md`). They mirror the canonical MiniPay Developer Documentation at https://docs.minipay.xyz/.
+- **Low-Balance Handling** — when a user cannot complete an action because their balance is too low, **redirect to the MiniPay Add Cash deeplink** rather than showing an error. Deeplink: `https://link.minipay.xyz/add_cash` (optionally `?tokens=USDm,USDC,USDT`). Canonical deeplink list: https://docs.minipay.xyz/technical-references/deeplinks.html — fetch before shipping; new deeplinks are added periodically.
 - **Dedicated Support** — provide an **in-app support link** reachable from inside the Mini App (header icon, footer, or settings). Accepted channels: Telegram, WhatsApp, email, or web support portal.
 - **SLA** — you must fix reported **critical issues within 24 hours**, or MiniPay will temporarily disable your listing.
 
@@ -127,6 +142,8 @@ Meeting the 24h SLA across a growing user base is hard with manual triage. A rec
 You stay in the loop as the human approver, but the agent handles intake, classification, and first-draft answers — which is what makes the 24h critical-fix SLA actually achievable.
 
 ### 7. Branding & Legal
+
+> Docs: https://docs.minipay.xyz/getting-started/submit-your-miniapp.html (Legal and Branding)
 
 - **Clear Ownership** — display your app's **name and logo** prominently. It must be obvious to the user that the service is operated by your entity, not by MiniPay.
 - **Legal Links** — provide accessible links to your **Terms of Service** and **Privacy Policy** from inside the app (footer or settings screen). Required for listing.
@@ -159,11 +176,17 @@ Where to publish: a `/stats` page inside the Mini App (read-only, no wallet requ
 
 ## Deeplinks (MiniPay)
 
+> Canonical list: https://docs.minipay.xyz/technical-references/deeplinks.html — fetch this before shipping; MiniPay publishes new deeplinks periodically. Full mirror in `minipay-docs-map.md` → _Deeplinks_.
+
 | Deeplink | URL | When to use |
 |----------|-----|-------------|
-| Deposit (Add Cash) | `https://minipay.opera.com/add_cash` | Low balance; user needs to top up |
-
-> Canonical list: `https://docs.minipay.xyz/technical-references/deeplinks.html#available-deeplinks` — fetch this before shipping; MiniPay publishes new deeplinks periodically.
+| Add Cash | `https://link.minipay.xyz/add_cash` (optionally `?tokens=USDm,USDC,USDT`) | Low balance; user needs to top up |
+| Open Mini App | `https://link.minipay.xyz/browse?url=xxx` | Deep-link into an approved Mini App |
+| MiniApps tab | `https://link.minipay.xyz/discover` | Jump to the discovery tab |
+| Transaction receipt | `https://link.minipay.xyz/receipt?tx=xxx[&celebrate]` | Show a receipt screen for a tx hash |
+| User's QR code | `https://link.minipay.xyz/qr` | Open the user's own QR screen |
+| Invite friends | `https://link.minipay.xyz/invite_friends` | Trigger the invite flow |
+| Pockets / balance | `https://link.minipay.xyz/balance` | Open the user's Pockets screen |
 
 ---
 

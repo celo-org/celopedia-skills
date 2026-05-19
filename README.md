@@ -101,6 +101,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`odis-socialconnect.md`](skills/celopedia-skill/references/odis-socialconnect.md) | ODIS (PnP), OdisPayments, FederatedAttestations |
 | [`minipay-live-apps.md`](skills/celopedia-skill/references/minipay-live-apps.md) | Discovery snapshot: live Mini Apps, categories, country targeting |
 | [`minipay-requirements.md`](skills/celopedia-skill/references/minipay-requirements.md) | Two-stage MiniPay listing flow: Stage 1 intake form (`minipay.to/mini-apps`) and Stage 2 post-call readiness checklist |
+| [`minipay-docs-map.md`](skills/celopedia-skill/references/minipay-docs-map.md) | Page-by-page index of `docs.minipay.xyz` (getting started, guides, technical references, deeplinks) |
 
 ### Platform Features
 
