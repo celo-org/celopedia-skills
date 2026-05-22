@@ -31,7 +31,7 @@ Before scoring your idea, know the person on the other end of the screen.
 
 ## 2. App Fit Scorecard
 
-Score your idea on 6 dimensions (0–2 each). Total out of 12.
+Score your idea on 5 dimensions (0–2 each). Total out of 10.
 
 ### A. Stablecoin-native
 Does the core value of your app involve sending, receiving, saving, or earning USDm / USDT / USDC?
@@ -46,20 +46,7 @@ Does the core value of your app involve sending, receiving, saving, or earning U
 
 ---
 
-### B. No-crypto UX possible
-Can you build this without exposing blockchain concepts to the user?
-
-| Score | What it means |
-|-------|---------------|
-| **2** | Users never see "wallet", "gas", "chain", "token", "smart contract", or a raw `0x…` address |
-| **1** | Some crypto vocabulary is visible but can be explained in plain language (e.g. "digital dollars") |
-| **0** | The app requires users to understand blockchain mechanics to complete the core flow |
-
-> MiniPay enforces specific copy rules. Replace: "Gas fee" → **Network fee** · "Onramp" → **Deposit** · "Offramp" → **Withdraw** · "Crypto" → **Stablecoin** or **Digital dollar**. See `minipay-requirements.md` §3.
-
----
-
-### C. Short-session friendly
+### B. Short-session friendly
 Can the primary action be completed in under 60 seconds on a budget Android?
 
 | Score | What it means |
@@ -72,7 +59,7 @@ Can the primary action be completed in under 60 seconds on a budget Android?
 
 ---
 
-### D. Local market fit
+### C. Local market fit
 Does your app address a need that is acute in at least one of MiniPay's primary markets?
 
 | Score | What it means |
@@ -96,7 +83,7 @@ Does your app address a need that is acute in at least one of MiniPay's primary 
 
 ---
 
-### E. No-sign-in possible
+### D. No-sign-in possible
 MiniPay does not support `personal_sign` or `eth_signTypedData`. Can your app work without them?
 
 | Score | What it means |
@@ -109,14 +96,14 @@ MiniPay does not support `personal_sign` or `eth_signTypedData`. Can your app wo
 
 ---
 
-### F. Category gap in current catalog
+### E. Category gap in current catalog
 Is your category underserved in the MiniPay Discovery catalog right now?
 
 | Score | What it means |
 |-------|---------------|
 | **2** | Category has 0–1 existing apps, or the one app that exists is geo-blocked in your target market |
 | **1** | 2–4 competitors, but your angle is meaningfully differentiated |
-| **0** | Saturated category (games: 11 apps, rewards: 10 apps) with no clear differentiation |
+| **0** | Highly competitive category with no clear differentiation angle |
 
 > See `minipay-live-apps.md` for the current catalog snapshot with per-country availability data.
 
@@ -126,10 +113,10 @@ Is your category underserved in the MiniPay Discovery catalog right now?
 
 | Total Score | Priority | What to do |
 |-------------|----------|------------|
-| **10–12** | 🟢 **Tier 1 — Build now** | Strong product-channel fit. Prioritise MiniPay Discovery as your primary distribution channel. After building, get a Celo team review before submitting. |
-| **7–9** | 🟡 **Tier 2 — Build with caveats** | Good fit with specific gaps. Identify your lowest-scoring dimension and address it before submission. |
-| **4–6** | 🟠 **Tier 3 — Validate first** | Partial fit. Run an ngrok test with real users in your target market before committing. Consider entering Proof of Ship to get feedback from the Celo community. |
-| **0–3** | 🔴 **Tier 4 — Wrong channel** | Structural mismatch with MiniPay constraints. Pivot the product concept or choose a different distribution channel. Proof of Ship is a good environment for this pivot. |
+| **8–10** | 🟢 **Tier 1 — Build now** | Strong product-channel fit. Prioritise MiniPay Discovery as your primary distribution channel. After building, get a Celo team review before submitting. |
+| **5–7** | 🟡 **Tier 2 — Build with caveats** | Good fit with specific gaps. Identify your lowest-scoring dimension and address it before submission. |
+| **3–4** | 🟠 **Tier 3 — Validate first** | Partial fit. Run an ngrok test with real users in your target market before committing. Consider entering Proof of Ship to get feedback from the Celo community. |
+| **0–2** | 🔴 **Tier 4 — Wrong channel** | Structural mismatch with MiniPay constraints. Pivot the product concept or choose a different distribution channel. Proof of Ship is a good environment for this pivot. |
 
 ---
 
@@ -141,73 +128,53 @@ Current catalog density from `minipay-live-apps.md` (snapshot — verify before 
 |----------|-----------|-------------|-------|
 | **Social** | 0 | 🟢 High | No social app listed. First mover in a 14M-wallet network |
 | **Finance — credit/lending** | 0 | 🟢 High | No credit app. Massive need in all primary markets |
-| **Finance — savings/FX** | 7 | 🟢 High | LATAM almost entirely uncovered |
-| **Prediction / betting** | 2 | 🟢 High | Main competitor (Predictor) blocked in BR, AR, GB, TH, VN, MY, PH |
+| **Finance — savings/FX** | 7 | 🟢 High | Many markets still underserved |
 | **Shopping** | 1 | 🟢 High | Only one app. E-commerce + stablecoins is open |
 | **Health / fitness** | 1 | 🟢 High | Only Squadletics. Large green field |
 | **News / media** | 1 | 🟢 High | Only Briefing. Untapped |
-| **Games** | 11 | 🟡 Medium | Competitive, but novel mechanics (skill-based, local IP, cultural context) can still win |
-| **Rewards / earn** | 10 | 🔴 Saturated | Highest competition. Only enter with a structurally different earning mechanic |
+| **Games** | 11 | 🟢 High | Easiest to build and launch; novel mechanics (skill-based, local IP, cultural context) differentiate |
+| **Rewards / earn** | 10 | 🟢 High | High interest from Celo; differentiated earning mechanics have strong potential |
 | **Utility** | 8 | 🟡 Medium | Bill pay dominated by Nigeria-focused apps. Other markets open |
-| **Sports** | 4 | 🟡 Medium | Africa-focused. LATAM sports app gap exists |
+| **Sports** | 4 | 🟡 Medium | Africa-focused. Opportunities in other markets |
 
 ---
 
-## 5. Geo Priority Map
+## 5. Things to Fix Before Submitting
 
-| Region | Countries | MiniPay penetration | Catalog coverage | Best categories to target |
-|--------|-----------|---------------------|-----------------|--------------------------|
-| **West Africa** | NG, GH, SL, CI | 🔴 High — most apps already here | Mostly covered | New mechanics in games, health, news |
-| **East Africa** | KE, UG, TZ, RW | 🟡 Medium | Partially covered | Finance, savings, sports |
-| **LATAM — Brazil** | BR | 🟢 Low | Almost nothing | Prediction, finance, social, shopping |
-| **LATAM — Andean** | CO, AR, PE, CL | 🟢 Low | Almost nothing | Prediction, finance, remittance |
-| **Southeast Asia** | PH, ID | 🟡 Medium | Partial | Remittance, micro-lending |
-| **Southern Africa** | ZA, MW, ZM | 🟢 Low | Almost nothing | Finance, savings, informal commerce |
+These are technical constraints that need to be addressed before your app can function correctly in MiniPay. All of them are fixable — address them during development.
 
-> **LATAM is the single biggest opportunity right now.** High MiniPay user base, almost no apps targeting the region, and the main prediction-market competitor is geo-blocked in Brazil and Argentina.
-
----
-
-## 6. Automatic Disqualifiers
-
-These are hard technical constraints. They are **not fixable with UX changes** — they require architectural decisions before building.
-
-| Disqualifier | Why it blocks you |
+| Item | What to do |
 |---|---|
-| App requires `personal_sign` | MiniPay does not support this method. Any flow that needs off-chain signatures (login, permit, typed auth) will silently fail or error. |
-| App requires `eth_signTypedData` | Same as above — not supported by the MiniPay wallet. |
-| App displays CELO balance or requires CELO payment | MiniPay hides CELO from users entirely. Displaying it breaks the UX contract and will get your app rejected from Discovery. |
-| App only works with EIP-1559 transaction fields | MiniPay uses legacy transactions only. Do not set `maxFeePerGas` or `maxPriorityFeePerGas`. |
-| App can only be tested in an emulator | MiniPay requires a physical device running Android or iOS. If your team cannot test on-device, do not submit yet. |
-| Bundle size > 2 MB or heavy images | Low-bandwidth users will abandon. Use SVG/WebP, lazy-load aggressively, and keep your initial JS bundle small. |
+| App uses `personal_sign` | Replace with wallet-address-only identity or ODIS phone resolution. See `odis-socialconnect.md`. |
+| App uses `eth_signTypedData` | Replace with a flow that only requires `eth_sendTransaction`. |
+| App displays CELO balance or requires CELO payment | Remove CELO from your UI entirely. MiniPay handles gas automatically — users never see it. |
+| App sets EIP-1559 transaction fields | Remove `maxFeePerGas` / `maxPriorityFeePerGas`. Use legacy transaction format. |
+| Bundle size > 2 MB or heavy images | Use SVG/WebP, lazy-load aggressively, and keep your initial JS bundle small. |
 
 ---
 
-## 7. Pre-fit Checklist (run before scoring)
+## 6. Pre-fit Checklist (run before scoring)
 
-Before applying the scorecard, answer these questions. A single "No" on items 1–4 is an immediate Tier 4:
+Before applying the scorecard, answer these questions. A single "No" on items 1–3 is an immediate Tier 4:
 
-- [ ] Can the entire core user flow run inside MiniPay's WebView without external app switching?
-- [ ] Does your app work without `personal_sign` or `eth_signTypedData`?
+- [ ] Can the entire core user flow run inside MiniPay's WebView?
 - [ ] Can you build the UI without showing CELO or raw `0x…` addresses?
-- [ ] Is your app testable on a physical device via ngrok?
 - [ ] Can a non-crypto user understand what the app does from the first screen?
 
 ---
 
-## 8. Example Score — Reference
+## 7. Example Score — Reference
 
 The table below shows a worked example for orientation. Replace with your own app's values.
 
 | Dimension | Score | Rationale |
 |-----------|-------|-----------|
-| A. Stablecoin-native | 2 | All payments and rewards denominated in USDm or USDT |
-| B. No-crypto UX | 2 | "Network fee" not "gas"; no addresses shown; no crypto jargon in UI copy |
-| C. Short-session | 2 | Core action (3 taps): choose → confirm → done |
-| D. Local market fit | 2 | Targets Brazil specifically; fills a gap left by a geo-blocked competitor |
-| E. No-sign-in | 2 | Wallet address = identity; no `personal_sign` anywhere |
-| F. Category gap | 2 | Category has zero Celo-native apps; main competitor geo-blocked |
-| **Total** | **12 / 12** | **🟢 Tier 1 — Build now** |
+| A. Stablecoin-native | 2 | All payments and rewards denominated in USDm, USDT, or USDC |
+| B. Short-session | 2 | Core action (3 taps): choose → confirm → done |
+| C. Local market fit | 2 | Directly solves a documented pain point in a specific primary market |
+| D. No-sign-in | 2 | Wallet address = identity; no `personal_sign` anywhere |
+| E. Category gap | 2 | Category has zero or one Celo-native apps |
+| **Total** | **10 / 10** | **🟢 Tier 1 — Build now** |
 
 ---
 
