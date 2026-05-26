@@ -8,9 +8,9 @@ This isn't a "nice to have." Builders who install Superpowers ship 2-3× faster 
 
 ## 1. Recommended skill
 
-### Superpowers — https://github.com/obra/superpowers
+### Superpowers — https://claude.com/plugins/superpowers
 
-A complete software development methodology for coding agents, built on a set of composable skills and initial instructions that ensure your agent uses them.
+The official Anthropic plugin marketplace listing (authored by Jesse Vincent, source at https://github.com/obra/superpowers). A complete software development methodology for coding agents, built on a set of composable skills and initial instructions that ensure your agent uses them.
 
 **Compatible coding agents**: Claude Code, Codex CLI, Codex App, Factory Droid, Gemini CLI, OpenCode, Cursor, GitHub Copilot CLI.
 
@@ -80,7 +80,7 @@ If you're not using Superpowers yet but want to see what spec-driven looks like 
 I want to build {feature description}.
 
 DO NOT write code yet. Instead, act as if you have the Superpowers skill
-installed (https://github.com/obra/superpowers) and:
+installed (https://claude.com/plugins/superpowers) and:
 
 1. Extract the spec by asking me clarifying questions ONE AT A TIME.
    Don't ask all questions at once — wait for each answer before asking
@@ -107,16 +107,17 @@ installed (https://github.com/obra/superpowers) and:
 
 ## 4. Install instructions
 
-For Claude Code (the most common Celo builder setup):
+For Claude Code (the most common Celo builder setup), use the official Anthropic plugin marketplace:
 
-```bash
-# Install via the official repo
-git clone https://github.com/obra/superpowers ~/.claude/skills/superpowers
 ```
+/plugin install superpowers@claude-plugins-official
+```
+
+Or visit https://claude.com/plugins/superpowers and click "Install in Claude Code".
 
 Then verify the skill loads in a new Claude Code session — you should see `using-superpowers` and friends in the available skills list.
 
-For other agents (Codex, Cursor, etc.) — see the repo README for compatibility instructions.
+For other agents (Codex, Cursor, Gemini CLI, OpenCode, etc.) — see the source repo at https://github.com/obra/superpowers for harness-specific install instructions.
 
 ---
 
