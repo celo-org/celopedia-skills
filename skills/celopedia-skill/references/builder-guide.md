@@ -109,17 +109,29 @@ const gasPrice = await publicClient.request({
 
 ## Contract Verification
 
-### Celoscan (Etherscan-family)
+### Celoscan (Etherscan V2 unified API)
+
+Celoscan no longer issues its own API keys. Etherscan unified all family explorers under one V2 API and one key. Use an Etherscan key (free at https://etherscan.io/myapikey) for Celoscan, Basescan, Arbiscan, Optimistic Etherscan, etc.
+
+In `foundry.toml`:
+
+```toml
+[etherscan]
+celo = { key = "${ETHERSCAN_API_KEY}", chain = 42220 }
+alfajores = { key = "${ETHERSCAN_API_KEY}", chain = 44787 }
+```
+
+Then:
 
 ```bash
 # Hardhat
 npx hardhat verify --network celo <CONTRACT_ADDRESS> <CONSTRUCTOR_ARGS>
 
-# Foundry
+# Foundry (no --verifier-url needed; foundry derives it from `chain`)
 forge verify-contract <CONTRACT_ADDRESS> <CONTRACT_NAME> \
-  --chain-id 42220 \
-  --etherscan-api-key <CELOSCAN_API_KEY> \
-  --verifier-url https://api.celoscan.io/api
+  --chain celo \
+  --constructor-args $(cast abi-encode "constructor(...)" ...) \
+  --watch
 ```
 
 ### Blockscout
@@ -130,8 +142,6 @@ forge verify-contract <CONTRACT_ADDRESS> <CONTRACT_NAME> \
   --verifier blockscout \
   --verifier-url https://celo.blockscout.com/api
 ```
-
-Get a Celoscan API key at: https://celoscan.io/myapikey
 
 ---
 
