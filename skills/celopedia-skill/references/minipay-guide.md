@@ -359,6 +359,7 @@ The ngrok dashboard at `http://localhost:4040` shows all requests for debugging.
 6. **2MB footprint** — Keep Mini App bundle size small
 7. **No CELO in UI** — MiniPay hides CELO from users. Your app must only display and accept USDT / USDC / USDm; fee abstraction handles the network fee in stablecoins automatically
 8. **Submission checklist** — before listing, review `minipay-requirements.md` for the 7-section official checklist (copy rules, 360×640, PageSpeed, ToS / Privacy, 24h SLA)
+9. **No geolocation on iOS** — MiniPay iOS does not bridge `navigator.geolocation` to the OS. `getCurrentPosition` and `watchPosition` hang silently, no callback ever fires, even with location permission granted to MiniPay at the OS level. Same code works fine in MetaMask in-app browser (iOS and Android) and Safari with extension wallets, which points at MiniPay's WKWebView delegate not implementing the geolocation permission handlers. Android behavior untested. Tracked at https://github.com/celo-org/minipay/issues/44. Workaround: detect `isIOS && window.ethereum.isMiniPay` and offer a deep link out to MetaMask (`https://metamask.app.link/dapp/<host>`)
 
 ---
 
