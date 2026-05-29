@@ -8,7 +8,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # Celopedia Skill
@@ -63,6 +63,17 @@ Deep protocol knowledge for building DeFi on Celo.
 - Common patterns: yield farming, leveraged staking, oracle integration
 
 **References**: `defi-protocols.md`, `contracts.md`
+
+### 3a. Stablecoin Orchestration (Fiat ↔ Stablecoin)
+
+B2B fiat-to-stablecoin infrastructure on Celo — virtual accounts, payouts, card issuing.
+
+- **Bridge (Stripe)**: virtual accounts (ACH/Wire/SEPA/SPEI/Pix), transfers, liquidation addresses, custodial wallets, Visa card issuing, USDB (yield-bearing native stablecoin)
+- Celo supported via `payment_rail: "celo"` on transfer/virtual-account/liquidation-address endpoints
+- Pairs naturally with **fee abstraction** (USDT in + USDT gas)
+- EEA caveat: USDT and USDB unavailable to EEA users — use USDC for EU flows
+
+**References**: `stablecoin-orchestration.md`
 
 ### 4. MiniPay App Builder
 
@@ -169,6 +180,7 @@ Start with `growth-diagnostic.md` — the 6-question diagnostic routes the build
 | Ecosystem search / competitors | Query The Grid (`the-grid-skill.md`) |
 | Contract address | Look up in `contracts.md` |
 | Protocol integration | Check `defi-protocols.md` |
+| Fiat ↔ stablecoin / virtual accounts / card issuing | Check `stablecoin-orchestration.md` |
 | Build / deploy / verify | Check `builder-guide.md`, `dev-templates.md` |
 | MiniPay development | Check `minipay-guide.md`, `minipay-templates.md` |
 | Specific MiniPay docs page (`docs.minipay.xyz/...`) | Look up in `minipay-docs-map.md` |

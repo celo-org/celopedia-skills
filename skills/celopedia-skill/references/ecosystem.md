@@ -163,6 +163,18 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 
 Cross-chain messaging docs: https://docs.celo.org/tooling/bridges/cross-chain-messaging
 
+### Stablecoin Orchestration & Fintech Infrastructure
+
+B2B APIs for moving money between fiat and stablecoins on Celo. Use these when building products
+that need to accept fiat deposits, pay out to bank accounts, or issue cards backed by stablecoin
+balances — without holding money transmitter licenses yourself.
+
+| Provider | Description | Docs |
+| --- | --- | --- |
+| Bridge (Stripe) | Stablecoin orchestration API — virtual accounts, transfers, custodial wallets, card issuing, USDB native stablecoin | <https://apidocs.bridge.xyz> |
+
+See `stablecoin-orchestration.md` for the full Bridge integration reference.
+
 ### Wallets
 
 | Wallet | Type | Platforms | URL |
