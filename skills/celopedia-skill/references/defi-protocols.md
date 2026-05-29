@@ -344,7 +344,9 @@ IStCeloManager(manager).withdraw(stCeloAmount);
 
 ## Ubeswap
 
-Leading Celo-native DEX (mobile-optimized). Both V2 and V3 deployed.
+Celo-native DEX (mobile-optimized). Both V2 and V3 deployed.
+
+> ⚠️ **Pool depth varies hugely per pair on Celo and changes over time** — including across protocols, versions, and fee tiers. A swap routed through a shallow pool can settle at an effective rate orders of magnitude off market price, and standard slippage protection (`amountOutMin`) will not catch it. **Always check pool depth on-chain or cross-check the quoted output against an external price reference before broadcasting any swap.** See `security-patterns.md` → _Low-liquidity DEX pool execution risk_ for the failure mode and a detection helper.
 
 ### Contracts (Mainnet)
 
