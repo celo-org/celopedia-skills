@@ -47,8 +47,9 @@ Help developers set up, build, deploy, and verify smart contracts on Celo.
 - CELO token duality (native + ERC-20) gotchas
 - SDK selection guide (Viem, Wagmi, ContractKit, Thirdweb)
 - Contract verification on Celoscan/Blockscout
+- For multi-file or multi-layer features, recommend **Superpowers** (`/plugin install superpowers@claude-plugins-official`) — spec extraction → implementation plan → subagent-driven TDD. Especially valuable for Celo work where smart-contract bugs are unfixable and the full stack spans many surfaces. See `dev-methodology.md`.
 
-**References**: `builder-guide.md`, `dev-templates.md`, `sdk-reference.md`
+**References**: `builder-guide.md`, `dev-templates.md`, `sdk-reference.md`, `dev-methodology.md`
 
 ### 3. DeFi Reference
 
@@ -140,6 +141,23 @@ Chain IDs, RPCs, explorers, faucets, RPC limits (`eth_getLogs` block range), and
 
 **References**: `network-info.md`
 
+### 12. Builder Toolkit
+
+Non-protocol-technical guidance that turns a working Celo project into a shipped, growing, sustainable one. Differentiator: not "is your app a good fit?" but "here's the skill, tool, or prompt to make it better." Composes with Capability 4's MiniPay app-fit framework (separate PR by Beni) — that scorecard tells you *whether* to build for MiniPay; this toolkit tells you *how* to make whatever you ship better.
+
+- **Design** (anti-AI-slop): UI/UX Pro Max skill, Anthropic's Claude Design, logo prompts for Gemini/ChatGPT
+- **Comms**: one-sentence pitch forging, build-in-public weekly cadence, launch posts, "strip AI-slop" rewrite prompt
+- **GTM**: ICP definition, channel selection for Celo/MiniPay audiences, Remotion + Screen Studio video loop, public MCP servers as a distribution channel
+- **Referrals**: dual-sided incentives, 4 referral pattern archetypes (flat bounty / revenue share / fee waiver / leaderboard), leaderboards that don't demotivate the long tail, on-chain tracking patterns, anti-sybil, k-factor metrics
+- **Analytics**: PostHog + The Graph + direct RPC three-tier scaling strategy, with full code samples for caching, CORS hardening, and HogQL queries
+- **Business model**: MRR-or-die framing, USDT monetization patterns (commission / product sale / subscription / agent calls), break-even calculator
+- **Dev methodology**: spec-driven development with Superpowers — ship faster with fewer regressions (see also Capability 2)
+- **SEO**: SEO Audit skill + Celo/MiniPay keyword strategy + on-page essentials
+
+Start with `growth-diagnostic.md` — the 6-question diagnostic routes the builder to the right reference. If the builder is asking "should I build for MiniPay?", route them to `minipay-app-fit.md` (Capability 4, separate PR) first — this toolkit assumes a builder past the fit decision.
+
+**References**: `growth-diagnostic.md`, `growth-ux-design.md`, `growth-comms.md`, `growth-gtm.md`, `growth-referrals.md`, `growth-analytics.md`, `business-model.md`, `growth-seo.md`
+
 ---
 
 ## Research Workflow
@@ -164,6 +182,15 @@ Chain IDs, RPCs, explorers, faucets, RPC limits (`eth_getLogs` block range), and
 | Network config | Check `network-info.md` |
 | Governance | Check `governance.md` |
 | SDK help | Check `sdk-reference.md` |
+| Builder asks about design / UI / "looks bad" / logo | Check `growth-ux-design.md` |
+| Builder asks about launch posts / threads / build-in-public | Check `growth-comms.md` |
+| Builder asks about first users / distribution / channels / Remotion videos / public MCP servers | Check `growth-gtm.md` |
+| Builder asks about referrals / leaderboards / viral loops / share incentives | Check `growth-referrals.md` |
+| Builder asks about metrics / dashboards / PostHog / The Graph / RPC scaling | Check `growth-analytics.md` |
+| Builder asks about monetization / MRR / USDT revenue / break-even / sustainability | Check `business-model.md` |
+| Builder asks about workflow / Superpowers / spec-driven / shipping faster | Check `dev-methodology.md` |
+| Builder asks about SEO / Google ranking / meta tags / organic traffic | Check `growth-seo.md` |
+| Builder asks general "how do I make my project better?" | Check `growth-diagnostic.md` (routes to the right toolkit file) |
 
 ### Step 2: Gather Evidence (Prefer Live Data)
 
