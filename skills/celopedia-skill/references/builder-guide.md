@@ -235,6 +235,26 @@ Celo migrated from L1 to L2 on March 26, 2025 (block 31,056,500). Old tutorials 
 
 Celo RPCs reject `eth_getLogs` spans > ~50,000 blocks with error `-32011 block range is too large`. Any indexer or event-history feature must paginate. See `network-info.md` → _RPC Limits & Gotchas_ for the chunked viem workaround.
 
+### 9. viem strict EIP-55 checksum
+
+viem 2.x rejects addresses whose mixed-case does NOT match the EIP-55 checksum exactly. You'll see:
+
+```text
+Address "0xa9aB7390f79b937C9c0A1FdFA1A40c2e145EAbd8" is invalid.
+- Address must match its checksum counterpart.
+```
+
+The trap: Foundry's `forge script` prints deploy addresses in lowercase. If you copy-paste that into a `.env` file then manually re-case it (e.g. to make it "look prettier"), you can land on a mixed-case string that ISN'T the valid EIP-55 checksum, and viem will reject it everywhere. The failure is silent in fire-and-forget code paths and surfaces only in server logs.
+
+Fix: either store the address all-lowercase (viem accepts that) or get the correct checksum first:
+
+```bash
+cast to-check-sum-address 0xa9ab7390f79b937c9c0a1fdfa1a40c2e145eabd8
+# -> 0xa9ab7390f79B937C9c0a1FDFA1A40C2E145eAbd8
+```
+
+Apply that exact string everywhere (env vars in `.env`, Railway / Vercel env, hardcoded constants, docs). Sweep with grep before shipping; ESLint won't catch this.
+
 ---
 
 ## Recommended Development Flow
