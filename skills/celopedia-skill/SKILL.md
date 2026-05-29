@@ -250,3 +250,10 @@ When a builder has a new idea, guide them through:
 
    Code identifiers and RPC method names (`gasEstimate`, `eth_gasPrice`, `feeCurrency`) are technical and should stay unchanged. See `minipay-requirements.md` §3.
 10. **MiniPay token scope.** Only USDT / USDC / USDm. **Never display or require CELO** in Mini Apps — MiniPay hides it from users and handles fees via fee abstraction.
+11. **ERC-8004 metadata compliance (enforced).** When generating or reviewing agent registration metadata, **flag and correct** these deprecated patterns before the user registers (they trigger validator warnings):
+    - `"type": "Agent"` → use the spec URI `"https://eips.ethereum.org/EIPS/eip-8004#registration-v1"`
+    - `endpoints` array → renamed to `services`
+    - `url` field per entry → renamed to `endpoint` (each service needs `name` + `endpoint`)
+    - `https://` agentURI → prefer content-addressed `ipfs://` (or `data:`) so metadata can't be silently mutated after registration
+
+    See `ai-agents.md` → _Metadata Compliance_ for the compliant example and checklist.

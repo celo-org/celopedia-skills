@@ -53,22 +53,24 @@ Agents register as ERC-721 NFTs with metadata URI. Each agent gets a unique `age
 | `tokenURI(uint256 agentId)` | Get full metadata URI |
 | `ownerOf(uint256 agentId)` | Get agent owner |
 
-**Agent metadata format:**
+**Agent metadata format (spec-compliant):**
 
 ```json
 {
-  "type": "Agent",
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
   "name": "MyAgent",
   "description": "An AI agent that...",
   "image": "ipfs://...",
-  "endpoints": [
-    { "type": "a2a", "url": "https://example.com/.well-known/agent.json" },
-    { "type": "mcp", "url": "https://example.com/mcp" },
-    { "type": "wallet", "address": "0x...", "chainId": 42220 }
+  "services": [
+    { "name": "A2A", "endpoint": "https://example.com/.well-known/agent.json" },
+    { "name": "MCP", "endpoint": "https://example.com/mcp" },
+    { "name": "web", "endpoint": "https://example.com" }
   ],
   "supportedTrust": ["reputation", "validation", "tee"]
 }
 ```
+
+> ⚠️ This format follows the **current** EIP-8004 spec. Older examples (including earlier versions of this file) used `"type": "Agent"`, an `endpoints` array, and a `url` field per entry — all three now trigger validation warnings. See **Metadata Compliance** below before registering.
 
 ### Reputation Registry
 
@@ -109,6 +111,50 @@ const txHash = await client.writeContract({
   args: ["ipfs://QmYourAgentMetadata"],
 });
 ```
+
+### Metadata Compliance (avoid validation warnings)
+
+Registering an agent runs metadata through a validator (e.g. 8004scan). The four most common warnings — and their fixes — all come from following an outdated metadata shape:
+
+| Warning | Cause | Fix |
+|---------|-------|-----|
+| **`type` — invalid value `Agent`** | The `type` field expects the spec's versioned registration identifier, not a freeform label | Set `type` to `"https://eips.ethereum.org/EIPS/eip-8004#registration-v1"` |
+| **`services` — deprecated `endpoints` field** | EIP-8004 renamed `endpoints` → `services` | Rename the array to `services` |
+| **`services` — missing `endpoint` field** | Each service entry now keys its URL on `endpoint`, not `url` | Use `{ "name": "...", "endpoint": "..." }` per entry |
+| **`agentURI` — not content-addressed** | An `https://` metadata URI can be silently mutated after registration; the validator can't detect tampering | Pin metadata to IPFS and register an `ipfs://` URI (the CID *is* the integrity check). `data:` base64 URIs (fully on-chain) are also content-addressed |
+
+**Fully compliant metadata example:**
+
+```json
+{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "name": "MyAgent",
+  "description": "An AI agent that executes USDT payments on Celo.",
+  "image": "ipfs://bafybeib.../logo.png",
+  "services": [
+    { "name": "A2A", "endpoint": "https://myagent.xyz/.well-known/agent.json", "version": "1.0" },
+    { "name": "MCP", "endpoint": "https://myagent.xyz/api/mcp" },
+    { "name": "web", "endpoint": "https://myagent.xyz" }
+  ],
+  "supportedTrust": ["reputation", "validation"]
+}
+```
+
+**`services` field reference:**
+- `name` (required) — the service type. Common values: `web`, `A2A`, `MCP`, `OASF`, `ENS`, `DID`, `email`.
+- `endpoint` (required) — the service URI or address (replaces the old `url`).
+- `version` (optional, SHOULD) — service version string.
+- `skills` / `domains` (optional) — only for `OASF` services.
+
+**Why content-addressing matters.** With `ipfs://`, the CID is derived from the content, so any change to the metadata produces a different CID — tampering is impossible to hide. With `https://`, the host can swap the metadata after registration and no one can prove it changed (unless you separately commit a hash). For agents whose reputation depends on stable identity, pin to IPFS.
+
+**Compliance checklist before calling `register()`:**
+- [ ] `type` is the `#registration-v1` spec URI, not `"Agent"`
+- [ ] `services` (not `endpoints`), each entry has `name` + `endpoint` (not `url`)
+- [ ] `agentURI` passed to `register()` is `ipfs://` or `data:` (content-addressed), not `https://`
+- [ ] Metadata pinned to a persistent IPFS provider (so the CID stays resolvable)
+
+**Further reading:** EIP-8004 spec (https://eips.ethereum.org/EIPS/eip-8004) · best-practices guide (https://best-practices.8004scan.io).
 
 ---
 
