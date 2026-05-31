@@ -207,6 +207,151 @@ Check `https://thegraph.com/explorer` for the current Celo-Aave-V3 subgraph slug
 
 ---
 
+## Carbon DeFi
+
+Fully on-chain maker trading protocol. Users set prices upfront — strategies execute automatically with **zero gas on fills**. No keeper bots, no agents need to stay online after placing a strategy. Deployed on Celo mainnet.
+
+### How It Works
+
+Carbon uses an **asymmetric liquidity** model: each strategy holds two independent price curves — one for buying and one for selling. When a fill happens, funds rotate from one curve to the other, enabling strategies like "buy low, sell high, repeat forever" without manual intervention.
+
+Key properties:
+- **Maker-first** — you set the price, the market comes to you
+- **Non-custodial** — strategies are owned via an NFT (Voucher), transferable like any ERC-721
+- **Composable** — external routers can source liquidity directly from the CarbonController
+
+### Contracts (Celo Mainnet)
+
+| Contract | Address |
+|----------|---------|
+| CarbonController | `0x6619871118D144c1c28eC3b23036FC1f0829ed3a` |
+| Voucher (Strategy NFT) | `0x5E994Ac7d65d81f51a76e0bB5a236C6fDA8dBF9A` |
+
+> For full per-chain addresses and function selectors, see the [transaction encoding spec](https://docs.carbondefi.xyz/developer-guides/carbon-defi-transaction-encoding).
+
+### Strategy Types
+
+| Intent | Strategy type |
+|--------|--------------|
+| Buy or sell at one exact price | Limit order |
+| Scale in as price drops | Range order (buy) |
+| Scale out as price rises | Range order (sell) |
+| Buy low, sell high, loop forever | Recurring strategy |
+| Provide two-sided concentrated liquidity | Concentrated strategy |
+| Two-sided liquidity up to 1000× from market | Full-range strategy |
+
+### MCP Server (AI / Agent Integration)
+
+Carbon DeFi exposes a full MCP server for AI-agent workflows. It covers strategy creation, management, trading, simulation, and discovery — all returning **unsigned transactions** the user signs.
+
+**Add to Claude Desktop** (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "carbon-defi": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://mcp.carbondefi.xyz/mcp"]
+    }
+  }
+}
+```
+
+**Or call tools directly via REST:**
+
+```bash
+# Get all strategies for a wallet on Celo
+curl -X POST https://mcp.carbondefi.xyz/tools/carbon_get_strategies \
+  -H "Content-Type: application/json" \
+  -d '{"wallet_address": "0xYourAddress", "chain": "celo"}'
+
+# Get a swap quote
+curl -X POST https://mcp.carbondefi.xyz/tools/carbon_get_trade_quote \
+  -H "Content-Type: application/json" \
+  -d '{"base_token": "CELO", "quote_token": "USDC", "amount": "10", "trade_direction": "buy", "chain": "celo"}'
+```
+
+**MCP endpoint:** `https://mcp.carbondefi.xyz/mcp`  
+**OpenAPI spec:** `https://mcp.carbondefi.xyz/openapi.json`  
+**Rate limits:** 30 req/min per IP, burst of 10
+
+Key tools available (25 total):
+
+| Category | Tools |
+|----------|-------|
+| Explore | `carbon_get_strategies`, `carbon_get_strategy`, `carbon_get_activity`, `carbon_explore_pair`, `carbon_get_protocol_stats`, `carbon_get_price_history`, `carbon_find_opportunities`, `carbon_simulate_strategy`, `carbon_resolve_token` |
+| Trade | `carbon_get_trade_quote`, `carbon_execute_trade` |
+| Create | `carbon_create_limit_order`, `carbon_create_range_order`, `carbon_create_recurring_strategy`, `carbon_create_concentrated_strategy`, `carbon_create_full_range_strategy` |
+| Manage | `carbon_reprice_strategy`, `carbon_edit_strategy`, `carbon_deposit_budget`, `carbon_withdraw_budget`, `carbon_pause_strategy`, `carbon_resume_strategy`, `carbon_delete_strategy` |
+| Docs | `carbon_help`, `carbon_learn` |
+
+### SDK Integration
+
+```typescript
+import { Sdk } from "@bancor/carbon-sdk";
+import { createPublicClient, http } from "viem";
+import { celo } from "viem/chains";
+
+const client = createPublicClient({ chain: celo, transport: http() });
+
+const sdk = new Sdk({
+  chainId: 42220, // Celo mainnet
+  provider: client,
+});
+
+// Create a recurring strategy: buy CELO at 0.50 USDC, sell at 0.60 USDC
+const tx = await sdk.strategy.createRecurringStrategy({
+  baseToken: "0x471EcE3750Da237f93B8E339c536989b8978a438", // CELO
+  quoteToken: "0xcebA9300f2b948710d2653dD7B07f33A8B32118C", // USDC
+  buyPriceLow:  "0.50",
+  buyPriceHigh: "0.50",
+  buyBudget:    "100",   // 100 USDC
+  sellPriceLow:  "0.60",
+  sellPriceHigh: "0.60",
+  sellBudget:    "0",    // funded from buy fills
+});
+// tx is unsigned — sign and broadcast with your wallet client
+```
+
+### Reading Carbon Liquidity On-Chain
+
+Carbon does not use a standard AMM `getAmountsOut`. Quotes must go through the CarbonController's `tradeBySourceAmount` or `tradeByTargetAmount` view functions, or via the MCP `carbon_get_trade_quote` tool which wraps this.
+
+```typescript
+// Unsigned trade execution after getting quote via MCP
+const { to, data, value } = await carbonMcp.getTradeQuote({
+  baseToken: "CELO",
+  quoteToken: "USDC",
+  amount: "10",
+  tradeDirection: "buy",
+  chain: "celo",
+});
+
+await walletClient.sendTransaction({ to, data, value });
+```
+
+### Common Patterns on Celo
+
+**Recurring CELO/USDC market making** — set a buy range below market and a sell range above; the strategy rebalances automatically as price oscillates, earning the spread.
+
+**Local stablecoin arbitrage** — with Mento V3 FPMM pools and Carbon running on the same chain, you can run a recurring strategy on a USDm/USDC or GBPm/USDm pair, capturing deviations from the oracle peg.
+
+**DCA into CELO** — use a range order with a wide buy band; the strategy scales in as price falls, averaging your entry without manual monitoring.
+
+### Links
+
+| Resource | URL |
+|----------|-----|
+| App | https://celo.carbondefi.xyz |
+| Docs | https://docs.carbondefi.xyz |
+| AI Agents & MCP guide | https://docs.carbondefi.xyz/rest-api/ai-agents-and-mcp-server |
+| Transaction encoding spec | https://docs.carbondefi.xyz/developer-guides/carbon-defi-transaction-encoding |
+| Litepaper | https://carbondefi.xyz/litepaper |
+| LLMs.txt | https://www.carbondefi.xyz/llms.txt |
+| MCP server | https://mcp.carbondefi.xyz |
+
+---
+
 ## Morpho Blue
 
 Permissionless lending with isolated markets. No governance needed to create markets.
