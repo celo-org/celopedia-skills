@@ -46,7 +46,7 @@ Search 6,300+ crypto products via The Grid, find competitors, analyze vertical s
 Foundry/Hardhat configs for Celo, fee abstraction implementation, SDK selection guide (Viem, Wagmi, ContractKit, Thirdweb), deployment and verification workflows.
 
 ### DeFi Reference
-Deep protocol reference for Uniswap V3/V4, Aave V3, Morpho Blue, Mento stablecoins, stCELO, Velodrome, and Curve on Celo. Includes contract addresses, interaction patterns, and yield strategies.
+Deep protocol reference for Uniswap V3/V4, Aave V3, Carbon DeFi, Morpho Blue, Mento stablecoins, stCELO, Velodrome, and Curve on Celo. Includes contract addresses, interaction patterns, and yield strategies.
 
 ### MiniPay App Builder
 Build Mini Apps for MiniPay (14M+ wallets). Wallet detection, auto-connect patterns, stablecoin payments, phone number resolution, testing with ngrok, and ready-to-use code templates. Includes the official submission checklist (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA).
@@ -86,6 +86,7 @@ Once installed, the skill activates automatically. Just describe what you need:
 | [The Grid](https://beta.node.thegrid.id/graphql) | 6,300+ crypto products, live ecosystem data | None (public) |
 | [docs.celo.org](https://docs.celo.org) | Contract addresses, network info, documentation | None |
 | [DefiLlama](https://defillama.com/chain/Celo) | TVL data (linked, not embedded) | None |
+| [Carbon DeFi](https://docs.carbondefi.xyz) | Contract addresses, MCP server, strategy patterns | None |
 | [celo-org/agent-skills](https://github.com/celo-org/agent-skills) | SDK patterns, code examples | None |
 
 ## Structure
@@ -116,7 +117,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 
 | File | What |
 |------|------|
-| [`defi-protocols.md`](skills/celopedia-skill/references/defi-protocols.md) | Deep protocol reference (Uniswap, Aave, Morpho, Mento) with live APY fetching |
+| [`defi-protocols.md`](skills/celopedia-skill/references/defi-protocols.md) | Deep protocol reference (Uniswap, Aave, Carbon DeFi, Morpho, Mento) with live APY fetching |
 
 ### MiniPay App Builder
 
