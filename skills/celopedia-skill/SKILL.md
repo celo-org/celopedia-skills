@@ -90,7 +90,7 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with 14M+ users.
 - **Live Mini Apps catalog** (snapshot): published discovery listings, categories, links, and **per-country targeting notes** — see `minipay-live-apps.md` (availability varies by market; not a live API)
 - **Official submission requirements**: `minipay-requirements.md` — listing is a **two-stage process**. Stage 1 is the public **intake form** at `https://minipay.to/mini-apps`; Stage 2 is the post-call **readiness form** (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA, etc.). Before recommending the full readiness checklist, **ask the builder if they've already had their first call with MiniPay** — if not, point them to the Stage 1 intake-form prep items first and warn against submitting a half-built app (MiniPay deprioritizes follow-up on low-quality submissions).
 
-**References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`, `minipay-docs-map.md` (page-by-page index of `docs.minipay.xyz`)
+**References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`, `minipay-docs-map.md` (page-by-page index of `docs.minipay.xyz`), `wallet-fork-patterns.md` (for builders shipping Valora-derived wallets - token integration gaps, upstream backend constraints, USAT price-feed workaround)
 
 ### 5. AI Agent Builder
 
@@ -203,6 +203,7 @@ Start with `growth-diagnostic.md` — the 6-question diagnostic routes the build
 | Builder asks about workflow / Superpowers / spec-driven / shipping faster | Check `dev-methodology.md` |
 | Builder asks about SEO / Google ranking / meta tags / organic traffic | Check `growth-seo.md` |
 | Builder asks general "how do I make my project better?" | Check `growth-diagnostic.md` (routes to the right toolkit file) |
+| Shipping a Valora-derived wallet / token shows `priceUsd: NaN` / wallet-side workaround for missing upstream price feed | Check `wallet-fork-patterns.md` |
 
 ### Step 2: Gather Evidence (Prefer Live Data)
 

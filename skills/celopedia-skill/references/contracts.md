@@ -62,12 +62,15 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 
 ### External Stablecoins & Tokens
 
-| Token | Symbol | Address |
-|-------|--------|---------|
-| USDC (Circle) | USDC | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
-| Tether USD | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
-| Wrapped Ether | WETH | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
-| CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
+| Token | Symbol | Decimals | Address |
+|-------|--------|----------|---------|
+| USDC (Circle) | USDC | 6 | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
+| Tether USD | USDT | 6 | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| Tether America USD | USAT | 6 | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` (!) |
+| Wrapped Ether | WETH | 18 | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
+| CELO (ERC-20) | CELO | 18 | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
+
+> **(!) USAT price-feed gap**: upstream oracles (CoinGecko coin id `usa`, etc.) do not yet index the Celo contract address. Valora's `getTokensInfoWithPrices` therefore returns `priceUsd: NaN` for USAT, which breaks display in any Valora-forked wallet. See `wallet-fork-patterns.md` -> _USAT price feed gap_ for the wallet-side workaround and upstream fix paths.
 
 ---
 
