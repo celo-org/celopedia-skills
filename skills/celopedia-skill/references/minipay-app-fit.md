@@ -72,7 +72,7 @@ Does the core value of your app involve sending, receiving, saving, or earning U
 | **1** | Stablecoins are present but secondary to the main experience |
 | **0** | The app does not involve stablecoin transactions at all |
 
-> **Note:** Network fees are handled automatically by MiniPay via CIP-64 fee abstraction — users never see gas. CELO should not be prominent in your UI. See `builder-guide.md` → *Allowed Fee Currencies (Mainnet)*.
+> **Note:** Network fees are handled automatically by MiniPay via CIP-64 fee abstraction — users can see the fee by tapping Info on the transaction approval screen, but never need to manage it manually. CELO should not be prominent in your UI. See `builder-guide.md` → *Allowed Fee Currencies (Mainnet)*.
 
 ---
 
@@ -110,6 +110,8 @@ Does your app address a need that is acute in at least one of MiniPay's primary 
 | 🇿🇦 South Africa | Township commerce, peer payments, informal savings groups (stokvels) |
 
 > **When filling this dimension:** name the specific country, the pain point, and why your app addresses it better than what already exists in that market.
+>
+> ⚠️ **Licensing reminder:** financial use cases in these markets (payments, savings, lending, FX) require proper local licensing. These categories should not be pursued without compliance and domain expertise — they are not yet fully covered by MiniPay's offer.
 
 ---
 
@@ -167,9 +169,9 @@ Current catalog density from `minipay-live-apps.md` (snapshot — verify before 
 | **Social** | 0 | 🟢 High | No social app listed — but requires network effects, plan for user acquisition from day one |
 | **Health / fitness** | 1 | 🟢 High | Only Squadletics. Large green field |
 | **News / media** | 1 | 🟢 High | Only Briefing. Untapped |
-| **Shopping** | 1 | 🟢 High | E-commerce + stablecoins is open — works best if you already have merchant or user relationships |
-| **Utility** | 8 | 🟡 Medium | Bill pay dominated by Nigeria-focused apps. Other markets open |
-| **Sports** | 4 | 🟡 Medium | Africa-focused. Opportunities in other markets |
+| **Shopping** | 1 | 🟢 High | E-commerce + stablecoins is open — **only if you already have users/traction** |
+| **Utility** | 8 | 🟡 Medium | Bill pay led by Bitgifty and Fonbank (Nigeria-focused). Check which markets they do not cover — that gap is your opportunity |
+| **Sports** | 4 | 🟢 High | Africa-focused. Opportunities in other markets |
 | **Finance — savings/FX** | 7 | 🟠 Established builders only | Many markets underserved, but this space suits teams with existing users and relevant domain background |
 | **Finance — credit/lending** | 0 | 🔴 Requires licensing | Massive market need, but requires financial licensing in each market. Not recommended without legal compliance and domain expertise |
 
