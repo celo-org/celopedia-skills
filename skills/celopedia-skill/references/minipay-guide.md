@@ -5,7 +5,9 @@
 >
 > For the full page-by-page index of `docs.minipay.xyz`, see `minipay-docs-map.md`.
 
-MiniPay is a non-custodial stablecoin wallet integrated into Opera Mini and available as a standalone app on Android and iOS. It's the fastest growing wallet in the Global South with 16M+ activations, 470M+ stablecoin transactions, 15M+ monthly Mini App opens, available in 66+ countries.
+MiniPay is a non-custodial stablecoin wallet integrated into Opera Mini and available as a standalone app on Android and iOS. It's the fastest growing wallet in the Global South with 16M+ total wallet activations, 470M+ transactions processed, 400M+ Mini App transactions to date, 50+ Mini Apps live, available in 66+ countries.
+
+> Stats sourced from the official MiniPay Q1 2026 report: https://forum.celo.org/t/minipay-update-q1-2026/13273
 
 > Wallet counts are updated by the MiniPay team via the MiniPay site and Celo blog. If a precise current number is needed, prefer fetching from those sources over the number above.
 
