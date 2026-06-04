@@ -82,7 +82,7 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with 14M+ users.
 - MiniPay detection (`window.ethereum.isMiniPay`)
 - Auto-connect patterns (no connect button in MiniPay)
 - Stablecoin payments with fee abstraction
-- Phone number → address via **ODIS (PnP) quota**, **OdisPayments** (cUSD/USDm top-up), **FederatedAttestations**, and **MiniPay issuer** (`0x7888612486844Bb9BE598668081c59A9f7367FBc` as trusted issuer)
+- Phone number → address via **ODIS (PnP) quota**, **OdisPayments** (USDm/cUSD top-up), **FederatedAttestations**, and **MiniPay issuer** (`0x7888612486844Bb9BE598668081c59A9f7367FBc` as trusted issuer)
 - Testing with ngrok on physical devices
 - UX best practices for emerging markets
 - Ready-to-use templates: payment flow, bill payment, balance display
@@ -247,7 +247,7 @@ When a builder has a new idea, guide them through:
 
 1. **Never guess contract addresses.** Wrong addresses = lost funds. If not in references, say so.
 2. **Celo is an L2, not an L1.** Migrated March 26, 2025 (block 31,056,500).
-3. **Mento stablecoins rebranded.** cUSD → USDm, cEUR → EURm, cREAL → BRLm. Both names valid.
+3. **Mento stablecoins rebranded — lead with the m-suffix name.** The new canonical naming is `{CURRENCY}m`: cUSD → USDm, cEUR → EURm, cREAL → BRLm. The same pattern extends to the regional stablecoins (`COPm`, `KESm`, `PHPm`, `BRLm`, `NGNm`, `ZARm`, etc.). When generating prose, code, UI copy, or examples, **lead with the m-suffix name**; the c-prefix is the legacy alias and should appear only as a parenthetical lookup aid (e.g. `USDm (cUSD)`) or in historical/factual contexts (past grant announcements, third-party app marketing snapshots, on-chain function names like `payInCUSD`).
 4. **Token decimals matter.** USDm = 18, USDC/USDT = 6. Always verify.
 5. **The Grid has no full-text search.** Only `_contains`/`_ilike` substring matching.
 6. **Filter for EVM.** Exclude non-EVM results unless asked.
