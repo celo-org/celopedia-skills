@@ -97,6 +97,8 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 
 ### Mento Stablecoins (see contracts.md for addresses)
 
+> Canonical list + how to build with them: https://docs.celo.org/build-on-celo/build-with-local-stablecoin
+
 | Currency | Symbol | Region |
 |----------|--------|--------|
 | US Dollar | USDm (cUSD) | Global |
@@ -117,10 +119,11 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 
 ### External Stablecoins
 
-| Token | Symbol |
-|-------|--------|
-| USDC (Circle) | USDC |
-| Tether USD | USDT |
+| Token | Symbol | Address |
+|-------|--------|---------|
+| USDC (Circle) | USDC | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
+| Tether USD | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| Tether America USD | USAT | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
 
 ---
 
