@@ -224,7 +224,7 @@ Wallet docs: https://docs.celo.org/tooling/wallets/index
 
 MiniPay is Celo's flagship stablecoin wallet, built into Opera Mini and also available as a standalone app.
 
-**Stats**: 14M+ wallets, 300M+ stablecoin transactions, 15M+ monthly Mini App opens, 60+ countries
+**Stats**: 16M+ wallets, 470M+ transactions, 15M+ monthly Mini App opens, 66+ countries
 
 ### Known Mini Apps
 
