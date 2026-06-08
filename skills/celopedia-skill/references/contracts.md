@@ -66,8 +66,11 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 |-------|--------|---------|
 | USDC (Circle) | USDC | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
 | Tether USD | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| Tether America USD | USAT | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
 | Wrapped Ether | WETH | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
 | CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
+
+> **USAT** (Tether America USD) launched on Celo in April 2026 — a USD stablecoin backed by short-term T-bills + cash (supervised by Anchorage Digital). **6 decimals** (like USDC/USDT). It is a whitelisted fee currency; its `feeCurrency` adapter is `0x0357EE22278c922e1D36cFe6b899269b161880C4` (18-decimal adapter — use the adapter, not the token, in the `feeCurrency` field). Caveat: upstream price oracles don't yet index the Celo contract address, so Valora-derived wallets may show `priceUsd: NaN` until that's resolved.
 
 ---
 
