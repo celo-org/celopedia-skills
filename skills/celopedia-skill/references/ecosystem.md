@@ -124,6 +124,18 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 | USDC (Circle) | USDC | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
 | Tether USD | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
 | Tether America USD | USAT | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
+| Mountain Protocol USD | USDM | `0x59d9356E565Ab3A36dD77763Fc0d87fEAf85508C` |
+| Angle USD | USDA | `0x0000206329b97DB379d5E1Bf586BbDB969C63274` |
+
+> ⚠️ **`USDM` ≠ `USDm`.** Mountain Protocol's **USDM** (uppercase M, yield-bearing, backed by short-term US Treasuries, 18 decimals, `0x59d9…508C`) is a **different token** from Celo's **USDm** (cUSD, the Mento dollar). Don't conflate them.
+
+### Other stablecoin & RWA issuers
+
+| Issuer | Tokens on Celo | Notes |
+|--------|----------------|-------|
+| Mountain Protocol | USDM | Yield-bearing USD, US-Treasury backed — https://mountainprotocol.com |
+| Angle | USDA (+ stUSD), EURA | Over-collateralized stable protocol — https://angle.money |
+| VNX | VEUR, VCHF, VGBP, VNXAU (gold) | EUR/CHF/GBP stablecoins + tokenized gold — https://vnx.li (verify token addresses on Celoscan) |
 
 ---
 
