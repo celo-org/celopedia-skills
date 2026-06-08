@@ -8,7 +8,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.3.1"
+  version: "2.4.0"
 ---
 
 # Celopedia Skill
@@ -77,7 +77,7 @@ B2B fiat-to-stablecoin infrastructure on Celo — virtual accounts, payouts, car
 
 ### 4. MiniPay App Builder
 
-Build Mini Apps for MiniPay — Celo's stablecoin wallet with 14M+ users.
+Build Mini Apps for MiniPay — Celo's stablecoin wallet with 16M+ users.
 
 - MiniPay detection (`window.ethereum.isMiniPay`)
 - Auto-connect patterns (no connect button in MiniPay)
@@ -97,10 +97,13 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with 14M+ users.
 Build AI agents that transact on Celo.
 
 - **ERC-8004**: Agent Trust Protocol (identity + reputation registries)
+- **Self Agent ID**: proof-of-human extension on ERC-8004 (soulbound NFT bound to a ZK passport proof) — sybil resistance; register at `https://app.ai.self.xyz`
+- **Celo Agent Visa**: tiered program (Tourist → Work Visa → Citizenship) unlocking DeFi incentives, liquidity, and MiniPay reach — `https://agentvisa.self.xyz/agents/visa`
 - **x402**: HTTP-native micropayments with stablecoins
 - **Celo MCP Server**: Query blockchain data from coding assistants
 - **Agent Skills**: Modular skill system for AI coding agents
-- Use cases: FX arbitrage, prediction markets, automated payments
+- **Onchain Agents Hackathon** (May 22 – Jun 15, 2026, $5K in CELO): build payment-native agents; submit via the **Celo Builders skill** (`npx skills add https://celobuilders.xyz`) — `https://bit.ly/OnchainAgentsHackathon`
+- Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
 
 **References**: `ai-agents.md`
 

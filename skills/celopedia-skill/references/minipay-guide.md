@@ -6,7 +6,7 @@
 >
 > For the full page-by-page index of `docs.minipay.xyz`, see `minipay-docs-map.md`.
 
-MiniPay is a non-custodial stablecoin wallet integrated into Opera Mini and available as a standalone app on Android and iOS. It's the fastest growing wallet in the Global South with 14M+ activations, 300M+ stablecoin transactions, available in 60+ countries.
+MiniPay is a non-custodial stablecoin wallet integrated into Opera Mini and available as a standalone app on Android and iOS. It's the fastest growing wallet in the Global South with 16M+ activations, 470M+ stablecoin transactions, 15M+ monthly Mini App opens, available in 66+ countries.
 
 > Wallet counts are updated by the MiniPay team via the MiniPay site and Celo blog. If a precise current number is needed, prefer fetching from those sources over the number above.
 
@@ -41,6 +41,20 @@ npx @celo/celo-composer@latest create -t minipay
 ```bash
 npm install viem@2 @celo/abis @celo/identity
 ```
+
+---
+
+## Quickstart: Utility Payment Mini App
+
+A common starting point — a Mini App where users pay a bill or send a stablecoin payment. The pieces below are documented in detail elsewhere in this guide; this is the order to wire them up. Mini Apps are **stablecoin-first**: build payment flows around USDm, USDC, and USDT (with gas paid in those same stablecoins via fee abstraction), so users never need to hold CELO.
+
+1. **Scaffold** — `npx @celo/celo-composer@latest create -t minipay` (or the raw Next.js path in `minipay-scaffold-from-scratch.md`).
+2. **Detect MiniPay & auto-connect** — `window.ethereum.isMiniPay`, no connect button (see _MiniPay Detection_ + _Wallet Connection_ above).
+3. **Pick the user's stablecoin** — read USDm/USDC/USDT balances and default to the one they hold (see _Supported Stablecoins_ + _Check Token Balance_). Mind decimals (USDm = 18, USDC/USDT = 6).
+4. **Pay gas in stablecoins** — set `feeCurrency` so the user pays network fees in the same stablecoin; use the **adapter** address for USDC/USDT. See `builder-guide.md` → _Allowed Fee Currencies_.
+5. **Build the payment flow** — approval + transfer for the bill/payment; reuse the **Bill Payment** and **Stablecoin Payment Flow** templates in `minipay-templates.md`.
+6. **Test on a physical device** — ngrok + a real Android/iOS phone (emulators do not work).
+7. **Submit** — when ready, go through the two-stage MiniPay listing at `https://minipay.to/mini-apps` (see `minipay-requirements.md`).
 
 ---
 

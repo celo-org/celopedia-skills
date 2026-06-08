@@ -49,10 +49,10 @@ Foundry/Hardhat configs for Celo, fee abstraction implementation, SDK selection 
 Deep protocol reference for Uniswap V3/V4, Aave V3, Carbon DeFi, Morpho Blue, Mento stablecoins, stCELO, Velodrome, and Curve on Celo. Includes contract addresses, interaction patterns, and yield strategies.
 
 ### MiniPay App Builder
-Build Mini Apps for MiniPay (14M+ wallets). Wallet detection, auto-connect patterns, stablecoin payments, phone number resolution, testing with ngrok, and ready-to-use code templates. Includes the official submission checklist (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA).
+Build Mini Apps for MiniPay (16M+ wallets). Wallet detection, auto-connect patterns, stablecoin payments, phone number resolution, testing with ngrok, and ready-to-use code templates. Includes the official submission checklist (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA).
 
 ### AI Agent Builder
-ERC-8004 (Agent Trust Protocol), x402 (HTTP micropayments), Celo MCP Server, and the Agent Skills specification. Build AI agents that transact autonomously on Celo.
+ERC-8004 (Agent Trust Protocol), Self Agent ID (proof-of-human), the Celo Agent Visa program, x402 (HTTP micropayments), Celo MCP Server, and the Agent Skills specification. Build onchain agents that transact autonomously on Celo.
 
 ### Security & Audit Readiness
 Celo-specific security patterns (CELO duality, CIP-64 fee abstraction, Aave aToken drift, Mento circuit breakers, post-L2 epoch effects). Chain-agnostic Solidity audits defer to [pashov/skills](https://github.com/pashov/skills).
