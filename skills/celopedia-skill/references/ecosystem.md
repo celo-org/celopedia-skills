@@ -117,25 +117,27 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 | Philippine Peso | PHPm | Philippines |
 | South African Rand | ZARm | South Africa |
 
-### External Stablecoins
+### External & third-party stablecoins
 
-| Token | Symbol | Address |
-|-------|--------|---------|
-| USDC (Circle) | USDC | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
-| Tether USD | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
-| Tether America USD | USAT | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
-| Mountain Protocol USD | USDM | `0x59d9356E565Ab3A36dD77763Fc0d87fEAf85508C` |
-| Angle USD | USDA | `0x0000206329b97DB379d5E1Bf586BbDB969C63274` |
+Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-local-stablecoin), addresses verified on-chain. See `contracts.md` for the full table.
 
-> ⚠️ **`USDM` ≠ `USDm`.** Mountain Protocol's **USDM** (uppercase M, yield-bearing, backed by short-term US Treasuries, 18 decimals, `0x59d9…508C`) is a **different token** from Celo's **USDm** (cUSD, the Mento dollar). Don't conflate them.
+| Token | Symbol | Issuer | Address |
+|-------|--------|--------|---------|
+| USDC | USDC | Circle | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
+| Tether USD | USDT | Tether | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| Tether America USD | USAT | Tether | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
+| Mountain Protocol USD | USDM | Mountain Protocol | `0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C` |
+| Angle USD | USDA | Angle | `0x0000206329b97DB379d5E1Bf586BbDB969C63274` |
+| Angle Euro | EURA | Angle | `0xC16B81Af351BA9e64C1a069E3Ab18c244A1E3049` |
+| VNX Euro | VEUR | VNX | `0x9346F43c1588B6DF1D52bdD6Bf846064F92d9Cba` |
+| VNX British Pound | VGBP | VNX | `0x7aE4265eCFC1F31bc0E112DfCFe3D78E01f4BB7f` |
+| VNX Swiss Franc | VCHF | VNX | `0xC5ebEa9984C485EC5D58cA5a2D376620d93aF871` |
+| Glo Dollar | USDGLO | Glo Foundation | `0x4F604735c1cF31399C6E711D5962b2B3E0225AD3` |
+| BRLA Digital | BRLA | BRLA | `0xFECB3F7c54E2CAAE9dC6Ac9060A822D47E053760` |
+| Minteo Colombian Peso | COPM | Minteo | `0xC92E8Fc2947E32F2B574CCA9F2F12097A71d5606` |
+| GoodDollar | G$ | GoodDollar | `0x62B8B11039FcfE5aB0C56E502b1C372A3d2a9c7A` |
 
-### Other stablecoin & RWA issuers
-
-| Issuer | Tokens on Celo | Notes |
-|--------|----------------|-------|
-| Mountain Protocol | USDM | Yield-bearing USD, US-Treasury backed — https://mountainprotocol.com |
-| Angle | USDA (+ stUSD), EURA | Over-collateralized stable protocol — https://angle.money |
-| VNX | VEUR, VCHF, VGBP, VNXAU (gold) | EUR/CHF/GBP stablecoins + tokenized gold — https://vnx.li (verify token addresses on Celoscan) |
+> ⚠️ **Ticker collisions** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury backed, `0x59D9…508C`) ≠ Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) ≠ Mento's **COPm**.
 
 ---
 
