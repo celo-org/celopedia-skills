@@ -390,7 +390,7 @@ Celo is **actively pushing builders toward onchain agents** — agents that hold
 Many of these benefit from **Self Agent ID** (one-human-one-spot) to prevent sybil/ghost-account fraud, and qualify for the **Agent Visa** and **Proof of Ship** AI agent tracks once live on mainnet.
 
 **Resources:**
-- ERC-8004 + Self Agent ID + x402 (above) are the core building blocks
+- Agent ideas: https://github.com/celo-org/ai-agent-ideas
 - Uniswap pools: https://app.uniswap.org/explore/pools/celo
 - Merkl rewards: https://merkl.angle.money/?chain=42220
 

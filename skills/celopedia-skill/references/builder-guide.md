@@ -57,7 +57,7 @@ Users can pay gas fees with ERC-20 tokens instead of native CELO. This is Celo's
 
 The table above is the common subset. The **full allowlist is larger** — it also includes many Mento local-currency stablecoins (KESm, COPm, GHSm, NGNm, ZARm, GBPm, and more) plus a few other assets. Rather than hardcode the whole list, **fetch it live** with `getCurrencies()` (see below) — that's the canonical, always-current source. For MiniPay Mini Apps and consumer payments, **USDm, USDC, and USDT** are the fee currencies users actually hold, so default to those.
 
-> **Wallet/SDK support:** fee abstraction works in MiniPay-focused and Celo-native wallets (MiniPay, Valora) today, with **Ledger support coming soon**. On the SDK side, **viem** supports the `feeCurrency` field natively — **ethers.js and web3.js do not**.
+> **Wallet/SDK support:** fee abstraction works in Celo-native wallets (MiniPay, Valora) today, with **Ledger support coming soon**. On the SDK side, **viem** supports the `feeCurrency` field natively — **ethers.js and web3.js do not**.
 
 The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C6276` governs the allowlist. Query it:
 
