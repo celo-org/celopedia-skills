@@ -45,35 +45,18 @@ Users can pay gas fees with ERC-20 tokens instead of native CELO. This is Celo's
 
 ### Allowed Fee Currencies (Mainnet)
 
-The allowlist is the **on-chain source of truth** — query `getCurrencies()` (below) for the live set. As of the last on-chain check it holds **20 fee currencies**: USDm, USDC, and USDT plus a wide set of Mento local-currency stablecoins (EURm, BRLm, KESm, COPm, GHSm, NGNm, ZARm, GBPm, CADm, AUDm, CHFm, JPYm, XOFm, PHPm), and WETH, XAUt0, USAT.
-
-**Important**: USDC and USDT use 6 decimals, so they require **adapter contracts** that normalize to 18 decimals. Use the **adapter** address (not the token address) in the `feeCurrency` field. Every other entry is 18-decimal, so its token address **is** its `feeCurrency` address.
+**Important**: USDC and USDT use 6 decimals, so they require **adapter contracts** that normalize to 18 decimals. Use the adapter address (not the token address) in the `feeCurrency` field.
 
 | Token | Decimals | Token Address | feeCurrency Address |
 |-------|----------|---------------|---------------------|
 | USDm (cUSD) | 18 | `0x765DE816845861e75A25fCA122bb6898B8B1282a` | `0x765DE816845861e75A25fCA122bb6898B8B1282a` (same) |
-| USDC | 6 | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` | `0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B` (adapter) |
-| USDT | 6 | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` | `0x0e2a3e05bc9a16f5292a6170456a710cb89c6f72` (adapter) |
 | EURm (cEUR) | 18 | `0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73` | `0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73` (same) |
 | BRLm (cREAL) | 18 | `0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787` | `0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787` (same) |
-| KESm (cKES) | 18 | `0x456a3D042C0DbD3db53D5489e98dFb038553B0d0` | `0x456a3D042C0DbD3db53D5489e98dFb038553B0d0` (same) |
-| COPm (cCOP) | 18 | `0x8A567e2aE79CA692Bd748aB832081C45de4041eA` | `0x8A567e2aE79CA692Bd748aB832081C45de4041eA` (same) |
-| GHSm (cGHS) | 18 | `0xfAeA5F3404bbA20D3cc2f8C4B0A888F55a3c7313` | `0xfAeA5F3404bbA20D3cc2f8C4B0A888F55a3c7313` (same) |
-| NGNm (cNGN) | 18 | `0xE2702Bd97ee33c88c8f6f92DA3B733608aa76F71` | `0xE2702Bd97ee33c88c8f6f92DA3B733608aa76F71` (same) |
-| ZARm (cZAR) | 18 | `0x4c35853A3B4e647fD266f4de678dCc8fEC410BF6` | `0x4c35853A3B4e647fD266f4de678dCc8fEC410BF6` (same) |
-| GBPm (cGBP) | 18 | `0xCCF663b1fF11028f0b19058d0f7B674004a40746` | `0xCCF663b1fF11028f0b19058d0f7B674004a40746` (same) |
-| CADm (cCAD) | 18 | `0xff4Ab19391af240c311c54200a492233052B6325` | `0xff4Ab19391af240c311c54200a492233052B6325` (same) |
-| AUDm (cAUD) | 18 | `0x7175504C455076F15c04A2F90a8e352281F492F9` | `0x7175504C455076F15c04A2F90a8e352281F492F9` (same) |
-| CHFm (cCHF) | 18 | `0xb55a79F398E759E43C95b979163f30eC87Ee131D` | `0xb55a79F398E759E43C95b979163f30eC87Ee131D` (same) |
-| JPYm (cJPY) | 18 | `0xc45eCF20f3CD864B32D9794d6f76814aE8892e20` | `0xc45eCF20f3CD864B32D9794d6f76814aE8892e20` (same) |
-| XOFm (cXOF) | 18 | `0x73F93dcc49cB8A239e2032663e9475dd5ef29A08` | `0x73F93dcc49cB8A239e2032663e9475dd5ef29A08` (same) |
-| PHPm (PUSO) | 18 | `0x105d4A9306D2E55a71d2Eb95B81553AE1dC20d7B` | `0x105d4A9306D2E55a71d2Eb95B81553AE1dC20d7B` (same) |
-| WETH | 18 | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` (same) |
-| XAUt0 (Tether Gold) | 18 | `0x857BF24e29da0773687E804a743c2E421a394C16` | `0x857BF24e29da0773687E804a743c2E421a394C16` (same) |
-| USAT | 18 | `0x0357EE22278c922e1D36cFe6b899269b161880C4` | `0x0357EE22278c922e1D36cFe6b899269b161880C4` (same) |
+| USDC | 6 | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` | `0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B` (adapter) |
+| USDT | 6 | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` | `0x0e2a3e05bc9a16f5292a6170456a710cb89c6f72` (adapter) |
 
-> Practical guidance: for MiniPay Mini Apps and consumer payments, **USDm, USDC, and USDT** are the fee currencies users actually hold — default to those. The Mento local-currency stablecoins and other assets above are valid fee currencies too, but rarely the right UX default. The list changes over time; treat `getCurrencies()` as canonical and don't hardcode it.
->
+The table above is the common subset. The **full allowlist is larger** — it also includes many Mento local-currency stablecoins (KESm, COPm, GHSm, NGNm, ZARm, GBPm, and more) plus a few other assets. Rather than hardcode the whole list, **fetch it live** with `getCurrencies()` (see below) — that's the canonical, always-current source. For MiniPay Mini Apps and consumer payments, **USDm, USDC, and USDT** are the fee currencies users actually hold, so default to those.
+
 > **Wallet/SDK support:** fee abstraction works in MiniPay-focused and Celo-native wallets (MiniPay, Valora) today, with **Ledger support coming soon**. On the SDK side, **viem** supports the `feeCurrency` field natively — **ethers.js and web3.js do not**.
 
 The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C6276` governs the allowlist. Query it:
