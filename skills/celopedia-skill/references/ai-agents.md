@@ -353,13 +353,9 @@ Skills activate automatically based on project context (e.g., `hardhat.config.ts
 
 ## Self Agent ID: Proof-of-Human for Agents
 
-Self Agent ID is the **proof-of-human extension on top of ERC-8004**: a soulbound NFT that binds an agent's key to a unique human, proven by a zero-knowledge passport check via Self Protocol. It makes an agent **sybil-resistant** (one human, one identity) without exposing any personal data — only a ZK proof and a nullifier go on-chain.
+Self Agent ID is the **proof-of-human extension on top of ERC-8004**: a soulbound NFT that binds an agent's key to a unique human via a zero-knowledge passport proof (Self Protocol). It makes an agent **sybil-resistant** without exposing personal data, and is required for the Celo Agent Visa Work tier and scored in Proof of Ship's AI Agents prize.
 
-- **Why it matters**: required for the Celo Agent Visa Work tier, scored in Proof of Ship's AI Agents prize, and the trust primitive for agent-to-agent / agent-to-service flows.
-- **Flow**: human scans passport in the Self app (proof generated locally) → on-chain verification → registry mints a soulbound NFT bound to the human's nullifier → the agent signs requests with the bound key.
-- **Register**: web UI at `https://app.ai.self.xyz/register`, CLI, or REST API. Registration modes include wallet-linked, wallet-free, agent keypair, passkey smart wallet, and social (Privy).
-- **Networks**: Celo Mainnet (real passport) and Celo Sepolia (mock documents for testing). Cross-links the ERC-8004 Identity Registry above.
-- **Docs**: https://docs.self.xyz/self-agent-id · register at https://app.ai.self.xyz
+**For the full registration reference — modes, the `POST /api/agent/register` flow, gotchas, and example curl — see `self-agent-id.md`.** Register at `https://app.ai.self.xyz`; docs at `https://docs.self.xyz/self-agent-id`.
 
 ---
 

@@ -97,7 +97,7 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with 16M+ users.
 Build AI agents that transact on Celo.
 
 - **ERC-8004**: Agent Trust Protocol (identity + reputation registries)
-- **Self Agent ID**: proof-of-human extension on ERC-8004 (soulbound NFT bound to a ZK passport proof) — sybil resistance; register at `https://app.ai.self.xyz`
+- **Self Agent ID**: proof-of-human extension on ERC-8004 (soulbound NFT bound to a passport ZK proof) — sybil resistance; register at `https://app.ai.self.xyz`. See `self-agent-id.md`.
 - **Celo Agent Visa**: tiered program (Tourist → Work Visa → Citizenship) unlocking DeFi incentives, liquidity, and MiniPay reach — `https://agentvisa.self.xyz/agents/visa`
 - **x402**: HTTP-native micropayments with stablecoins
 - **Celo MCP Server**: Query blockchain data from coding assistants
@@ -105,7 +105,7 @@ Build AI agents that transact on Celo.
 - **Onchain Agents Hackathon** (May 22 – Jun 15, 2026, $5K in CELO): build payment-native agents; submit via the **Celo Builders skill** (`npx skills add https://celobuilders.xyz`) — `https://bit.ly/OnchainAgentsHackathon`
 - Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
 
-**References**: `ai-agents.md`
+**References**: `ai-agents.md`, `self-agent-id.md`
 
 ### 6. Security & Audit Readiness
 
