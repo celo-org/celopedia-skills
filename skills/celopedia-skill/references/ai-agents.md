@@ -351,18 +351,52 @@ Skills activate automatically based on project context (e.g., `hardhat.config.ts
 
 ---
 
+## Self Agent ID: Proof-of-Human for Agents
+
+Self Agent ID is the **proof-of-human extension on top of ERC-8004**: a soulbound NFT that binds an agent's key to a unique human via a zero-knowledge passport proof (Self Protocol). It makes an agent **sybil-resistant** without exposing personal data, and is required for the Celo Agent Visa Work tier and scored in Proof of Ship's AI Agents prize.
+
+**For the full registration reference — modes, the `POST /api/agent/register` flow, gotchas, and example curl — see `self-agent-id.md`.** Register at `https://app.ai.self.xyz`; docs at `https://docs.self.xyz/self-agent-id`.
+
+---
+
+## Celo Agent Visa
+
+A tiered program for AI agents that transact on Celo — the further your agent goes, the more ecosystem support it unlocks. Apply at **https://agentvisa.self.xyz/agents/visa**.
+
+| Tier | Requirements | Unlocks |
+|------|--------------|---------|
+| **Tourist** | ≥1 transaction on Celo (automatic) | Co-marketing + founder mentorship |
+| **Work Visa** | Self Agent ID verification · 1,000+ txns · $5K+ volume (or 1,000 unique contracts) · live product with real utility | DeFi incentives, liquidity support, featured placement |
+| **Citizenship** | Work Visa criteria + 10,000+ txns or $15K+ volume · manual review | Flagship support, deepest integrations |
+
+Benefits across tiers include access to MiniPay's 16M+ users, DeFi incentives (Uniswap, Aave, Mento, Velodrome), token-launch liquidity, mentorship, and co-marketing. Self Agent ID is the gate for the Work tier — register it first.
+
+---
+
 ## AI Agent Use Cases on Celo
 
-Key opportunities for AI agents on Celo:
+Celo is **actively pushing builders toward onchain agents** — agents that hold a wallet, transact in stablecoins, and generate real on-chain activity (not just chatbots). The strongest use cases are payment-native and emerging-market-first. Keep your scope broad; the wedge that wins is usually "an everyday money task, automated, settled in stablecoins."
 
-- **Onchain FX Trading**: Arbitrage bots across Mento stablecoin pairs, LP management on Uniswap, Merkl rewards optimization
-- **Prediction Markets**: Automated market making and trading
-- **Automated Savings/DCA**: Dollar-cost averaging into CELO or stablecoins
-- **Data Collection Payments**: x402 micropayments for data (82.7% data gap outside NA/Europe)
-- **Retroactive Funding Optimization**: Track Proof-of-Ship metrics via Karma dashboard
-- **Payment Agents**: Autonomous bill payment, remittance, payroll
+- **Consumer money (save / send / spend)**: savings-coach and round-up agents, group savings (chama / stokvel) pools, remittance concierge, bill-pay & autopay, FX-hedging agents that dollarize a local-currency paycheck. Highest PMF — emerging-market retail.
+- **Agentic commerce & marketplaces**: local-commerce concierge with escrow, cross-border shopping agents, subscription managers — settling via x402 micropayments.
+- **DeFAI (crypto-native)**: conversational DeFi agents that compose Mento + Aave + Ubeswap, set-and-forget yield optimizers, DCA / strategy agents, onchain tax & portfolio assistants.
+- **Social, predictions & viral**: localized prediction markets, tip-to-earn creator agents, donation / round-up-to-cause agents.
+- **SMB, freelancers & identity infra**: invoice / get-paid agents, sybil-resistant airdrop & quest tools, SMS/USSD wallets for feature phones, and an MCP server for Celo. Pair human- or operator-facing flows with **Self Agent ID** for trust.
+
+Many of these benefit from **Self Agent ID** (one-human-one-spot) to prevent sybil/ghost-account fraud, and qualify for the **Agent Visa** and **Proof of Ship** AI agent tracks once live on mainnet.
 
 **Resources:**
 - Agent ideas: https://github.com/celo-org/ai-agent-ideas
 - Uniswap pools: https://app.uniswap.org/explore/pools/celo
 - Merkl rewards: https://merkl.angle.money/?chain=42220
+
+---
+
+## Onchain Agents Hackathon
+
+A Celo DevRel-run hackathon for building onchain agents focused on **real-world payments and everyday applications** — May 22 – June 15, 2026, **$5K prize pool in CELO**. Winning agents generate real transactions and demonstrate genuine on-chain utility (not prototypes). Full details: **https://bit.ly/OnchainAgentsHackathon**
+
+- **Tracks**: Best Agent on Celo ($2,500 / $1,000 / $500) · Most Activity — onchain transactions ($500) · Highest 8004scan rank ($500). Activity/rank tracks combine with the main track.
+- **Register**: quote-tweet the announcement tagging @CeloDevs + @Celo, describe what you're building, and include your ERC-8004 registry link. Join the Telegram for updates.
+- **Verification**: Self Agent ID is beneficial (helps judges sort out sybil attempts); not strictly required where Self isn't available in your region.
+- **Submit**: through the **Celo Builders skill** — install it with `npx skills add https://celobuilders.xyz`, then ask your coding agent to submit (hackathon: `celo-onchain-agents`). The skill walks you through connecting, answering project questions, reviewing the draft, and publishing.

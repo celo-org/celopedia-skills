@@ -66,8 +66,25 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 |-------|--------|---------|
 | USDC (Circle) | USDC | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
 | Tether USD | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| Tether America USD | USAT | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
+| Mountain Protocol USD | USDM | `0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C` |
+| Angle USD | USDA | `0x0000206329b97DB379d5E1Bf586BbDB969C63274` |
+| Angle Euro | EURA | `0xC16B81Af351BA9e64C1a069E3Ab18c244A1E3049` |
+| VNX Euro | VEUR | `0x9346F43c1588B6DF1D52bdD6Bf846064F92d9Cba` |
+| VNX British Pound | VGBP | `0x7aE4265eCFC1F31bc0E112DfCFe3D78E01f4BB7f` |
+| VNX Swiss Franc | VCHF | `0xC5ebEa9984C485EC5D58cA5a2D376620d93aF871` |
+| Glo Dollar | USDGLO | `0x4F604735c1cF31399C6E711D5962b2B3E0225AD3` |
+| BRLA Digital | BRLA | `0xFECB3F7c54E2CAAE9dC6Ac9060A822D47E053760` |
+| Minteo Colombian Peso | COPM | `0xC92E8Fc2947E32F2B574CCA9F2F12097A71d5606` |
+| GoodDollar | G$ | `0x62B8B11039FcfE5aB0C56E502b1C372A3d2a9c7A` |
 | Wrapped Ether | WETH | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
 | CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
+
+> Third-party stablecoins above are sourced from and verified against the official list: https://docs.celo.org/build-on-celo/build-with-local-stablecoin (addresses confirmed on-chain).
+>
+> **Ticker collisions to watch** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury-backed) is **not** Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) is **not** Mento's **COPm** (`0x8A56…`).
+
+> **USAT** (Tether America USD) launched on Celo in April 2026 — a USD stablecoin backed by short-term T-bills + cash (supervised by Anchorage Digital). **6 decimals** (like USDC/USDT). It is a whitelisted fee currency; its `feeCurrency` adapter is `0x0357EE22278c922e1D36cFe6b899269b161880C4` (18-decimal adapter — use the adapter, not the token, in the `feeCurrency` field). Caveat: upstream price oracles don't yet index the Celo contract address, so Valora-derived wallets may show `priceUsd: NaN` until that's resolved.
 
 ---
 
