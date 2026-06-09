@@ -1,12 +1,13 @@
 # MiniPay Development Guide
 
-> Sources:
-> - MiniPay docs (canonical): https://docs.minipay.xyz/
+> **Single source of truth:** https://docs.minipay.xyz/ — all implementation details in this file are derived from and cross-checked against the official MiniPay developer docs.
 > - docs.celo.org mirror: https://docs.celo.org/build-on-celo/build-on-minipay/*
 >
 > For the full page-by-page index of `docs.minipay.xyz`, see `minipay-docs-map.md`.
 
-MiniPay is a non-custodial stablecoin wallet integrated into Opera Mini and available as a standalone app on Android and iOS. It's the fastest growing wallet in the Global South with 16M+ activations, 470M+ stablecoin transactions, 15M+ monthly Mini App opens, available in 66+ countries.
+MiniPay is a non-custodial stablecoin wallet integrated into Opera Mini and available as a standalone app on Android and iOS. It's the fastest growing wallet in the Global South with 16M+ total wallet activations, 470M+ transactions processed, 400M+ Mini App transactions to date, 50+ Mini Apps live, available in 66+ countries.
+
+> Stats sourced from the official MiniPay Q1 2026 report: https://forum.celo.org/t/minipay-update-q1-2026/13273
 
 > Wallet counts are updated by the MiniPay team via the MiniPay site and Celo blog. If a precise current number is needed, prefer fetching from those sources over the number above.
 
@@ -289,6 +290,164 @@ MiniPay requires that apps identify users by **phone number**, not `0x…` hex a
 3. A truncated `0x123…abc` only as a secondary hint — never as the primary identifier.
 
 This is part of MiniPay's submission requirements — see `minipay-requirements.md` §1.
+
+---
+
+## Custom Methods (MiniPay-native RPC)
+
+> Canonical docs: https://docs.minipay.xyz/technical-references/custom-methods/custom-methods.html
+
+MiniPay exposes three custom JSON-RPC methods via `window.ethereum`. They require a Viem custom client built from a typed schema.
+
+### Setup — `useMiniPayClient` hook
+
+```typescript
+import { createWalletClient, custom } from "viem";
+import { celo } from "viem/chains";
+
+// Define the custom RPC schema once, import the hook wherever you need it
+export function useMiniPayClient() {
+  if (typeof window === "undefined" || !window.ethereum) return null;
+  return createWalletClient({
+    chain: celo,
+    transport: custom(window.ethereum),
+  });
+}
+```
+
+---
+
+### `minipay_getExchangeRate` — real-time FX rate
+
+> Docs: https://docs.minipay.xyz/technical-references/custom-methods/get-exchange-rate.html
+
+```typescript
+import { useState, useCallback } from "react";
+import { useMiniPayClient } from "./useMiniPayClient";
+
+export function useGetExchangeRate() {
+  const client = useMiniPayClient();
+  const [rate, setRate] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const getExchangeRate = useCallback(
+    async ({ from, to }: { from: string; to: string }) => {
+      if (!client) return;
+      setIsPending(true);
+      setError(null);
+      try {
+        const result = await client.request({
+          method: "minipay_getExchangeRate" as any,
+          params: [{ from, to }],
+        });
+        setRate(result as string);
+      } catch (err) {
+        setError(err instanceof Error ? err : new Error(String(err)));
+      } finally {
+        setIsPending(false);
+      }
+    },
+    [client],
+  );
+
+  return { getExchangeRate, rate, isPending, error };
+}
+
+// Usage — get USDT → NGN rate:
+// const { getExchangeRate, rate } = useGetExchangeRate();
+// await getExchangeRate({ from: "USDT", to: "NGN" });
+```
+
+---
+
+### `minipay_scanQrCode` — native QR scanner
+
+> Docs: https://docs.minipay.xyz/technical-references/custom-methods/scan-qr-code.html
+
+```typescript
+import { useState, useCallback } from "react";
+import { useMiniPayClient } from "./useMiniPayClient";
+
+export function useScanQrCode() {
+  const client = useMiniPayClient();
+  const [scannedValue, setScannedValue] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const scanQrCode = useCallback(async () => {
+    if (!client) return;
+    setIsPending(true);
+    setError(null);
+    try {
+      const result = await client.request({
+        method: "minipay_scanQrCode" as any,
+        params: [],
+      });
+      setScannedValue(result as string);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error(String(err)));
+    } finally {
+      setIsPending(false);
+    }
+  }, [client]);
+
+  return { scanQrCode, scannedValue, isPending, error };
+}
+
+// Usage:
+// const { scanQrCode, scannedValue } = useScanQrCode();
+// <button onClick={scanQrCode}>Scan QR</button>
+```
+
+---
+
+### `minipay_requestContact` — native contact picker
+
+> Docs: https://docs.minipay.xyz/technical-references/custom-methods/request-contact.html
+
+Returns `{ name: string; address: string }` — the contact's name and their MiniPay wallet address.
+
+```typescript
+import { useState, useCallback } from "react";
+import { useMiniPayClient } from "./useMiniPayClient";
+
+interface MiniPayContact {
+  name: string;
+  address: string;
+}
+
+export function useRequestContact() {
+  const client = useMiniPayClient();
+  const [contact, setContact] = useState<MiniPayContact | null>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const requestContact = useCallback(async () => {
+    if (!client) return;
+    setIsPending(true);
+    setError(null);
+    try {
+      const result = await client.request({
+        method: "minipay_requestContact" as any,
+        params: [],
+      });
+      setContact(result as MiniPayContact);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error(String(err)));
+    } finally {
+      setIsPending(false);
+    }
+  }, [client]);
+
+  return { requestContact, contact, isPending, error };
+}
+
+// Usage — pick a contact and pre-fill the recipient address:
+// const { requestContact, contact } = useRequestContact();
+// contact?.address → pre-fill send form
+// contact?.name   → display "Send to João"
+```
 
 ---
 

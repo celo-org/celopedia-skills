@@ -1,8 +1,7 @@
 # MiniPay Submission Requirements
 
-> Sources:
-> - Opera MiniPay "Build for MiniPay: Developer Requirements" (official PDF)
-> - MiniPay docs: https://docs.minipay.xyz/getting-started/submit-your-miniapp.html
+> **Single source of truth:** https://docs.minipay.xyz/ — specifically https://docs.minipay.xyz/getting-started/submit-your-miniapp.html
+> - Additional source: Opera MiniPay "Build for MiniPay: Developer Requirements" (official PDF)
 >
 > Last updated: 2026-05-18.
 
