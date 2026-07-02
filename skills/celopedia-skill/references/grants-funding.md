@@ -91,6 +91,8 @@
 
 ## Grant Matchmaking Guide
 
+> **Before you apply:** add [attribution tags](attribution-tags.md) to your transactions as early as possible. Celo tracks ecosystem impact via ERC-8021 attribution data and will use it for future reward distribution — programs that reward on-chain usage (Divvi, Proof of Ship-style cohorts) can only credit what's attributable.
+
 | Building... | Recommended Programs |
 |-------------|---------------------|
 | Any Celo project (milestone-based) | Prezenti Anchor Round (up to 25K) |

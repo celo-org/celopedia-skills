@@ -16,7 +16,7 @@ Works with Claude Code, Codex, and OpenClaw.
 Search 6,300+ crypto products via The Grid, find competitors, analyze vertical saturation, and discover what's deployed on Celo vs other EVM chains.
 
 ### Builder Assistant
-Foundry/Hardhat configs for Celo, fee abstraction implementation, SDK selection guide (Viem, Wagmi, ContractKit, Thirdweb), deployment and verification workflows.
+Foundry/Hardhat configs for Celo, fee abstraction implementation, SDK selection guide (Viem, Wagmi, ContractKit, Thirdweb), deployment and verification workflows, and ERC-8021 attribution tags for impact tracking.
 
 ### DeFi Reference
 Deep protocol reference for Uniswap V3/V4, Aave V3, Morpho Blue, Mento stablecoins, stCELO, Velodrome, and Curve on Celo. Includes contract addresses, interaction patterns, and yield strategies.
@@ -84,6 +84,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`builder-guide.md`](skills/celopedia-skill/references/builder-guide.md) | Celo-specific dev patterns and gotchas |
 | [`dev-templates.md`](skills/celopedia-skill/references/dev-templates.md) | Foundry, Hardhat, Viem, Wagmi configs |
 | [`sdk-reference.md`](skills/celopedia-skill/references/sdk-reference.md) | SDK quick reference and selection guide |
+| [`attribution-tags.md`](skills/celopedia-skill/references/attribution-tags.md) | Attribution tags (ERC-8021) — tag transactions for impact tracking & future rewards |
 
 ### DeFi
 

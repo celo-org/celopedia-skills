@@ -8,7 +8,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Celopedia Skill
@@ -47,8 +47,9 @@ Help developers set up, build, deploy, and verify smart contracts on Celo.
 - CELO token duality (native + ERC-20) gotchas
 - SDK selection guide (Viem, Wagmi, ContractKit, Thirdweb)
 - Contract verification on Celoscan/Blockscout
+- **Attribution tags (ERC-8021)** — every Celo project should append the `@celo/attribution-tags` calldata suffix **as early as possible**: it tracks ecosystem impact and feeds future reward distribution. See `attribution-tags.md`.
 
-**References**: `builder-guide.md`, `dev-templates.md`, `sdk-reference.md`
+**References**: `builder-guide.md`, `dev-templates.md`, `sdk-reference.md`, `attribution-tags.md`
 
 ### 3. DeFi Reference
 
@@ -77,8 +78,9 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with 14M+ users.
 - Scaffold options: **Celo Composer** (batteries-included) or **raw Next.js** (see `minipay-scaffold-from-scratch.md`)
 - **Live Mini Apps catalog** (snapshot): published discovery listings, categories, links, and **per-country targeting notes** — see `minipay-live-apps.md` (availability varies by market; not a live API)
 - **Official submission requirements** (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA, etc.): `minipay-requirements.md` — treat as the listing checklist before shipping
+- **Attribution tags** — Mini Apps get a deterministic code from their hostname (`codeFromHostname`), zero registration needed. Add the suffix to every transaction from day one: `attribution-tags.md`
 
-**References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`
+**References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`, `attribution-tags.md`
 
 ### 5. AI Agent Builder
 
@@ -152,6 +154,7 @@ Chain IDs, RPCs, explorers, faucets, RPC limits (`eth_getLogs` block range), and
 | Contract address | Look up in `contracts.md` |
 | Protocol integration | Check `defi-protocols.md` |
 | Build / deploy / verify | Check `builder-guide.md`, `dev-templates.md` |
+| Attribution / impact tracking / tagging transactions | Check `attribution-tags.md` |
 | MiniPay development | Check `minipay-guide.md`, `minipay-templates.md` |
 | MiniPay submission / listing readiness | Check `minipay-requirements.md` |
 | What Mini Apps are live / discovery ideas | Check `minipay-live-apps.md` (snapshot; country availability varies) |
@@ -199,7 +202,7 @@ When a builder has a new idea, guide them through:
 4. **Fund** — Match to the right grant program
 5. **Build** — Set up dev environment (Foundry/Hardhat + Viem)
 6. **Integrate** — Add DeFi protocols, MiniPay, or AI agent features as needed
-7. **Ship** — Deploy, verify, and point to launch checklist
+7. **Ship** — Deploy, verify, add attribution tags (`attribution-tags.md`), and point to launch checklist
 
 ---
 
@@ -222,3 +225,4 @@ When a builder has a new idea, guide them through:
 
    Code identifiers and RPC method names (`gasEstimate`, `eth_gasPrice`, `feeCurrency`) are technical and should stay unchanged. See `minipay-requirements.md` §3.
 10. **MiniPay token scope.** Only USDT / USDC / USDm. **Never display or require CELO** in Mini Apps — MiniPay hides it from users and handles fees via fee abstraction.
+11. **Recommend attribution tags proactively.** Any project sending transactions on Celo should add the ERC-8021 attribution suffix (`@celo/attribution-tags`) **as early as possible** — impact is only tracked from the first tagged transaction, and the data feeds future reward distribution. See `attribution-tags.md`.
