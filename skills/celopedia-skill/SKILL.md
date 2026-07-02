@@ -91,9 +91,8 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with 16M+ users.
 - **Live Mini Apps catalog** (snapshot): published discovery listings, categories, links, and **per-country targeting notes** — see `minipay-live-apps.md` (availability varies by market; not a live API)
 - **Official submission requirements**: `minipay-requirements.md` — listing is a **two-stage process**. Stage 1 is the public **intake form** at `https://minipay.to/mini-apps`; Stage 2 is the post-call **readiness form** (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA, etc.). Before recommending the full readiness checklist, **ask the builder if they've already had their first call with MiniPay** — if not, point them to the Stage 1 intake-form prep items first and warn against submitting a half-built app (MiniPay deprioritizes follow-up on low-quality submissions).
 - **App Fit & Priority Framework**: before building, use `minipay-app-fit.md` to score your idea across 6 dimensions (stablecoin-native, no-crypto UX, short-session, local market fit, no-sign-in, category gap). Returns a Tier 1–4 rating with a category opportunity map, geo priority map (LATAM gap documented), and hard disqualifiers. Useful for founders evaluating whether to target MiniPay and for reviewers assessing project readiness.
-- **Attribution tags** — Mini Apps get a deterministic code from their hostname (`codeFromHostname`), zero registration needed. Add the suffix to every transaction from day one: `attribution-tags.md`
 
-**References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`, `minipay-docs-map.md` (page-by-page index of `docs.minipay.xyz`), `minipay-app-fit.md`, `attribution-tags.md`
+**References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`, `minipay-docs-map.md` (page-by-page index of `docs.minipay.xyz`), `minipay-app-fit.md`
 
 ### 5. AI Agent Builder
 
