@@ -1,5 +1,7 @@
 # MiniPay live Mini Apps (discovery catalog snapshot)
 
+> Canonical MiniPay developer docs: https://docs.minipay.xyz/ (page-by-page index in `minipay-docs-map.md`). This file is a **discovery-catalog snapshot**, not docs.
+>
 > **Snapshot source:** Opera MiniPay discovery export (`discover-mini-apps-export.csv`). **Point-in-time** list so developers can see categories and live-style products in the MiniPay ecosystem.
 >
 > **Last regenerated from export:** 2026-04-09 (run `python3 scripts/generate_minipay_live_apps.py <csv>` from repo root).

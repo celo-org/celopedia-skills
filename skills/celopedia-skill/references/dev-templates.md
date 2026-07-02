@@ -2,6 +2,16 @@
 
 Ready-to-use configuration and code snippets for building on Celo.
 
+> **Building a Mini App for MiniPay?**
+> This file covers general Celo dev setup (Foundry, Hardhat, viem, wagmi). For a MiniPay-specific
+> scaffold with detection, auto-connect, fee abstraction, and ngrok testing already wired, use:
+>
+> - `minipay-scaffold-from-scratch.md` — minimal Next.js + viem setup (recommended for Mini Apps)
+> - `minipay-templates.md` — copy-paste code for 6 common patterns (payments, balances, deeplinks)
+> - `minipay-app-fit.md` — scorecard to check if your idea is a good fit before you start building
+>
+> Or scaffold immediately with: `npx @celo/celo-composer@latest create -t minipay`
+
 ---
 
 ## Foundry Configuration

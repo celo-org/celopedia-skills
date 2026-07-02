@@ -41,8 +41,8 @@ Verified core addresses are in **`contracts.md`**:
 | Role | Contract | Notes |
 |------|----------|--------|
 | Attestation registry | **FederatedAttestations** `0x0aD5b1d0C25ecF6266Dd951403723B2687d6aff2` | Use `kit.contracts.getFederatedAttestations()` with ContractKit |
-| Quota payment | **OdisPayments** `0xAE6B29f31B96e61DdDc792f45fDa4e4F0356D0CB` | Pulls **cUSD / USDm** (StableToken) to credit PnP quota |
-| cUSD / USDm token | `0x765DE816845861e75A25fCA122bb6898B8B1282a` | 18 decimals — see `minipay-guide.md` |
+| Quota payment | **OdisPayments** `0xAE6B29f31B96e61DdDc792f45fDa4e4F0356D0CB` | Pulls **USDm / cUSD** (StableToken) to credit PnP quota |
+| USDm / cUSD token | `0x765DE816845861e75A25fCA122bb6898B8B1282a` | 18 decimals — see `minipay-guide.md` |
 
 ### MiniPay issuer (trusted issuer for lookups)
 
@@ -98,7 +98,7 @@ const authSigner: AuthSigner = {
 ## Quota (mainnet gotcha)
 
 - **`getPnpQuotaStatus(account, authSigner, serviceContext)`** returns `remainingQuota`, `totalQuota`, `performedQueryCount`.
-- **Having cUSD/USDm in the wallet does not automatically grant PnP quota.** If `remainingQuota` is **0**, you typically must pay into **`OdisPayments`**:
+- **Having USDm/cUSD in the wallet does not automatically grant PnP quota.** If `remainingQuota` is **0**, you typically must pay into **`OdisPayments`**:
   1. **`StableToken.increaseAllowance(odisPaymentsAddress, amountWei)`**
   2. **`OdisPayments.payInCUSD(quotaAccount, amountWei)`** — credits **that account’s** PnP quota.
 
