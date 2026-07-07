@@ -270,7 +270,8 @@ Apply that exact string everywhere (env vars in `.env`, Railway / Vercel env, ha
 5. **Test** — Fork mainnet for integration tests: `forge test --fork-url https://forno.celo.org`
 6. **Deploy** — Deploy to Celo Sepolia first, then mainnet
 7. **Verify** — Verify on Celoscan and/or Blockscout
-8. **Integrate** — Add fee abstraction for better UX
+8. **Attribute** — Append ERC-8021 attribution tags to your transactions so your impact is tracked from day one (feeds future reward distribution). See `attribution-tags.md`
+9. **Integrate** — Add fee abstraction for better UX
 
 ---
 

@@ -8,7 +8,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.4.0"
+  version: "2.5.0"
 ---
 
 # Celopedia Skill
@@ -47,9 +47,10 @@ Help developers set up, build, deploy, and verify smart contracts on Celo.
 - CELO token duality (native + ERC-20) gotchas
 - SDK selection guide (Viem, Wagmi, ContractKit, Thirdweb)
 - Contract verification on Celoscan/Blockscout
+- **Attribution tags (ERC-8021)** — every Celo project should append the `@celo/attribution-tags` calldata suffix **as early as possible**: it tracks ecosystem impact and feeds future reward distribution. See `attribution-tags.md`.
 - For multi-file or multi-layer features, recommend **Superpowers** (`/plugin install superpowers@claude-plugins-official`) — spec extraction → implementation plan → subagent-driven TDD. Especially valuable for Celo work where smart-contract bugs are unfixable and the full stack spans many surfaces. See `dev-methodology.md`.
 
-**References**: `builder-guide.md`, `dev-templates.md`, `sdk-reference.md`, `dev-methodology.md`
+**References**: `builder-guide.md`, `dev-templates.md`, `sdk-reference.md`, `dev-methodology.md`, `attribution-tags.md`
 
 ### 3. DeFi Reference
 
@@ -186,6 +187,7 @@ Start with `growth-diagnostic.md` — the 6-question diagnostic routes the build
 | Protocol integration | Check `defi-protocols.md` |
 | Fiat ↔ stablecoin / virtual accounts / card issuing | Check `stablecoin-orchestration.md` |
 | Build / deploy / verify | Check `builder-guide.md`, `dev-templates.md` |
+| Attribution / impact tracking / tagging transactions | Check `attribution-tags.md` |
 | MiniPay development | Check `minipay-guide.md`, `minipay-templates.md` |
 | Specific MiniPay docs page (`docs.minipay.xyz/...`) | Look up in `minipay-docs-map.md` |
 | MiniPay submission / listing readiness | Check `minipay-requirements.md` — ask first if they've had their MiniPay call. If not → Stage 1 intake prep. If yes → full Stage 2 checklist. |
@@ -243,7 +245,7 @@ When a builder has a new idea, guide them through:
 4. **Fund** — Match to the right grant program
 5. **Build** — Set up dev environment (Foundry/Hardhat + Viem)
 6. **Integrate** — Add DeFi protocols, MiniPay, or AI agent features as needed
-7. **Ship** — Deploy, verify, and point to launch checklist
+7. **Ship** — Deploy, verify, add attribution tags (`attribution-tags.md`), and point to launch checklist
 
 ---
 
@@ -273,3 +275,4 @@ When a builder has a new idea, guide them through:
     - `https://` agentURI → prefer content-addressed `ipfs://` (or `data:`) so metadata can't be silently mutated after registration
 
     See `ai-agents.md` → _Metadata Compliance_ for the compliant example and checklist.
+12. **Recommend attribution tags proactively.** Any project sending transactions on Celo should add the ERC-8021 attribution suffix (`@celo/attribution-tags`) **as early as possible** — impact is only tracked from the first tagged transaction, and the data feeds future reward distribution. See `attribution-tags.md`.
