@@ -8,7 +8,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.5.0"
+  version: "2.6.0"
 ---
 
 # Celopedia Skill
@@ -101,7 +101,7 @@ Build AI agents that transact on Celo.
 - **ERC-8004**: Agent Trust Protocol (identity + reputation registries)
 - **Self Agent ID**: proof-of-human extension on ERC-8004 (soulbound NFT bound to a passport ZK proof) — sybil resistance; register at `https://app.ai.self.xyz`. See `self-agent-id.md`.
 - **Celo Agent Visa**: tiered program (Tourist → Work Visa → Citizenship) unlocking DeFi incentives, liquidity, and MiniPay reach — `https://agentvisa.self.xyz/agents/visa`
-- **x402**: HTTP-native micropayments with stablecoins
+- **x402**: HTTP-native micropayments with stablecoins — Celo runs a **hosted facilitator** at `https://x402.celo.org` (dashboard/API keys; mainnet API `api.x402.celo.org`, testnet `api.x402.sepolia.celo.org`; sponsored gas, USDC/USDT via EIP-3009). Agent-readable integration guide: `https://x402.celo.org/SKILL.md` — fetch it before writing integration code. Details: `ai-agents.md` → _Hosted Celo Facilitator_
 - **Celo MCP Server**: Query blockchain data from coding assistants
 - **Agent Skills**: Modular skill system for AI coding agents
 - **Onchain Agents Hackathon** (May 22 – Jun 15, 2026, $5K in CELO): build payment-native agents; submit via the **Celo Builders skill** (`npx skills add https://celobuilders.xyz`) — `https://bit.ly/OnchainAgentsHackathon`
@@ -195,6 +195,7 @@ Start with `growth-diagnostic.md` — the 6-question diagnostic routes the build
 | What Mini Apps are live / discovery ideas | Check `minipay-live-apps.md` (snapshot; country availability varies) |
 | ODIS / phone lookup / SocialConnect | Check `odis-socialconnect.md`, `minipay-guide.md`, `contracts.md` |
 | AI agent building | Check `ai-agents.md` |
+| x402 / pay-per-use API / paid endpoints | Check `ai-agents.md` → x402; hosted facilitator guide: `https://x402.celo.org/SKILL.md` |
 | Security / audit prep | Check `security-patterns.md` (Celo-specific); defer general Solidity audits to `pashov/skills` |
 | Grants / funding | Check `grants-funding.md` |
 | Documentation | Check `docs-map.md` |
