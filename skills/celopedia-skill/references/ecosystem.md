@@ -122,6 +122,19 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 | USDC (Circle) | USDC |
 | Tether USD | USDT |
 
+### Ripio Stablecoins
+
+Ripio-issued wrapped Latin American fiat (see contracts.md for addresses).
+
+| Currency | Symbol | Region |
+|----------|--------|--------|
+| Argentine Peso | wARS | Argentina |
+| Brazilian Real | wBRL | Brazil |
+| Mexican Peso | wMXN | Mexico |
+| Colombian Peso | wCOP | Colombia |
+| Peruvian Sol | wPEN | Peru |
+| Chilean Peso | wCLP | Chile |
+
 ---
 
 ## Infrastructure

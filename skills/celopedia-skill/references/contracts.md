@@ -69,6 +69,19 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 | Wrapped Ether | WETH | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
 | CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
 
+### Ripio Stablecoins
+
+Ripio-issued wrapped Latin American fiat stablecoins.
+
+| Token | Symbol | Address |
+|-------|--------|---------|
+| Wrapped Argentine Peso | wARS | `0x0DC4F92879B7670e5f4e4e6e3c801D229129D90D` |
+| Wrapped Brazilian Real | wBRL | `0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0` |
+| Wrapped Mexican Peso | wMXN | `0x337E7456B420bD3481e7FA61fA9850343d610d34` |
+| Wrapped Colombian Peso | wCOP | `0x8a1D45e102e886510e891d2Ec656a708991e2D76` |
+| Wrapped Peruvian Sol | wPEN | `0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE` |
+| Wrapped Chilean Peso | wCLP | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` |
+
 ---
 
 ## L1 Contracts on Ethereum (Mainnet)
