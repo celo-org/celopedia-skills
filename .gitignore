@@ -1,2 +1,5 @@
 
 node_modules
+
+# Generated docs-watch change reports (local only, not tracked)
+.claude/skills/docs-watch/reports/
