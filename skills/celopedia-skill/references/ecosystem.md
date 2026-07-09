@@ -136,6 +136,12 @@ Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-l
 | BRLA Digital | BRLA | BRLA | `0xFECB3F7c54E2CAAE9dC6Ac9060A822D47E053760` |
 | Minteo Colombian Peso | COPM | Minteo | `0xC92E8Fc2947E32F2B574CCA9F2F12097A71d5606` |
 | GoodDollar | G$ | GoodDollar | `0x62B8B11039FcfE5aB0C56E502b1C372A3d2a9c7A` |
+| Wrapped Argentine Peso | wARS | Ripio | `0x0DC4F92879B7670e5f4e4e6e3c801D229129D90D` |
+| Wrapped Brazilian Real | wBRL | Ripio | `0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0` |
+| Wrapped Mexican Peso | wMXN | Ripio | `0x337E7456B420bD3481e7FA61fA9850343d610d34` |
+| Wrapped Colombian Peso | wCOP | Ripio | `0x8a1D45e102e886510e891d2Ec656a708991e2D76` |
+| Wrapped Peruvian Sol | wPEN | Ripio | `0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE` |
+| Wrapped Chilean Peso | wCLP | Ripio | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` |
 
 > ⚠️ **Ticker collisions** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury backed, `0x59D9…508C`) ≠ Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) ≠ Mento's **COPm**.
 

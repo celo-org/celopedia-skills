@@ -77,6 +77,12 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 | BRLA Digital | BRLA | `0xFECB3F7c54E2CAAE9dC6Ac9060A822D47E053760` |
 | Minteo Colombian Peso | COPM | `0xC92E8Fc2947E32F2B574CCA9F2F12097A71d5606` |
 | GoodDollar | G$ | `0x62B8B11039FcfE5aB0C56E502b1C372A3d2a9c7A` |
+| Ripio Argentine Peso | wARS | `0x0DC4F92879B7670e5f4e4e6e3c801D229129D90D` |
+| Ripio Brazilian Real | wBRL | `0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0` |
+| Ripio Mexican Peso | wMXN | `0x337E7456B420bD3481e7FA61fA9850343d610d34` |
+| Ripio Colombian Peso | wCOP | `0x8a1D45e102e886510e891d2Ec656a708991e2D76` |
+| Ripio Peruvian Sol | wPEN | `0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE` |
+| Ripio Chilean Peso | wCLP | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` |
 | Wrapped Ether | WETH | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
 | CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
 
