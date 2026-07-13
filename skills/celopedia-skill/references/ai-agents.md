@@ -208,7 +208,7 @@ The thirdweb flow below is an **alternative** that uses thirdweb's own facilitat
 | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` | 6 |
 | USDm | `0x765DE816845861e75A25fCA122bb6898B8B1282a` | 18 |
 
-> ⚠️ USDm implements EIP-2612 `permit` only, **not** EIP-3009 — it does not work with the hosted Celo facilitator above. Check your facilitator's supported schemes before pricing in USDm.
+> ⚠️ **USDm caveat.** USDm (Mento `StableTokenV3`) implements EIP-2612 `permit` only, **not** EIP-3009 `transferWithAuthorization` (verified on-chain) — so it does **not** work with the hosted Celo facilitator, whose engine currently implements only the EIP-3009 transfer method. The x402 `exact` EVM spec also defines Permit2 / EIP-2612 fallback methods, and facilitators that implement them (e.g. thirdweb accepts "ERC-2612 permit" tokens) can settle USDm. Rule: **match the token to your facilitator's supported transfer methods** — for the hosted Celo facilitator that means USDC or USDT.
 
 ### Server Implementation (Next.js)
 
