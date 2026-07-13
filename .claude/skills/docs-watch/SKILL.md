@@ -6,11 +6,14 @@ description: Check docs.celo.org and other live sources for drift against this r
 # celopedia-skills docs upstream watch
 
 Goal: detect when the facts mirrored into `skills/celopedia-skill/references/`
-have drifted from their live sources, and either fix the drift directly
-(mechanical changes) or flag it for a human (ambiguous/high-stakes changes) —
-following the process already documented in this repo's `README.md`
-("Contributing" section: check docs.celo.org → update the file → bump
-version → open a PR).
+have drifted from their live sources, and surface every finding — mechanical
+fixes and ambiguous/high-stakes flags alike — in **one reviewable pull
+request per run**, opened against `celo-org/celopedia-skills:main` (the
+canonical upstream repo, not a fork), so a human can approve, edit, or
+close it. This builds on the process already documented in this repo's
+`README.md` ("Contributing" section: check docs.celo.org → update the file
+→ bump version → open a PR) but replaces its own ad hoc reports/issues with
+a single PR as the one place everything gets reviewed.
 
 ## Sources checked
 
@@ -36,34 +39,48 @@ version → open a PR).
 
 4. **Classify every delta:**
    - `no action` — cosmetic/unrelated (e.g. a docs page's prose changed but
-     not its existence or URL).
+     not its existence or URL). Not mentioned in the PR.
    - `reference update` — mechanical, unambiguous fact change: a sitemap page
      added/removed/renamed, a DeFi protocol added/removed from the Celo chain
      list, a grant program's Live/Past status flipped, a new fee-currency
-     token added. For these:
-     1. Edit the reference file directly with the corrected fact.
-     2. Bump `version` in `skills/celopedia-skill/SKILL.md` (patch bump for
-        pure data refresh).
-     3. Open a PR against `main` titled like `chore(docs): refresh <file> —
-        <one-line summary>`, following the README's Contributing steps.
+     token added. Edit the reference file directly with the corrected fact,
+     on the run's branch (see step 5) — do not commit or PR per-item.
    - `needs review` — anything ambiguous or high-stakes (a contract address
      that doesn't match, a chain ID / fee-currency address change, anything
      touching `contracts.md` core protocol addresses or `network-info.md`
-     chain IDs). For these: do **not** edit the file. Open a GitHub issue in
-     `celo-org/celopedia-skills` describing exactly what was observed vs.
-     what's cached, and why it needs a human to confirm before changing.
+     chain IDs). Do **not** edit the file — never guess a fix for these.
+     Instead, write a clearly-marked entry describing exactly what was
+     observed vs. what's cached, for the "Needs review" section of the PR
+     body (step 5).
 
-5. **Write the report** to `.claude/skills/docs-watch/reports/report-<YYYY-MM-DD>.md`
-   and commit it directly to `main` (a plain log entry, not something that
-   needs review) — this is the durable location, since a `.context/` file
-   would not survive between separate runs of a scheduled routine. One
-   section per source: deltas found, classification, and any PR/issue links
-   opened. Put a one-line "action needed?" summary at the top — if anything
-   is `needs review`, say so first.
+5. **If any `reference update` or `needs review` deltas were found**, open
+   **one** pull request for the whole run:
+   1. Create a branch off `main` (e.g. `docs-watch/<YYYY-MM-DD>`).
+   2. Apply all `reference update` edits on that branch, and bump `version`
+      in `skills/celopedia-skill/SKILL.md` (patch bump for a pure data
+      refresh) if any reference file changed.
+   3. Push the branch to this checkout's own remote (the fork), then open
+      the PR **against `celo-org/celopedia-skills:main`**, e.g.:
+      `gh pr create --repo celo-org/celopedia-skills --base main --head <fork-owner>:<branch> --title "docs-watch: weekly refresh — <date>" --body "..."`
+   4. The PR body is the report — no separate report file. Structure it as:
+      a one-line "what changed" summary at the top, one section per source
+      with its deltas and classification, a clearly separated **Needs
+      review** section for anything requiring human judgment (this replaces
+      the old issue-filing path — the reviewer approves, pushes edits, or
+      closes the PR instead of triaging a separate issue), and the mechanical
+      edits already applied in the diff.
+   5. **One PR covers the whole run** — don't split `reference update` and
+      `needs review` findings into separate PRs.
 
-6. **Update the snapshot** with newly-verified facts and today's date. Keep
-   it small — only the facts checked above, not a full copy of the reference
-   files.
+   **If nothing was found** (all `no action`, or the run was blocked/errored
+   — e.g. a source unreachable), do not open a PR or commit anything. End
+   with a short summary in the final message instead.
+
+6. **Update the snapshot** with newly-verified facts and today's date —
+   include this edit in the same PR branch as step 5 (not a direct commit to
+   main). Keep it small — only the facts checked above, not a full copy of
+   the reference files. If no PR was opened this run, leave the snapshot
+   unchanged (nothing was actually verified).
 
 ## Notes
 
