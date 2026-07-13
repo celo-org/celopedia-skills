@@ -110,7 +110,7 @@ Replace crypto-jargon with user-friendly terms everywhere a real user sees them 
 
 - **Mobile-First Resolution** — the UI must be responsive and fully functional at **360w × 640h**. This is the hard minimum from the readiness PDF, and the smaller of the two figures floating in MiniPay's public material — design and verify against 360 × 640. Use Chrome DevTools device mode to validate before submission.
 - **Asset Optimization** — use **SVG or WebP** for images. Avoid PNG/JPG for anything larger than a few KB.
-- **Performance Benchmarking** — submit a **PageSpeed Insights** score (`https://pagespeed.web.dev`) for your production URL with the form. Aim for 90+ on mobile. Low scores block listing.
+- **Performance Benchmarking** — submit a **PageSpeed Insights** score (`https://pagespeed.web.dev`) for your production URL with the form. Aim for 90+ on mobile. Low scores block listing. **For how to measure real-user load speed (Web Vitals via PostHog) and the optimization playbook to actually hit 90+, see `minipay-performance.md`.**
 - **Network Transparency** — provide a full manifest of every **URL, subdomain, and origin** your app calls (JS, CSS, fonts, RPCs, APIs). MiniPay reviews this for supply-chain risk.
 
 ### 5. Smart Contract Standards

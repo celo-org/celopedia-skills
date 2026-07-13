@@ -92,7 +92,7 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with 16M+ users.
 - **Official submission requirements**: `minipay-requirements.md` — listing is a **two-stage process**. Stage 1 is the public **intake form** at `https://minipay.to/mini-apps`; Stage 2 is the post-call **readiness form** (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA, etc.). Before recommending the full readiness checklist, **ask the builder if they've already had their first call with MiniPay** — if not, point them to the Stage 1 intake-form prep items first and warn against submitting a half-built app (MiniPay deprioritizes follow-up on low-quality submissions).
 - **App Fit & Priority Framework**: before building, use `minipay-app-fit.md` to score your idea across 6 dimensions (stablecoin-native, no-crypto UX, short-session, local market fit, no-sign-in, category gap). Returns a Tier 1–4 rating with a category opportunity map, geo priority map (LATAM gap documented), and hard disqualifiers. Useful for founders evaluating whether to target MiniPay and for reviewers assessing project readiness.
 
-**References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`, `minipay-docs-map.md` (page-by-page index of `docs.minipay.xyz`), `minipay-app-fit.md`
+**References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`, `minipay-docs-map.md` (page-by-page index of `docs.minipay.xyz`), `minipay-app-fit.md`, `minipay-performance.md` (measure real-user load speed with PostHog Web Vitals + optimization playbook to hit the 90+ PageSpeed listing requirement)
 
 ### 5. AI Agent Builder
 
@@ -191,6 +191,7 @@ Start with `growth-diagnostic.md` — the 6-question diagnostic routes the build
 | MiniPay development | Check `minipay-guide.md`, `minipay-templates.md` |
 | Specific MiniPay docs page (`docs.minipay.xyz/...`) | Look up in `minipay-docs-map.md` |
 | MiniPay submission / listing readiness | Check `minipay-requirements.md` — ask first if they've had their MiniPay call. If not → Stage 1 intake prep. If yes → full Stage 2 checklist. |
+| MiniPay performance / load speed / Web Vitals / PageSpeed / slow first load | Check `minipay-performance.md` — measure real-user load speed with PostHog + optimization playbook to hit 90+ |
 | What Mini Apps are live / discovery ideas | Check `minipay-live-apps.md` (snapshot; country availability varies) |
 | ODIS / phone lookup / SocialConnect | Check `odis-socialconnect.md`, `minipay-guide.md`, `contracts.md` |
 | AI agent building | Check `ai-agents.md` |

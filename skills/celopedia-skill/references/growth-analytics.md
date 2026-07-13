@@ -295,6 +295,8 @@ module.exports = async (req, res) => {
 
 The Graph and RPC tell you *what happened on-chain*. PostHog tells you *what the user did in the app before/after*. Both are necessary; neither replaces the other.
 
+> PostHog also measures **real-user load speed** (Core Web Vitals) — critical for MiniPay, where slow loads are an entry barrier. Enable it with `capture_performance: { web_vitals: true }` in `posthog.init`. Full measure-and-optimize playbook: `minipay-performance.md`.
+
 ### Step 1 — Add the PostHog snippet to every HTML page
 
 > Use the **project API key** (starts with `phc_`) — not the personal API key (`phx_`). Wrong key = silent failure, all zeros in dashboard.
