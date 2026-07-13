@@ -198,7 +198,7 @@ Celo runs an official hosted x402 facilitator, so builders don't need to run the
 - **Token support (EIP-3009)**: USDC (mainnet + Sepolia) and USDT (mainnet). **USDm is NOT supported by this facilitator** — Mento `StableTokenV2` implements only EIP-2612 `permit`, not EIP-3009. USDT's EIP-712 domain is `name: "Tether USD", version: "1"` (its `version()` method reverts).
 - Test on Celo Sepolia first — testnet USDC from https://faucet.circle.com (buyers need no testnet CELO; gas is sponsored).
 
-The thirdweb flow below is an **alternative** that uses thirdweb's own facilitator instead.
+The thirdweb flow below is an **alternative** that uses thirdweb's own facilitator instead — and it is the path to take when you want to charge in **USDm or other Mento local stablecoins**, which the hosted facilitator cannot settle (see the USDm caveat below).
 
 ### Supported Tokens on Celo
 
@@ -208,7 +208,7 @@ The thirdweb flow below is an **alternative** that uses thirdweb's own facilitat
 | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` | 6 |
 | USDm | `0x765DE816845861e75A25fCA122bb6898B8B1282a` | 18 |
 
-> ⚠️ **USDm caveat.** USDm (Mento `StableTokenV3`) implements EIP-2612 `permit` only, **not** EIP-3009 `transferWithAuthorization` (verified on-chain) — so it does **not** work with the hosted Celo facilitator, whose engine currently implements only the EIP-3009 transfer method. The x402 `exact` EVM spec also defines Permit2 / EIP-2612 fallback methods, and facilitators that implement them (e.g. thirdweb accepts "ERC-2612 permit" tokens) can settle USDm. Rule: **match the token to your facilitator's supported transfer methods** — for the hosted Celo facilitator that means USDC or USDT.
+> ⚠️ **USDm / Mento local stablecoin caveat.** USDm — and the rest of the Mento family (EURm, BRLm, KESm, …; all `StableTokenV2`/`V3` implementations, verified on-chain) — implements EIP-2612 `permit` only, **not** EIP-3009 `transferWithAuthorization`. So Mento stablecoins do **not** work with the hosted Celo facilitator, whose engine currently implements only the EIP-3009 transfer method. The x402 `exact` EVM spec also defines Permit2 / EIP-2612 fallback methods, and facilitators that implement them (e.g. **thirdweb**, which accepts "ERC-2612 permit" tokens) can settle USDm and the local stablecoins. This matters for agents that price or settle in local currencies — e.g. FX and trading agents paying per-request in KESm or BRLm — which should use the thirdweb flow. Rule: **match the token to your facilitator's supported transfer methods** — hosted Celo facilitator → USDC/USDT; thirdweb → also USDm + Mento locals.
 
 ### Server Implementation (Next.js)
 
