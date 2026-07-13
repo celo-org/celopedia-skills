@@ -53,34 +53,58 @@ a single PR as the one place everything gets reviewed.
      observed vs. what's cached, for the "Needs review" section of the PR
      body (step 5).
 
-5. **If any `reference update` or `needs review` deltas were found**, open
-   **one** pull request for the whole run:
-   1. Create a branch off `main` (e.g. `docs-watch/<YYYY-MM-DD>`).
-   2. Apply all `reference update` edits on that branch, and bump `version`
-      in `skills/celopedia-skill/SKILL.md` (patch bump for a pure data
-      refresh) if any reference file changed.
-   3. Push the branch to this checkout's own remote (the fork), then open
-      the PR **against `celo-org/celopedia-skills:main`**, e.g.:
-      `gh pr create --repo celo-org/celopedia-skills --base main --head <fork-owner>:<branch> --title "docs-watch: weekly refresh — <date>" --body "..."`
-   4. The PR body is the report — no separate report file. Structure it as:
-      a one-line "what changed" summary at the top, one section per source
-      with its deltas and classification, a clearly separated **Needs
-      review** section for anything requiring human judgment (this replaces
-      the old issue-filing path — the reviewer approves, pushes edits, or
-      closes the PR instead of triaging a separate issue), and the mechanical
-      edits already applied in the diff.
-   5. **One PR covers the whole run** — don't split `reference update` and
-      `needs review` findings into separate PRs.
+5. **Every run ends one of three ways** — always distinguishable from each
+   other by whether/how a PR shows up, since this skill never writes report
+   files:
 
-   **If nothing was found** (all `no action`, or the run was blocked/errored
-   — e.g. a source unreachable), do not open a PR or commit anything. End
-   with a short summary in the final message instead.
+   - **Drift found** (any `reference update` and/or `needs review` delta):
+     open **one** pull request for the whole run.
+     1. Create a branch off `main` (e.g. `docs-watch/<YYYY-MM-DD>`).
+     2. Apply all `reference update` edits on that branch, and bump
+        `version` in `skills/celopedia-skill/SKILL.md` (patch bump for a
+        pure data refresh) if any reference file changed.
+     3. Update the snapshot (step 6) on the same branch.
+     4. Push the branch directly to `celo-org/celopedia-skills` (this
+        checkout has push access — no fork needed) and open the PR:
+        `gh pr create --repo celo-org/celopedia-skills --base main --head <branch> --title "docs-watch: weekly refresh — <date>" --body "..."`
+     5. The PR body is the report — no separate report file. Structure it
+        as: a one-line "what changed" summary at the top, one section per
+        source with its deltas and classification, a clearly separated
+        **Needs review** section for anything requiring human judgment
+        (the reviewer approves, pushes edits, or closes the PR), and the
+        mechanical edits already applied in the diff.
+     6. **One PR covers the whole run** — don't split `reference update`
+        and `needs review` findings into separate PRs.
 
-6. **Update the snapshot** with newly-verified facts and today's date —
-   include this edit in the same PR branch as step 5 (not a direct commit to
-   main). Keep it small — only the facts checked above, not a full copy of
-   the reference files. If no PR was opened this run, leave the snapshot
-   unchanged (nothing was actually verified).
+   - **Blocked** (one or more sources unreachable — network error, 403,
+     timeout, etc. — so deltas couldn't be assessed for those sources): open
+     a small pull request too, so a blocked run is never silently
+     indistinguishable from a clean one.
+     1. Branch off `main` (e.g. `docs-watch/blocked-<YYYY-MM-DD>`), and only
+        edit the "Last attempt" line in `snapshot.md` (step 6) — no
+        reference files, no version bump, since nothing was actually
+        verified.
+     2. Push and open the PR with title `docs-watch: blocked — <date>` and
+        a body listing exactly which sources failed and how (status code /
+        error), plus which sources (if any) *did* succeed this run.
+     3. This PR is informational, not something to merge for content —
+        the reviewer's real fix is the underlying blocker (e.g. a network
+        egress allow-list). Merging just records the attempt; closing
+        without merging is equally fine.
+
+   - **Clean** (every source reachable, every delta `no action`): do not
+     open a PR or commit anything — stay completely silent. End with a
+     short summary in the final message instead.
+
+6. **Update the snapshot**, on whichever branch step 5 used:
+   - On a **drift-found** or **clean** run where sources were reachable:
+     update the per-source facts with newly-verified values and set
+     `Last verified: <date>` for each source checked.
+   - On a **blocked** run: leave the per-source facts untouched (they
+     weren't actually re-verified), and only update the top-of-file
+     `Last attempt: <date> — BLOCKED (<hosts>)` line.
+   - Keep the file small — only the facts checked above, not a full copy of
+     the reference files.
 
 ## Notes
 
