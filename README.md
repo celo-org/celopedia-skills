@@ -51,6 +51,7 @@ Once installed, the skill activates automatically. Just describe what you need:
 - *"What grants can I apply to for a DeFi project?"*
 - *"How saturated is the DEX vertical on EVM chains?"*
 - *"Build an AI agent that makes micropayments with x402"*
+- *"Report a bug / request a feature"* — the skill routes it to the right Celo repo and files a GitHub issue (or a PR for small doc/reference fixes)
 
 ## Data Sources
 
@@ -109,6 +110,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`governance.md`](skills/celopedia-skill/references/governance.md) | On-chain governance reference |
 | [`ai-agents.md`](skills/celopedia-skill/references/ai-agents.md) | ERC-8004, x402, MCP, Agent Skills |
 | [`security-patterns.md`](skills/celopedia-skill/references/security-patterns.md) | Celo-specific security risks (pairs with [pashov/skills](https://github.com/pashov/skills)) |
+| [`feedback.md`](skills/celopedia-skill/references/feedback.md) | Route bug reports / feature requests to the right Celo repo and file via `gh` |
 
 ## Contributing
 
