@@ -8,7 +8,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Celopedia Skill
@@ -140,6 +140,16 @@ Chain IDs, RPCs, explorers, faucets, RPC limits (`eth_getLogs` block range), and
 
 **References**: `network-info.md`
 
+### 12. Brand & Attribution
+
+Help partners and integrators reference Celo correctly — logos, symbol, colors, and **"Build on Celo"** attribution.
+
+- Point to the official **Celo Brand Kit** (`https://celo.org/brand-kit`) — the canonical, always-current source for downloadable wordmark/symbol assets, colors, and typography
+- **Brand policy**: use official assets unmodified (no recoloring, redrawing, or adding elements); don't register Celo marks/domains; don't imply endorsement or a partnership that doesn't exist
+- Never hardcode hex values or fonts — send users to the live Color and Typography sections
+
+**References**: `brandkit.md`
+
 ---
 
 ## Research Workflow
@@ -163,6 +173,7 @@ Chain IDs, RPCs, explorers, faucets, RPC limits (`eth_getLogs` block range), and
 | Network config | Check `network-info.md` |
 | Governance | Check `governance.md` |
 | SDK help | Check `sdk-reference.md` |
+| Branding / logo / "Build on Celo" / brand colors | Check `brandkit.md` |
 
 ### Step 2: Gather Evidence (Prefer Live Data)
 
@@ -178,6 +189,7 @@ Chain IDs, RPCs, explorers, faucets, RPC limits (`eth_getLogs` block range), and
 | On-chain data | Celo RPC (`forno.celo.org`) | — |
 | Token/contract info | Blockscout API (no key needed) | Celoscan API (key needed) |
 | MiniPay discovery listings | MiniPay app in target regions | `minipay-live-apps.md` snapshot |
+| Brand assets / colors / logos | Official brand kit (`celo.org/brand-kit`) | `brandkit.md` pointer |
 
 ### Step 3: Synthesize & Present
 
