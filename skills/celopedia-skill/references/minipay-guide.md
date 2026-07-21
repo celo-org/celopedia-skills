@@ -468,6 +468,49 @@ Host: `link.minipay.xyz`. Full table with all current deeplinks is in `minipay-d
 
 ---
 
+## Client-Side State & One-Time Onboarding
+
+The MiniPay WebView supports `localStorage` / `sessionStorage` like any browser.
+For "show this once" UX — an intro walkthrough, a tips banner, a what's-new card
+— gate it on a `localStorage` flag. Learnings from a production Mini App:
+
+- **Use `localStorage`, not `sessionStorage`, for "once ever."** `sessionStorage`
+  is cleared every time the Mini App is reopened, so a walkthrough gated on it
+  reappears on every launch. `localStorage` persists across sessions.
+- **This state is per-device, not per-wallet.** It lives in the WebView, tied to
+  the device — not to the connected address. It does **not** sync across devices,
+  and it's wiped if the user clears MiniPay/app data or the WebView evicts
+  storage. Treat it as a UX hint, never as authoritative or security state.
+- **Don't key onboarding on the wallet address.** The account often isn't
+  connected on first paint, so an address-keyed check causes a flash of the wrong
+  UI while the connection resolves — and you don't need it. A single static key
+  is enough.
+- **Read the flag in a client effect, not during render/SSR.** `localStorage` is
+  `undefined` on the server; touching it during render causes hydration
+  mismatches. Read it inside `useEffect` (or after a mounted check).
+- **Measure completion with an analytics event, not storage.** Storage is
+  invisible to you; you can't count who finished onboarding by inspecting it.
+  Emit an event on completion instead.
+
+```tsx
+// Show a one-time intro on first open; expose a "replay" entry point elsewhere.
+useEffect(() => {
+  if (!localStorage.getItem('intro-seen')) setShowIntro(true)
+}, [])
+
+function dismissIntro() {
+  localStorage.setItem('intro-seen', '1')
+  setShowIntro(false)
+  // analytics.capture('intro_completed')  // count completion via events, not storage
+}
+```
+
+Because "seen" is per-device, always give users a way to **replay** the intro
+(a Help / "how to win" entry point), so anyone on a fresh device or after a data
+clear can find it again.
+
+---
+
 ## Testing with ngrok
 
 MiniPay cannot access localhost. Use ngrok to expose your dev server:
