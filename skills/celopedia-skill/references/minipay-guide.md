@@ -293,10 +293,48 @@ This is part of MiniPay's submission requirements — see `minipay-requirements.
 | Deeplink | URL | Purpose |
 |----------|-----|---------|
 | Deposit (Add Cash) | `https://minipay.opera.com/add_cash` | Redirect users with low balance to top up |
+| Open in MiniPay (Browse) | `https://link.minipay.xyz/browse?url=<url-encoded target>` | Open an external link **inside** MiniPay's in-app browser (the target short link is provisioned by MiniPay — request it) |
 
 > **Canonical list:** `https://docs.minipay.xyz/technical-references/deeplinks.html#available-deeplinks` — fetch before shipping; MiniPay publishes new deeplinks periodically.
 >
 > **UI copy:** label this action **Deposit** in buttons/messages — not "Add Cash", "Onramp", or "Buy". See `minipay-requirements.md` §3.
+>
+> **Opening your Mini App from an external link (referrals / campaigns).** Use
+> the **Browse** deeplink to open a URL _inside_ MiniPay:
+> `https://link.minipay.xyz/browse?url=<url-encoded target>&campaign=<app>&source=external&medium=social`.
+> Example (Mondeto): `https://link.minipay.xyz/browse?url=https%3A%2F%2Fopr.as%2Fw752&campaign=mondeto&source=external&medium=social`.
+> The target is a **MiniPay/Opera short link** for your listed app (e.g.
+> `https://opr.as/xxxx`) — **request it from the MiniPay team**, it's not
+> self-serve.
+>
+> **MiniPay does NOT do referrals or dynamic links.** The `campaign/source/medium`
+> params are MiniPay's own open-attribution analytics, **not** a referral system,
+> and MiniPay won't carry arbitrary params through for you. Any referral logic
+> (e.g. `?ref=<wallet>`) is **yours** — bake it into the `url=` target you pass
+> and read it in your app. A plain shared link (not wrapped in Browse) opens in a
+> normal browser, not MiniPay.
+
+---
+
+## Sharing out of a Mini App (Web Share)
+
+MiniPay runs your app in a webview, so `navigator.share()` opens the phone's
+native share sheet — the only way to reach Instagram / Stories (no web-share URL
+exists for those). Gotchas from production:
+
+- **You can't force a target first.** The OS picker owns the order; you can't
+  make X (or any app) the first option. If X-first matters, add an explicit
+  `https://x.com/intent/tweet?text=…&url=…` button instead of relying on the sheet.
+- **Telegram (and some targets) drop the `text`** when a Web Share payload has
+  both `text` and `url` — only the link survives. Fold the link INTO the text and
+  share one string: `navigator.share({ text: \`${msg}\n\n${url}\` })`.
+- **`window.open(intentUrl, '_blank')` works** inside the webview for X /
+  WhatsApp / Telegram, as long as it's inside a user-gesture (click) handler.
+  Use `https://api.whatsapp.com/send?text=…` — `wa.me/?text=…` without a phone
+  number shows an "invalid number" page. Telegram: `https://t.me/share/url?url=…&text=…`.
+- A plain shared link opens in a normal browser; wrap it in the **Browse
+  deeplink** (Deeplinks above) to open inside MiniPay. Either way, keep referral
+  attribution in **your own** URL params — MiniPay doesn't do referrals.
 
 ---
 

@@ -78,6 +78,12 @@ Replace crypto-jargon with user-friendly terms everywhere a real user sees them 
 | Deposit (Add Cash) | `https://minipay.opera.com/add_cash` | Low balance; user needs to top up |
 
 > Canonical list: `https://docs.minipay.xyz/technical-references/deeplinks.html#available-deeplinks` — fetch this before shipping; MiniPay publishes new deeplinks periodically.
+>
+> **Opening your app from an external link:** use the **Browse** deeplink
+> `https://link.minipay.xyz/browse?url=<url-encoded target>` — the target short
+> link (e.g. `https://opr.as/xxxx`) is **provisioned by MiniPay; request it**.
+> MiniPay does **not** do referrals or dynamic links — carry your own params
+> (`?ref=`) in the target URL. See `minipay-guide.md` → Deeplinks + Sharing.
 
 ---
 
