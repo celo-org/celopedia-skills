@@ -4,10 +4,10 @@ Baseline seeded: 2026-07-07 (from the repo's own reference files, not a fresh
 live fetch — their own "Last updated" stamp is 2026-04-15, so treat this
 snapshot as unverified against live sources until the first real run).
 
-Last attempt: none yet (baseline only) — updated by every run, including
-blocked ones, per `SKILL.md` step 6. A `BLOCKED` value here means the most
-recent run couldn't reach one or more sources; check the linked PR for
-which ones.
+Last attempt: 2026-07-27 — BLOCKED (docs.celo.org, api.llama.fi,
+www.celopg.eco) — updated by every run, including blocked ones, per
+`SKILL.md` step 6. A `BLOCKED` value here means the most recent run
+couldn't reach one or more sources; check the linked PR for which ones.
 
 ## 1. Docs sitemap (`docs-map.md`)
 
