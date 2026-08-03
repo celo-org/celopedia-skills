@@ -95,6 +95,8 @@
 
 ## Grant Matchmaking Guide
 
+> **Before you apply:** add [attribution tags](attribution-tags.md) to your transactions as early as possible. Celo tracks ecosystem impact via ERC-8021 attribution data and will use it for future reward distribution — programs that reward on-chain usage can only credit what's attributable.
+
 | Building… | Recommended Program |
 |-----------|---------------------|
 | Building a MiniApp for MiniPay | Proof of Ship S2 ($5K/month) |

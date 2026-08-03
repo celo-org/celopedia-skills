@@ -1,7 +1,9 @@
 # MiniPay Documentation Map
 
-> Source: https://docs.minipay.xyz/
-> Last updated: 2026-05-18
+> **Single source of truth:** https://docs.minipay.xyz/
+> This file is the canonical index of all MiniPay developer documentation pages.
+> All other `minipay-*.md` skill files defer to URLs listed here for authoritative content.
+> Last updated: 2026-05-22
 
 Use this to find the right page in MiniPay's developer docs for any topic. Links go directly to `docs.minipay.xyz`.
 

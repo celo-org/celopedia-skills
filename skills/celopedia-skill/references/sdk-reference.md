@@ -239,3 +239,90 @@ Quick prototype?
   └── Yes → Thirdweb (prebuilt UI + dashboard)
   └── No → Viem + Wagmi for full control
 ```
+
+---
+
+## Building for MiniPay? Read This First
+
+MiniPay is Celo's embedded stablecoin wallet with 14M+ users across 60+ countries. If you are building a Mini App for MiniPay, the SDK patterns above apply — but with **important constraints and required patterns** that differ from a standard Celo dApp.
+
+### SDK choice for MiniPay
+
+| Requirement | Recommendation |
+|---|---|
+| Wallet connection | **Viem with `custom(window.ethereum)`** or **Wagmi with `injected()` connector** only. Do not use RainbowKit in MiniPay — it renders a multi-wallet selection modal that is incompatible with MiniPay's injected wallet model. |
+| Transactions | **Viem** — required for `feeCurrency` (CIP-64 fee abstraction). All transactions must pay network fees in a stablecoin, never in CELO. |
+| React hooks | **Wagmi** works well — use `injected()` connector, not `metaMask()` or `walletConnect()`. |
+
+### MiniPay detection and zero-click connect (required)
+
+Inside MiniPay, the wallet is pre-injected. **Never show a "Connect Wallet" button.** Detect MiniPay and connect automatically on mount:
+
+```typescript
+import { useEffect } from "react";
+import { useConnect, useAccount } from "wagmi";
+import { injected } from "wagmi/connectors";
+
+function isMiniPay(): boolean {
+  return typeof window !== "undefined" &&
+    (window as { ethereum?: { isMiniPay?: boolean } }).ethereum?.isMiniPay === true;
+}
+
+// In your root component or layout:
+export function AutoConnect() {
+  const { connect } = useConnect();
+  const { isConnected } = useAccount();
+
+  useEffect(() => {
+    if (isMiniPay() && !isConnected) {
+      connect({ connector: injected() });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return null;
+}
+```
+
+Then in your UI, hide wallet-related buttons when inside MiniPay:
+
+```tsx
+{!isMiniPay() && <ConnectWalletButton />}
+```
+
+### Fee abstraction is mandatory in MiniPay
+
+MiniPay hides CELO from users entirely. Every write transaction must include `feeCurrency` so the network fee is paid in a stablecoin automatically:
+
+```typescript
+// Pay network fee in USDm — user never needs to hold CELO
+await walletClient.writeContract({
+  address: CONTRACT_ADDRESS,
+  abi: myAbi,
+  functionName: "myFunction",
+  args: [arg1, arg2],
+  feeCurrency: "0x765DE816845861e75A25fCA122bb6898B8B1282a", // USDm
+});
+```
+
+For USDC and USDT, use the **adapter address** (not the token address) in `feeCurrency` — see `builder-guide.md` → *Allowed Fee Currencies (Mainnet)* for the full table.
+
+### MiniPay constraints summary
+
+| Constraint | Detail |
+|---|---|
+| No `personal_sign` | MiniPay does not support `personal_sign` or `eth_signTypedData`. Design auth around wallet address only. |
+| Legacy transactions only | Do not set `maxFeePerGas` or `maxPriorityFeePerGas`. Use `feeCurrency` instead. |
+| No CELO in UI | Never display CELO balances or require CELO payments. Show USDm / USDT / USDC only. |
+| Physical device required | MiniPay does not work in browser emulators. Test on a real Android or iOS device via ngrok. |
+| 360 × 640 minimum | Design and test at this viewport. Use Chrome DevTools device mode before submission. |
+
+### Full MiniPay documentation
+
+For the complete integration guide, code templates, phone number resolution via ODIS, deeplinks, ngrok setup, and the official submission checklist:
+
+- `minipay-guide.md` — detection, auto-connect, stablecoin transfers, fee abstraction, deeplinks
+- `minipay-templates.md` — copy-paste code for 6 common Mini App patterns
+- `minipay-scaffold-from-scratch.md` — minimal Next.js + viem setup without Celo Composer
+- `minipay-requirements.md` — official submission checklist (PageSpeed, ToS/Privacy, copy rules, 24h SLA)
+- `minipay-app-fit.md` — scorecard to evaluate whether your idea is a good fit for MiniPay before building

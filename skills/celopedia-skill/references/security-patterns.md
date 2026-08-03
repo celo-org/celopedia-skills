@@ -88,6 +88,36 @@
 
 ---
 
+## 6. Low-liquidity DEX pool execution risk
+
+**Risk:** Pool depth on Celo varies hugely per pair, per DEX, per version, and per fee tier — and shifts over time as liquidity migrates. When a pool's reserves are small relative to the swap size, the AMM curve produces extreme price impact: the effective execution rate can diverge by orders of magnitude from external market price. Standard slippage protection (`amountOutMin`) does **not** catch this, because the router validates against the pool's own quoted output, not against market price. A swap that pays the user 1.5% less than the (broken) pool quote still settles, even if that pool quote is 5000% off market. The failure is silent from the contract's perspective — the tx succeeds, the user just receives a tiny amount.
+
+**What is known:**
+- This affects any constant-product (Uniswap V2-style) pool whose `reserve0 * reserve1` product is small relative to the input amount.
+- Concentrated-liquidity (Uniswap V3-style) pools fail similarly when active in-range liquidity is thin at the trade's price.
+- On Celo specifically, liquidity has migrated several times since the L2 transition (Ubeswap V2 → Uniswap V3 → V4), so pools and fee tiers that older code or tutorials still default to may now be effectively empty. Per-pair, per-tier reality changes — don't assume protocol-wide claims like "X DEX is the deep one" stay true.
+
+**⚠️ Unverified specifics — check before shipping:**
+- Live TVL per pool changes daily. This file deliberately does not name "the deep pool" for any given pair, because that ranking goes stale. Always query live (DefiLlama, the protocol's subgraph, or on-chain reserves) at the time of the swap.
+
+**Mitigation:**
+- **Sanity-check pool depth on-chain at quote time.** For V2-style: `factory.getPair(a, b)` → `IERC20.balanceOf(pair)` for both tokens. For V3-style: `factory.getPool(a, b, fee)` → balance check. If either reserve is < ~10× the swap size, route elsewhere.
+- **Cross-check the router's quoted output against an external price reference** (CoinGecko, DefiLlama, or a deeper venue) before broadcasting. Abort if the implied rate diverges more than ~2% from reference. Pseudocode:
+
+  ```ts
+  const quoted = await router.getAmountsOut(amountIn, path);
+  const effectiveRate = Number(amountIn) / Number(quoted[quoted.length - 1]);
+  const reference = await fetchReferencePrice(tokenIn, tokenOut); // off-chain oracle
+  if (Math.abs(effectiveRate - reference) / reference > 0.02) {
+    throw new Error("Quote diverges from reference price — pool likely shallow. Aborting.");
+  }
+  ```
+
+- **For automated systems** (bots, agents, keepers, sweep scripts) that swap programmatically, encode both checks as hard preconditions — do not rely on a configured `slippage` parameter alone, and do not hard-code a "preferred DEX / fee tier" without re-validating depth at runtime.
+- **Don't blanket-blacklist or blanket-recommend any DEX or version.** Pool health is per-pair and time-varying. A pair that's deep on one DEX today may shift tomorrow; a pair that's shallow on a DEX may have a sibling pair (different fee tier, different stable, multi-hop route) that's fine.
+
+---
+
 ## Using this file with pashov/skills
 
 For any Celo deployment, run all three layers:

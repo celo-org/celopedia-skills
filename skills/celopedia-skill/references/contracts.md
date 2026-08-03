@@ -66,32 +66,43 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 |-------|--------|---------|
 | USDC (Circle) | USDC | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
 | Tether USD | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| Tether America USD | USAT | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
+| Mountain Protocol USD | USDM | `0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C` |
+| Angle USD | USDA | `0x0000206329b97DB379d5E1Bf586BbDB969C63274` |
+| Angle Euro | EURA | `0xC16B81Af351BA9e64C1a069E3Ab18c244A1E3049` |
+| VNX Euro | VEUR | `0x9346F43c1588B6DF1D52bdD6Bf846064F92d9Cba` |
+| VNX British Pound | VGBP | `0x7aE4265eCFC1F31bc0E112DfCFe3D78E01f4BB7f` |
+| VNX Swiss Franc | VCHF | `0xC5ebEa9984C485EC5D58cA5a2D376620d93aF871` |
+| Glo Dollar | USDGLO | `0x4F604735c1cF31399C6E711D5962b2B3E0225AD3` |
+| BRLA Digital | BRLA | `0xFECB3F7c54E2CAAE9dC6Ac9060A822D47E053760` |
+| Minteo Colombian Peso | COPM | `0xC92E8Fc2947E32F2B574CCA9F2F12097A71d5606` |
+| GoodDollar | G$ | `0x62B8B11039FcfE5aB0C56E502b1C372A3d2a9c7A` |
+| Ripio Argentine Peso | wARS | `0x0DC4F92879B7670e5f4e4e6e3c801D229129D90D` |
+| Ripio Brazilian Real | wBRL | `0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0` |
+| Ripio Mexican Peso | wMXN | `0x337E7456B420bD3481e7FA61fA9850343d610d34` |
+| Ripio Colombian Peso | wCOP | `0x8a1D45e102e886510e891d2Ec656a708991e2D76` |
+| Ripio Peruvian Sol | wPEN | `0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE` |
+| Ripio Chilean Peso | wCLP | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` |
 | Wrapped Ether | WETH | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
 | CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
 
-### Rippio wFIAT — Wrapped LATAM Fiat Stablecoins
+> Third-party stablecoins above are sourced from and verified against the official list: https://docs.celo.org/build-on-celo/build-with-local-stablecoin (addresses confirmed on-chain).
+>
+> **Ticker collisions to watch** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury-backed) is **not** Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) is **not** Mento's **COPm** (`0x8A56…`).
 
-Issued by [Rippio](https://rippio.com) (Argentina), deployed on Celo Mainnet (July 2026). Each token is 1:1 pegged to its local fiat, redeemable via Rippio's platform. All tokens use 18 decimals.
+> **USAT** (Tether America USD) launched on Celo in April 2026 — a USD stablecoin backed by short-term T-bills + cash (supervised by Anchorage Digital). **6 decimals** (like USDC/USDT). It is a whitelisted fee currency; its `feeCurrency` adapter is `0x0357EE22278c922e1D36cFe6b899269b161880C4` (18-decimal adapter — use the adapter, not the token, in the `feeCurrency` field). Caveat: upstream price oracles don't yet index the Celo contract address, so Valora-derived wallets may show `priceUsd: NaN` until that's resolved.
 
-| Token | Symbol | Address | Supply (approx.) | Status |
-|-------|--------|---------|-----------------|--------|
-| Wrapped Brazilian Real | wBRL | `0xd76f5faf6888e24d9f04bf92a0c8b921fe4390e0` | ~102K BRL | Live |
-| Wrapped Argentine Peso | wARS | `0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d` | ~31.6M ARS | Live |
-| Wrapped Mexican Peso | wMXN | `0x337e7456b420bd3481e7fa61fa9850343d610d34` | ~5K MXN | Live |
-| Wrapped Colombian Peso | wCOP | `0x8a1d45e102e886510e891d2ec656a708991e2d76` | ~1M COP | Live |
-| Wrapped Peruvian Sol | wPEN | `0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE` | ~100 PEN | Testnet-level |
-| Wrapped Chilean Peso | wCLP | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` | ~100 CLP | Testnet-level |
-
-**Liquidity pools (Textile FX, Celo Mainnet):**
+**Ripio wFIAT liquidity pools (Textile FX, Celo Mainnet):**
 
 | Pool | Address |
 |------|---------|
 | wARS / USDT | `0x14a9aec2bbdb21f86612b2a97a74d380b10d6fa4` |
 | wBRL / USDT | `0x0ea5b44cad7624cd8f5ffdc184022f630a05efac` |
 
-**Integration notes:**
+**Ripio wFIAT integration notes:**
+- Approximate supply (Jul 2026): wBRL ~102K BRL, wARS ~31.6M ARS, wMXN ~5K MXN, wCOP ~1M COP; wPEN/wCLP at testnet-level supply
 - No `feeCurrency` adapter — gas must be paid in USDC, USDT, or USDm (not wFIAT)
-- `wBRL` ≠ `BRLm`: `wBRL` is Rippio-issued; `BRLm` (cREAL) is Mento-issued — different issuers, different risk profiles
+- `wBRL` ≠ `BRLm`: `wBRL` is Ripio-issued; `BRLm` (cREAL) is Mento-issued — different issuers, different risk profiles
 - wFIAT tokens are **not** supported in MiniPay (MiniPay wallet only handles USDT, USDC, USDm)
 
 ---

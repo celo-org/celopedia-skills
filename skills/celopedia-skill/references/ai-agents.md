@@ -53,22 +53,24 @@ Agents register as ERC-721 NFTs with metadata URI. Each agent gets a unique `age
 | `tokenURI(uint256 agentId)` | Get full metadata URI |
 | `ownerOf(uint256 agentId)` | Get agent owner |
 
-**Agent metadata format:**
+**Agent metadata format (spec-compliant):**
 
 ```json
 {
-  "type": "Agent",
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
   "name": "MyAgent",
   "description": "An AI agent that...",
   "image": "ipfs://...",
-  "endpoints": [
-    { "type": "a2a", "url": "https://example.com/.well-known/agent.json" },
-    { "type": "mcp", "url": "https://example.com/mcp" },
-    { "type": "wallet", "address": "0x...", "chainId": 42220 }
+  "services": [
+    { "name": "A2A", "endpoint": "https://example.com/.well-known/agent.json" },
+    { "name": "MCP", "endpoint": "https://example.com/mcp" },
+    { "name": "web", "endpoint": "https://example.com" }
   ],
   "supportedTrust": ["reputation", "validation", "tee"]
 }
 ```
+
+> ⚠️ This format follows the **current** EIP-8004 spec. Older examples (including earlier versions of this file) used `"type": "Agent"`, an `endpoints` array, and a `url` field per entry — all three now trigger validation warnings. See **Metadata Compliance** below before registering.
 
 ### Reputation Registry
 
@@ -110,6 +112,50 @@ const txHash = await client.writeContract({
 });
 ```
 
+### Metadata Compliance (avoid validation warnings)
+
+Registering an agent runs metadata through a validator (e.g. 8004scan). The four most common warnings — and their fixes — all come from following an outdated metadata shape:
+
+| Warning | Cause | Fix |
+|---------|-------|-----|
+| **`type` — invalid value `Agent`** | The `type` field expects the spec's versioned registration identifier, not a freeform label | Set `type` to `"https://eips.ethereum.org/EIPS/eip-8004#registration-v1"` |
+| **`services` — deprecated `endpoints` field** | EIP-8004 renamed `endpoints` → `services` | Rename the array to `services` |
+| **`services` — missing `endpoint` field** | Each service entry now keys its URL on `endpoint`, not `url` | Use `{ "name": "...", "endpoint": "..." }` per entry |
+| **`agentURI` — not content-addressed** | An `https://` metadata URI can be silently mutated after registration; the validator can't detect tampering | Pin metadata to IPFS and register an `ipfs://` URI (the CID *is* the integrity check). `data:` base64 URIs (fully on-chain) are also content-addressed |
+
+**Fully compliant metadata example:**
+
+```json
+{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "name": "MyAgent",
+  "description": "An AI agent that executes USDT payments on Celo.",
+  "image": "ipfs://bafybeib.../logo.png",
+  "services": [
+    { "name": "A2A", "endpoint": "https://myagent.xyz/.well-known/agent.json", "version": "1.0" },
+    { "name": "MCP", "endpoint": "https://myagent.xyz/api/mcp" },
+    { "name": "web", "endpoint": "https://myagent.xyz" }
+  ],
+  "supportedTrust": ["reputation", "validation"]
+}
+```
+
+**`services` field reference:**
+- `name` (required) — the service type. Common values: `web`, `A2A`, `MCP`, `OASF`, `ENS`, `DID`, `email`.
+- `endpoint` (required) — the service URI or address (replaces the old `url`).
+- `version` (optional, SHOULD) — service version string.
+- `skills` / `domains` (optional) — only for `OASF` services.
+
+**Why content-addressing matters.** With `ipfs://`, the CID is derived from the content, so any change to the metadata produces a different CID — tampering is impossible to hide. With `https://`, the host can swap the metadata after registration and no one can prove it changed (unless you separately commit a hash). For agents whose reputation depends on stable identity, pin to IPFS.
+
+**Compliance checklist before calling `register()`:**
+- [ ] `type` is the `#registration-v1` spec URI, not `"Agent"`
+- [ ] `services` (not `endpoints`), each entry has `name` + `endpoint` (not `url`)
+- [ ] `agentURI` passed to `register()` is `ipfs://` or `data:` (content-addressed), not `https://`
+- [ ] Metadata pinned to a persistent IPFS provider (so the CID stays resolvable)
+
+**Further reading:** EIP-8004 spec (https://eips.ethereum.org/EIPS/eip-8004) · best-practices guide (https://best-practices.8004scan.io).
+
 ---
 
 ## x402: HTTP-Native Micropayments
@@ -127,6 +173,33 @@ Protocol enabling pay-per-request APIs using HTTP 402 status code and stablecoin
 5. Server verifies payment via facilitator
 6. Server settles on-chain and delivers response
 
+### Hosted Celo Facilitator (x402.celo.org) — default choice
+
+Celo runs an official hosted x402 facilitator, so builders don't need to run their own verify/settle infrastructure. The facilitator **sponsors settlement gas** (buyers need no CELO) and **never custodies funds** — EIP-3009 `transferWithAuthorization` moves stablecoins buyer → seller directly inside the token contract.
+
+| What | URL |
+|------|-----|
+| Dashboard (API key, credits, top-ups) | https://x402.celo.org |
+| Mainnet facilitator API (`eip155:42220`) | https://api.x402.celo.org |
+| Testnet facilitator API (`eip155:11142220`) | https://api.x402.sepolia.celo.org |
+| **Full integration guide (agent-readable skill)** | https://x402.celo.org/SKILL.md |
+| Live config (treasury, price, tokens, free credits) | https://x402.celo.org/api/config |
+
+**Always fetch `https://x402.celo.org/SKILL.md` before writing integration code** — it carries the current, settlement-verified seller (`@x402/hono` / `@x402/express`) and buyer (`@x402/fetch`) code for this facilitator.
+
+**Metering model** (snapshot — confirm via `/api/config`): connect a wallet on the dashboard and sign a message (no gas) → API key with free starter credits (500 mainnet / 1,000 testnet). Each on-chain `/settle` costs 1 credit (flat $0.001, topped up with USDC on the dashboard). `/verify` and `/supported` are free and need no key.
+
+**Integration gotchas for this facilitator:**
+
+- Use the **v2 scoped `@x402/*` packages** (`@x402/hono` or `@x402/express` + `@x402/core` + `@x402/evm`; buyer: `@x402/fetch`). The legacy `x402-express` / `x402-fetch` packages have no Celo entry in their network enum and will not work.
+- Celo is **not in the x402 packages' default-asset table** — a bare `price: "$0.01"` type-checks but throws at request time. Always pass the explicit price object: `{ amount: "10000", asset: USDC_ADDRESS, extra: { name: "USDC", version: "2" } }` (string amounts in 6-decimal base units; `$0.01 = "10000"`).
+- Attach the API key with `HTTPFacilitatorClient({ createAuthHeaders })` as `X-API-Key` — it goes only to the facilitator, never to buyers or the browser.
+- `payTo` is the **seller's own receiving wallet** — not the facilitator, not the buyer.
+- **Token support (EIP-3009)**: USDC (mainnet + Sepolia) and USDT (mainnet). **USDm is NOT supported by this facilitator** — Mento `StableTokenV2` implements only EIP-2612 `permit`, not EIP-3009. USDT's EIP-712 domain is `name: "Tether USD", version: "1"` (its `version()` method reverts).
+- Test on Celo Sepolia first — testnet USDC from https://faucet.circle.com (buyers need no testnet CELO; gas is sponsored).
+
+The thirdweb flow below is an **alternative** that uses thirdweb's own facilitator instead — and it is the path to take when you want to charge in **USDm or other Mento local stablecoins**, which the hosted facilitator cannot settle (see the USDm caveat below).
+
 ### Supported Tokens on Celo
 
 | Token | Address | Decimals |
@@ -134,6 +207,8 @@ Protocol enabling pay-per-request APIs using HTTP 402 status code and stablecoin
 | USDC | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` | 6 |
 | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` | 6 |
 | USDm | `0x765DE816845861e75A25fCA122bb6898B8B1282a` | 18 |
+
+> ⚠️ **USDm / Mento local stablecoin caveat.** USDm — and the rest of the Mento family (EURm, BRLm, KESm, …; all `StableTokenV2`/`V3` implementations, verified on-chain) — implements EIP-2612 `permit` only, **not** EIP-3009 `transferWithAuthorization`. So Mento stablecoins do **not** work with the hosted Celo facilitator, whose engine currently implements only the EIP-3009 transfer method. The x402 `exact` EVM spec also defines Permit2 / EIP-2612 fallback methods, and facilitators that implement them (e.g. **thirdweb**, which accepts "ERC-2612 permit" tokens) can settle USDm and the local stablecoins. This matters for agents that price or settle in local currencies — e.g. FX and trading agents paying per-request in KESm or BRLm — which should use the thirdweb flow. Rule: **match the token to your facilitator's supported transfer methods** — hosted Celo facilitator → USDC/USDT; thirdweb → also USDm + Mento locals.
 
 ### Server Implementation (Next.js)
 
@@ -305,18 +380,52 @@ Skills activate automatically based on project context (e.g., `hardhat.config.ts
 
 ---
 
+## Self Agent ID: Proof-of-Human for Agents
+
+Self Agent ID is the **proof-of-human extension on top of ERC-8004**: a soulbound NFT that binds an agent's key to a unique human via a zero-knowledge passport proof (Self Protocol). It makes an agent **sybil-resistant** without exposing personal data, and is required for the Celo Agent Visa Work tier and scored in Proof of Ship's AI Agents prize.
+
+**For the full registration reference — modes, the `POST /api/agent/register` flow, gotchas, and example curl — see `self-agent-id.md`.** Register at `https://app.ai.self.xyz`; docs at `https://docs.self.xyz/self-agent-id`.
+
+---
+
+## Celo Agent Visa
+
+A tiered program for AI agents that transact on Celo — the further your agent goes, the more ecosystem support it unlocks. Apply at **https://agentvisa.self.xyz/agents/visa**.
+
+| Tier | Requirements | Unlocks |
+|------|--------------|---------|
+| **Tourist** | ≥1 transaction on Celo (automatic) | Co-marketing + founder mentorship |
+| **Work Visa** | Self Agent ID verification · 1,000+ txns · $5K+ volume (or 1,000 unique contracts) · live product with real utility | DeFi incentives, liquidity support, featured placement |
+| **Citizenship** | Work Visa criteria + 10,000+ txns or $15K+ volume · manual review | Flagship support, deepest integrations |
+
+Benefits across tiers include access to MiniPay's 16M+ users, DeFi incentives (Uniswap, Aave, Mento, Velodrome), token-launch liquidity, mentorship, and co-marketing. Self Agent ID is the gate for the Work tier — register it first.
+
+---
+
 ## AI Agent Use Cases on Celo
 
-Key opportunities for AI agents on Celo:
+Celo is **actively pushing builders toward onchain agents** — agents that hold a wallet, transact in stablecoins, and generate real on-chain activity (not just chatbots). The strongest use cases are payment-native and emerging-market-first. Keep your scope broad; the wedge that wins is usually "an everyday money task, automated, settled in stablecoins."
 
-- **Onchain FX Trading**: Arbitrage bots across Mento stablecoin pairs, LP management on Uniswap, Merkl rewards optimization
-- **Prediction Markets**: Automated market making and trading
-- **Automated Savings/DCA**: Dollar-cost averaging into CELO or stablecoins
-- **Data Collection Payments**: x402 micropayments for data (82.7% data gap outside NA/Europe)
-- **Retroactive Funding Optimization**: Track Proof-of-Ship metrics via Karma dashboard
-- **Payment Agents**: Autonomous bill payment, remittance, payroll
+- **Consumer money (save / send / spend)**: savings-coach and round-up agents, group savings (chama / stokvel) pools, remittance concierge, bill-pay & autopay, FX-hedging agents that dollarize a local-currency paycheck. Highest PMF — emerging-market retail.
+- **Agentic commerce & marketplaces**: local-commerce concierge with escrow, cross-border shopping agents, subscription managers — settling via x402 micropayments.
+- **DeFAI (crypto-native)**: conversational DeFi agents that compose Mento + Aave + Ubeswap, set-and-forget yield optimizers, DCA / strategy agents, onchain tax & portfolio assistants.
+- **Social, predictions & viral**: localized prediction markets, tip-to-earn creator agents, donation / round-up-to-cause agents.
+- **SMB, freelancers & identity infra**: invoice / get-paid agents, sybil-resistant airdrop & quest tools, SMS/USSD wallets for feature phones, and an MCP server for Celo. Pair human- or operator-facing flows with **Self Agent ID** for trust.
+
+Many of these benefit from **Self Agent ID** (one-human-one-spot) to prevent sybil/ghost-account fraud, and qualify for the **Agent Visa** and **Proof of Ship** AI agent tracks once live on mainnet.
 
 **Resources:**
 - Agent ideas: https://github.com/celo-org/ai-agent-ideas
 - Uniswap pools: https://app.uniswap.org/explore/pools/celo
 - Merkl rewards: https://merkl.angle.money/?chain=42220
+
+---
+
+## Onchain Agents Hackathon
+
+A Celo DevRel-run hackathon for building onchain agents focused on **real-world payments and everyday applications** — May 22 – June 15, 2026, **$5K prize pool in CELO**. Winning agents generate real transactions and demonstrate genuine on-chain utility (not prototypes). Full details: **https://bit.ly/OnchainAgentsHackathon**
+
+- **Tracks**: Best Agent on Celo ($2,500 / $1,000 / $500) · Most Activity — onchain transactions ($500) · Highest 8004scan rank ($500). Activity/rank tracks combine with the main track.
+- **Register**: quote-tweet the announcement tagging @CeloDevs + @Celo, describe what you're building, and include your ERC-8004 registry link. Join the Telegram for updates.
+- **Verification**: Self Agent ID is beneficial (helps judges sort out sybil attempts); not strictly required where Self isn't available in your region.
+- **Submit**: through the **Celo Builders skill** — install it with `npx skills add https://celobuilders.xyz`, then ask your coding agent to submit (hackathon: `celo-onchain-agents`). The skill walks you through connecting, answering project questions, reviewing the draft, and publishing.

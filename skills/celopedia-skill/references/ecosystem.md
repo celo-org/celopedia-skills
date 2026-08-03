@@ -97,6 +97,8 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 
 ### Mento Stablecoins (see contracts.md for addresses)
 
+> Canonical list + how to build with them: https://docs.celo.org/build-on-celo/build-with-local-stablecoin
+
 | Currency | Symbol | Region |
 |----------|--------|--------|
 | US Dollar | USDm (cUSD) | Global |
@@ -115,32 +117,40 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 | Philippine Peso | PHPm | Philippines |
 | South African Rand | ZARm | South Africa |
 
-### External Stablecoins
+### External & third-party stablecoins
 
-| Token | Symbol |
-|-------|--------|
-| USDC (Circle) | USDC |
-| Tether USD | USDT |
+Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-local-stablecoin), addresses verified on-chain. See `contracts.md` for the full table.
 
-### Rippio wFIAT — Wrapped LATAM Fiat (launched July 2026)
+| Token | Symbol | Issuer | Address |
+|-------|--------|--------|---------|
+| USDC | USDC | Circle | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
+| Tether USD | USDT | Tether | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| Tether America USD | USAT | Tether | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
+| Mountain Protocol USD | USDM | Mountain Protocol | `0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C` |
+| Angle USD | USDA | Angle | `0x0000206329b97DB379d5E1Bf586BbDB969C63274` |
+| Angle Euro | EURA | Angle | `0xC16B81Af351BA9e64C1a069E3Ab18c244A1E3049` |
+| VNX Euro | VEUR | VNX | `0x9346F43c1588B6DF1D52bdD6Bf846064F92d9Cba` |
+| VNX British Pound | VGBP | VNX | `0x7aE4265eCFC1F31bc0E112DfCFe3D78E01f4BB7f` |
+| VNX Swiss Franc | VCHF | VNX | `0xC5ebEa9984C485EC5D58cA5a2D376620d93aF871` |
+| Glo Dollar | USDGLO | Glo Foundation | `0x4F604735c1cF31399C6E711D5962b2B3E0225AD3` |
+| BRLA Digital | BRLA | BRLA | `0xFECB3F7c54E2CAAE9dC6Ac9060A822D47E053760` |
+| Minteo Colombian Peso | COPM | Minteo | `0xC92E8Fc2947E32F2B574CCA9F2F12097A71d5606` |
+| GoodDollar | G$ | GoodDollar | `0x62B8B11039FcfE5aB0C56E502b1C372A3d2a9c7A` |
+| Wrapped Argentine Peso | wARS | Ripio | `0x0DC4F92879B7670e5f4e4e6e3c801D229129D90D` |
+| Wrapped Brazilian Real | wBRL | Ripio | `0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0` |
+| Wrapped Mexican Peso | wMXN | Ripio | `0x337E7456B420bD3481e7FA61fA9850343d610d34` |
+| Wrapped Colombian Peso | wCOP | Ripio | `0x8a1D45e102e886510e891d2Ec656a708991e2D76` |
+| Wrapped Peruvian Sol | wPEN | Ripio | `0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE` |
+| Wrapped Chilean Peso | wCLP | Ripio | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` |
 
-[Rippio](https://rippio.com) (Argentina) issued the first wrapped local-currency stablecoins on Celo, targeting LATAM remittance and payments use cases. Tokens are 1:1 pegged and redeemable via Rippio's platform.
+> ⚠️ **Ticker collisions** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury backed, `0x59D9…508C`) ≠ Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) ≠ Mento's **COPm**.
 
-| Token | Symbol | Country | Status |
-|-------|--------|---------|--------|
-| Wrapped Brazilian Real | wBRL | Brazil | Live (~102K BRL) |
-| Wrapped Argentine Peso | wARS | Argentina | Live (~31.6M ARS) |
-| Wrapped Mexican Peso | wMXN | Mexico | Live (~5K MXN) |
-| Wrapped Colombian Peso | wCOP | Colombia | Live (~1M COP) |
-| Wrapped Peruvian Sol | wPEN | Peru | Early (testnet-level supply) |
-| Wrapped Chilean Peso | wCLP | Chile | Early (testnet-level supply) |
-
-Liquidity available via **Textile FX** pools (wARS/USDT and wBRL/USDT on Celo Mainnet). Full addresses in `contracts.md`.
-
-**Key distinctions:**
-- `wBRL` (Rippio) ≠ `BRLm` (Mento/cREAL) — different issuers and risk profiles
-- wFIAT tokens are not MiniPay-compatible (MiniPay only supports USDT, USDC, USDm)
+**Ripio wFIAT notes** (wARS, wBRL, wMXN, wCOP, wPEN, wCLP — launched Jul 2026):
+- Approximate supply: wBRL ~102K BRL, wARS ~31.6M ARS, wMXN ~5K MXN, wCOP ~1M COP; wPEN/wCLP at testnet-level supply
+- Liquidity via **Textile FX** pools: wARS/USDT and wBRL/USDT (addresses in `contracts.md`)
+- `wBRL` (Ripio) ≠ `BRLm` (Mento/cREAL) — different issuers, different risk profiles
 - No `feeCurrency` adapter — gas must be paid in USDC, USDT, or USDm
+- wFIAT tokens are not MiniPay-compatible (MiniPay only handles USDT, USDC, USDm)
 
 ---
 
@@ -182,6 +192,18 @@ Liquidity available via **Textile FX** pools (wARS/USDT and wBRL/USDT on Celo Ma
 | SmolRefuel | https://smolrefuel.com | Gas top-up |
 
 Cross-chain messaging docs: https://docs.celo.org/tooling/bridges/cross-chain-messaging
+
+### Stablecoin Orchestration & Fintech Infrastructure
+
+B2B APIs for moving money between fiat and stablecoins on Celo. Use these when building products
+that need to accept fiat deposits, pay out to bank accounts, or issue cards backed by stablecoin
+balances — without holding money transmitter licenses yourself.
+
+| Provider | Description | Docs |
+| --- | --- | --- |
+| Bridge (Stripe) | Stablecoin orchestration API — virtual accounts, transfers, custodial wallets, card issuing, USDB native stablecoin | <https://apidocs.bridge.xyz> |
+
+See `stablecoin-orchestration.md` for the full Bridge integration reference.
 
 ### Wallets
 
@@ -232,7 +254,7 @@ Wallet docs: https://docs.celo.org/tooling/wallets/index
 
 MiniPay is Celo's flagship stablecoin wallet, built into Opera Mini and also available as a standalone app.
 
-**Stats**: 14M+ wallets, 300M+ stablecoin transactions, 15M+ monthly Mini App opens, 60+ countries
+**Stats**: 16M+ wallets, 470M+ transactions, 15M+ monthly Mini App opens, 66+ countries
 
 ### Known Mini Apps
 
