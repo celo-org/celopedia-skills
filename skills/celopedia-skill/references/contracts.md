@@ -92,16 +92,7 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 
 > **USAT** (Tether America USD) launched on Celo in April 2026 — a USD stablecoin backed by short-term T-bills + cash (supervised by Anchorage Digital). **6 decimals** (like USDC/USDT). It is a whitelisted fee currency; its `feeCurrency` adapter is `0x0357EE22278c922e1D36cFe6b899269b161880C4` (18-decimal adapter — use the adapter, not the token, in the `feeCurrency` field). Caveat: upstream price oracles don't yet index the Celo contract address, so Valora-derived wallets may show `priceUsd: NaN` until that's resolved.
 
-**Ripio wFIAT liquidity pools (Textile FX, Celo Mainnet):**
-
-| Pool | Address |
-|------|---------|
-| wARS / USDT | `0x14a9aec2bbdb21f86612b2a97a74d380b10d6fa4` |
-| wBRL / USDT | `0x0ea5b44cad7624cd8f5ffdc184022f630a05efac` |
-
-**Ripio wFIAT integration notes:**
-- Approximate supply (Jul 2026): wBRL ~102K BRL, wARS ~31.6M ARS, wMXN ~5K MXN, wCOP ~1M COP; wPEN/wCLP at testnet-level supply
-- No `feeCurrency` adapter — gas must be paid in USDC, USDT, or USDm (not wFIAT)
+**Ripio wFIAT notes** (added Jul 2026):
 - `wBRL` ≠ `BRLm`: `wBRL` is Ripio-issued; `BRLm` (cREAL) is Mento-issued — different issuers, different risk profiles
 - wFIAT tokens are **not** supported in MiniPay (MiniPay wallet only handles USDT, USDC, USDm)
 

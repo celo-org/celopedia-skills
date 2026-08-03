@@ -145,11 +145,8 @@ Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-l
 
 > ⚠️ **Ticker collisions** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury backed, `0x59D9…508C`) ≠ Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) ≠ Mento's **COPm**.
 
-**Ripio wFIAT notes** (wARS, wBRL, wMXN, wCOP, wPEN, wCLP — launched Jul 2026):
-- Approximate supply: wBRL ~102K BRL, wARS ~31.6M ARS, wMXN ~5K MXN, wCOP ~1M COP; wPEN/wCLP at testnet-level supply
-- Liquidity via **Textile FX** pools: wARS/USDT and wBRL/USDT (addresses in `contracts.md`)
+**Ripio wFIAT notes** (wARS, wBRL, wMXN, wCOP, wPEN, wCLP — added Jul 2026):
 - `wBRL` (Ripio) ≠ `BRLm` (Mento/cREAL) — different issuers, different risk profiles
-- No `feeCurrency` adapter — gas must be paid in USDC, USDT, or USDm
 - wFIAT tokens are not MiniPay-compatible (MiniPay only handles USDT, USDC, USDm)
 
 ---
