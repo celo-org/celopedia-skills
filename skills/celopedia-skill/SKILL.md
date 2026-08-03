@@ -8,7 +8,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.6.0"
+  version: "2.7.0"
 ---
 
 # Celopedia Skill
@@ -90,7 +90,7 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with 16M+ users.
 - Scaffold options: **Celo Composer** (batteries-included) or **raw Next.js** (see `minipay-scaffold-from-scratch.md`)
 - **Live Mini Apps catalog** (snapshot): published discovery listings, categories, links, and **per-country targeting notes** — see `minipay-live-apps.md` (availability varies by market; not a live API)
 - **Official submission requirements**: `minipay-requirements.md` — listing is a **two-stage process**. Stage 1 is the public **intake form** at `https://minipay.to/mini-apps`; Stage 2 is the post-call **readiness form** (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA, etc.). Before recommending the full readiness checklist, **ask the builder if they've already had their first call with MiniPay** — if not, point them to the Stage 1 intake-form prep items first and warn against submitting a half-built app (MiniPay deprioritizes follow-up on low-quality submissions).
-- **App Fit & Priority Framework**: before building, use `minipay-app-fit.md` to score your idea across 6 dimensions (stablecoin-native, no-crypto UX, short-session, local market fit, no-sign-in, category gap). Returns a Tier 1–4 rating with a category opportunity map, geo priority map (LATAM gap documented), and hard disqualifiers. Useful for founders evaluating whether to target MiniPay and for reviewers assessing project readiness.
+- **App Fit & Priority Framework**: before building, use `minipay-app-fit.md`. It separates **MiniPay channel fit** (a 5-dimension scorecard: stablecoin-native, short-session, local market fit, no `personal_sign`, catalog whitespace) from **demand evidence** and **source of funds** — evaluated separately so a high channel-fit score never reads as validated demand on its own. Returns a channel-fit + demand recommendation (build now / validate first / blocked by funding rail / wrong channel), a category opportunity map, and hard disqualifiers. Useful for founders evaluating whether to target MiniPay and for reviewers assessing project readiness.
 
 **References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`, `minipay-docs-map.md` (page-by-page index of `docs.minipay.xyz`), `minipay-app-fit.md`, `minipay-performance.md` (measure real-user load speed with PostHog Web Vitals + optimization playbook to hit the 90+ PageSpeed listing requirement)
 
