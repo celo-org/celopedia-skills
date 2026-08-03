@@ -145,6 +145,10 @@ Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-l
 
 > ⚠️ **Ticker collisions** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury backed, `0x59D9…508C`) ≠ Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) ≠ Mento's **COPm**.
 
+**Ripio wFIAT notes** (wARS, wBRL, wMXN, wCOP, wPEN, wCLP — added Jul 2026):
+- `wBRL` (Ripio) ≠ `BRLm` (Mento/cREAL) — different issuers, different risk profiles
+- wFIAT tokens are not MiniPay-compatible (MiniPay only handles USDT, USDC, USDm)
+
 ---
 
 ## Infrastructure
