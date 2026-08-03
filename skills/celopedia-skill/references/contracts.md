@@ -69,6 +69,31 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 | Wrapped Ether | WETH | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
 | CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
 
+### Rippio wFIAT — Wrapped LATAM Fiat Stablecoins
+
+Issued by [Rippio](https://rippio.com) (Argentina), deployed on Celo Mainnet (July 2026). Each token is 1:1 pegged to its local fiat, redeemable via Rippio's platform. All tokens use 18 decimals.
+
+| Token | Symbol | Address | Supply (approx.) | Status |
+|-------|--------|---------|-----------------|--------|
+| Wrapped Brazilian Real | wBRL | `0xd76f5faf6888e24d9f04bf92a0c8b921fe4390e0` | ~102K BRL | Live |
+| Wrapped Argentine Peso | wARS | `0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d` | ~31.6M ARS | Live |
+| Wrapped Mexican Peso | wMXN | `0x337e7456b420bd3481e7fa61fa9850343d610d34` | ~5K MXN | Live |
+| Wrapped Colombian Peso | wCOP | `0x8a1d45e102e886510e891d2ec656a708991e2d76` | ~1M COP | Live |
+| Wrapped Peruvian Sol | wPEN | `0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE` | ~100 PEN | Testnet-level |
+| Wrapped Chilean Peso | wCLP | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` | ~100 CLP | Testnet-level |
+
+**Liquidity pools (Textile FX, Celo Mainnet):**
+
+| Pool | Address |
+|------|---------|
+| wARS / USDT | `0x14a9aec2bbdb21f86612b2a97a74d380b10d6fa4` |
+| wBRL / USDT | `0x0ea5b44cad7624cd8f5ffdc184022f630a05efac` |
+
+**Integration notes:**
+- No `feeCurrency` adapter — gas must be paid in USDC, USDT, or USDm (not wFIAT)
+- `wBRL` ≠ `BRLm`: `wBRL` is Rippio-issued; `BRLm` (cREAL) is Mento-issued — different issuers, different risk profiles
+- wFIAT tokens are **not** supported in MiniPay (MiniPay wallet only handles USDT, USDC, USDm)
+
 ---
 
 ## L1 Contracts on Ethereum (Mainnet)

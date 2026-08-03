@@ -122,6 +122,26 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 | USDC (Circle) | USDC |
 | Tether USD | USDT |
 
+### Rippio wFIAT — Wrapped LATAM Fiat (launched July 2026)
+
+[Rippio](https://rippio.com) (Argentina) issued the first wrapped local-currency stablecoins on Celo, targeting LATAM remittance and payments use cases. Tokens are 1:1 pegged and redeemable via Rippio's platform.
+
+| Token | Symbol | Country | Status |
+|-------|--------|---------|--------|
+| Wrapped Brazilian Real | wBRL | Brazil | Live (~102K BRL) |
+| Wrapped Argentine Peso | wARS | Argentina | Live (~31.6M ARS) |
+| Wrapped Mexican Peso | wMXN | Mexico | Live (~5K MXN) |
+| Wrapped Colombian Peso | wCOP | Colombia | Live (~1M COP) |
+| Wrapped Peruvian Sol | wPEN | Peru | Early (testnet-level supply) |
+| Wrapped Chilean Peso | wCLP | Chile | Early (testnet-level supply) |
+
+Liquidity available via **Textile FX** pools (wARS/USDT and wBRL/USDT on Celo Mainnet). Full addresses in `contracts.md`.
+
+**Key distinctions:**
+- `wBRL` (Rippio) ≠ `BRLm` (Mento/cREAL) — different issuers and risk profiles
+- wFIAT tokens are not MiniPay-compatible (MiniPay only supports USDT, USDC, USDm)
+- No `feeCurrency` adapter — gas must be paid in USDC, USDT, or USDm
+
 ---
 
 ## Infrastructure
