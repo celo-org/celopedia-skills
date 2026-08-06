@@ -54,11 +54,18 @@ Users can pay gas fees with ERC-20 tokens instead of native CELO. This is Celo's
 | BRLm (cREAL) | 18 | `0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787` | `0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787` (same) |
 | USDC | 6 | `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` | `0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B` (adapter) |
 | USDT | 6 | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` | `0x0e2a3e05bc9a16f5292a6170456a710cb89c6f72` (adapter) |
+| USA₮ | 6 | `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` | `0x0357EE22278c922e1D36cFe6b899269b161880C4` (adapter) |
 
-The `FeeCurrencyDirectory` contract at `0x9212Fb72ae65367A7c887eC4Ad9bE310BAC611BF` governs the allowlist. Query it:
+> **USA₮** (Tether America USD) — US-regulated dollar issued by Anchorage Digital Bank, N.A. (first federally chartered digital asset bank in the US). GENIUS Act compliant. Launched on Celo Mainnet March 31, 2026. **Not the same as USD₮ (USDT)** — different issuer, different trust profile, designed for institutional and compliance-sensitive use cases.
+
+The table above is the common subset. The **full allowlist is larger** — it also includes many Mento local-currency stablecoins (KESm, COPm, GHSm, NGNm, ZARm, GBPm, and more) plus a few other assets. Rather than hardcode the whole list, **fetch it live** with `getCurrencies()` (see below) — that's the canonical, always-current source. For MiniPay Mini Apps and consumer payments, **USDm, USDC, and USDT** are the fee currencies users actually hold, so default to those.
+
+> **Wallet/SDK support:** fee abstraction works in Celo-native wallets (MiniPay, Valora) today, with **Ledger support coming soon**. On the SDK side, **viem** supports the `feeCurrency` field natively — **ethers.js and web3.js do not**.
+
+The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C6276` governs the allowlist. Query it:
 
 ```typescript
-const FEE_CURRENCY_DIRECTORY = "0x9212Fb72ae65367A7c887eC4Ad9bE310BAC611BF";
+const FEE_CURRENCY_DIRECTORY = "0x15F344b9E6c3Cb6F0376A36A64928b13F62C6276";
 const currencies = await publicClient.readContract({
   address: FEE_CURRENCY_DIRECTORY,
   abi: [{ name: "getCurrencies", type: "function", stateMutability: "view", inputs: [], outputs: [{ type: "address[]" }] }],
@@ -109,17 +116,29 @@ const gasPrice = await publicClient.request({
 
 ## Contract Verification
 
-### Celoscan (Etherscan-family)
+### Celoscan (Etherscan V2 unified API)
+
+Celoscan no longer issues its own API keys. Etherscan unified all family explorers under one V2 API and one key. Use an Etherscan key (free at https://etherscan.io/myapikey) for Celoscan, Basescan, Arbiscan, Optimistic Etherscan, etc.
+
+In `foundry.toml`:
+
+```toml
+[etherscan]
+celo = { key = "${ETHERSCAN_API_KEY}", chain = 42220 }
+alfajores = { key = "${ETHERSCAN_API_KEY}", chain = 44787 }
+```
+
+Then:
 
 ```bash
 # Hardhat
 npx hardhat verify --network celo <CONTRACT_ADDRESS> <CONSTRUCTOR_ARGS>
 
-# Foundry
+# Foundry (no --verifier-url needed; foundry derives it from `chain`)
 forge verify-contract <CONTRACT_ADDRESS> <CONTRACT_NAME> \
-  --chain-id 42220 \
-  --etherscan-api-key <CELOSCAN_API_KEY> \
-  --verifier-url https://api.celoscan.io/api
+  --chain celo \
+  --constructor-args $(cast abi-encode "constructor(...)" ...) \
+  --watch
 ```
 
 ### Blockscout
@@ -130,8 +149,6 @@ forge verify-contract <CONTRACT_ADDRESS> <CONTRACT_NAME> \
   --verifier blockscout \
   --verifier-url https://celo.blockscout.com/api
 ```
-
-Get a Celoscan API key at: https://celoscan.io/myapikey
 
 ---
 
@@ -225,6 +242,26 @@ Celo migrated from L1 to L2 on March 26, 2025 (block 31,056,500). Old tutorials 
 
 Celo RPCs reject `eth_getLogs` spans > ~50,000 blocks with error `-32011 block range is too large`. Any indexer or event-history feature must paginate. See `network-info.md` → _RPC Limits & Gotchas_ for the chunked viem workaround.
 
+### 9. viem strict EIP-55 checksum
+
+viem 2.x rejects addresses whose mixed-case does NOT match the EIP-55 checksum exactly. You'll see:
+
+```text
+Address "0xa9aB7390f79b937C9c0A1FdFA1A40c2e145EAbd8" is invalid.
+- Address must match its checksum counterpart.
+```
+
+The trap: Foundry's `forge script` prints deploy addresses in lowercase. If you copy-paste that into a `.env` file then manually re-case it (e.g. to make it "look prettier"), you can land on a mixed-case string that ISN'T the valid EIP-55 checksum, and viem will reject it everywhere. The failure is silent in fire-and-forget code paths and surfaces only in server logs.
+
+Fix: either store the address all-lowercase (viem accepts that) or get the correct checksum first:
+
+```bash
+cast to-check-sum-address 0xa9ab7390f79b937c9c0a1fdfa1a40c2e145eabd8
+# -> 0xa9ab7390f79B937C9c0a1FDFA1A40C2E145eAbd8
+```
+
+Apply that exact string everywhere (env vars in `.env`, Railway / Vercel env, hardcoded constants, docs). Sweep with grep before shipping; ESLint won't catch this.
+
 ---
 
 ## Recommended Development Flow
@@ -236,7 +273,8 @@ Celo RPCs reject `eth_getLogs` spans > ~50,000 blocks with error `-32011 block r
 5. **Test** — Fork mainnet for integration tests: `forge test --fork-url https://forno.celo.org`
 6. **Deploy** — Deploy to Celo Sepolia first, then mainnet
 7. **Verify** — Verify on Celoscan and/or Blockscout
-8. **Integrate** — Add fee abstraction for better UX
+8. **Attribute** — Append ERC-8021 attribution tags to your transactions so your impact is tracked from day one (feeds future reward distribution). See `attribution-tags.md`
+9. **Integrate** — Add fee abstraction for better UX
 
 ---
 

@@ -1,8 +1,13 @@
 # MiniPay Development Guide
 
-> Source: docs.celo.org/build-on-celo/build-on-minipay/*
+> **Single source of truth:** https://docs.minipay.xyz/ — all implementation details in this file are derived from and cross-checked against the official MiniPay developer docs.
+> - docs.celo.org mirror: https://docs.celo.org/build-on-celo/build-on-minipay/*
+>
+> For the full page-by-page index of `docs.minipay.xyz`, see `minipay-docs-map.md`.
 
-MiniPay is a non-custodial stablecoin wallet integrated into Opera Mini and available as a standalone app on Android and iOS. It's the fastest growing wallet in the Global South with 14M+ activations, 300M+ stablecoin transactions, available in 60+ countries.
+MiniPay is a non-custodial stablecoin wallet integrated into Opera Mini and available as a standalone app on Android and iOS. It's the fastest growing wallet in the Global South with 16M+ total wallet activations, 470M+ transactions processed, 400M+ Mini App transactions to date, 50+ Mini Apps live, available in 66+ countries.
+
+> Stats sourced from the official MiniPay Q1 2026 report: https://forum.celo.org/t/minipay-update-q1-2026/13273
 
 > Wallet counts are updated by the MiniPay team via the MiniPay site and Celo blog. If a precise current number is needed, prefer fetching from those sources over the number above.
 
@@ -288,14 +293,176 @@ This is part of MiniPay's submission requirements — see `minipay-requirements.
 
 ---
 
+## Custom Methods (MiniPay-native RPC)
+
+> Canonical docs: https://docs.minipay.xyz/technical-references/custom-methods/custom-methods.html
+
+MiniPay exposes three custom JSON-RPC methods via `window.ethereum`. They require a Viem custom client built from a typed schema.
+
+### Setup — `useMiniPayClient` hook
+
+```typescript
+import { createWalletClient, custom } from "viem";
+import { celo } from "viem/chains";
+
+// Define the custom RPC schema once, import the hook wherever you need it
+export function useMiniPayClient() {
+  if (typeof window === "undefined" || !window.ethereum) return null;
+  return createWalletClient({
+    chain: celo,
+    transport: custom(window.ethereum),
+  });
+}
+```
+
+---
+
+### `minipay_getExchangeRate` — real-time FX rate
+
+> Docs: https://docs.minipay.xyz/technical-references/custom-methods/get-exchange-rate.html
+
+```typescript
+import { useState, useCallback } from "react";
+import { useMiniPayClient } from "./useMiniPayClient";
+
+export function useGetExchangeRate() {
+  const client = useMiniPayClient();
+  const [rate, setRate] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const getExchangeRate = useCallback(
+    async ({ from, to }: { from: string; to: string }) => {
+      if (!client) return;
+      setIsPending(true);
+      setError(null);
+      try {
+        const result = await client.request({
+          method: "minipay_getExchangeRate" as any,
+          params: [{ from, to }],
+        });
+        setRate(result as string);
+      } catch (err) {
+        setError(err instanceof Error ? err : new Error(String(err)));
+      } finally {
+        setIsPending(false);
+      }
+    },
+    [client],
+  );
+
+  return { getExchangeRate, rate, isPending, error };
+}
+
+// Usage — get USDT → NGN rate:
+// const { getExchangeRate, rate } = useGetExchangeRate();
+// await getExchangeRate({ from: "USDT", to: "NGN" });
+```
+
+---
+
+### `minipay_scanQrCode` — native QR scanner
+
+> Docs: https://docs.minipay.xyz/technical-references/custom-methods/scan-qr-code.html
+
+```typescript
+import { useState, useCallback } from "react";
+import { useMiniPayClient } from "./useMiniPayClient";
+
+export function useScanQrCode() {
+  const client = useMiniPayClient();
+  const [scannedValue, setScannedValue] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const scanQrCode = useCallback(async () => {
+    if (!client) return;
+    setIsPending(true);
+    setError(null);
+    try {
+      const result = await client.request({
+        method: "minipay_scanQrCode" as any,
+        params: [],
+      });
+      setScannedValue(result as string);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error(String(err)));
+    } finally {
+      setIsPending(false);
+    }
+  }, [client]);
+
+  return { scanQrCode, scannedValue, isPending, error };
+}
+
+// Usage:
+// const { scanQrCode, scannedValue } = useScanQrCode();
+// <button onClick={scanQrCode}>Scan QR</button>
+```
+
+---
+
+### `minipay_requestContact` — native contact picker
+
+> Docs: https://docs.minipay.xyz/technical-references/custom-methods/request-contact.html
+
+Returns `{ name: string; address: string }` — the contact's name and their MiniPay wallet address.
+
+```typescript
+import { useState, useCallback } from "react";
+import { useMiniPayClient } from "./useMiniPayClient";
+
+interface MiniPayContact {
+  name: string;
+  address: string;
+}
+
+export function useRequestContact() {
+  const client = useMiniPayClient();
+  const [contact, setContact] = useState<MiniPayContact | null>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const requestContact = useCallback(async () => {
+    if (!client) return;
+    setIsPending(true);
+    setError(null);
+    try {
+      const result = await client.request({
+        method: "minipay_requestContact" as any,
+        params: [],
+      });
+      setContact(result as MiniPayContact);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error(String(err)));
+    } finally {
+      setIsPending(false);
+    }
+  }, [client]);
+
+  return { requestContact, contact, isPending, error };
+}
+
+// Usage — pick a contact and pre-fill the recipient address:
+// const { requestContact, contact } = useRequestContact();
+// contact?.address → pre-fill send form
+// contact?.name   → display "Send to João"
+```
+
+---
+
 ## Deeplinks
+
+Host: `link.minipay.xyz`. Full table with all current deeplinks is in `minipay-docs-map.md` → _Deeplinks_.
 
 | Deeplink | URL | Purpose |
 |----------|-----|---------|
-| Deposit (Add Cash) | `https://minipay.opera.com/add_cash` | Redirect users with low balance to top up |
-| Open in MiniPay (Browse) | `https://link.minipay.xyz/browse?url=<url-encoded target>` | Open an external link **inside** MiniPay's in-app browser (the target short link is provisioned by MiniPay — request it) |
+| Add Cash | `https://link.minipay.xyz/add_cash` (optionally `?tokens=USDm,USDC,USDT`) | Redirect users with low balance to top up |
+| Open Mini App (Browse) | `https://link.minipay.xyz/browse?url=<url-encoded target>` | Open an external link **inside** MiniPay's in-app browser (the target short link is provisioned by MiniPay — request it) |
+| MiniApps tab | `https://link.minipay.xyz/discover` | Jump to the discovery tab |
+| Transaction receipt | `https://link.minipay.xyz/receipt?tx=xxx[&celebrate]` | Show a receipt screen for a tx hash |
 
-> **Canonical list:** `https://docs.minipay.xyz/technical-references/deeplinks.html#available-deeplinks` — fetch before shipping; MiniPay publishes new deeplinks periodically.
+> **Canonical list:** https://docs.minipay.xyz/technical-references/deeplinks.html — fetch before shipping; MiniPay publishes new deeplinks periodically.
 >
 > **UI copy:** label this action **Deposit** in buttons/messages — not "Add Cash", "Onramp", or "Buy". See `minipay-requirements.md` §3.
 >
@@ -335,6 +502,49 @@ exists for those). Gotchas from production:
 - A plain shared link opens in a normal browser; wrap it in the **Browse
   deeplink** (Deeplinks above) to open inside MiniPay. Either way, keep referral
   attribution in **your own** URL params — MiniPay doesn't do referrals.
+
+---
+
+## Client-Side State & One-Time Onboarding
+
+The MiniPay WebView supports `localStorage` / `sessionStorage` like any browser.
+For "show this once" UX — an intro walkthrough, a tips banner, a what's-new card
+— gate it on a `localStorage` flag. Learnings from a production Mini App:
+
+- **Use `localStorage`, not `sessionStorage`, for "once ever."** `sessionStorage`
+  is cleared every time the Mini App is reopened, so a walkthrough gated on it
+  reappears on every launch. `localStorage` persists across sessions.
+- **This state is per-device, not per-wallet.** It lives in the WebView, tied to
+  the device — not to the connected address. It does **not** sync across devices,
+  and it's wiped if the user clears MiniPay/app data or the WebView evicts
+  storage. Treat it as a UX hint, never as authoritative or security state.
+- **Don't key onboarding on the wallet address.** The account often isn't
+  connected on first paint, so an address-keyed check causes a flash of the wrong
+  UI while the connection resolves — and you don't need it. A single static key
+  is enough.
+- **Read the flag in a client effect, not during render/SSR.** `localStorage` is
+  `undefined` on the server; touching it during render causes hydration
+  mismatches. Read it inside `useEffect` (or after a mounted check).
+- **Measure completion with an analytics event, not storage.** Storage is
+  invisible to you; you can't count who finished onboarding by inspecting it.
+  Emit an event on completion instead.
+
+```tsx
+// Show a one-time intro on first open; expose a "replay" entry point elsewhere.
+useEffect(() => {
+  if (!localStorage.getItem('intro-seen')) setShowIntro(true)
+}, [])
+
+function dismissIntro() {
+  localStorage.setItem('intro-seen', '1')
+  setShowIntro(false)
+  // analytics.capture('intro_completed')  // count completion via events, not storage
+}
+```
+
+Because "seen" is per-device, always give users a way to **replay** the intro
+(a Help / "how to win" entry point), so anyone on a fresh device or after a data
+clear can find it again.
 
 ---
 
@@ -388,6 +598,7 @@ The ngrok dashboard at `http://localhost:4040` shows all requests for debugging.
 6. **2MB footprint** — Keep Mini App bundle size small
 7. **No CELO in UI** — MiniPay hides CELO from users. Your app must only display and accept USDT / USDC / USDm; fee abstraction handles the network fee in stablecoins automatically
 8. **Submission checklist** — before listing, review `minipay-requirements.md` for the 7-section official checklist (copy rules, 360×640, PageSpeed, ToS / Privacy, 24h SLA)
+9. **No geolocation on iOS** — MiniPay iOS does not bridge `navigator.geolocation` to the OS. `getCurrentPosition` and `watchPosition` hang silently, no callback ever fires, even with location permission granted to MiniPay at the OS level. Same code works fine in MetaMask in-app browser (iOS and Android) and Safari with extension wallets, which points at MiniPay's WKWebView delegate not implementing the geolocation permission handlers. Android behavior untested. Tracked at https://github.com/celo-org/minipay/issues/44. Workaround: detect `isIOS && window.ethereum.isMiniPay` and offer a deep link out to MetaMask (`https://metamask.app.link/dapp/<host>`)
 
 ---
 

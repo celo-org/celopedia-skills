@@ -1,6 +1,6 @@
 # MiniPay Code Templates
 
-Ready-to-use code for common Mini App patterns.
+Ready-to-use code for common Mini App patterns. Canonical reference docs: https://docs.minipay.xyz/ — full per-page index in `minipay-docs-map.md`.
 
 ## Contents
 
@@ -488,8 +488,9 @@ import { getPreferredStablecoin } from "@/lib/stablecoins";
 async function startPayment(userAddress: `0x${string}`) {
   const preferred = await getPreferredStablecoin(userAddress);
   if (!preferred) {
-    // Low balance — redirect to MiniPay Deposit (see minipay-requirements.md §6)
-    window.location.href = "https://minipay.opera.com/add_cash";
+    // Low balance — redirect to MiniPay Add Cash (see minipay-requirements.md §6)
+    // Canonical: https://docs.minipay.xyz/technical-references/deeplinks.html
+    window.location.href = "https://link.minipay.xyz/add_cash";
     return;
   }
   // Proceed with preferred.address + preferred.decimals as the charge token.

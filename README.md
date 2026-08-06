@@ -4,11 +4,38 @@ The comprehensive skill for building on Celo. Ecosystem intelligence, developer 
 
 ## Install
 
+For Codex and OpenClaw (installs to `.agents/skills/`):
+
 ```bash
 npx skills add celo-org/celopedia-skills
 ```
 
-Works with Claude Code, Codex, and OpenClaw.
+### Claude Code
+
+Claude Code only discovers skills under `.claude/skills/` (project) or
+`~/.claude/skills/` (user), so `npx skills add` alone is not enough.
+Pick one of:
+
+**Option A — symlink (keeps `.agents/` as the source of truth, recommended on macOS/Linux):**
+
+```bash
+npx skills add celo-org/celopedia-skills
+mkdir -p .claude
+ln -s ../.agents/skills .claude/skills
+```
+
+**Option B — install directly under `.claude/skills/`:**
+
+```bash
+mkdir -p .claude/skills
+git clone --depth 1 https://github.com/celo-org/celopedia-skills.git /tmp/celopedia
+cp -r /tmp/celopedia/skills/celopedia-skill .claude/skills/
+rm -rf /tmp/celopedia
+```
+
+Restart Claude Code after installing — creating a new top-level `.claude/`
+directory mid-session is not picked up live. Verify with `/skills` or by
+asking "what skills are available?".
 
 ## What it does
 
@@ -16,16 +43,16 @@ Works with Claude Code, Codex, and OpenClaw.
 Search 6,300+ crypto products via The Grid, find competitors, analyze vertical saturation, and discover what's deployed on Celo vs other EVM chains.
 
 ### Builder Assistant
-Foundry/Hardhat configs for Celo, fee abstraction implementation, SDK selection guide (Viem, Wagmi, ContractKit, Thirdweb), deployment and verification workflows.
+Foundry/Hardhat configs for Celo, fee abstraction implementation, SDK selection guide (Viem, Wagmi, ContractKit, Thirdweb), deployment and verification workflows, and ERC-8021 attribution tags for impact tracking.
 
 ### DeFi Reference
-Deep protocol reference for Uniswap V3/V4, Aave V3, Morpho Blue, Mento stablecoins, stCELO, Velodrome, and Curve on Celo. Includes contract addresses, interaction patterns, and yield strategies.
+Deep protocol reference for Uniswap V3/V4, Aave V3, Carbon DeFi, Morpho Blue, Mento stablecoins, stCELO, Velodrome, and Curve on Celo. Includes contract addresses, interaction patterns, and yield strategies.
 
 ### MiniPay App Builder
-Build Mini Apps for MiniPay (14M+ wallets). Wallet detection, auto-connect patterns, stablecoin payments, phone number resolution, testing with ngrok, and ready-to-use code templates. Includes the official submission checklist (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA).
+Build Mini Apps for MiniPay (16M+ wallets). Wallet detection, auto-connect patterns, stablecoin payments, phone number resolution, testing with ngrok, and ready-to-use code templates. Includes the official submission checklist (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA).
 
 ### AI Agent Builder
-ERC-8004 (Agent Trust Protocol), x402 (HTTP micropayments), Celo MCP Server, and the Agent Skills specification. Build AI agents that transact autonomously on Celo.
+ERC-8004 (Agent Trust Protocol), Self Agent ID (proof-of-human), the Celo Agent Visa program, x402 (HTTP micropayments, with Celo's hosted facilitator at [x402.celo.org](https://x402.celo.org)), Celo MCP Server, and the Agent Skills specification. Build onchain agents that transact autonomously on Celo.
 
 ### Security & Audit Readiness
 Celo-specific security patterns (CELO duality, CIP-64 fee abstraction, Aave aToken drift, Mento circuit breakers, post-L2 epoch effects). Chain-agnostic Solidity audits defer to [pashov/skills](https://github.com/pashov/skills).
@@ -60,6 +87,7 @@ Once installed, the skill activates automatically. Just describe what you need:
 | [The Grid](https://beta.node.thegrid.id/graphql) | 6,300+ crypto products, live ecosystem data | None (public) |
 | [docs.celo.org](https://docs.celo.org) | Contract addresses, network info, documentation | None |
 | [DefiLlama](https://defillama.com/chain/Celo) | TVL data (linked, not embedded) | None |
+| [Carbon DeFi](https://docs.carbondefi.xyz) | Contract addresses, MCP server, strategy patterns | None |
 | [celo-org/agent-skills](https://github.com/celo-org/agent-skills) | SDK patterns, code examples | None |
 
 ## Structure
@@ -85,12 +113,13 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`builder-guide.md`](skills/celopedia-skill/references/builder-guide.md) | Celo-specific dev patterns and gotchas |
 | [`dev-templates.md`](skills/celopedia-skill/references/dev-templates.md) | Foundry, Hardhat, Viem, Wagmi configs |
 | [`sdk-reference.md`](skills/celopedia-skill/references/sdk-reference.md) | SDK quick reference and selection guide |
+| [`attribution-tags.md`](skills/celopedia-skill/references/attribution-tags.md) | Attribution tags (ERC-8021) — tag transactions for impact tracking & future rewards |
 
 ### DeFi
 
 | File | What |
 |------|------|
-| [`defi-protocols.md`](skills/celopedia-skill/references/defi-protocols.md) | Deep protocol reference (Uniswap, Aave, Morpho, Mento) with live APY fetching |
+| [`defi-protocols.md`](skills/celopedia-skill/references/defi-protocols.md) | Deep protocol reference (Uniswap, Aave, Carbon DeFi, Morpho, Mento) with live APY fetching |
 
 ### MiniPay App Builder
 
@@ -101,14 +130,15 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`minipay-scaffold-from-scratch.md`](skills/celopedia-skill/references/minipay-scaffold-from-scratch.md) | Raw Next.js + viem setup (alternative to Celo Composer) |
 | [`odis-socialconnect.md`](skills/celopedia-skill/references/odis-socialconnect.md) | ODIS (PnP), OdisPayments, FederatedAttestations |
 | [`minipay-live-apps.md`](skills/celopedia-skill/references/minipay-live-apps.md) | Discovery snapshot: live Mini Apps, categories, country targeting |
-| [`minipay-requirements.md`](skills/celopedia-skill/references/minipay-requirements.md) | Official submission checklist: UI copy rules, performance, legal, 24h SLA |
+| [`minipay-requirements.md`](skills/celopedia-skill/references/minipay-requirements.md) | Two-stage MiniPay listing flow: Stage 1 intake form (`minipay.to/mini-apps`) and Stage 2 post-call readiness checklist |
+| [`minipay-docs-map.md`](skills/celopedia-skill/references/minipay-docs-map.md) | Page-by-page index of `docs.minipay.xyz` (getting started, guides, technical references, deeplinks) |
 
 ### Platform Features
 
 | File | What |
 |------|------|
 | [`governance.md`](skills/celopedia-skill/references/governance.md) | On-chain governance reference |
-| [`ai-agents.md`](skills/celopedia-skill/references/ai-agents.md) | ERC-8004, x402, MCP, Agent Skills |
+| [`ai-agents.md`](skills/celopedia-skill/references/ai-agents.md) | ERC-8004, x402 + hosted Celo facilitator, MCP, Agent Skills |
 | [`security-patterns.md`](skills/celopedia-skill/references/security-patterns.md) | Celo-specific security risks (pairs with [pashov/skills](https://github.com/pashov/skills)) |
 | [`feedback.md`](skills/celopedia-skill/references/feedback.md) | Route bug reports / feature requests to the right Celo repo and file via `gh` |
 
