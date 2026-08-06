@@ -8,7 +8,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.6.0"
+  version: "2.6.1"
 ---
 
 # Celopedia Skill
@@ -21,7 +21,7 @@ Celo is a leading **Ethereum L2** (OP Stack + EigenDA + zkEVM). Purpose-built fo
 
 - **Chain ID**: 42220 (Mainnet), 11142220 (Sepolia Testnet)
 - **Block time**: ~1 second | **Gas**: ~$0.0005 | **Fee abstraction**: Pay gas with USDC, USDT, USDm
-- **Stablecoins**: 15+ Mento local-currency stablecoins (USDm, EURm, BRLm, KESm, COPm, GHSm, NGNm, ZARm, GBPm, CADm, AUDm, CHFm, JPYm, XOFm, PHPm) + external USDC, USDT, USAT — see `contracts.md` / `ecosystem.md`
+- **Stablecoins**: 15+ Mento local-currency stablecoins (USDm, EURm, BRLm, KESm, COPm, GHSm, NGNm, ZARm, GBPm, CADm, AUDm, CHFm, JPYm, XOFm, PHPm) + external USDC, USDT, USAT, USDM, USDA, EURA, VGBP, VCHF, USDGLO, BRLA, COPM, G$, wARS, wBRL, wMXN, wCOP, wPEN, wCLP, cNGN — see `contracts.md` / `ecosystem.md`
 - **MiniPay**: 16M+ wallets, 470M+ transactions, 66+ countries
 
 ---
@@ -174,6 +174,27 @@ Start with `growth-diagnostic.md` — the 6-question diagnostic routes the build
 
 **References**: `growth-diagnostic.md`, `growth-ux-design.md`, `growth-comms.md`, `growth-gtm.md`, `growth-referrals.md`, `growth-analytics.md`, `business-model.md`, `growth-seo.md`
 
+### 13. Brand & Attribution
+
+Help partners and integrators reference Celo correctly — logos, symbol, colors, and **"Build on Celo"** attribution.
+
+- Point to the official **Celo Brand Kit** (`https://celo.org/brand-kit`) — the canonical, always-current source for downloadable wordmark/symbol assets, colors, and typography
+- **Brand policy**: use official assets unmodified (no recoloring, redrawing, or adding elements); don't register Celo marks/domains; don't imply endorsement or a partnership that doesn't exist
+- Never hardcode hex values or fonts — send users to the live Color and Typography sections
+
+**References**: `brandkit.md`
+
+### 14. Feedback & Issue Routing
+
+Help the user report a bug or propose a feature and **route it to the right Celo repo** — without leaving their editor.
+
+- Triggers on intent like "report a bug", "request a feature", "something's wrong in the docs / this skill", "file an issue", or "give feedback"
+- Routes to the correct destination (this skill → `celo-org/celopedia-skills`, docs → `celo-org/docs`, Celo Composer → `celo-org/celo-composer`, x402 SDK/attribution → `celo-org/attribution-tags`, x402 facilitator/infra → `celo-org/x402-facilitator`)
+- Default output is a GitHub **issue**; for small fixes to sources we can edit (this skill's references and the Celo docs), offer a **PR** instead
+- Files via `gh`, with a prefilled browser-form fallback; **always confirm the drafted issue with the user and keep it public-safe** (no private names/calls/quotes) before filing
+
+**References**: `feedback.md`
+
 ---
 
 ## Research Workflow
@@ -211,6 +232,8 @@ Start with `growth-diagnostic.md` — the 6-question diagnostic routes the build
 | Builder asks about workflow / Superpowers / spec-driven / shipping faster | Check `dev-methodology.md` |
 | Builder asks about SEO / Google ranking / meta tags / organic traffic | Check `growth-seo.md` |
 | Builder asks general "how do I make my project better?" | Check `growth-diagnostic.md` (routes to the right toolkit file) |
+| Branding / logo / "Build on Celo" / brand colors | Check `brandkit.md` |
+| Report a bug / request a feature / give feedback | Route via `feedback.md` |
 
 ### Step 2: Gather Evidence (Prefer Live Data)
 
@@ -226,6 +249,7 @@ Start with `growth-diagnostic.md` — the 6-question diagnostic routes the build
 | On-chain data | Celo RPC (`forno.celo.org`) | — |
 | Token/contract info | Blockscout API (no key needed) | Celoscan API (key needed) |
 | MiniPay discovery listings | MiniPay app in target regions | `minipay-live-apps.md` snapshot |
+| Brand assets / colors / logos | Official brand kit (`celo.org/brand-kit`) | `brandkit.md` pointer |
 
 ### Step 3: Synthesize & Present
 

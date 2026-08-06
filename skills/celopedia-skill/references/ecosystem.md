@@ -129,7 +129,6 @@ Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-l
 | Mountain Protocol USD | USDM | Mountain Protocol | `0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C` |
 | Angle USD | USDA | Angle | `0x0000206329b97DB379d5E1Bf586BbDB969C63274` |
 | Angle Euro | EURA | Angle | `0xC16B81Af351BA9e64C1a069E3Ab18c244A1E3049` |
-| VNX Euro | VEUR | VNX | `0x9346F43c1588B6DF1D52bdD6Bf846064F92d9Cba` |
 | VNX British Pound | VGBP | VNX | `0x7aE4265eCFC1F31bc0E112DfCFe3D78E01f4BB7f` |
 | VNX Swiss Franc | VCHF | VNX | `0xC5ebEa9984C485EC5D58cA5a2D376620d93aF871` |
 | Glo Dollar | USDGLO | Glo Foundation | `0x4F604735c1cF31399C6E711D5962b2B3E0225AD3` |
@@ -142,6 +141,7 @@ Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-l
 | Wrapped Colombian Peso | wCOP | Ripio | `0x8a1D45e102e886510e891d2Ec656a708991e2D76` |
 | Wrapped Peruvian Sol | wPEN | Ripio | `0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE` |
 | Wrapped Chilean Peso | wCLP | Ripio | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` |
+| cNGN (Nigerian Naira, regulated) | cNGN | Wrapped CBDC | `0xF6829D7393dAe24509eb1E52eE8e572e2E271a4f` |
 
 > ⚠️ **Ticker collisions** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury backed, `0x59D9…508C`) ≠ Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) ≠ Mento's **COPm**.
 

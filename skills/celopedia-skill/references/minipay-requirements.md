@@ -187,6 +187,12 @@ Where to publish: a `/stats` page inside the Mini App (read-only, no wallet requ
 | Invite friends | `https://link.minipay.xyz/invite_friends` | Trigger the invite flow |
 | Pockets / balance | `https://link.minipay.xyz/balance` | Open the user's Pockets screen |
 
+> **Opening your app from an external link:** use the **Browse** deeplink
+> `https://link.minipay.xyz/browse?url=<url-encoded target>` — the target short
+> link (e.g. `https://opr.as/xxxx`) is **provisioned by MiniPay; request it**.
+> MiniPay does **not** do referrals or dynamic links — carry your own params
+> (`?ref=`) in the target URL. See `minipay-guide.md` → Deeplinks + Sharing.
+
 ---
 
 ## Full pre-listing checklist (Stage 2)

@@ -1,7 +1,7 @@
 # Celo Contract Addresses
 
 > Source: https://docs.celo.org/tooling/contracts/
-> Last updated: 2026-04-15
+> Last updated: 2026-08-06
 
 All addresses verified from official Celo documentation. **Do not guess addresses not listed here.**
 
@@ -70,7 +70,6 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 | Mountain Protocol USD | USDM | `0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C` |
 | Angle USD | USDA | `0x0000206329b97DB379d5E1Bf586BbDB969C63274` |
 | Angle Euro | EURA | `0xC16B81Af351BA9e64C1a069E3Ab18c244A1E3049` |
-| VNX Euro | VEUR | `0x9346F43c1588B6DF1D52bdD6Bf846064F92d9Cba` |
 | VNX British Pound | VGBP | `0x7aE4265eCFC1F31bc0E112DfCFe3D78E01f4BB7f` |
 | VNX Swiss Franc | VCHF | `0xC5ebEa9984C485EC5D58cA5a2D376620d93aF871` |
 | Glo Dollar | USDGLO | `0x4F604735c1cF31399C6E711D5962b2B3E0225AD3` |
@@ -85,6 +84,7 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 | Ripio Chilean Peso | wCLP | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` |
 | Wrapped Ether | WETH | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
 | CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
+| cNGN (Nigerian Naira, regulated) | cNGN | `0xF6829D7393dAe24509eb1E52eE8e572e2E271a4f` |
 
 > Third-party stablecoins above are sourced from and verified against the official list: https://docs.celo.org/build-on-celo/build-with-local-stablecoin (addresses confirmed on-chain).
 >
