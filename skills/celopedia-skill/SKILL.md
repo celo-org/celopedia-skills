@@ -21,7 +21,7 @@ Celo is a leading **Ethereum L2** (OP Stack + EigenDA + zkEVM). Purpose-built fo
 
 - **Chain ID**: 42220 (Mainnet), 11142220 (Sepolia Testnet)
 - **Block time**: ~1 second | **Gas**: ~$0.0005 | **Fee abstraction**: Pay gas with USDC, USDT, USDm
-- **Stablecoins**: 15+ Mento local-currency stablecoins + USDC + USDT
+- **Stablecoins**: 15+ Mento local-currency stablecoins + USDC + USDT + cNGN
 - **MiniPay**: 14M+ wallets, 300M+ stablecoin transactions, 60+ countries
 
 ---

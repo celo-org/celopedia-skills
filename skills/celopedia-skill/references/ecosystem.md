@@ -121,6 +121,7 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 |-------|--------|
 | USDC (Circle) | USDC |
 | Tether USD | USDT |
+| cNGN (Nigerian Naira, regulated) | cNGN |
 
 ---
 
