@@ -129,7 +129,6 @@ Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-l
 | Mountain Protocol USD | USDM | Mountain Protocol | `0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C` |
 | Angle USD | USDA | Angle | `0x0000206329b97DB379d5E1Bf586BbDB969C63274` |
 | Angle Euro | EURA | Angle | `0xC16B81Af351BA9e64C1a069E3Ab18c244A1E3049` |
-| VNX Euro | VEUR | VNX | `0x9346F43c1588B6DF1D52bdD6Bf846064F92d9Cba` |
 | VNX British Pound | VGBP | VNX | `0x7aE4265eCFC1F31bc0E112DfCFe3D78E01f4BB7f` |
 | VNX Swiss Franc | VCHF | VNX | `0xC5ebEa9984C485EC5D58cA5a2D376620d93aF871` |
 | Glo Dollar | USDGLO | Glo Foundation | `0x4F604735c1cF31399C6E711D5962b2B3E0225AD3` |
