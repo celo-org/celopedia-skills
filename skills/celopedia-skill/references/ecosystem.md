@@ -2,7 +2,7 @@
 
 > Sources: docs.celo.org, DefiLlama, celo.org/ecosystem
 > For live TVL data, always refer to https://defillama.com/chain/Celo
-> Last updated: 2026-04-15
+> Last updated: 2026-08-24
 
 ---
 
@@ -14,7 +14,10 @@
 |----------|-------------|---------|
 | Uniswap V3 | Concentrated liquidity AMM | https://app.uniswap.org |
 | Uniswap V4 | Next-gen AMM with hooks (deployed Oct 2025) | https://app.uniswap.org |
+| Uniswap V2 | Constant-product AMM | https://app.uniswap.org |
 | Velodrome V3 | Concentrated liquidity, ve-tokenomics | https://velodrome.finance |
+| Velodrome V2 | ve(3,3) AMM | https://velodrome.finance |
+| SushiSwap | Multi-chain AMM | https://www.sushi.com |
 | Curve | Efficient stablecoin trading | https://curve.finance |
 | Ubeswap | Celo-native DEX (V2 + V3) | https://ubeswap.org |
 | Carbon DeFi | Automated on-chain trading strategies (Bancor) | https://app.carbondefi.xyz |
@@ -25,8 +28,9 @@
 | Protocol | Description | Website |
 |----------|-------------|---------|
 | Aave V3 | Multi-asset lending, largest on Celo | https://aave.com |
-| Morpho V1 | Permissionless isolated lending markets | https://app.morpho.org |
+| Morpho Blue | Permissionless isolated lending markets | https://app.morpho.org |
 | Feather | Risk-adjusted permissionless lending | https://app.feather.zone |
+| Moola Market | Celo-native lending & borrowing | https://mm.moola.market |
 
 > **For live TVL data**, query DefiLlama: `curl -s https://api.llama.fi/protocols | jq '[.[] | select(.chains[]? == "Celo")] | sort_by(-.tvl)'`
 > See `live-data-sources.md` for more API examples.
@@ -36,6 +40,7 @@
 | Protocol | Description | Website |
 |----------|-------------|---------|
 | Beefy | Autocompounding yield farming | https://beefy.com |
+| Autofarm | Yield aggregator | https://autofarm.network |
 | Steer Protocol | Automated liquidity management | https://app.steer.finance |
 | ICHI | Algorithmic liquidity strategies | https://www.ichi.org |
 | TheDeep | Cross-chain DeFi liquidity automation | https://app.thedeep.ink |
@@ -70,6 +75,7 @@
 | Midas RWA | Tokenized real-world assets | https://midas.app |
 | VNX | Tokenized commodities/forex | https://vnx.li |
 | Untangled Vault | Capital allocation | https://untangled.finance |
+| Tether Gold (XAUt) | Tokenized gold | https://gold.tether.to |
 
 ### Payments & Streaming
 
