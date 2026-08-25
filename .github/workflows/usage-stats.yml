@@ -32,11 +32,13 @@ jobs:
           owner: celo-org
           repositories: celopedia-skills
 
-      # History + snapshots live on the unprotected `stats` branch, not main.
+      # History + snapshots live on the unprotected `stats` branch, not main:
       # protect-main requires a PR, so a github-actions push to main is always
-      # rejected (GH006). Working on `stats` lets the run read the accumulated
-      # history and push back without touching branch protection. Created from
-      # the default branch on first run; tooling is re-synced from it each run.
+      # rejected (GH006). The `stats` branch is seeded once (from PR #54) and
+      # updated in place — the run reads the accumulated history there and pushes
+      # back, no branch-protection change needed. If the branch is ever missing
+      # it cold-starts empty. Tooling (scripts, workflow) is re-synced from the
+      # default branch each run so `stats` can't drift.
       - name: Switch to stats branch
         run: |
           git config user.name "github-actions[bot]"
