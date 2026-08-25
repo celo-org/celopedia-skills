@@ -54,6 +54,9 @@ Build Mini Apps for MiniPay (16M+ wallets). Wallet detection, auto-connect patte
 ### AI Agent Builder
 ERC-8004 (Agent Trust Protocol), Self Agent ID (proof-of-human), the Celo Agent Visa program, x402 (HTTP micropayments, with Celo's hosted facilitator at [x402.celo.org](https://x402.celo.org)), Celo MCP Server, and the Agent Skills specification. Build onchain agents that transact autonomously on Celo.
 
+### Chain Migration
+Move or expand an existing EVM app onto Celo from another L2 (Lisk, Base, Optimism, Mode, Ink, Unichain, Soneium, Zora, Fraxtal). Audits the repo for chain IDs, RPC hosts, and hardcoded token addresses, then maps tokens and protocols and applies the edits. Covers the two changes that silently break working code: the gas token (ETH → CELO, plus CIP-64 fee abstraction) and CELO token duality — where ported `WETH.deposit()` reverts, `receive()` never fires on the ERC-20 path, and a CELO approval exposes the user's gas balance.
+
 ### Security & Audit Readiness
 Celo-specific security patterns (CELO duality, CIP-64 fee abstraction, Aave aToken drift, Mento circuit breakers, post-L2 epoch effects). Chain-agnostic Solidity audits defer to [pashov/skills](https://github.com/pashov/skills).
 
@@ -78,6 +81,7 @@ Once installed, the skill activates automatically. Just describe what you need:
 - *"What grants can I apply to for a DeFi project?"*
 - *"How saturated is the DEX vertical on EVM chains?"*
 - *"Build an AI agent that makes micropayments with x402"*
+- *"I'm building on Lisk — how do I move my app to Celo?"*
 - *"Report a bug / request a feature"* — the skill routes it to the right Celo repo and files a GitHub issue (or a PR for small doc/reference fixes)
 
 ## Data Sources
@@ -114,6 +118,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`dev-templates.md`](skills/celopedia-skill/references/dev-templates.md) | Foundry, Hardhat, Viem, Wagmi configs |
 | [`sdk-reference.md`](skills/celopedia-skill/references/sdk-reference.md) | SDK quick reference and selection guide |
 | [`attribution-tags.md`](skills/celopedia-skill/references/attribution-tags.md) | Attribution tags (ERC-8021) — tag transactions for impact tracking & future rewards |
+| [`migrating-from-another-chain.md`](skills/celopedia-skill/references/migrating-from-another-chain.md) | Move a dApp to Celo from another L2: repo audit, token/protocol mapping, gas token + duality breaks |
 
 ### DeFi
 
