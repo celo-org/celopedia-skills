@@ -126,8 +126,6 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Hardhat | https://docs.celo.org/tooling/dev-environments/hardhat |
 | Remix | https://docs.celo.org/tooling/dev-environments/remix |
 | Thirdweb Overview | https://docs.celo.org/tooling/dev-environments/thirdweb/overview |
-| Using thirdweb | https://docs.celo.org/tooling/dev-environments/thirdweb/thirdweb |
-| Thirdweb One-Click Deploy | https://docs.celo.org/tooling/dev-environments/thirdweb/one-click-deploy |
 | MultiBaas Overview (Curvegrid) | https://docs.celo.org/tooling/dev-environments/multibaas/overview |
 | MultiBaas Smart Contracts | https://docs.celo.org/tooling/dev-environments/multibaas/contracts |
 | MultiBaas Event Webhooks | https://docs.celo.org/tooling/dev-environments/multibaas/webhooks |
