@@ -22,7 +22,7 @@ Ask this first — it changes the plan, and most teams have not decided. **Check
 | Phase 3 changes | apply globally | apply globally | **gate per-chain** (`if (chainId === celo.id)`) so Base/OP/etc. stay correct |
 | Effort | higher up front, one chain to maintain | lower up front, two chains forever | lowest — one more entry, plus Celo's semantics |
 
-Most teams arriving from another OP Stack L2 want a middle or right column — and increasingly the right one, since they already ship Base plus others. Don't assume the full move. If you're in the right column, the `lisk → celo` find-and-replace in **Phase 1** does **not** apply: you add Celo alongside, and the **Phase 3** duality/fee-abstraction changes must be conditional on the active chain (see §3.1, §3.2).
+Most teams arriving from another OP Stack L2 want a middle or right column — and increasingly the right one, since they already ship Base plus others. Don't assume the full move. If you're in the right column, the config-and-replace edits in **Phase 4 (steps 1–3)** do **not** apply wholesale — you add a Celo entry to the existing chain registry / address map instead — and the duality + fee-abstraction changes (**Phase 4 steps 4–5**, per §3.1/§3.2) must be gated on the active chain. See the conditional note in **Phase 4**.
 
 ---
 
@@ -77,8 +77,13 @@ rg -n 'api\.lisk\.com|blockscout\.lisk\.com|\.gateway\.tenderly|drpc\.org|alchem
 # Chain object imports
 rg -n "from ['\"]viem/chains['\"]|\b(lisk|liskSepolia|base|optimism|mode|ink|unichain|soneium)\b" -g '*.ts' -g '*.tsx'
 
-# Native-gas assumptions — incl. native-payout idioms (.transfer/.send; see §3.2 break 4)
-rg -n 'parseEther|formatEther|msg\.value|nativeCurrency|\bWETH\b|deposit\{value|\.transfer\(|\.send\('
+# Native-gas assumptions
+rg -n 'parseEther|formatEther|msg\.value|nativeCurrency|\bWETH\b|deposit\{value'
+
+# Native CELO payout idiom (see §3.2 break 4). Scoped to Solidity and matched on
+# `payable(...)` so ERC-20 `token.transfer(` and JS `res.send`/`mailer.send` don't.
+# (Won't catch the `address payable p; p.transfer(x)` variable form — review those by hand.)
+rg -n --pcre2 'payable\([^)]*\)\.(transfer|send)\(' -g '*.sol'
 
 # User-facing "ETH"
 rg -n '"[^"]*\bETH\b[^"]*"' -g '*.tsx' -g '*.ts'
@@ -175,7 +180,7 @@ Five things that break on arrival from an ETH-gas chain:
 | 1 | **`WETH.deposit{value:}()` reverts** | Celo's WETH (`0xD221812d…`, *"Wrapped Ether (Celo native bridge)"*) is **bridged ETH, not a wrapper** — verified on-chain to have **no `deposit()` and no `withdraw()`**. Ported wrap-before-swap logic compiles, points at a real address, and **reverts at runtime**. On Celo you never wrap: pass the CELO ERC-20 address directly. |
 | 2 | **Double-counting** | `address(this).balance + IERC20(WETH).balanceOf(address(this))` is correct on Lisk and a **2× overcount** on Celo if WETH is swapped for the CELO ERC-20. No revert — just wrong numbers in treasury math, TVL displays, and accounting. |
 | 3 | **`receive()` never fires on the ERC-20 path** | A native transfer executes **no code** on the recipient. A contract crediting deposits in `receive()`/`fallback()` **silently no-ops** when a user pays via `IERC20(CELO).transfer()` — funds arrive in the balance, the user is never credited. The most dangerous item on this page. |
-| 4 | **Reentrancy assumptions invert; native payouts may starve on gas** | A CELO ERC-20 transfer hands control to *nobody*, so a `ReentrancyGuard` around one is dead weight. Conversely, code assuming "ERC-20 transfer = cheap storage write" now pays a flat 9000 gas per transfer — audit batch-payout loops, which get materially more expensive. And the native payout idiom `payable(x).transfer()` / `.send()` forwards only a **2300-gas stipend** that a CELO transfer can exceed — prefer `(bool ok, ) = payable(x).call{value: amount}("")` with checks-effects-interactions. *(Whether `.transfer` reverts outright is worth a testnet check; `.call` is the safe pattern regardless.)* |
+| 4 | **Reentrancy assumptions invert; ERC-20 payouts cost more** | A CELO ERC-20 transfer hands control to *nobody*, so a `ReentrancyGuard` around one is dead weight. Conversely, code assuming "ERC-20 transfer = cheap storage write" now pays a flat **9000 gas** per `IERC20(CELO).transfer` — audit batch-payout loops, which get materially more expensive. *(Separate, **general-Solidity** note surfaced by the same audit — **not** Celo-specific: a ported `payable(x).transfer()` / `.send()` payout leans on the fixed **2300-gas stipend**, fragile since EIP-1884 on any EVM chain, and should move to `(bool ok, ) = payable(x).call{value: amount}("")` with checks-effects-interactions. The native path here carries the same stipend risk as anywhere; only the 9000-gas ERC-20 line above is Celo-specific.)* |
 | 5 | **An approval exposes the user's gas money** | `approve()`/`allowance()` are implemented on the CELO ERC-20 (verified live), and `balanceOf` *is* the native balance. So granting an unlimited CELO allowance lets a spender move the balance the user needs to pay gas — **a drain surface that cannot exist on an ETH-gas chain.** Treat unlimited CELO approvals as a security review item, not a UX convenience. |
 
 **Pick the path that matches the recipient.** If the target is `payable` and reads `msg.value`, use the native path. If it takes `uint256 amount` behind an allowance, use the ERC-20 path. When unsure, read the contract on Celoscan. Worked example: `builder-guide.md` → _Sending CELO — common failure & fix_.
@@ -204,6 +209,8 @@ Fixes: `vm.deal(addr, amount)` for native, `deal(CELO_ADDRESS, user, amount)` fo
 ## Phase 4 — Apply the edits
 
 Ordered. Confirm each group with the user before writing.
+
+> **Already-multichain apps (right column of _Are you moving, or expanding?_):** do **not** apply steps 1–3 as a global find-and-replace. `lisk → celo` swaps the whole app onto Celo and breaks the chains you're keeping. Instead **add a Celo entry** to the existing chain registry / per-chain address map, and **gate steps 4–5** (gas path, duality fixes) on `chainId === celo.id` so Base/OP/etc. keep working. Steps 6–7 are unaffected.
 
 1. **Configs** — `foundry.toml`, `hardhat.config.ts`, wagmi/viem client. Templates in `dev-templates.md`; don't hand-roll.
 2. **Chain object** — `lisk` → `celo`, `liskSepolia` → `celoSepolia` from `viem/chains`.
