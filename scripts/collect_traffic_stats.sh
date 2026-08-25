@@ -82,7 +82,9 @@ merged=$(jq \
   .daily = (.daily // {})
   | upsert("clones"; ($clones.clones // []))
   | upsert("views";  ($views.views  // []))
-  | .runs = ((.runs // []) + [$run])
+  # Upsert runs by day too (keep the latest per date) so a re-run or manual
+  # workflow_dispatch on the same day does not duplicate the snapshot row.
+  | .runs = (((.runs // []) + [$run]) | group_by(.run_at[:10]) | map(max_by(.run_at)))
   | .daily = (.daily | to_entries | sort_by(.key) | from_entries)
 ' "$HISTORY")
 printf '%s\n' "$merged" > "$HISTORY"
@@ -100,7 +102,7 @@ monthly=$(jq -r '
 ' "$HISTORY")
 
 snapshots=$(jq -r '
-  .runs | map(
+  .runs[-12:] | map(
     "| " + .run_at[:10]
     + " | " + ((.installs.total // "—") | tostring)
     + " | " + ((.installs.skills // {}) | to_entries | map(.key + ": " + (.value | tostring)) | join(", "))
@@ -131,7 +133,7 @@ upper bound on distinct users for the month (the same user on two days counts tw
 |---|---|---|---|---|---|
 $monthly
 
-## Snapshots (skills.sh all-time install counters)
+## Snapshots (skills.sh all-time install counters — last 12 runs)
 
 | Date | Total installs | Per skill | Stars | Forks |
 |---|---|---|---|---|

@@ -309,29 +309,6 @@
       ]
     },
     {
-      "run_at": "2026-08-25T00:00:00Z",
-      "note": "seeded from interactive session",
-      "stars": 23,
-      "forks": 19,
-      "clones_14d": {
-        "count": 326,
-        "uniques": 148
-      },
-      "views_14d": {
-        "count": 252,
-        "uniques": 86
-      },
-      "installs": {
-        "total": 439,
-        "skills": {
-          "celopedia-skill": 379,
-          "docs-watch": 60
-        }
-      },
-      "referrers": [],
-      "paths": []
-    },
-    {
       "run_at": "2026-08-25T09:44:51Z",
       "stars": 23,
       "forks": 19,

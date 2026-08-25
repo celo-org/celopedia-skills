@@ -14,10 +14,9 @@ upper bound on distinct users for the month (the same user on two days counts tw
 | 2026-07 | 2 | 32 | 23 | 25 | 17 |
 | 2026-08 | 23 | 497 | 290 | 429 | 167 |
 
-## Snapshots (skills.sh all-time install counters)
+## Snapshots (skills.sh all-time install counters — last 12 runs)
 
 | Date | Total installs | Per skill | Stars | Forks |
 |---|---|---|---|---|
 | 2026-08-13 | 419 | celopedia-skill: 369, docs-watch: 50 | 23 | 17 |
-| 2026-08-25 | 439 | celopedia-skill: 379, docs-watch: 60 | 23 | 19 |
 | 2026-08-25 | 439 | celopedia-skill: 379, docs-watch: 60 | 23 | 19 |

@@ -6,8 +6,8 @@ name: usage-stats
 on:
   schedule:
     # GitHub disables scheduled workflows on public repos after 60 days without
-    # repository activity; the weekly snapshot commit below resets that timer,
-    # but only while runs succeed — investigate failures within 60 days.
+    # repository activity; the weekly snapshot commit to the `stats` branch below
+    # resets that timer, but only while runs succeed — investigate failures within 60 days.
     - cron: "0 6 * * 1" # Mondays 06:00 UTC
   workflow_dispatch:
 
@@ -32,6 +32,23 @@ jobs:
           owner: celo-org
           repositories: celopedia-skills
 
+      # History + snapshots live on the unprotected `stats` branch, not main.
+      # protect-main requires a PR, so a github-actions push to main is always
+      # rejected (GH006). Working on `stats` lets the run read the accumulated
+      # history and push back without touching branch protection. Created from
+      # the default branch on first run; tooling is re-synced from it each run.
+      - name: Switch to stats branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin stats >/dev/null 2>&1; then
+            git fetch --depth=1 origin stats
+            git checkout -B stats origin/stats
+            git checkout "$GITHUB_SHA" -- scripts/ .github/workflows/
+          else
+            git checkout -b stats
+          fi
+
       - name: Collect stats
         env:
           GH_TOKEN: ${{ steps.traffic-token.outputs.token }}
@@ -39,12 +56,10 @@ jobs:
 
       - name: Commit history
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add stats/
+          git add stats/ scripts/ .github/workflows/
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             git commit -m "stats: weekly traffic snapshot"
-            git push
+            git push origin stats
           fi
