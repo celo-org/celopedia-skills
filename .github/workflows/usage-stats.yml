@@ -5,6 +5,9 @@ name: usage-stats
 # 14-day window gives 2x overlap safety.
 on:
   schedule:
+    # GitHub disables scheduled workflows on public repos after 60 days without
+    # repository activity; the weekly snapshot commit below resets that timer,
+    # but only while runs succeed — investigate failures within 60 days.
     - cron: "0 6 * * 1" # Mondays 06:00 UTC
   workflow_dispatch:
 
@@ -17,18 +20,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check TRAFFIC_TOKEN
-        env:
-          TRAFFIC_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
-        run: |
-          if [ -z "$TRAFFIC_TOKEN" ]; then
-            echo "::error::TRAFFIC_TOKEN secret is not set. Traffic API endpoints need a PAT with push access to this repo (the built-in GITHUB_TOKEN returns 403). Create a fine-grained PAT (Administration: read, Contents: read) and add it with: gh secret set TRAFFIC_TOKEN -R ${{ github.repository }}"
-            exit 1
-          fi
+      # Traffic API endpoints reject the built-in GITHUB_TOKEN (403), so a
+      # GitHub App installation token is minted per run. The app is org-owned
+      # (no personal-token expiry) and needs Administration: read on this repo.
+      - name: Generate traffic token
+        id: traffic-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ vars.TRAFFIC_APP_ID }}
+          private-key: ${{ secrets.TRAFFIC_APP_PRIVATE_KEY }}
+          owner: celo-org
+          repositories: celopedia-skills
 
       - name: Collect stats
         env:
-          GH_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
+          GH_TOKEN: ${{ steps.traffic-token.outputs.token }}
         run: ./scripts/collect_traffic_stats.sh
 
       - name: Commit history
