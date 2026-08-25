@@ -1,0 +1,419 @@
+{
+  "repo": "celo-org/celopedia-skills",
+  "daily": {
+    "2026-07-30": {
+      "clones": {
+        "count": 14,
+        "uniques": 11
+      },
+      "views": {
+        "count": 22,
+        "uniques": 14
+      }
+    },
+    "2026-07-31": {
+      "clones": {
+        "count": 18,
+        "uniques": 12
+      },
+      "views": {
+        "count": 3,
+        "uniques": 3
+      }
+    },
+    "2026-08-01": {
+      "clones": {
+        "count": 19,
+        "uniques": 12
+      },
+      "views": {
+        "count": 29,
+        "uniques": 9
+      }
+    },
+    "2026-08-02": {
+      "clones": {
+        "count": 15,
+        "uniques": 10
+      },
+      "views": {
+        "count": 26,
+        "uniques": 8
+      }
+    },
+    "2026-08-03": {
+      "clones": {
+        "count": 40,
+        "uniques": 23
+      },
+      "views": {
+        "count": 20,
+        "uniques": 7
+      }
+    },
+    "2026-08-04": {
+      "clones": {
+        "count": 23,
+        "uniques": 14
+      },
+      "views": {
+        "count": 17,
+        "uniques": 9
+      }
+    },
+    "2026-08-05": {
+      "clones": {
+        "count": 22,
+        "uniques": 10
+      },
+      "views": {
+        "count": 26,
+        "uniques": 8
+      }
+    },
+    "2026-08-06": {
+      "clones": {
+        "count": 25,
+        "uniques": 15
+      },
+      "views": {
+        "count": 3,
+        "uniques": 3
+      }
+    },
+    "2026-08-07": {
+      "clones": {
+        "count": 16,
+        "uniques": 13
+      },
+      "views": {
+        "count": 9,
+        "uniques": 4
+      }
+    },
+    "2026-08-08": {
+      "clones": {
+        "count": 8,
+        "uniques": 6
+      },
+      "views": {
+        "count": 34,
+        "uniques": 7
+      }
+    },
+    "2026-08-09": {
+      "clones": {
+        "count": 3,
+        "uniques": 3
+      },
+      "views": {
+        "count": 13,
+        "uniques": 8
+      }
+    },
+    "2026-08-10": {
+      "clones": {
+        "count": 14,
+        "uniques": 8
+      },
+      "views": {
+        "count": 19,
+        "uniques": 11
+      }
+    },
+    "2026-08-11": {
+      "clones": {
+        "count": 29,
+        "uniques": 25
+      },
+      "views": {
+        "count": 4,
+        "uniques": 4
+      }
+    },
+    "2026-08-12": {
+      "clones": {
+        "count": 22,
+        "uniques": 12
+      },
+      "views": {
+        "count": 26,
+        "uniques": 8
+      }
+    },
+    "2026-08-13": {
+      "clones": {
+        "count": 15,
+        "uniques": 10
+      },
+      "views": {
+        "count": 23,
+        "uniques": 9
+      }
+    },
+    "2026-08-14": {
+      "clones": {
+        "count": 17,
+        "uniques": 11
+      },
+      "views": {
+        "count": 10,
+        "uniques": 4
+      }
+    },
+    "2026-08-15": {
+      "clones": {
+        "count": 16,
+        "uniques": 10
+      },
+      "views": {
+        "count": 16,
+        "uniques": 5
+      }
+    },
+    "2026-08-16": {
+      "clones": {
+        "count": 10,
+        "uniques": 5
+      },
+      "views": {
+        "count": 36,
+        "uniques": 11
+      }
+    },
+    "2026-08-17": {
+      "clones": {
+        "count": 17,
+        "uniques": 12
+      },
+      "views": {
+        "count": 16,
+        "uniques": 9
+      }
+    },
+    "2026-08-18": {
+      "clones": {
+        "count": 91,
+        "uniques": 35
+      },
+      "views": {
+        "count": 10,
+        "uniques": 5
+      }
+    },
+    "2026-08-19": {
+      "clones": {
+        "count": 23,
+        "uniques": 13
+      },
+      "views": {
+        "count": 24,
+        "uniques": 10
+      }
+    },
+    "2026-08-20": {
+      "clones": {
+        "count": 18,
+        "uniques": 13
+      },
+      "views": {
+        "count": 19,
+        "uniques": 9
+      }
+    },
+    "2026-08-21": {
+      "clones": {
+        "count": 11,
+        "uniques": 6
+      },
+      "views": {
+        "count": 26,
+        "uniques": 7
+      }
+    },
+    "2026-08-22": {
+      "clones": {
+        "count": 23,
+        "uniques": 13
+      },
+      "views": {
+        "count": 12,
+        "uniques": 7
+      }
+    },
+    "2026-08-23": {
+      "clones": {
+        "count": 20,
+        "uniques": 11
+      },
+      "views": {
+        "count": 11,
+        "uniques": 5
+      }
+    }
+  },
+  "runs": [
+    {
+      "run_at": "2026-08-13T00:00:00Z",
+      "note": "seeded from interactive session",
+      "stars": 23,
+      "forks": 17,
+      "clones_14d": {
+        "count": 268,
+        "uniques": 142
+      },
+      "views_14d": {
+        "count": 251,
+        "uniques": 90
+      },
+      "installs": {
+        "total": 419,
+        "skills": {
+          "celopedia-skill": 369,
+          "docs-watch": 50
+        }
+      },
+      "referrers": [
+        {
+          "referrer": "github.com",
+          "count": 22,
+          "uniques": 9
+        },
+        {
+          "referrer": "t.co",
+          "count": 1,
+          "uniques": 1
+        }
+      ],
+      "paths": [
+        {
+          "path": "/celo-org/celopedia-skills",
+          "count": 131,
+          "uniques": 83
+        },
+        {
+          "path": "/celo-org/celopedia-skills/issues",
+          "count": 15,
+          "uniques": 8
+        },
+        {
+          "path": "/celo-org/celopedia-skills/tree/main",
+          "count": 8,
+          "uniques": 6
+        },
+        {
+          "path": "/celo-org/celopedia-skills/tree/main/skills/celopedia-skill",
+          "count": 5,
+          "uniques": 3
+        }
+      ]
+    },
+    {
+      "run_at": "2026-08-25T00:00:00Z",
+      "note": "seeded from interactive session",
+      "stars": 23,
+      "forks": 19,
+      "clones_14d": {
+        "count": 326,
+        "uniques": 148
+      },
+      "views_14d": {
+        "count": 252,
+        "uniques": 86
+      },
+      "installs": {
+        "total": 439,
+        "skills": {
+          "celopedia-skill": 379,
+          "docs-watch": 60
+        }
+      },
+      "referrers": [],
+      "paths": []
+    },
+    {
+      "run_at": "2026-08-25T09:44:51Z",
+      "stars": 23,
+      "forks": 19,
+      "clones_14d": {
+        "count": 326,
+        "uniques": 148
+      },
+      "views_14d": {
+        "count": 252,
+        "uniques": 86
+      },
+      "installs": {
+        "total": 439,
+        "skills": {
+          "celopedia-skill": 379,
+          "docs-watch": 60
+        }
+      },
+      "referrers": [
+        {
+          "referrer": "github.com",
+          "count": 25,
+          "uniques": 11
+        },
+        {
+          "referrer": "Google",
+          "count": 2,
+          "uniques": 1
+        }
+      ],
+      "paths": [
+        {
+          "path": "/celo-org/celopedia-skills",
+          "count": 129,
+          "uniques": 77
+        },
+        {
+          "path": "/celo-org/celopedia-skills/issues",
+          "count": 14,
+          "uniques": 9
+        },
+        {
+          "path": "/celo-org/celopedia-skills/commits",
+          "count": 7,
+          "uniques": 6
+        },
+        {
+          "path": "/celo-org/celopedia-skills/commits/main",
+          "count": 7,
+          "uniques": 5
+        },
+        {
+          "path": "/celo-org/celopedia-skills/actions",
+          "count": 7,
+          "uniques": 4
+        },
+        {
+          "path": "/celo-org/celopedia-skills/pulls",
+          "count": 6,
+          "uniques": 6
+        },
+        {
+          "path": "/celo-org/celopedia-skills/issues/39",
+          "count": 5,
+          "uniques": 3
+        },
+        {
+          "path": "/celo-org/celopedia-skills/blob/main/skills/celopedia-skill/references/feedback.md",
+          "count": 5,
+          "uniques": 2
+        },
+        {
+          "path": "/celo-org/celopedia-skills/blob/main/skills/celopedia-skill/references/odis-socialconnect.md",
+          "count": 5,
+          "uniques": 1
+        },
+        {
+          "path": "/celo-org/celopedia-skills/branches",
+          "count": 3,
+          "uniques": 3
+        }
+      ]
+    }
+  ]
+}
