@@ -4,11 +4,13 @@ description: |
   The comprehensive Celo ecosystem skill. Ecosystem intelligence, builder tools, DeFi protocol
   reference, MiniPay development, AI agent infrastructure, governance, grants, and verified
   contract addresses — all in one skill. Powered by The Grid for live cross-chain ecosystem data.
+  Also covers migrating, moving, porting, switching, or redeploying an existing dApp onto Celo
+  from another chain (Lisk, Base, Optimism, Mode, Ink, Unichain, Soneium, Zora, Fraxtal).
 homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.6.2"
+  version: "2.7.1"
 ---
 
 # Celopedia Skill
@@ -195,6 +197,20 @@ Help the user report a bug or propose a feature and **route it to the right Celo
 
 **References**: `feedback.md`
 
+
+### 15. Migrating a dApp from Another Chain
+
+Help a team **move or expand an existing EVM app onto Celo** from another L2 — Lisk, Base, Optimism, Mode, Ink, Unichain, Soneium, Zora, Fraxtal.
+
+- Triggers on intent like "migrate to Celo", "move my app to Celo", "port this to Celo", "switch chains", "redeploy on Celo", "deploy this on Celo instead", "I'm building on Lisk / Base / Optimism — how do I come to Celo", or "what changes if I run this on Celo"
+- **Ask first whether they're fully moving or going multichain** — most teams haven't decided, and it changes the plan
+- Audit the repo for chain IDs, RPC hosts, chain-object imports, hardcoded token addresses, and native-gas assumptions; map tokens and protocols; then apply edits in order
+- **Two things silently break working code**: the gas token (ETH → CELO, plus CIP-64 fee abstraction) and **CELO token duality** — ported `WETH.deposit{value:}()` reverts, `receive()` never fires on the ERC-20 path, native+ERC-20 balances double-count, and a CELO approval exposes the user's gas money
+- Foundry fork tests do **not** simulate the `0xfd` precompile — a fork transfer returns success and moves nothing, so fork-green is not verification
+- Never invent a token address or a protocol mapping; if there's no Celo equivalent, say so
+
+**References**: `migrating-from-another-chain.md`, `builder-guide.md`, `contracts.md`, `dev-templates.md`
+
 ---
 
 ## Research Workflow
@@ -234,6 +250,7 @@ Help the user report a bug or propose a feature and **route it to the right Celo
 | Builder asks general "how do I make my project better?" | Check `growth-diagnostic.md` (routes to the right toolkit file) |
 | Branding / logo / "Build on Celo" / brand colors | Check `brandkit.md` |
 | Report a bug / request a feature / give feedback | Route via `feedback.md` |
+| Moving an app to Celo from another chain ("migrate from Lisk", "port this to Celo") | Follow `migrating-from-another-chain.md` |
 
 ### Step 2: Gather Evidence (Prefer Live Data)
 
@@ -278,7 +295,7 @@ When a builder has a new idea, guide them through:
 ## Important Rules
 
 1. **Never guess contract addresses.** Wrong addresses = lost funds. If not in references, say so.
-2. **Celo is an L2, not an L1.** Migrated March 26, 2025 (block 31,056,500).
+2. **Celo is an L2, not an L1.** Migrated March 26, 2025 (block 31,056,500). This is **Celo's own** L1→L2 migration — a historical fact about the chain. Don't confuse it with a user migrating *their app* to Celo from another chain, which is `migrating-from-another-chain.md`.
 3. **Mento stablecoins rebranded — lead with the m-suffix name.** The new canonical naming is `{CURRENCY}m`: cUSD → USDm, cEUR → EURm, cREAL → BRLm. The same pattern extends to the regional stablecoins (`COPm`, `KESm`, `PHPm`, `BRLm`, `NGNm`, `ZARm`, etc.). When generating prose, code, UI copy, or examples, **lead with the m-suffix name**; the c-prefix is the legacy alias and should appear only as a parenthetical lookup aid (e.g. `USDm (cUSD)`) or in historical/factual contexts (past grant announcements, third-party app marketing snapshots, on-chain function names like `payInCUSD`).
 4. **Token decimals matter.** USDm = 18, USDC/USDT = 6. Always verify.
 5. **The Grid has no full-text search.** Only `_contains`/`_ilike` substring matching.
