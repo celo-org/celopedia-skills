@@ -53,7 +53,7 @@ Verified source chain IDs and gas tokens (`ethereum-lists/chains`):
 | Zora | 7777777 | ETH |
 | **Fraxtal** | 252 | **FRAX** — not ETH |
 
-Both chains are EVM-equivalent OP Stack rollups, so **contract bytecode ports unchanged**. The work is configuration, address mapping, and the two semantic changes in §4.
+Both chains are EVM-equivalent OP Stack rollups, so **contract bytecode ports unchanged**. The work is configuration, address mapping, and the two semantic changes in **Phase 3**.
 
 ---
 
@@ -62,8 +62,12 @@ Both chains are EVM-equivalent OP Stack rollups, so **contract bytecode ports un
 Run these and build a findings table before changing anything.
 
 ```bash
-# Chain IDs — review every hit by hand, see the false-positive warning below
+# Distinctive chain IDs — safe to grep bare, but still review every hit by hand
 rg -n '\b(1135|4202|8453|34443|57073|1868|7777777)\b' --type-add 'cfg:*.{ts,js,json,toml,sol,env,yaml,yml}' -tcfg
+
+# Noisy chain IDs (OP Mainnet 10, Unichain 130, Fraxtal 252) — bare digits match
+# far too much, so match only in a chain-config position
+rg -n --pcre2 '(?i)(chain_?id|chain)\W{0,3}(10|130|252)\b'
 
 # RPC and explorer hosts
 rg -n 'api\.lisk\.com|blockscout\.lisk\.com|\.gateway\.tenderly|drpc\.org|alchemy|infura'
@@ -81,7 +85,7 @@ rg -n '"[^"]*\bETH\b[^"]*"' -g '*.tsx' -g '*.ts'
 rg -n 'rpc_endpoints|etherscan|verify|chainId' foundry.toml hardhat.config.* 2>/dev/null
 ```
 
-> **Chain IDs are the one pattern that produces false positives.** `1135` is also a plausible token amount, array length, or block number. Never bulk-replace a numeric chain ID — confirm each hit is in a chain-config position first. `4202` and `130` are especially prone to this.
+> **Chain IDs are the one pattern that produces false positives.** `1135` is also a plausible token amount, array length, or block number — `4202` likewise. Never bulk-replace a numeric chain ID; confirm each hit sits in a chain-config position first. `10`, `130` and `252` are so collision-prone as bare digits that the second pattern above deliberately scopes them to `chainId:`-style assignments — at the cost of missing one written any other way, which is the right trade.
 
 Record findings as `file:line → what it is → what it becomes`, then confirm with the user before editing.
 
@@ -111,7 +115,7 @@ All verified on-chain against `rpc.api.lisk.com` (symbol + decimals):
 | USDT | **USDT** `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` | 6 decimals |
 | USDt0 | USDC or USDT above | no Celo equivalent; pick a canonical stable |
 | EURC.e (6 dec) | **EURm** `0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73` | Mento euro, **18 decimals** — verified both ends; not a like-for-like swap |
-| WETH | **WETH** `0xD221812de1BD094f35587EE8E174B07B6167D9Af` | ⚠️ see §4 — **not** a wrapper, has no `deposit()` |
+| WETH | **WETH** `0xD221812de1BD094f35587EE8E174B07B6167D9Af` | ⚠️ see **Phase 3.2** — **not** a wrapper, has no `deposit()` |
 | LSK | — | no Celo equivalent; bridge or drop |
 | WBTC / wstETH | — | **not in `contracts.md`** — verify on Celoscan before use; do not assume an address |
 
@@ -188,7 +192,7 @@ recipient balanceOf():     10000000000000000000000  (unchanged)
 
 No revert. A non-zero gas charge. A `true` return. And **zero tokens moved.** Any test that asserts "the call didn't revert" passes; only a test that asserts the *balance delta* catches it. A ported suite can go fully green against a fork while mainnet behaves entirely differently.
 
-Fixes: `vm.deal(addr, amount)` for native, `deal(CELO_ADDRESS, user, amount)` for ERC-20 (`builder-guide.md` → _Foundry Fork Testing & Token Duality_). And always assert **balance deltas**, never just success. Anything touching duality must be confirmed on a real testnet (§5) — fork-green is not verification.
+Fixes: `vm.deal(addr, amount)` for native, `deal(CELO_ADDRESS, user, amount)` for ERC-20 (`builder-guide.md` → _Foundry Fork Testing & Token Duality_). And always assert **balance deltas**, never just success. Anything touching duality must be confirmed on a real testnet (Phase 5) — fork-green is not verification.
 
 ---
 
@@ -198,7 +202,7 @@ Ordered. Confirm each group with the user before writing.
 
 1. **Configs** — `foundry.toml`, `hardhat.config.ts`, wagmi/viem client. Templates in `dev-templates.md`; don't hand-roll.
 2. **Chain object** — `lisk` → `celo`, `liskSepolia` → `celoSepolia` from `viem/chains`.
-3. **Token constants** — per the §2 map. Re-check every decimal.
+3. **Token constants** — per the Phase 2 map. Re-check every decimal.
 4. **Gas path** — minimal or CIP-64 (§3.1).
 5. **Duality fixes** (§3.2) — remove wrap steps, fix double-counted balances, add an ERC-20 deposit path alongside `receive()`, re-audit approval scopes and payout-loop gas.
 6. **UI strings** — "ETH" → "CELO". If targeting MiniPay, apply the banned-terms rules in `minipay-requirements.md` §3 instead ("Gas fee" → "Network fee", etc.).
@@ -224,7 +228,7 @@ Deploy, verify, then assert the things a fork cannot tell you:
 Moving is the floor. These are the reasons to stay:
 
 - **Fee abstraction** — users transact holding only stablecoins. `builder-guide.md`.
-- **MiniPay** — 14M+ wallets, distribution to emerging markets. `minipay-guide.md`, and `minipay-requirements.md` for the listing checklist.
+- **MiniPay** — 16M+ wallets, distribution to emerging markets. `minipay-guide.md`, and `minipay-requirements.md` for the listing checklist.
 - **Mento local stablecoins** — 15+ local currencies (KESm, NGNm, GHSm, ZARm, COPm, PHPm…). Nothing equivalent on Lisk. `defi-protocols.md`.
 - **Grants** — `grants-funding.md`, and always check `celopg.eco/programs` live.
 
@@ -243,7 +247,7 @@ Moving is the floor. These are the reasons to stay:
 
 Keep this file general:
 
-1. Add a column to the §1 delta table — chain ID, RPC, explorer, gas token (verify against `ethereum-lists/chains`; **don't assume ETH** — Fraxtal uses FRAX).
-2. Add the chain's token addresses to the §1 grep table from its own docs.
-3. Add its protocol set to the §2 map, marking anything with no Celo counterpart.
-4. §3 is chain-independent — every ETH-gas chain hits the same duality breaks.
+1. Add a column to the **Chain delta** table — chain ID, RPC, explorer, gas token (verify against `ethereum-lists/chains`; **don't assume ETH** — Fraxtal uses FRAX).
+2. Add the chain's token addresses to the Phase 1 grep table from its own docs.
+3. Add its protocol set to the Phase 2 map, marking anything with no Celo counterpart.
+4. Phase 3 is chain-independent — every ETH-gas chain hits the same duality breaks.
