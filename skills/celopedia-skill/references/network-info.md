@@ -29,7 +29,7 @@ Users can pay gas fees with these ERC-20 tokens instead of native CELO. The addr
 | USDm (cUSD) | `0x765DE816845861e75A25fCA122bb6898B8B1282a` | 18 decimals — token == adapter |
 | EURm (cEUR) | `0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73` | 18 decimals — token == adapter |
 | USDC | `0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B` | **adapter** — token is `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
-| USDT (USD₮) | `0x0E2A3e05bc9A16F5292A6170456A710cb89C6f72` | **adapter** — token is `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| USD₮ | `0x0E2A3e05bc9A16F5292A6170456A710cb89C6f72` | **adapter** — token is `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
 | USAT (Tether America USD) | `0x0357EE22278c922e1D36cFe6b899269b161880C4` | **adapter** — token is `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
 | WETH (Celo native bridge) | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` | 18 decimals — token == adapter |
 | XAUt0 (Tether Gold) | `0x857BF24e29da0773687E804a743c2E421a394C16` | **adapter** — token is `0xaf37E8B6C9ED7f6318979f56Fc287d76c30847ff` |

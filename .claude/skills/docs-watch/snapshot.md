@@ -63,9 +63,11 @@ section below were left untouched this run.
 - Source: DefiLlama (`api.llama.fi/protocols`), docs.celo.org, celo.org/ecosystem
 - Last verified: 2026-08-24
 - Categories tracked: DEXes (10, +Uniswap V2/Velodrome V2/SushiSwap), Lending
-  (4, +Moola Market; "Morpho V1" renamed to "Morpho Blue"), Yield/Liquidity
-  mgmt (6, +Autofarm), Stablecoins (2), Liquid Staking (1), Derivatives (1),
-  RWA (7, +Tether Gold), Payments/Streaming (1), plus Governance section
+  (3; "Morpho V1" renamed to "Morpho Blue" — Moola Market was added then
+  removed on review, its site (`mm.moola.market`) is unreachable), Yield/
+  Liquidity mgmt (6, +Autofarm), Stablecoins (2), Liquid Staking (1),
+  Derivatives (1), RWA (7, +Tether Gold), Payments/Streaming (1), plus
+  Governance section
 - Uniswap V4 has no separate DefiLlama TVL entry on Celo right now (still
   listed — contracts confirmed live via `uniswap-contracts` docs page, so
   treated as a DefiLlama indexing quirk, not a removal; no action taken).

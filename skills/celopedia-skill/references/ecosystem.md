@@ -30,7 +30,6 @@
 | Aave V3 | Multi-asset lending, largest on Celo | https://aave.com |
 | Morpho Blue | Permissionless isolated lending markets | https://app.morpho.org |
 | Feather | Risk-adjusted permissionless lending | https://app.feather.zone |
-| Moola Market | Celo-native lending & borrowing | https://mm.moola.market |
 
 > **For live TVL data**, query DefiLlama: `curl -s https://api.llama.fi/protocols | jq '[.[] | select(.chains[]? == "Celo")] | sort_by(-.tvl)'`
 > See `live-data-sources.md` for more API examples.
