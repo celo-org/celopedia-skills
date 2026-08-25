@@ -11,16 +11,18 @@ How to move an existing EVM app to Celo from another L2 — Lisk, Base, Optimism
 
 ## Are you moving, or expanding?
 
-Ask this first — it changes the plan, and most teams have not decided.
+Ask this first — it changes the plan, and most teams have not decided. **Check the repo before you ask**: grep for a chain registry (an array of chain objects, `defineChain`, multiple `viem/chains` imports), per-chain address maps, or a `switchChain`/chain-switcher. If the app is *already* multichain, you're in the third column below — you extend an abstraction, you don't replace a source chain.
 
-| | **Full move** | **Multichain (stay + add Celo)** |
-|---|---|---|
-| Source-chain contracts | deprecate, migrate liquidity off | keep running |
-| Token | move canonical supply | needs a bridge/mint story across both |
-| Users | one-time migration comms | audience split; per-chain UX |
-| Effort | higher up front, one chain to maintain | lower up front, two chains forever |
+| | **Full move** | **Add Celo (single source)** | **Add Celo (already multichain)** |
+|---|---|---|---|
+| Starting point | one source chain | one source chain | N chains (Base is near-universal) |
+| Source-chain contracts | deprecate, migrate liquidity off | keep running | untouched |
+| Token | move canonical supply | bridge/mint story across both | already multi-deployed; add Celo issuance |
+| The edit | swap chain config source→Celo | swap config, keep source too | **add a Celo entry** to the existing registry — no find-and-replace |
+| Phase 3 changes | apply globally | apply globally | **gate per-chain** (`if (chainId === celo.id)`) so Base/OP/etc. stay correct |
+| Effort | higher up front, one chain to maintain | lower up front, two chains forever | lowest — one more entry, plus Celo's semantics |
 
-Most teams arriving from another OP Stack L2 want the second. Don't assume the first.
+Most teams arriving from another OP Stack L2 want a middle or right column — and increasingly the right one, since they already ship Base plus others. Don't assume the full move. If you're in the right column, the `lisk → celo` find-and-replace in **Phase 1** does **not** apply: you add Celo alongside, and the **Phase 3** duality/fee-abstraction changes must be conditional on the active chain (see §3.1, §3.2).
 
 ---
 
@@ -75,8 +77,8 @@ rg -n 'api\.lisk\.com|blockscout\.lisk\.com|\.gateway\.tenderly|drpc\.org|alchem
 # Chain object imports
 rg -n "from ['\"]viem/chains['\"]|\b(lisk|liskSepolia|base|optimism|mode|ink|unichain|soneium)\b" -g '*.ts' -g '*.tsx'
 
-# Native-gas assumptions
-rg -n 'parseEther|formatEther|msg\.value|nativeCurrency|\bWETH\b|deposit\{value'
+# Native-gas assumptions — incl. native-payout idioms (.transfer/.send; see §3.2 break 4)
+rg -n 'parseEther|formatEther|msg\.value|nativeCurrency|\bWETH\b|deposit\{value|\.transfer\(|\.send\('
 
 # User-facing "ETH"
 rg -n '"[^"]*\bETH\b[^"]*"' -g '*.tsx' -g '*.ts'
@@ -115,7 +117,8 @@ All verified on-chain against `rpc.api.lisk.com` (symbol + decimals):
 | USDT | **USDT** `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` | 6 decimals |
 | USDt0 | USDC or USDT above | no Celo equivalent; pick a canonical stable |
 | EURC.e (6 dec) | **EURm** `0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73` | Mento euro, **18 decimals** — verified both ends; not a like-for-like swap |
-| WETH | **WETH** `0xD221812de1BD094f35587EE8E174B07B6167D9Af` | ⚠️ see **Phase 3.2** — **not** a wrapper, has no `deposit()` |
+| WETH (used as a wrapper: `deposit`/`withdraw`) | **CELO ERC-20** `0x471EcE3750Da237f93B8E339c536989b8978a438` | ⚠️ ported wrap-before-swap logic — Celo has no wrapper; swap the CELO ERC-20 directly (**Phase 3.2** break 1). **Do not** map to Celo's WETH. |
+| WETH (used as bridged ETH: an asset) | **WETH** `0xD221812de1BD094f35587EE8E174B07B6167D9Af` | only if you genuinely need bridged ETH — **not** a wrapper, has no `deposit()`/`withdraw()` |
 | LSK | — | no Celo equivalent; bridge or drop |
 | WBTC / wstETH | — | **not in `contracts.md`** — verify on Celoscan before use; do not assume an address |
 
@@ -141,6 +144,8 @@ Bridges: Superbridge (`superbridge.app/celo`), Wormhole, Squid, AllBridge — `e
 ## Phase 3 — The two semantic changes
 
 Everything above is configuration. This section is where working code breaks **silently**. Read it before editing contracts.
+
+> **If Celo is one chain among several** (the right-hand column of _Are you moving, or expanding?_), apply everything below **conditionally on the active chain** — `if (chainId === celo.id)` — never globally. Fee abstraction (§3.1) and the duality fixes (§3.2) are correct on Celo and wrong on Base/OP/etc.; a global edit that "works on Celo" will break the other chains.
 
 ### 3.1 Gas token: ETH → CELO
 
@@ -170,7 +175,7 @@ Five things that break on arrival from an ETH-gas chain:
 | 1 | **`WETH.deposit{value:}()` reverts** | Celo's WETH (`0xD221812d…`, *"Wrapped Ether (Celo native bridge)"*) is **bridged ETH, not a wrapper** — verified on-chain to have **no `deposit()` and no `withdraw()`**. Ported wrap-before-swap logic compiles, points at a real address, and **reverts at runtime**. On Celo you never wrap: pass the CELO ERC-20 address directly. |
 | 2 | **Double-counting** | `address(this).balance + IERC20(WETH).balanceOf(address(this))` is correct on Lisk and a **2× overcount** on Celo if WETH is swapped for the CELO ERC-20. No revert — just wrong numbers in treasury math, TVL displays, and accounting. |
 | 3 | **`receive()` never fires on the ERC-20 path** | A native transfer executes **no code** on the recipient. A contract crediting deposits in `receive()`/`fallback()` **silently no-ops** when a user pays via `IERC20(CELO).transfer()` — funds arrive in the balance, the user is never credited. The most dangerous item on this page. |
-| 4 | **Reentrancy assumptions invert** | A CELO ERC-20 transfer hands control to *nobody*, so a `ReentrancyGuard` around one is dead weight. Conversely, code assuming "ERC-20 transfer = cheap storage write" now pays a flat 9000 gas per transfer — audit batch-payout loops, which get materially more expensive. |
+| 4 | **Reentrancy assumptions invert; native payouts may starve on gas** | A CELO ERC-20 transfer hands control to *nobody*, so a `ReentrancyGuard` around one is dead weight. Conversely, code assuming "ERC-20 transfer = cheap storage write" now pays a flat 9000 gas per transfer — audit batch-payout loops, which get materially more expensive. And the native payout idiom `payable(x).transfer()` / `.send()` forwards only a **2300-gas stipend** that a CELO transfer can exceed — prefer `(bool ok, ) = payable(x).call{value: amount}("")` with checks-effects-interactions. *(Whether `.transfer` reverts outright is worth a testnet check; `.call` is the safe pattern regardless.)* |
 | 5 | **An approval exposes the user's gas money** | `approve()`/`allowance()` are implemented on the CELO ERC-20 (verified live), and `balanceOf` *is* the native balance. So granting an unlimited CELO allowance lets a spender move the balance the user needs to pay gas — **a drain surface that cannot exist on an ETH-gas chain.** Treat unlimited CELO approvals as a security review item, not a UX convenience. |
 
 **Pick the path that matches the recipient.** If the target is `payable` and reads `msg.value`, use the native path. If it takes `uint256 amount` behind an allowance, use the ERC-20 path. When unsure, read the contract on Celoscan. Worked example: `builder-guide.md` → _Sending CELO — common failure & fix_.
