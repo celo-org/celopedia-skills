@@ -18,7 +18,7 @@ jobs:
   collect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       # Traffic API endpoints reject the built-in GITHUB_TOKEN (403), so a
       # GitHub App installation token is minted per run. The app is org-owned
@@ -36,9 +36,13 @@ jobs:
       # protect-main requires a PR, so a github-actions push to main is always
       # rejected (GH006). The `stats` branch is seeded once (from PR #54) and
       # updated in place — the run reads the accumulated history there and pushes
-      # back, no branch-protection change needed. If the branch is ever missing
-      # it cold-starts empty. Tooling (scripts, workflow) is re-synced from the
-      # default branch each run so `stats` can't drift.
+      # back, no branch-protection change needed. Tooling (scripts, workflow) is
+      # re-synced from the default branch each run so `stats` can't drift.
+      #
+      # `stats` is an orphan branch by design and must be recreated by hand as one
+      # if it is ever deleted. The cold-start path below cuts from the default
+      # branch, so the branch would carry `.github/workflows/` — and GITHUB_TOKEN
+      # may not create workflow files, so that first push would be rejected.
       - name: Switch to stats branch
         run: |
           git config user.name "github-actions[bot]"

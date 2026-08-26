@@ -6,7 +6,7 @@
 #   - GitHub traffic API (14-day rolling window — the whole reason this runs weekly)
 #   - skills.sh install counters (all-time, scraped from the public page; best-effort)
 #
-# Requires: gh (authenticated with push access — traffic endpoints 403 otherwise), jq, curl, perl.
+# Requires: gh (authenticated with Administration: read — traffic endpoints 403 otherwise), jq, curl, perl.
 set -euo pipefail
 
 REPO="${STATS_REPO:-celo-org/celopedia-skills}"
