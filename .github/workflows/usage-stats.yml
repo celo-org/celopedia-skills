@@ -58,7 +58,14 @@ jobs:
 
       - name: Commit history
         run: |
-          git add stats/ scripts/ .github/workflows/
+          # Only stats/ is committed. The tooling re-synced above stays in the
+          # working tree so the collector can run, but committing
+          # .github/workflows/ would make the push fail: GITHUB_TOKEN may not
+          # create or update workflow files, and there is no `workflows`
+          # permission available to grant it. Drift is prevented by the re-sync
+          # from $GITHUB_SHA each run, not by committing the tooling here.
+          git reset -q -- scripts/ .github/workflows/
+          git add stats/
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
