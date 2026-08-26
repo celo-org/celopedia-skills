@@ -152,8 +152,8 @@ Use your total score to understand what to do next.
 |-------------|----------|------------|
 | **8–10** | 🟢 **Tier 1 — Build now** | Strong fit. MiniPay Discovery should be your primary distribution target. Get a Celo team review before submitting. |
 | **5–7** | 🟡 **Tier 2 — Build, fix the gaps** | Good fit but one or two dimensions are weak. Find your lowest score, fix that specific gap, then re-evaluate. |
-| **3–4** | 🟠 **Tier 3 — Validate before committing** | Partial fit. Test with real users via ngrok before building further. Consider Proof of Ship to get community feedback first. |
-| **0–2** | 🔴 **Tier 4 — Wrong channel for now** | Structural mismatch with MiniPay. Pivot the concept or choose a different channel. Proof of Ship is a good place to explore alternatives. |
+| **3–4** | 🟠 **Tier 3 — Validate before committing** | Partial fit. Test with real users via ngrok before building further, and get community feedback in the Celo Discord first. |
+| **0–2** | 🔴 **Tier 4 — Wrong channel for now** | Structural mismatch with MiniPay. Pivot the concept or choose a different channel — see `growth-gtm.md` for alternatives. |
 
 ---
 

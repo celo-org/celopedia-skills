@@ -622,5 +622,5 @@ See `minipay-requirements.md` for the full submission checklist.
 
 - **Celo Builder Fund** (Verda Ventures): $25K investment for MiniPay builders
   - Contact: team@verda.ventures
-- **Proof of Ship**: Monthly rewards for consistent building
+- **Celo Devs newsletter**: hackathons and new builder programs are announced here
   - Subscribe: https://celo-devs.beehiiv.com/subscribe

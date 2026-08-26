@@ -382,7 +382,7 @@ Skills activate automatically based on project context (e.g., `hardhat.config.ts
 
 ## Self Agent ID: Proof-of-Human for Agents
 
-Self Agent ID is the **proof-of-human extension on top of ERC-8004**: a soulbound NFT that binds an agent's key to a unique human via a zero-knowledge passport proof (Self Protocol). It makes an agent **sybil-resistant** without exposing personal data, and is required for the Celo Agent Visa Work tier and scored in Proof of Ship's AI Agents prize.
+Self Agent ID is the **proof-of-human extension on top of ERC-8004**: a soulbound NFT that binds an agent's key to a unique human via a zero-knowledge passport proof (Self Protocol). It makes an agent **sybil-resistant** without exposing personal data, and is required for the Celo Agent Visa Work tier.
 
 **For the full registration reference — modes, the `POST /api/agent/register` flow, gotchas, and example curl — see `self-agent-id.md`.** Register at `https://app.ai.self.xyz`; docs at `https://docs.self.xyz/self-agent-id`.
 
@@ -412,7 +412,7 @@ Celo is **actively pushing builders toward onchain agents** — agents that hold
 - **Social, predictions & viral**: localized prediction markets, tip-to-earn creator agents, donation / round-up-to-cause agents.
 - **SMB, freelancers & identity infra**: invoice / get-paid agents, sybil-resistant airdrop & quest tools, SMS/USSD wallets for feature phones, and an MCP server for Celo. Pair human- or operator-facing flows with **Self Agent ID** for trust.
 
-Many of these benefit from **Self Agent ID** (one-human-one-spot) to prevent sybil/ghost-account fraud, and qualify for the **Agent Visa** and **Proof of Ship** AI agent tracks once live on mainnet.
+Many of these benefit from **Self Agent ID** (one-human-one-spot) to prevent sybil/ghost-account fraud, and qualify for the **Agent Visa** tiers once live on mainnet.
 
 **Resources:**
 - Agent ideas: https://github.com/celo-org/ai-agent-ideas

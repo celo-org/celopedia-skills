@@ -10,14 +10,8 @@
 
 ## Currently Live Programs
 
-### Proof of Ship (Season 2)
-- **Type**: Monthly builder program for MiniApps on MiniPay (not a hackathon)
-- **Amount**: $5,000 USDT/month prize pool; max 2,000 USDT per project across the season
-- **Dates**: April 1 – June 30, 2026 (three monthly cycles)
-- **Host**: Celo Devs / Celo Public Goods (submissions on Talent App)
-- **Priority categories**: Games, Utility apps, X2Earn apps, AI Agents with MiniPay use cases
-- **Best for**: Builders shipping MiniApps with MiniPay hook on Celo mainnet (verified contract + open-source GitHub required)
-- **Links**: https://bit.ly/celo-proof-of-ship · https://talent.app/~/earn/celo-proof-of-ship
+> **Proof of Ship has been sunset** and is no longer accepting submissions. For hackathon and
+> new-program announcements, subscribe to the Celo Devs newsletter: https://celo-devs.beehiiv.com/subscribe
 
 ### Prezenti: Anchor Round
 
@@ -80,14 +74,12 @@
 | Prezenti Peach Round | Up to 50K USD | Aug–Dec 2025 | Prezenti |
 | Support Streams S1 | 150K CELO + 150K OP | Sep 2025–Jan 2026 | Celo Public Goods |
 | Proof of Impact S1 | 250K CELO + 100K OP | Aug–Dec 2025 | Celo Public Goods |
-| Proof of Ship S1 | 30K cUSD + 100K CELO | Aug–Dec 2025 | Celo Devs |
 | GoodBuilders Round 2 | $70K G$ + 50K CELO | Jul–Oct 2025 | GoodDollar |
 | CeloPG & Farcaster | 50K CELO | May–Jul 2025 | Celo Public Goods |
 | USDGLO Flywheel | 6K USDGLO + 10K CELO | Jun–Jul 2025 | Glo Dollar |
 | Builder Rewards | 30K CELO | May–Jul 2025 | Celo Public Goods |
 | Support Streams S0 | 100K CELO | May–Jul 2025 | Celo Public Goods |
 | Proof of Impact S0 | 150K CELO | May–Jul 2025 | Celo Public Goods |
-| Proof of Ship (original) | 30K cUSD | Feb–Jul 2025 | Celo Devs |
 
 > Note: Prezenti applications have **moved from Charmverse to Tally**. Old Charmverse links are inactive — use `https://anchor.prezenti.xyz/` and `https://frontier.prezenti.xyz/` for new submissions. Announcement: https://forum.celo.org/t/prezenti-grant-applications-have-moved-to-tally/13318
 
@@ -99,7 +91,6 @@
 
 | Building… | Recommended Program |
 |-----------|---------------------|
-| Building a MiniApp for MiniPay | Proof of Ship S2 ($5K/month) |
 | Project built on Celo, focus on MiniPay | **Prezenti Anchor Round** — up to $25K |
 | AI agents or agent-economy infrastructure | **Prezenti Frontier Pool (S2)** |
 | GoodDollar / UBI integration | **GoodBuilders S3** — $50K G$ |

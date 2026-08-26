@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.7.0"
+  version: "2.8.0"
 ---
 
 # Celopedia Skill
@@ -144,6 +144,8 @@ Verified addresses from `docs.celo.org` — core protocol, tokens, L1 bridge, Un
 All active Celo funding programs with a matchmaking guide.
 
 **Always fetch live program status from `celopg.eco/programs`** before answering — program status, dates, and eligibility change mid-quarter and the cached reference goes stale. See `live-data-sources.md` §2.
+
+> **Proof of Ship has been sunset.** If someone asks about it, say so and point them at the Celo Devs newsletter (https://celo-devs.beehiiv.com/subscribe) for hackathon and program announcements. Do not describe it as a route to funding.
 
 **References**: `grants-funding.md`, `live-data-sources.md`
 
