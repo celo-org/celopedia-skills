@@ -221,8 +221,10 @@ Supported assets: USDC, USDT, EURm, USDm, CELO, WETH
 
 | Token | Symbol | Address |
 |-------|--------|---------|
-| USDm | USDm | `0xEF4d55D6dE8e8d73232827Cd1e9b2F2dBb45bC80` |
-| EURm | EURm | `0x6B172e333e2978484261D7eCC3DE491E79764BbC` |
+| USDm | USDm | `0xdE9e4C3ce781b4bA68120d6261cbad65ce0aB00b` |
+| EURm | EURm | `0xA99dC247d6b7B2E3ab48a1fEE101b83cD6aCd82a` |
+| Celo Dollar (legacy) | cUSD | `0xEF4d55D6dE8e8d73232827Cd1e9b2F2dBb45bC80` |
+| Celo Euro (legacy) | cEUR | `0x6B172e333e2978484261D7eCC3DE491E79764BbC` |
 | BRLm | BRLm | `0x2294298942fdc79417DE9E0D740A4957E0e7783a` |
 | USDC | USDC | `0x01C5C0122039549AD1493B8220cABEdD739BC44E` |
 | USDT | USDT | `0xd077A400968890Eacc75cdc901F0356c943e4fDb` |
@@ -239,6 +241,15 @@ Supported assets: USDC, USDT, EURm, USDm, CELO, WETH
 | GHSm | GHSm | `0x5e94B8C872bD47BC4255E60ECBF44D5E66e7401C` |
 | CADm | CADm | `0xF151c9a13b78C84f93f50B8b3bC689fedc134F60` |
 | AUDm | AUDm | `0x5873Faeb42F3563dcD77F0fbbdA818E6d6DA3139` |
+
+> **Sepolia is not mainnet here — do not copy the mainnet pattern.** On **mainnet**,
+> USDm/EURm are the *same contracts* cUSD/cEUR were, renamed: `0x765DE816…` returns
+> `name() = "Mento Dollar", symbol() = "USDm"` today. On **Celo Sepolia** they are
+> **two separate deployments** — the legacy `0xEF4d55D6…` / `0x6B172e33…` still return
+> `cUSD` / `cEUR`, and USDm/EURm live at the new addresses above. A testnet integration
+> that reuses the mainnet mental model will point at the wrong token. Verified by
+> `eth_call symbol()` against `forno.celo-sepolia.celo-testnet.org` and
+> `forno.celo.org` on 2026-08-28.
 
 ### Uniswap V3 (Alfajores Testnet)
 
