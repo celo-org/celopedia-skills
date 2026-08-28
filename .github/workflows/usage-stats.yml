@@ -1,0 +1,74 @@
+name: usage-stats
+
+# Captures GitHub traffic (14-day rolling window) and skills.sh install
+# counters into stats/ before the window rolls off. Weekly cadence against a
+# 14-day window gives 2x overlap safety.
+on:
+  schedule:
+    # GitHub disables scheduled workflows on public repos after 60 days without
+    # repository activity; the weekly snapshot commit to the `stats` branch below
+    # resets that timer, but only while runs succeed — investigate failures within 60 days.
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Traffic API endpoints reject the built-in GITHUB_TOKEN (403), so a
+      # GitHub App installation token is minted per run. The app is org-owned
+      # (no personal-token expiry) and needs Administration: read on this repo.
+      - name: Generate traffic token
+        id: traffic-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ vars.TRAFFIC_APP_ID }}
+          private-key: ${{ secrets.TRAFFIC_APP_PRIVATE_KEY }}
+          owner: celo-org
+          repositories: celopedia-skills
+
+      # History + snapshots live on the unprotected `stats` branch, not main:
+      # protect-main requires a PR, so a github-actions push to main is always
+      # rejected (GH006). The `stats` branch is seeded once (from PR #54) and
+      # updated in place — the run reads the accumulated history there and pushes
+      # back, no branch-protection change needed. If the branch is ever missing
+      # it cold-starts empty. Tooling (scripts, workflow) is re-synced from the
+      # default branch each run so `stats` can't drift.
+      - name: Switch to stats branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin stats >/dev/null 2>&1; then
+            git fetch --depth=1 origin stats
+            git checkout -B stats origin/stats
+            git checkout "$GITHUB_SHA" -- scripts/ .github/workflows/
+          else
+            git checkout -b stats
+          fi
+
+      - name: Collect stats
+        env:
+          GH_TOKEN: ${{ steps.traffic-token.outputs.token }}
+        run: ./scripts/collect_traffic_stats.sh
+
+      - name: Commit history
+        run: |
+          # Only stats/ is committed. The tooling re-synced above stays in the
+          # working tree so the collector can run, but committing
+          # .github/workflows/ would make the push fail: GITHUB_TOKEN may not
+          # create or update workflow files, and there is no `workflows`
+          # permission available to grant it. Drift is prevented by the re-sync
+          # from $GITHUB_SHA each run, not by committing the tooling here.
+          git reset -q -- scripts/ .github/workflows/
+          git add stats/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "stats: weekly traffic snapshot"
+            git push origin stats
+          fi

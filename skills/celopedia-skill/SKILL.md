@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.8.0"
+  version: "2.10.0"
 ---
 
 # Celopedia Skill
