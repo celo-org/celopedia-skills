@@ -1,0 +1,65 @@
+# Turns the issue forms' required "Priority" and "Size" dropdowns into the matching
+# priority:* / size:* labels, so every ticket carries both from the moment it's filed.
+# Uses only the repo-scoped GITHUB_TOKEN — no secrets to configure.
+#
+# The name is load-bearing: .claude/shared/engineering-rules.md (synced from pm-kit,
+# so it cannot be corrected locally) refers to "the issue-priority-label workflow".
+# Renaming this file makes that reference dangle again.
+name: Label issue priority
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply priority and size labels from the form dropdowns
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BODY: ${{ github.event.issue.body }}
+          NUM: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # Each dropdown renders as "### <Label>" followed by the selected option.
+          # Options carry a description ("critical — money correctness …", "S — hours"),
+          # so only the first word is the value.
+          field() {
+            printf '%s\n' "$BODY" \
+              | awk -v h="^### $1" '$0 ~ h {found=1; next} found && NF {print $1; exit}' \
+              | tr -d '\r'
+          }
+
+          # --- Priority ---
+          # bug_report.yml has no Priority dropdown, so an empty result here is
+          # expected, not an error. Same for an issue filed without the form.
+          p=$(field Priority | tr '[:upper:]' '[:lower:]')
+          case "$p" in
+            critical|high|medium|low)
+              for other in critical high medium low; do
+                [ "$other" != "$p" ] && gh issue edit "$NUM" -R "$REPO" --remove-label "priority:$other" 2>/dev/null || true
+              done
+              gh issue edit "$NUM" -R "$REPO" --add-label "priority:$p"
+              echo "labeled #$NUM priority:$p"
+              ;;
+            *) echo "no priority selection found (got: '$p') — skipping priority" ;;
+          esac
+
+          # --- Size ---
+          s=$(field Size | tr '[:lower:]' '[:upper:]')
+          case "$s" in
+            S|M|L)
+              for other in S M L; do
+                [ "$other" != "$s" ] && gh issue edit "$NUM" -R "$REPO" --remove-label "size:$other" 2>/dev/null || true
+              done
+              gh issue edit "$NUM" -R "$REPO" --add-label "size:$s"
+              echo "labeled #$NUM size:$s"
+              ;;
+            *) echo "no size selection found (got: '$s') — skipping size" ;;
+          esac
