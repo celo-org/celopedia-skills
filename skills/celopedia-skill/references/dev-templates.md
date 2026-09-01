@@ -282,13 +282,62 @@ function SendCelo() {
 
 ## Scaffold a New Celo dApp
 
+### Celo Composer templates
+
+`-t` takes exactly four values. Anything else falls back to `basic` rather than erroring, so a
+typo scaffolds the wrong project silently — check what you got before building on it.
+
+| `-t` | Shape | What you get on top of the base | Wallet / contracts default |
+|------|-------|--------------------------------|----------------------------|
+| `basic` | monorepo (`apps/web`, `apps/contracts`) | Next.js + wagmi + viem + RainbowKit, Hardhat alongside | `rainbowkit` / `hardhat` |
+| `minipay` | monorepo (`apps/web`, `apps/contracts`) | `basic` **plus** MiniPay detection (`window.ethereum.isMiniPay`), auto-connect in the wallet provider and connect button, and a `user-balance.tsx` component | `rainbowkit` / `hardhat` |
+| `farcaster-miniapp` | monorepo (`apps/web` only) | `@farcaster/frame-sdk`, `frame-core`, `miniapp-wagmi-connector`, `quick-auth`, plus a `FARCASTER_SETUP.md` | `none` / `none` |
+| `ai-chat` | **single app at the repo root — not a monorepo** | Vercel AI SDK chat app: `@ai-sdk/{anthropic,google,mistral,openai,perplexity,react}`, artifacts, Drizzle + Postgres, auth, Playwright tests | `none` / `none` |
+
 ```bash
-# Full dApp with MiniPay template
+# Agent / chatbot — the AI SDK starter (no contracts, no wallet, needs a Postgres URL)
+npx @celo/celo-composer@latest create -t ai-chat
+
+# MiniPay Mini App — basic + MiniPay detection and auto-connect
 npx @celo/celo-composer@latest create -t minipay
 
-# With Thirdweb
+# Farcaster Mini App
+npx @celo/celo-composer@latest create -t farcaster-miniapp
+
+# Plain Celo dApp
+npx @celo/celo-composer@latest create -t basic
+
+# With Thirdweb (not Composer)
 npx thirdweb create app --evm
 ```
+
+**Compose the pieces independently of the template:**
+
+```bash
+--wallet-provider rainbowkit|thirdweb|none
+-c, --contracts   hardhat|foundry|none
+--skip-install    # scaffold only, no pnpm install
+-y                # accept defaults, no prompts
+```
+
+**Things worth knowing before you pick:**
+
+- **`ai-chat` is the odd one out.** It is not a monorepo and ships no contracts or wallet wiring —
+  it is the Vercel AI chat starter with Celo defaults, so a Celo transaction path is yours to add.
+  It also expects a Postgres database (Drizzle migrations run on `build`), which the other three
+  do not.
+- **`minipay` is `basic` plus a MiniPay layer**, not a separate lineage. If you already scaffolded
+  `basic`, you are ~5 files away from the `minipay` output rather than needing to start over.
+- **`farcaster-miniapp` has no `apps/contracts`.** Add one with `-c hardhat` if you need it.
+- For a MiniPay Mini App you may not want Composer at all — see
+  `minipay-scaffold-from-scratch.md` for a single-app Next.js + viem setup.
+
+> Verified 2026-09-02 against `@celo/celo-composer@2.4.13` (node v20.19.4, darwin): all four
+> scaffold with exit 0. File counts — `basic` 32, `minipay` 33, `farcaster-miniapp` 40,
+> `ai-chat` 173. The silent-fallback warning is measured, not assumed: `-t nonsense` also exits 0
+> and produces the same 32 files as `basic`. Template list taken from `create --help`, not from
+> the package's `templates/` directory, which also contains `contracts/` and `wallets/` — those
+> are the `-c` and `--wallet-provider` pieces, not `-t` values.
 
 ---
 
