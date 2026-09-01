@@ -66,9 +66,19 @@ The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C62
 | QuickNode | Global edge network, Streams |
 | Infura (Consensys) | Standard Ethereum-style RPC |
 | Ankr | All-in-one Web3 hub |
+| Chainstack | Geo-load-balanced global nodes. Archive data and debug/trace APIs on paid plans. **Celo mainnet only** — its docs list network ID 42220 and no testnet |
 | Lava | Decentralized RPC network |
 | OnFinality | Multi-chain RPC |
 | Dwellir | Nordic-hosted nodes |
+
+Provider endpoints are per-account and issued from each dashboard, so there is no
+shared URL to publish for them. Chainstack endpoints are key- or password-protected
+(`https://USERNAME:PASSWORD@HOSTNAME` for the latter).
+
+**Reach for a provider when Forno's rate limit starts shaping your app.** Forno is free
+and fine for development and for most reads. The usual trigger for moving is an agent or
+backend making sustained calls, or needing archive state and `debug_*` / `trace_*`, which
+Forno does not serve.
 
 ## Block Explorers
 
