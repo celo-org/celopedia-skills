@@ -69,7 +69,7 @@ rg -n '\b(1135|4202|8453|34443|57073|1868|7777777)\b' --type-add 'cfg:*.{ts,js,j
 
 # Noisy chain IDs (OP Mainnet 10, Unichain 130, Fraxtal 252) — bare digits match
 # far too much, so match only in a chain-config position
-rg -n --pcre2 '(?i)(chain_?id|chain)\W{0,3}(10|130|252)\b'
+rg -n '(?i)(chain_?id|chain)\W{0,3}(10|130|252)\b'
 
 # RPC and explorer hosts
 rg -n 'api\.lisk\.com|blockscout\.lisk\.com|\.gateway\.tenderly|drpc\.org|alchemy|infura'
@@ -81,9 +81,11 @@ rg -n "from ['\"]viem/chains['\"]|\b(lisk|liskSepolia|base|optimism|mode|ink|uni
 rg -n 'parseEther|formatEther|msg\.value|nativeCurrency|\bWETH\b|deposit\{value'
 
 # Native CELO payout idiom (see §3.2 break 4). Scoped to Solidity and matched on
-# `payable(...)` so ERC-20 `token.transfer(` and JS `res.send`/`mailer.send` don't.
-# (Won't catch the `address payable p; p.transfer(x)` variable form — review those by hand.)
-rg -n --pcre2 'payable\([^)]*\)\.(transfer|send)\(' -g '*.sol'
+# arity: a native `.transfer`/`.send` takes one argument, an ERC-20 `transfer` takes
+# two, so `IERC20(usdc).transfer(to, amt)` and JS `res.send`/`mailer.send` stay out.
+# (Misses a call whose single argument spans lines or contains a nested call —
+# review those by hand.)
+rg -n '\.(transfer|send)\(\s*[^,()]*\s*\)' -g '*.sol'
 
 # User-facing "ETH"
 rg -n '"[^"]*\bETH\b[^"]*"' -g '*.tsx' -g '*.ts'
