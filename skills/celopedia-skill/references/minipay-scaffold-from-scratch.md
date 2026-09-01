@@ -57,7 +57,7 @@ Canonical table: `builder-guide.md` → _Allowed Fee Currencies (Mainnet)_. Quic
 
 ## 6. Ship
 
-- **Open-source the repo.** Required for Proof of Ship and several other programs.
+- **Open-source the repo.** Required by several Celo funding programs — see `grants-funding.md`.
 - **Submit to MiniPay discovery.** See `minipay-live-apps.md` for the current pipeline notes and category/country targeting behavior.
 
 ---

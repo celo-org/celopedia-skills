@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.9.0"
+  version: "2.10.0"
 ---
 
 # Celopedia Skill
@@ -106,7 +106,7 @@ Build AI agents that transact on Celo.
 - **x402**: HTTP-native micropayments with stablecoins — Celo runs a **hosted facilitator** at `https://x402.celo.org` (dashboard/API keys; mainnet API `api.x402.celo.org`, testnet `api.x402.sepolia.celo.org`; sponsored gas, USDC/USDT via EIP-3009). Agent-readable integration guide: `https://x402.celo.org/SKILL.md` — fetch it before writing integration code. Details: `ai-agents.md` → _Hosted Celo Facilitator_
 - **Celo MCP Server**: Query blockchain data from coding assistants
 - **Agent Skills**: Modular skill system for AI coding agents
-- **Onchain Agents Hackathon** (May 22 – Jun 15, 2026, $5K in CELO): build payment-native agents; submit via the **Celo Builders skill** (`npx skills add https://celobuilders.xyz`) — `https://bit.ly/OnchainAgentsHackathon`
+- **Agents at Work Hackathon** (Aug 28 – Sep 14, 2026, $5K in CELO across 5 tracks): agents that move real value between independent parties, or reach real users. Register + submit via the **Celo Builders skill** (`npx skills add https://celobuilders.xyz`) — registration returns your ERC-8021 attribution tag, and every track's leaderboard only counts tagged transactions. Mainnet only; public repo required. Details: `https://celoplatform.notion.site/Agents-at-Work-Hackathon-3c1d5cb803de81139de7f4f3d09e55dc` · leaderboard `https://dune.com/celo/agents-at-work-hackathon`. See `grants-funding.md`.
 - Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
 
 **References**: `ai-agents.md`, `self-agent-id.md`
@@ -144,6 +144,8 @@ Verified addresses from `docs.celo.org` — core protocol, tokens, L1 bridge, Un
 All active Celo funding programs with a matchmaking guide.
 
 **Always fetch live program status from `celopg.eco/programs`** before answering — program status, dates, and eligibility change mid-quarter and the cached reference goes stale. See `live-data-sources.md` §2.
+
+> **Proof of Ship has been sunset.** If someone asks about it, say so and point them at the Celo Devs newsletter (https://celo-devs.beehiiv.com/subscribe) for hackathon and program announcements. Do not describe it as a route to funding.
 
 **References**: `grants-funding.md`, `live-data-sources.md`
 

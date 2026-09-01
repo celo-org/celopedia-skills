@@ -15,7 +15,7 @@ ERC-8021 is a standard for appending a small attribution suffix to a transaction
 - **Future rewards** — reward distribution programs will use this attribution data; tagging early maximizes claimable history
 - **Zero risk** — no execution change, no gas-meaningful overhead, one small suffix per transaction
 
-**Who should add it:** everyone sending transactions on Celo — MiniPay Mini Apps, Proof of Ship cohort projects, DeFi frontends, AI agents, any dApp.
+**Who should add it:** everyone sending transactions on Celo — MiniPay Mini Apps, DeFi frontends, AI agents, any dApp.
 
 ---
 
@@ -43,7 +43,7 @@ await wallet.sendTransaction({ to, value, data: tag });
 
 ### Option B — Issued or custom code
 
-Issued through Proof of Ship onboarding, or pick your own (`[a-z0-9_]`, 1–32 chars):
+Issued through a program you're enrolled in, or pick your own (`[a-z0-9_]`, 1–32 chars):
 
 ```ts
 import { toDataSuffix } from "@celo/attribution-tags";
@@ -131,7 +131,7 @@ Offline (no RPC): `fromDataSuffix(rawCalldata)` decodes raw calldata the same wa
 
 ## Rules & Gotchas
 
-1. **Only add your own code — never platform codes.** Codes like `minipay` or `proofofship` are added by the platform itself (wallet/cohort layer). If your app adds `minipay`, every transaction from a plain browser falsely claims to be a MiniPay transaction and pollutes the attribution data.
+1. **Only add your own code — never platform codes.** Platform codes like `minipay` are added by the platform itself (wallet/cohort layer), not by your app. If your app adds `minipay`, every transaction from a plain browser falsely claims to be a MiniPay transaction and pollutes the attribution data.
 2. **The suffix goes *after* your contract's expected calldata**, never inside it. The contract sees only its real arguments.
 3. **Code charset is `[a-z0-9_]`, 1–32 chars.** The SDK rejects uppercase, spaces, and commas at encode time.
 4. **The suffix is metadata for off-chain readers**, not for contract logic — it doesn't survive into contract execution.
