@@ -96,7 +96,7 @@ Once installed, the skill activates automatically. Just describe what you need:
 
 ## Structure
 
-The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped references. `SKILL.md` is the main definition (v2.0.0); everything else is loaded on demand.
+The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped references. `SKILL.md` is the main definition; everything else is loaded on demand.
 
 ### Ecosystem Intelligence
 
@@ -117,7 +117,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`builder-guide.md`](skills/celopedia-skill/references/builder-guide.md) | Celo-specific dev patterns and gotchas |
 | [`dev-templates.md`](skills/celopedia-skill/references/dev-templates.md) | Foundry, Hardhat, Viem, Wagmi configs |
 | [`sdk-reference.md`](skills/celopedia-skill/references/sdk-reference.md) | SDK quick reference and selection guide |
-| [`attribution-tags.md`](skills/celopedia-skill/references/attribution-tags.md) | Attribution tags (ERC-8021) — tag transactions for impact tracking & future rewards |
+| [`dev-methodology.md`](skills/celopedia-skill/references/dev-methodology.md) | Spec-driven development: working with AI coding agents on Celo projects |
 | [`migrating-from-another-chain.md`](skills/celopedia-skill/references/migrating-from-another-chain.md) | Move a dApp to Celo from another L2: repo audit, token/protocol mapping, gas token + duality breaks |
 
 ### DeFi
@@ -125,6 +125,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | File | What |
 |------|------|
 | [`defi-protocols.md`](skills/celopedia-skill/references/defi-protocols.md) | Deep protocol reference (Uniswap, Aave, Carbon DeFi, Morpho, Mento) with live APY fetching |
+| [`stablecoin-orchestration.md`](skills/celopedia-skill/references/stablecoin-orchestration.md) | Fiat ↔ stablecoin rails via Bridge (Stripe): virtual accounts, payouts, cards, issuance |
 
 ### MiniPay App Builder
 
@@ -133,10 +134,34 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`minipay-guide.md`](skills/celopedia-skill/references/minipay-guide.md) | Complete MiniPay development guide |
 | [`minipay-templates.md`](skills/celopedia-skill/references/minipay-templates.md) | Ready-to-use Mini App code templates |
 | [`minipay-scaffold-from-scratch.md`](skills/celopedia-skill/references/minipay-scaffold-from-scratch.md) | Raw Next.js + viem setup (alternative to Celo Composer) |
+| [`minipay-app-fit.md`](skills/celopedia-skill/references/minipay-app-fit.md) | Should you target MiniPay? Product-channel fit scorecard and category opportunity map |
 | [`odis-socialconnect.md`](skills/celopedia-skill/references/odis-socialconnect.md) | ODIS (PnP), OdisPayments, FederatedAttestations |
 | [`minipay-live-apps.md`](skills/celopedia-skill/references/minipay-live-apps.md) | Discovery snapshot: live Mini Apps, categories, country targeting |
 | [`minipay-requirements.md`](skills/celopedia-skill/references/minipay-requirements.md) | Two-stage MiniPay listing flow: Stage 1 intake form (`minipay.to/mini-apps`) and Stage 2 post-call readiness checklist |
+| [`minipay-performance.md`](skills/celopedia-skill/references/minipay-performance.md) | Measure and optimize Mini App load speed against the listing requirement |
 | [`minipay-docs-map.md`](skills/celopedia-skill/references/minipay-docs-map.md) | Page-by-page index of `docs.minipay.xyz` (getting started, guides, technical references, deeplinks) |
+
+### Builder Toolkit
+
+Non-protocol problems — the things that stall a project after the code works.
+
+| File | What |
+|------|------|
+| [`growth-diagnostic.md`](skills/celopedia-skill/references/growth-diagnostic.md) | Entry point: "where are you stuck?" — routes to the right toolkit file |
+| [`growth-gtm.md`](skills/celopedia-skill/references/growth-gtm.md) | Go-to-market for Celo and MiniPay audiences: ICP, channels, launch sequencing |
+| [`growth-comms.md`](skills/celopedia-skill/references/growth-comms.md) | Narrative, build-in-public cadence, launch-grade content |
+| [`growth-ux-design.md`](skills/celopedia-skill/references/growth-ux-design.md) | UX and design differentiation; MiniPay copy rules |
+| [`growth-referrals.md`](skills/celopedia-skill/references/growth-referrals.md) | Referral loops, dual-sided incentives, anti-sybil |
+| [`growth-analytics.md`](skills/celopedia-skill/references/growth-analytics.md) | On-chain and off-chain measurement: RPC, The Graph, PostHog |
+| [`growth-seo.md`](skills/celopedia-skill/references/growth-seo.md) | SEO playbook with country-specific worked examples |
+| [`business-model.md`](skills/celopedia-skill/references/business-model.md) | Designing a revenue layer: commissions, subscriptions, capturing stablecoin flow |
+
+### Brand & Attribution
+
+| File | What |
+|------|------|
+| [`brandkit.md`](skills/celopedia-skill/references/brandkit.md) | Official Celo brand kit: logo usage, naming, what needs permission |
+| [`attribution-tags.md`](skills/celopedia-skill/references/attribution-tags.md) | Attribution tags (ERC-8021) — tag transactions for impact tracking & future rewards |
 
 ### Platform Features
 
@@ -144,6 +169,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 |------|------|
 | [`governance.md`](skills/celopedia-skill/references/governance.md) | On-chain governance reference |
 | [`ai-agents.md`](skills/celopedia-skill/references/ai-agents.md) | ERC-8004, x402 + hosted Celo facilitator, MCP, Agent Skills |
+| [`self-agent-id.md`](skills/celopedia-skill/references/self-agent-id.md) | Self Agent ID: proof-of-human on ERC-8004, soulbound NFT on Celo |
 | [`security-patterns.md`](skills/celopedia-skill/references/security-patterns.md) | Celo-specific security risks (pairs with [pashov/skills](https://github.com/pashov/skills)) |
 | [`feedback.md`](skills/celopedia-skill/references/feedback.md) | Route bug reports / feature requests to the right Celo repo and file via `gh` |
 

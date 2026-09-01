@@ -29,9 +29,12 @@ Users can pay gas fees with these ERC-20 tokens instead of native CELO. The addr
 | USDm (cUSD) | `0x765DE816845861e75A25fCA122bb6898B8B1282a` | 18 decimals — token == adapter |
 | EURm (cEUR) | `0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73` | 18 decimals — token == adapter |
 | USDC | `0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B` | **adapter** — token is `0xcebA9300f2b948710d2653dD7B07f33A8B32118C` |
-| USDT | `0x0e2a3e05bc9a16f5292a6170456a710cb89c6f72` | **adapter** — token is `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| USD₮ | `0x0E2A3e05bc9A16F5292A6170456A710cb89C6f72` | **adapter** — token is `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` |
+| USA₮ | `0x0357EE22278c922e1D36cFe6b899269b161880C4` | **adapter** — token is `0xD2ab3C9A02DBBAB236BfEC45D1d755DF4267F771` |
+| WETH (Celo native bridge) | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` | 18 decimals — token == adapter |
+| XAUt0 (Tether Gold) | `0x857BF24e29da0773687E804a743c2E421a394C16` | **adapter** — token is `0xaf37E8B6C9ED7f6318979f56Fc287d76c30847ff` |
 
-Canonical table with full mechanics: `builder-guide.md` → _Allowed Fee Currencies (Mainnet)_.
+The full Mainnet allowlist also includes all 14 Mento local-currency stablecoins (AUDm, BRLm, CADm, CHFm, COPm, EURm, GBPm, GHSm, JPYm, KESm, NGNm, PHPm, XOFm, ZARm) — for these, `feeCurrency` == the token address (see `contracts.md`). Live, governable allowlist: `docs.celo.org/tooling/contracts/fee-currencies` (also queryable via `celocli network:whitelist`). Canonical table with full mechanics: `builder-guide.md` → _Allowed Fee Currencies (Mainnet)_ — **note**: as of this run, `builder-guide.md` documents only USDC/USDT/USDm/EURm and hasn't been updated for WETH/XAUt0/USAT/the full Mento set; it is out of this skill's tracked-file scope, so it isn't edited here — flagged for a follow-up.
 
 The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C6276` governs the allowlist.
 
@@ -63,9 +66,19 @@ The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C62
 | QuickNode | Global edge network, Streams |
 | Infura (Consensys) | Standard Ethereum-style RPC |
 | Ankr | All-in-one Web3 hub |
+| Chainstack | Geo-load-balanced global nodes. Archive data and debug/trace APIs on paid plans. **Celo mainnet only** — its docs list network ID 42220 and no testnet |
 | Lava | Decentralized RPC network |
 | OnFinality | Multi-chain RPC |
 | Dwellir | Nordic-hosted nodes |
+
+Provider endpoints are per-account and issued from each dashboard, so there is no
+shared URL to publish for them. Chainstack endpoints are key- or password-protected
+(`https://USERNAME:PASSWORD@HOSTNAME` for the latter).
+
+**Reach for a provider when Forno's rate limit starts shaping your app.** Forno is free
+and fine for development and for most reads. The usual trigger for moving is an agent or
+backend making sustained calls, or needing archive state and `debug_*` / `trace_*`, which
+Forno does not serve.
 
 ## Block Explorers
 

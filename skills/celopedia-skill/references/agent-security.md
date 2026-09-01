@@ -142,7 +142,7 @@ Anthropic's guidance, which is specific and worth following exactly:
 
 ## 5. Denial of Wallet: budget as a security control
 
-The formal name for "someone runs up your model bill" is **Denial of Wallet** — cost amplification rather than downtime. OWASP tracks it as *Unbounded Consumption* (LLM06:2026). https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/
+The formal name for "someone runs up your model bill" is **Denial of Wallet** — cost amplification rather than downtime. OWASP tracks it as *Unbounded Consumption* (LLM10:2025). https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/
 
 **Rate-limit tokens, not requests.** A request counter undercounts abuse badly: normal support queries run 200–300 tokens while abuse queries ("write me a program…") run 2,000+, roughly a **10× multiplier per request**. A limit of 15 requests per 10 minutes bounds request count and almost nothing about spend. Keep the request counter, and add a sliding-window *token* budget keyed the same way.
 

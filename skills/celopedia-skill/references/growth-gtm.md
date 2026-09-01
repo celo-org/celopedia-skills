@@ -39,7 +39,7 @@ Ranked by realistic ROI for a solo founder with zero budget. Don't try all of th
 | **WhatsApp Status / Groups** | Direct line to MiniPay's actual user base (especially Africa) | 1 hr/week | Highest conversion rate, hardest to measure |
 | **YouTube Shorts / TikTok / Reels** (with Remotion + Screen Studio) | Mass reach in regional markets — non-English content (Spanish, Portuguese, Swahili, Tagalog) has low competition for Celo/stablecoin topics | 2 hr/week to produce, 1 minute to post in 3 places | 1k-100k views per video, 1-3% to install |
 | **Celo Discord** | Grants team, ecosystem partnerships, fellow builders | Background presence — answer 1 question/day, post launches | Indirect — leads to grant intros and integrations |
-| **Hackathons (Proof of Ship)** | Validation, credibility, direct user funnel from MiniPay's discovery surface | Variable | Listing on MiniPay = instant distribution |
+| **Hackathons** | Validation, credibility, direct user funnel from MiniPay's discovery surface | Variable | Listing on MiniPay = instant distribution |
 | **Cold outreach to outlets** | One-time launch moment | See [growth-comms.md](growth-comms.md) §4 | 1 in 10 pitch hit rate if your numbers are real |
 
 ### What does NOT work (skip these as a solo founder)
