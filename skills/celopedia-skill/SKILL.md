@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.10.1"
+  version: "2.11.0"
 ---
 
 # Celopedia Skill
@@ -108,8 +108,9 @@ Build AI agents that transact on Celo.
 - **Agent Skills**: Modular skill system for AI coding agents
 - **Agents at Work Hackathon** (Aug 28 – Sep 14, 2026, $5K in CELO across 5 tracks): agents that move real value between independent parties, or reach real users. Register + submit via the **Celo Builders skill** (`npx skills add https://celobuilders.xyz`) — registration returns your ERC-8021 attribution tag, and every track's leaderboard only counts tagged transactions. Mainnet only; public repo required. Details: `https://celoplatform.notion.site/Agents-at-Work-Hackathon-3c1d5cb803de81139de7f4f3d09e55dc` · leaderboard `https://dune.com/celo/agents-at-work-hackathon`. See `grants-funding.md`.
 - Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
+- **Securing an agent or chatbot**: `agent-security.md` — rendering model output safely, scoping by grounding rather than prompt instructions, treating tool output as untrusted, Denial of Wallet budgeting, and what changes once the agent holds a key (injection reaching a signing path, x402 spend, permanent ERC-8004 reputation). Read it before shipping anything public.
 
-**References**: `ai-agents.md`, `self-agent-id.md`
+**References**: `ai-agents.md`, `self-agent-id.md`, `agent-security.md`
 
 ### 6. Security & Audit Readiness
 
@@ -119,8 +120,9 @@ Help builders ship safer Celo contracts by flagging Celo-specific risks and poin
 - **General Solidity audit coverage**: defer to `pashov/skills` (https://github.com/pashov/skills) — `solidity-auditor` (8-agent parallel audit) and `x-ray` (threat model + attack surface)
 - Use `security-patterns.md` as the Celo layer on top of chain-agnostic audits
 - Explicit uncertainty tags on any risk where published specifications are incomplete
+- **Off-chain surfaces**: for an LLM agent, assistant, or chatbot, the exploitable surface is usually the renderer, the endpoint, and the prompt rather than the contract — see `agent-security.md`
 
-**References**: `security-patterns.md`
+**References**: `security-patterns.md`, `agent-security.md`
 
 ### 7. Governance (Live)
 
