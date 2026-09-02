@@ -30,6 +30,16 @@ jobs:
           # Each dropdown renders as "### <Label>" followed by the selected option.
           # Options carry a description ("critical — money correctness …", "S — hours"),
           # so only the first word is the value.
+          #
+          # Matching is on the RENDERED heading, not the form's field id. That matters:
+          # bug_report.yml's Priority dropdown has id `severity` but renders as
+          # "### Priority (one per issue — …)", so it is read correctly. Grepping the
+          # form for `id: priority` will tell you otherwise; the id is not what ships.
+          #
+          # The match is a prefix, which is what makes the long bug_report label work.
+          # Cost: a future heading like "### Priority rationale" would also match and
+          # its first word would be taken as the value. No such heading exists in any
+          # form today; if one is added, tighten this.
           field() {
             printf '%s\n' "$BODY" \
               | awk -v h="^### $1" '$0 ~ h {found=1; next} found && NF {print $1; exit}' \
@@ -37,8 +47,8 @@ jobs:
           }
 
           # --- Priority ---
-          # bug_report.yml has no Priority dropdown, so an empty result here is
-          # expected, not an error. Same for an issue filed without the form.
+          # All three forms carry a Priority dropdown. An empty result here means the
+          # issue was filed outside the forms, which is expected, not an error.
           p=$(field Priority | tr '[:upper:]' '[:lower:]')
           case "$p" in
             critical|high|medium|low)
