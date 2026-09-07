@@ -1,8 +1,9 @@
 # Celo Documentation Map
 
 > Source: https://docs.celo.org/llms.txt
-> OpenAPI Spec: https://docs.celo.org/api-reference/openapi.json
-> Last updated: 2026-08-24
+> Last updated: 2026-09-07
+
+> Note: the `api-reference/openapi.json` OpenAPI spec link is no longer listed in the live sitemap — removed above.
 
 Use this to find the right documentation page for any topic. Links go directly to docs.celo.org.
 
@@ -15,6 +16,7 @@ Use this to find the right documentation page for any topic. Links go directly t
 | What is Celo? | https://docs.celo.org/home/celo |
 | Discover Celo | https://docs.celo.org/home/index |
 | Our History | https://docs.celo.org/home/history |
+| About Celo L1 | https://docs.celo.org/home/celo-l1 |
 | Quickstart | https://docs.celo.org/build-on-celo/quickstart |
 | Building dApps on Celo | https://docs.celo.org/build-on-celo/index |
 | Launch Checklist | https://docs.celo.org/build-on-celo/launch-checklist |
@@ -28,10 +30,8 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Topic | URL |
 |-------|-----|
 | Overview | https://docs.celo.org/build-on-celo/build-on-minipay/overview |
-| Quickstart | https://docs.celo.org/build-on-celo/build-on-minipay/quickstart |
-| Code Library | https://docs.celo.org/build-on-celo/build-on-minipay/code-library |
-| Deeplinks | https://docs.celo.org/build-on-celo/build-on-minipay/deeplinks |
-| Ngrok Setup (testing) | https://docs.celo.org/build-on-celo/build-on-minipay/prerequisites/ngrok-setup |
+
+> Quickstart, Code Library, Deeplinks, and Ngrok Setup are no longer separate pages in the live sitemap — the Overview page's description now says it also serves as "the index of the MiniPay developer docs for everything else", so this content appears consolidated into Overview rather than removed outright.
 
 ## Build with AI
 
@@ -40,11 +40,13 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Overview | https://docs.celo.org/build-on-celo/build-with-ai/overview |
 | Use Celo Docs with AI Tools | https://docs.celo.org/build-on-celo/build-with-ai/use-docs-with-ai |
 | ERC-8004: Agent Trust Protocol | https://docs.celo.org/build-on-celo/build-with-ai/8004 |
+| Self Agent ID: Proof-of-Human Identity for Agents | https://docs.celo.org/build-on-celo/build-with-ai/self-agent-id |
 | x402: Agent Payments | https://docs.celo.org/build-on-celo/build-with-ai/x402 |
 | MPP: Machine Payments Protocol | https://docs.celo.org/build-on-celo/build-with-ai/mpp |
 | Celopedia | https://docs.celo.org/build-on-celo/build-with-ai/celopedia |
 | MCP Server | https://docs.celo.org/build-on-celo/build-with-ai/mcp/celo-mcp |
 | MCP Overview | https://docs.celo.org/build-on-celo/build-with-ai/mcp/index |
+| Celina | https://docs.celo.org/build-on-celo/build-with-ai/mcp/celina |
 | AI Agent Examples | https://docs.celo.org/build-on-celo/build-with-ai/usecases |
 | Vibe Coding | https://docs.celo.org/build-on-celo/build-with-ai/vibe-coding |
 
@@ -57,7 +59,9 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Build with DeFi | https://docs.celo.org/build-on-celo/build-with-defi |
 | Build with Farcaster | https://docs.celo.org/build-on-celo/build-with-farcaster |
 | Build with Local Stablecoins | https://docs.celo.org/build-on-celo/build-with-local-stablecoin |
+| Build with USA₮ | https://docs.celo.org/build-on-celo/build-with-usat |
 | Build with Self (ZK Identity) | https://docs.celo.org/build-on-celo/build-with-self |
+| Introduction to SocialConnect | https://docs.celo.org/build-on-celo/build-on-socialconnect |
 | Nightfall Privacy Layer | https://docs.celo.org/build-on-celo/nightfall |
 | Fund your Project | https://docs.celo.org/build-on-celo/fund-your-project |
 
@@ -89,33 +93,49 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Smart Contract Upgrades | https://docs.celo.org/home/protocol/governance/smart-contracts-upgrades |
 | Security Council | https://docs.celo.org/home/protocol/security-council |
 | Challengers | https://docs.celo.org/home/protocol/challengers |
+| Metadata and Claims | https://docs.celo.org/home/protocol/metadata |
 | L2 Epoch Rewards | https://docs.celo.org/home/protocol/epoch-rewards/index |
 | Carbon Offsetting Fund | https://docs.celo.org/home/protocol/epoch-rewards/carbon-offsetting-fund |
 | Community Fund | https://docs.celo.org/home/protocol/epoch-rewards/community-fund |
 | Escrow | https://docs.celo.org/home/protocol/escrow |
 
-## L2 Specs
+### Staking
 
-> New top-level `/specs/` section — replaces the old single `infra-partners/specs` link.
+> New subsection under `home/protocol/staking/*` — locking CELO, validator elections/groups, and key management, previously not broken out as its own indexed set of pages.
 
 | Topic | URL |
 |-------|-----|
-| Celo L2 Specification (index) | https://docs.celo.org/specs/index |
-| Deployments | https://docs.celo.org/specs/deployments |
-| Token Duality | https://docs.celo.org/specs/token-duality |
-| Transaction Fees | https://docs.celo.org/specs/transaction-fees |
-| Fee Abstraction (spec) | https://docs.celo.org/specs/fee-abstraction |
-| Transaction Types On Celo L2 | https://docs.celo.org/specs/transaction-types |
-| Native Bridge | https://docs.celo.org/specs/native-bridge |
-| EigenDA | https://docs.celo.org/specs/eigenda |
-| Finality | https://docs.celo.org/specs/finality |
-| L1 to L2 Migration | https://docs.celo.org/specs/l2-migration |
-| Smart Contract Updates From L1 | https://docs.celo.org/specs/smart-contract-updates-from-l1 |
-| L1 Deploy Verification | https://docs.celo.org/specs/l1-smart-contract-verification |
-| Jovian Upgrade | https://docs.celo.org/specs/upgrades/jovian |
-| Jello Upgrade | https://docs.celo.org/specs/upgrades/jello |
-| Ice Cream Upgrade | https://docs.celo.org/specs/upgrades/ice-cream |
-| Isthmus Upgrade | https://docs.celo.org/specs/upgrades/isthmus |
+| Staking (index) | https://docs.celo.org/home/protocol/staking/index |
+| Locked CELO | https://docs.celo.org/home/protocol/staking/locked-celo |
+| Validator Elections | https://docs.celo.org/home/protocol/staking/validator-elections |
+| Validator Groups | https://docs.celo.org/home/protocol/staking/validator-groups |
+| Voting for Validator Groups | https://docs.celo.org/home/protocol/staking/voting |
+| Key Management (summary) | https://docs.celo.org/home/protocol/staking/key-management/summary |
+| Detailed Role Descriptions | https://docs.celo.org/home/protocol/staking/key-management/detailed |
+| Signer Key Rotation | https://docs.celo.org/home/protocol/staking/key-management/key-rotation |
+
+## L2 Specification
+
+> The `/specs/` top-level section has been renamed/moved to `operate/specification/*`, alongside the node-operator docs (see "Operate a Celo Node" below).
+
+| Topic | URL |
+|-------|-----|
+| Celo L2 Specification (index) | https://docs.celo.org/operate/specification/index |
+| Deployments | https://docs.celo.org/operate/specification/deployments |
+| Token Duality | https://docs.celo.org/operate/specification/token-duality |
+| Transaction Fees | https://docs.celo.org/operate/specification/transaction-fees |
+| Fee Abstraction (spec) | https://docs.celo.org/operate/specification/fee-abstraction |
+| Transaction Types On Celo L2 | https://docs.celo.org/operate/specification/transaction-types |
+| Native Bridge | https://docs.celo.org/operate/specification/native-bridge |
+| EigenDA | https://docs.celo.org/operate/specification/eigenda |
+| Finality | https://docs.celo.org/operate/specification/finality |
+| L1 to L2 Migration | https://docs.celo.org/operate/specification/l2-migration |
+| Smart Contract Updates From L1 | https://docs.celo.org/operate/specification/smart-contract-updates-from-l1 |
+| L1 Deploy Verification | https://docs.celo.org/operate/specification/l1-smart-contract-verification |
+| Jovian Upgrade | https://docs.celo.org/operate/specification/upgrades/jovian |
+| Jello Upgrade | https://docs.celo.org/operate/specification/upgrades/jello |
+| Ice Cream Upgrade | https://docs.celo.org/operate/specification/upgrades/ice-cream |
+| Isthmus Upgrade | https://docs.celo.org/operate/specification/upgrades/isthmus |
 
 ## Tooling — Dev Environments
 
@@ -125,10 +145,12 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Foundry | https://docs.celo.org/tooling/dev-environments/foundry |
 | Hardhat | https://docs.celo.org/tooling/dev-environments/hardhat |
 | Remix | https://docs.celo.org/tooling/dev-environments/remix |
-| Thirdweb Overview | https://docs.celo.org/tooling/dev-environments/thirdweb/overview |
+| Thirdweb | https://docs.celo.org/tooling/dev-environments/thirdweb |
 | MultiBaas Overview (Curvegrid) | https://docs.celo.org/tooling/dev-environments/multibaas/overview |
 | MultiBaas Smart Contracts | https://docs.celo.org/tooling/dev-environments/multibaas/contracts |
 | MultiBaas Event Webhooks | https://docs.celo.org/tooling/dev-environments/multibaas/webhooks |
+
+> "Thirdweb Overview" moved from `tooling/dev-environments/thirdweb/overview` to `tooling/dev-environments/thirdweb` (dropped the `/overview` segment), and now also absorbs the standalone "Thirdweb SDK" page (`tooling/libraries-sdks/thirdweb-sdk/index`, removed from the sitemap).
 
 ## Tooling — Libraries & SDKs
 
@@ -142,7 +164,6 @@ Use this to find the right documentation page for any topic. Links go directly t
 | ContractKit Setup | https://docs.celo.org/tooling/libraries-sdks/contractkit/setup |
 | ContractKit Usage | https://docs.celo.org/tooling/libraries-sdks/contractkit/usage |
 | ODIS (phone identifiers, PnP) | https://docs.celo.org/tooling/libraries-sdks/contractkit/odis |
-| Thirdweb SDK | https://docs.celo.org/tooling/libraries-sdks/thirdweb-sdk/index |
 | Reown (WalletConnect) | https://docs.celo.org/tooling/libraries-sdks/reown/index |
 | Composer Kit UI | https://docs.celo.org/tooling/libraries-sdks/composer-kit |
 | Dynamic | https://docs.celo.org/tooling/libraries-sdks/dynamic/index |
@@ -151,6 +172,8 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Celo CLI (overview) | https://docs.celo.org/tooling/libraries-sdks/cli/index |
 | Celo CLI — full commands reference | https://docs.celo.org/tooling/libraries-sdks/cli/commands |
 
+> ContractKit gained 6 new pages not yet individually listed here (viem/v1/v2 migration guides, wrapper/registry contracts, data encryption key, using Web3 from ContractKit) under `tooling/libraries-sdks/contractkit/*` — see the ContractKit index above.
+>
 > The Celo CLI now has a full per-subcommand reference (18 pages: account, election, epochs, governance, identity, lockedcelo, multisig, network, node, oracle, plugins, releasecelo, rewards, transfer, validator, validatorgroup, autocomplete, config, help) under `tooling/libraries-sdks/cli/<subcommand>` — see the commands reference page above for the full index.
 
 ## Tooling — Contracts
@@ -179,6 +202,7 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Supra | https://docs.celo.org/tooling/oracles/supra |
 | Quex | https://docs.celo.org/tooling/oracles/quex-oracles |
 | DIA | https://docs.celo.org/tooling/oracles/dia |
+| Wit/Oracle | https://docs.celo.org/tooling/oracles/wit-oracle |
 | Running Oracles | https://docs.celo.org/tooling/oracles/run |
 | Indexer Overview | https://docs.celo.org/tooling/indexers/overview |
 | The Graph | https://docs.celo.org/tooling/indexers/the-graph |
@@ -191,7 +215,7 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Block Explorer (Celoscan + Blockscout) | https://docs.celo.org/tooling/explorers/block-explorers |
 | Analytics | https://docs.celo.org/tooling/explorers/analytics |
 
-> The separate "Celoscan" and "Blockscout" pages were merged into one **Block Explorer** page. The standalone "Faucet" and "Run a Node" tooling pages were removed — use the Community Links faucet and `infra-partners/operators/run-node` respectively.
+> The separate "Celoscan" and "Blockscout" pages were merged into one **Block Explorer** page. The standalone "Faucet" and "Run a Node" tooling pages were removed — use the Community Links faucet and `operate/operators/run-node` respectively.
 
 ## Tooling — Wallets
 
@@ -206,12 +230,14 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Connect Ledger to Celo Terminal | https://docs.celo.org/tooling/wallets/ledger/to-celo-terminal |
 | Connect Ledger to Celo Web Wallet | https://docs.celo.org/tooling/wallets/ledger/to-celo-web |
 | Connect Ledger to Celo CLI | https://docs.celo.org/tooling/wallets/ledger/to-celo-cli |
+| Ledger EIP-712 Signing Workaround | https://docs.celo.org/tooling/wallets/ledger/eip712-workaround |
 
 ## Tooling — Other
 
 | Topic | URL |
 |-------|-----|
 | Developer Tools Overview | https://docs.celo.org/tooling/overview/index |
+| Celo for Ethereum Developers | https://docs.celo.org/tooling/overview/migrate/from-ethereum |
 | Celo Sepolia Testnet | https://docs.celo.org/tooling/testnets/celo-sepolia/index |
 | Contract Verification Overview | https://docs.celo.org/tooling/contract-verification/index |
 | Verify with Hardhat | https://docs.celo.org/tooling/contract-verification/hardhat |
@@ -234,44 +260,46 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Ramps | https://docs.celo.org/home/ramps |
 | Bridging | https://docs.celo.org/home/bridged-tokens/bridges |
 | Bridging Native ETH | https://docs.celo.org/home/bridged-tokens/native-ETH-bridging |
+| Bridging CELO from Ethereum | https://docs.celo.org/home/bridged-tokens/bridging-celo-from-ethereum |
+| Withdrawing CELO to Ethereum | https://docs.celo.org/home/bridged-tokens/withdrawing-celo-to-ethereum |
 
 > "Exchange Assets" (`home/manage/exchange`) was removed from the live sitemap — "Exchanges" (`home/exchanges`) above still covers where to buy/swap CELO.
 
-## Infrastructure Partners
+## Operate a Celo Node
 
-> The old "Integration" subsection (Integration Overview, Checklist, General, Custody, Listings, Cloud HSM) has been removed entirely from the live sitemap. Node Operators has grown substantially.
+> The old `infra-partners/*` prefix has been renamed to `operate/*` (both the `operators` and `notices` subpaths). A new top-level overview page was added; the "Integration" subsection removed in the prior run stays removed.
 
 | Topic | URL |
 |-------|-----|
-| Notices Overview | https://docs.celo.org/infra-partners/notices/overview |
-| Node Operators Overview | https://docs.celo.org/infra-partners/operators/overview |
-| Node Architecture | https://docs.celo.org/infra-partners/operators/architecture |
-| Running a Node with Docker | https://docs.celo.org/infra-partners/operators/run-node |
-| Running an Archive Node | https://docs.celo.org/infra-partners/operators/archive-node |
-| Serving Historical Proofs | https://docs.celo.org/infra-partners/operators/historical-proofs |
-| Running a Public RPC Node | https://docs.celo.org/infra-partners/operators/public-rpc-node |
-| Monitoring & Metrics | https://docs.celo.org/infra-partners/operators/monitoring |
-| Upgrades & Maintenance | https://docs.celo.org/infra-partners/operators/maintenance |
-| Troubleshooting | https://docs.celo.org/infra-partners/operators/troubleshooting |
-| Migrating a Celo L1 Node (legacy) | https://docs.celo.org/infra-partners/operators/migrate-node |
-| Configuration Reference | https://docs.celo.org/infra-partners/operators/configuration |
-| Network Config & Assets | https://docs.celo.org/infra-partners/operators/network-config |
+| Operate a Celo Node (overview) | https://docs.celo.org/operate/index |
+| Notices Overview | https://docs.celo.org/operate/notices/overview |
+| Node Operators Overview | https://docs.celo.org/operate/operators/overview |
+| Node Architecture | https://docs.celo.org/operate/operators/architecture |
+| Running a Node with Docker | https://docs.celo.org/operate/operators/run-node |
+| Running an Archive Node | https://docs.celo.org/operate/operators/archive-node |
+| Serving Historical Proofs | https://docs.celo.org/operate/operators/historical-proofs |
+| Running a Public RPC Node | https://docs.celo.org/operate/operators/public-rpc-node |
+| Monitoring & Metrics | https://docs.celo.org/operate/operators/monitoring |
+| Upgrades & Maintenance | https://docs.celo.org/operate/operators/maintenance |
+| Troubleshooting | https://docs.celo.org/operate/operators/troubleshooting |
+| Migrating a Celo L1 Node (legacy) | https://docs.celo.org/operate/operators/migrate-node |
+| Configuration Reference | https://docs.celo.org/operate/operators/configuration |
+| Network Config & Assets | https://docs.celo.org/operate/operators/network-config |
+| Cel2 FAQ | https://docs.celo.org/operate/operators/faq |
 
 ## Hardforks & Notices
 
-> Active deprecation notices are new; the individual hardfork notice pages moved under an `archive/` path.
-
 | Topic | URL |
 |-------|-----|
-| End of Support for op-geth | https://docs.celo.org/infra-partners/notices/op-geth-deprecation |
-| Deprecation of Req/Res CL P2P Sync | https://docs.celo.org/infra-partners/notices/req-resp-cl-sync-deprecation |
-| L2 Migration (archive) | https://docs.celo.org/infra-partners/notices/archive/l2-migration |
-| Jello Hardfork — ZK (archive) | https://docs.celo.org/infra-partners/notices/archive/jello-upgrade |
-| Jovian Hardfork (archive) | https://docs.celo.org/infra-partners/notices/archive/jovian-upgrade |
-| Isthmus Hardfork (archive) | https://docs.celo.org/infra-partners/notices/archive/isthmus-upgrade |
-| Ice Cream Hardfork — EigenDA v2 (archive) | https://docs.celo.org/infra-partners/notices/archive/eigenda-v2-upgrade |
-| L1 Fusaka Upgrade (archive) | https://docs.celo.org/infra-partners/notices/archive/l1-fusaka-upgrade |
-| Celo Sepolia Launch (archive) | https://docs.celo.org/infra-partners/notices/archive/celo-sepolia-launch |
+| End of Support for op-geth | https://docs.celo.org/operate/notices/op-geth-deprecation |
+| Deprecation of Req/Res CL P2P Sync | https://docs.celo.org/operate/notices/req-resp-cl-sync-deprecation |
+| L2 Migration (archive) | https://docs.celo.org/operate/notices/archive/l2-migration |
+| Jello Hardfork — ZK (archive) | https://docs.celo.org/operate/notices/archive/jello-upgrade |
+| Jovian Hardfork (archive) | https://docs.celo.org/operate/notices/archive/jovian-upgrade |
+| Isthmus Hardfork (archive) | https://docs.celo.org/operate/notices/archive/isthmus-upgrade |
+| Ice Cream Hardfork — EigenDA v2 (archive) | https://docs.celo.org/operate/notices/archive/eigenda-v2-upgrade |
+| L1 Fusaka Upgrade (archive) | https://docs.celo.org/operate/notices/archive/l1-fusaka-upgrade |
+| Celo Sepolia Launch (archive) | https://docs.celo.org/operate/notices/archive/celo-sepolia-launch |
 
 ## Contributing
 
@@ -288,25 +316,15 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Registering a Community RPC Provider | https://docs.celo.org/contribute-to-celo/community-rpc-nodes/registering-as-rpc-node |
 | Community RPC Provider Penalties | https://docs.celo.org/contribute-to-celo/community-rpc-nodes/penalties |
 | Community RPC Provider FAQ | https://docs.celo.org/contribute-to-celo/community-rpc-nodes/validator-rpc-faq |
-| Regional DAOs | https://docs.celo.org/contribute-to-celo/daos |
 | Release Process Overview | https://docs.celo.org/contribute-to-celo/release-process/index |
 | Smart Contracts Release Process | https://docs.celo.org/contribute-to-celo/release-process/smart-contracts |
 | Blockchain Client Release Process | https://docs.celo.org/contribute-to-celo/release-process/blockchain-client |
 | CLI/ContractKit Release Process | https://docs.celo.org/contribute-to-celo/release-process/base-cli-contractkit-dappkit-utils |
 | Attestation Service Release Process | https://docs.celo.org/contribute-to-celo/release-process/attestation-service |
 
-> "Code of Conduct" (`contribute-to-celo/code-of-conduct`) was removed from the live sitemap.
+> "Code of Conduct" (`contribute-to-celo/code-of-conduct`) was removed from the live sitemap. "Regional DAOs" (`contribute-to-celo/daos`) was also removed from the live sitemap this run.
 
-## Legacy Documentation
-
-> A large "Legacy" tree (~40 pages) preserving pre-L2 Celo L1 docs (Proof of Stake, consensus, legacy transaction/stability mechanics, validator operations, identity/ODIS internals) is new since the last check. Not enumerated page-by-page here — start at the index below and branch out.
-
-| Topic | URL |
-|-------|-----|
-| Legacy Overview | https://docs.celo.org/legacy/overview |
-| Legacy L1 Architecture | https://docs.celo.org/legacy/l1-architecture |
-| Cel2 FAQ | https://docs.celo.org/legacy/faq |
-| What's Changed? (L1→L2) | https://docs.celo.org/legacy/transition/whats-changed/overview |
+> **Legacy Documentation tree removed.** The `/legacy/` tree added in the prior run (~40 pages: Legacy Overview, Legacy L1 Architecture, Cel2 FAQ, What's Changed?, plus the unenumerated Proof-of-Stake/consensus/validator-ops/ODIS-internals pages) is gone from the live sitemap as of this run. "Legacy Overview" and "Legacy L1 Architecture" appear superseded by the new "About Celo L1" page (Getting Started, above); "Cel2 FAQ" moved to `operate/operators/faq` (see "Operate a Celo Node", above). No direct replacement was found in the live sitemap for "What's Changed? (L1→L2)" or the rest of the unenumerated pre-L2 tree — treat that specific content as gone rather than moved.
 
 ## Community Links
 
@@ -316,4 +334,4 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Discord | https://discord.com/invite/celo |
 | Forum | https://forum.celo.org |
 | Faucet | https://faucet.celo.org/celo-sepolia |
-| FAQ | https://docs.celo.org/legacy/faq |
+| FAQ | https://docs.celo.org/operate/operators/faq |

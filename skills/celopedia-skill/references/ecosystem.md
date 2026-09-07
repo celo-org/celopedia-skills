@@ -2,7 +2,7 @@
 
 > Sources: docs.celo.org, DefiLlama, celo.org/ecosystem
 > For live TVL data, always refer to https://defillama.com/chain/Celo
-> Last updated: 2026-08-24
+> Last updated: 2026-09-07
 
 ---
 
@@ -75,6 +75,8 @@
 | VNX | Tokenized commodities/forex | https://vnx.li |
 | Untangled Vault | Capital allocation | https://untangled.finance |
 | Tether Gold (XAUt) | Tokenized gold | https://gold.tether.to |
+
+> DefiLlama's "Tether Gold" protocol entry no longer lists Celo among its tracked chains as of this run (same as the existing Uniswap V4 note below) — but XAUt0 is confirmed live on Celo mainnet as a governance-approved fee currency (`contracts.md`, `network-info.md`), so this is treated as a DefiLlama indexing gap, not a real removal; no action taken.
 
 ### Payments & Streaming
 

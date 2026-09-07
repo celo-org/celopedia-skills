@@ -1,7 +1,7 @@
 # Celo Contract Addresses
 
 > Source: https://docs.celo.org/tooling/contracts/
-> Last updated: 2026-08-06
+> Last updated: 2026-09-07
 
 All addresses verified from official Celo documentation. **Do not guess addresses not listed here.**
 
@@ -251,7 +251,21 @@ Supported assets: USDC, USDT, EURm, USDm, CELO, WETH
 > `eth_call symbol()` against `forno.celo-sepolia.celo-testnet.org` and
 > `forno.celo.org` on 2026-08-28.
 
-### Uniswap V3 (Alfajores Testnet)
+### Uniswap V4 (Celo Sepolia Testnet)
+
+> New this run — V4 was not previously deployed to a Celo testnet.
+
+| Contract | Address |
+|----------|---------|
+| PoolManager | `0x2af85C83CFe7bC5182F81E5aE82661b4E9F15A1e` |
+| PositionManager | `0xB104b7c42DAB49d31fe3Ea91Dd80305348Cc37C1` |
+| PositionDescriptor | `0x3B13783e319Be24E2b9Db588745eA3202723B497` |
+| V4Quoter | `0xca5E523FA87c7dC67762c8E7f4a65783899b3c72` |
+| StateView | `0xF7e0Ba08d608cE1c90498c763e9fa001404e2a4b` |
+| UniversalRouter | `0x8891A0A682cC7f0bda7912E79C80167403d96103` |
+| Permit2 | `0x000000000022D473030F116dDEE9F6B43aC78BA3` |
+
+## Uniswap V3 (Alfajores Testnet)
 
 | Contract | Address |
 |----------|---------|

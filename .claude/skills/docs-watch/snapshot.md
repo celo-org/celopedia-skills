@@ -4,84 +4,93 @@ Baseline seeded: 2026-07-07 (from the repo's own reference files, not a fresh
 live fetch — their own "Last updated" stamp is 2026-04-15, so treat this
 snapshot as unverified against live sources until the first real run).
 
-Last attempt: 2026-08-24 — PARTIAL BLOCK (celopg.eco: 403, org egress policy
-denial — see PR for the run's docs-watch/2026-08-24 branch). Sources 1-4
-(docs sitemap, contracts, network info, DefiLlama TVL) were reachable and
-verified; source 5 (grant programs) was not — `grants-funding.md` and its
-section below were left untouched this run.
+Last attempt: 2026-09-07 — PARTIAL BLOCK (celopg.eco: 403, org egress policy
+denial — same failure mode as the 2026-08-24 run — see PR for the
+docs-watch/2026-09-07 branch). Sources 1-4 (docs sitemap, contracts,
+network info, DefiLlama TVL) were reachable and verified; source 5 (grant
+programs) was not — `grants-funding.md` and its section below were left
+untouched this run (note: it was refreshed independently of this skill by
+PR #60 on 2026-08-06, so it isn't as stale as the "not verified since"
+framing below might suggest).
 
 ## 1. Docs sitemap (`docs-map.md`)
 
 - Source: `docs.celo.org/llms.txt`
-- Last verified: 2026-08-24
-- ~264 pages total as of last count (up from ~150) — major restructuring:
-  new top-level `/specs/` section (15 pages), new `/legacy/` tree (~40
-  pages, pre-L2 docs), Fee Abstraction split into its own 3-page subsection
-  under `build-on-celo/fee-abstraction/*` (was one page under
-  `tooling/overview/fee-abstraction`, now removed), `tooling/contracts/
-  token-contracts` renamed to `stablecoin-contracts`, new `fee-currencies`
-  contracts page, `infra-partners/notices/*` hardfork pages moved under an
-  `archive/` prefix, `infra-partners/integration/*` subtree removed
-  entirely, Celo CLI gained an 18-page subcommand reference, MultiBaas dev
-  environment added, new AI pages (Use Docs with AI, MPP, Celopedia).
-  "Agent Skills", "Code of Conduct", "Exchange Assets", and the standalone
-  "Faucet" tooling page were removed from the sitemap.
+- Last verified: 2026-09-07
+- ~224 pages total (down from ~264 two weeks ago, but that's a restructure,
+  not real shrinkage) — another major restructuring: the `infra-partners/*`
+  prefix (notices + operators) was renamed to `operate/*`, and `specs/*`
+  was renamed to `operate/specification/*`. The entire `/legacy/` tree
+  added just two weeks ago (~40 pre-L2 pages) is gone again — "Legacy
+  Overview"/"Legacy L1 Architecture" look superseded by a new "About Celo
+  L1" page (`home/celo-l1`), "Cel2 FAQ" moved to `operate/operators/faq`,
+  but "What's Changed? (L1→L2)" and the rest of the unenumerated pre-L2
+  tree have no found replacement — treat as gone, not moved. Also: MiniPay
+  quickstart/code-library/deeplinks/ngrok-setup pages collapsed into the
+  Overview page; a new 7-page `home/protocol/staking/*` subsection; new
+  AI pages (Self Agent ID, Celina); new `build-with-usat` and
+  `build-on-socialconnect` pages; `tooling/dev-environments/thirdweb/
+  overview` renamed to `.../thirdweb` and absorbed the standalone
+  "Thirdweb SDK" page; "Regional DAOs" removed.
 
 ## 2. Contract addresses (`contracts.md`)
 
 - Source: `docs.celo.org/tooling/contracts/*`
-- Last verified: 2026-08-24
-- Core protocol contracts (mainnet): 20 tracked — all addresses verified
-  unchanged against `core-contracts`, `stablecoin-contracts`, `l1-contracts`,
-  `uniswap-contracts`.
-- Registry address: `0x000000000000000000000000000000000000ce10`
-- Mento stablecoins tracked: 15 (USDm, EURm, BRLm, XOFm, KESm, NGNm, COPm,
-  GBPm, CHFm, JPYm, AUDm, CADm, GHSm, PHPm, ZARm) — all mainnet + testnet
-  addresses verified unchanged, **except** flagged below.
-- **Flagged, not fixed** (needs review — see PR): on Celo Sepolia testnet,
-  the live `stablecoin-contracts` page now lists USDm and EURm at different
-  addresses than our cached testnet table (which match the *legacy* cUSD/
-  cEUR addresses, also still live under those legacy names). Do not trust
+- Last verified: 2026-09-07
+- Core protocol contracts (mainnet + Sepolia testnet), all Mento
+  stablecoins, all external stablecoins/tokens, Uniswap V4 (mainnet),
+  Uniswap V3 (mainnet + Alfajores testnet), and all L1 contracts (mainnet +
+  the previously-tracked Sepolia subset) verified byte-for-byte unchanged.
+- Registry address: `0x000000000000000000000000000000000000ce10` — unchanged
+- **New this run**: Uniswap V4 has been deployed to Celo Sepolia testnet
+  (wasn't there before) — added its 7-contract table to `contracts.md`.
+- **Still flagged, not fixed** (needs review, carried over unchanged from
+  2026-08-24 — see PR): on Celo Sepolia testnet, the live
+  `stablecoin-contracts` page still lists USDm/EURm at different addresses
+  than the Registry's `StableToken`/`StableTokenEUR` entries (which still
+  resolve to the *legacy* cUSD/cEUR addresses). Unresolved; do not trust
   `contracts.md`'s testnet USDm/EURm rows until a human resolves this.
 
 ## 3. Network info (`network-info.md`)
 
 - Source: `docs.celo.org/build-on-celo/network-overview`
-- Last verified: 2026-08-24
+- Last verified: 2026-09-07
 - Mainnet chain ID: `42220`; Sepolia testnet chain ID: `11142220` — unchanged
 - Public RPC: `https://forno.celo.org` — unchanged
-- Fee-currency (gas abstraction) tokens: mechanically expanded — WETH and
-  XAUt0 (Tether Gold) added as new fee currencies; USAT (Tether America USD)
-  also added; full mainnet allowlist is now 20 tokens (all 14 Mento
-  currencies + USDm/EURm/USDC/USDT/USAT/WETH/XAUt0). `builder-guide.md`'s
-  canonical fee-currency table is now stale but out of this skill's tracked
-  scope — flagged for follow-up, not edited.
+- Mainnet fee-currency allowlist (20 tokens) and all `feeCurrency` adapter
+  addresses verified unchanged, including the WETH/XAUt0/USAT tokens added
+  last run. `builder-guide.md`'s stale fee-currency table remains
+  out-of-scope/unedited (still flagged for follow-up, unchanged).
 - `FeeCurrencyDirectory`: `0x15F344b9E6c3Cb6F0376A36A64928b13F62C6276` — unchanged
 
 ## 4. Ecosystem / TVL (`ecosystem.md`)
 
 - Source: DefiLlama (`api.llama.fi/protocols`), docs.celo.org, celo.org/ecosystem
-- Last verified: 2026-08-24
-- Categories tracked: DEXes (10, +Uniswap V2/Velodrome V2/SushiSwap), Lending
-  (3; "Morpho V1" renamed to "Morpho Blue" — Moola Market was added then
-  removed on review, its site (`mm.moola.market`) is unreachable), Yield/
-  Liquidity mgmt (6, +Autofarm), Stablecoins (2), Liquid Staking (1),
-  Derivatives (1), RWA (7, +Tether Gold), Payments/Streaming (1), plus
-  Governance section
-- Uniswap V4 has no separate DefiLlama TVL entry on Celo right now (still
-  listed — contracts confirmed live via `uniswap-contracts` docs page, so
-  treated as a DefiLlama indexing quirk, not a removal; no action taken).
+- Last verified: 2026-09-07
+- All previously-tracked protocols still present on Celo per DefiLlama,
+  modulo DefiLlama's own category relabeling (e.g. Feather: "Lending" →
+  "Risk Curators"; PoolTogether V3: "Other" → "Yield Lottery") — cosmetic,
+  no action. Moola Market (`moola.market` / `mm.moola.market`) is still
+  unreachable (curl: connection failure) despite nonzero DefiLlama TVL —
+  same unresolved state as 2026-08-24, still not added.
+- **New DefiLlama indexing quirk**: "Tether Gold" no longer lists Celo among
+  its DefiLlama chains (same pattern as the existing Uniswap V4 note) — but
+  XAUt0 is confirmed live on Celo mainnet as a fee currency
+  (`contracts.md`/`network-info.md`), so treated as an indexing gap, not a
+  real removal. Documented in `ecosystem.md`; no table changes made.
+- Did not add any of the many sub-$1M-TVL long-tail protocols DefiLlama
+  lists on Celo (Textile FX, Mobius Money, AutoRange, Symmetric, Ubeswap V3,
+  DONASWAP V2, YieldWolf, Magik Farm, Numoen, ImmortalX, etc.) — consistent
+  with this file's existing curated-not-exhaustive scope.
 
 ## 5. Grant programs (`grants-funding.md`)
 
 - Source: `www.celopg.eco/programs` (status changes frequently — this file
   is explicitly a stale-prone cache per its own header)
 - **Not verified this run** — `celopg.eco` returned a 403 from the sandbox's
-  org egress policy (not the site itself); see PR docs-watch/2026-08-24.
-- Currently-Live programs tracked (as of 2026-05-18, unverified since):
-  Proof of Ship S2, Prezenti Anchor Round (through 2026-06-30), Prezenti
-  Frontier Pool S2 (through 2026-06-30), GoodBuilders Season 3 (through
-  2026-05-18), Celo Builder Fund (year-round through 2026-12-31).
-- Note: several of the above end dates are now in the past relative to this
-  run (2026-08-24) — likely flipped to "Past" but unconfirmed. Re-check
-  status on the next run once celopg.eco is reachable.
+  org egress policy (not the site itself); confirmed via both WebFetch
+  (EGRESS_BLOCKED) and raw curl (`connect_rejected`, org policy) — see PR
+  docs-watch/2026-09-07.
+- File content unchanged from its 2026-08-06 refresh (PR #60, outside this
+  skill's own run history) — not re-verified here. Re-check status on the
+  next run once celopg.eco is reachable from this sandbox.
