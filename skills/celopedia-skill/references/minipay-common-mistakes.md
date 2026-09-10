@@ -198,6 +198,87 @@ MiniPay requires a physical Android device. Use ngrok + Developer Mode.
 
 ---
 
+## Build & test failures — it never gets far enough to be rejected
+
+### 20. `Cannot read property of undefined` on load
+
+**Why it fails:** `window.ethereum` is read before checking it exists — usually
+during server-side rendering, where there is no `window` at all.
+**Fix:** guard on both.
+```typescript
+if (typeof window !== "undefined" && window.ethereum) { /* safe */ }
+```
+
+### 21. The app won't load in MiniPay at all
+
+Three usual causes, in order of likelihood:
+1. **The ngrok tunnel expired or restarted** — the URL changes every restart on
+   the free tier. Restart and re-enter the new URL.
+2. **HTTP instead of HTTPS** — MiniPay only loads HTTPS. Use the `https://`
+   URL ngrok prints, not the `http://` one.
+3. **Mixed content** — an HTTPS page pulling an HTTP script or image. The
+   WebView blocks it silently; the console shows the warning.
+
+→ `minipay-guide.md` → _Testing with ngrok_
+
+### 22. Gas estimation throws
+
+Usually not a gas problem. Check, in order: the account actually holds enough
+of the fee-currency stablecoin; the recipient address is valid; the decimals
+are right for the token (#9). A malformed transfer surfaces as an estimation
+error, not a validation one.
+
+### 23. The transaction never confirms
+
+Network congestion or a manually-set gas price that's too low. Don't set gas
+prices by hand on Celo — let the client estimate. Check the hash on Celoscan
+before assuming your code is at fault.
+
+### 24. CORS errors from your own API
+
+The Mini App runs on a different origin than your backend. Configure the
+allowed origins on the server, and remember the ngrok host changes each
+restart during development.
+
+---
+
+## Debugging inside the WebView
+
+You cannot use an emulator, so these three are the whole toolkit:
+
+**Confirm detection first** — most "MiniPay is broken" reports are an app
+running in a normal browser:
+```typescript
+console.log("provider:", !!window.ethereum, "isMiniPay:", window.ethereum?.isMiniPay);
+```
+
+**Remote-debug the WebView** — connect the Android device over USB and open
+`chrome://inspect` in desktop Chrome. You get full DevTools against the live
+Mini App: console, network, breakpoints.
+
+**Watch the tunnel** — the ngrok dashboard at `http://localhost:4040` shows
+every request the WebView makes, including the ones that fail before they
+reach your logs. This is how you catch a missing asset or a blocked origin.
+
+---
+
+## Pre-submission smoke test
+
+Run this on a real device before you submit — it catches most of the blocking
+list above:
+
+- [ ] App loads over HTTPS in MiniPay, no connect button appears
+- [ ] Balance renders with correct decimals for every token you support
+- [ ] A transfer succeeds end to end, and the UI updates on confirmation
+- [ ] A transfer you cannot afford shows the shortfall message and the Add Cash
+      link — not a raw error
+- [ ] Cancelling the signature shows "you cancelled", not a crash
+- [ ] Nothing anywhere renders a `0x…` address
+- [ ] Layout holds at 360 × 640
+- [ ] Airplane mode mid-transaction produces a readable error, not a hang
+
+---
+
 ## Related References
 
 - `minipay-requirements.md` — the full two-stage listing checklist

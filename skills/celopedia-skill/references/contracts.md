@@ -251,7 +251,12 @@ Supported assets: USDC, USDT, EURm, USDm, CELO, WETH
 > `eth_call symbol()` against `forno.celo-sepolia.celo-testnet.org` and
 > `forno.celo.org` on 2026-08-28.
 
-### Uniswap V3 (Alfajores Testnet)
+### Uniswap V3 (Alfajores Testnet — ⚠️ sunset)
+
+> **Alfajores no longer exists** (chain ID `44787`; its RPC does not respond).
+> These addresses are kept for reading historical deployments only — **do not
+> deploy against them**. Redeploy on Celo Sepolia (`11142220`). See
+> `network-info.md` → _Alfajores is sunset_.
 
 | Contract | Address |
 |----------|---------|

@@ -118,7 +118,7 @@ useEffect(() => {
 **Important — two separate things**:
 
 1. **Decimals**: USDm has 18 decimals; USDC/USDT have 6. Always check decimals before displaying amounts.
-2. **Fee abstraction**: For **balances, transfers, and approvals**, use the **Token Address** column. For the **`feeCurrency` transaction field** (paying gas in stablecoins), use the **`feeCurrency` adapter address** — USDC/USDT transactions will **fail** if you pass the token address instead of the adapter. See `builder-guide.md` → _Allowed Fee Currencies (Mainnet)_ for the canonical table and underlying mechanics (CIP-64, FeeCurrencyDirectory).
+2. **Fee abstraction**: For **balances, transfers, and approvals**, use the **Token Address** column. For the **`feeCurrency` transaction field** (paying gas in stablecoins), use the **`feeCurrency` adapter address** — USDC/USDT transactions will **fail** if you pass the token address instead of the adapter. Paying the fee in a stablecoin also costs **~2.5–3.5× the gas** of paying in CELO (measured: +40,700 for USDm, +71,700 for USDT, +114,712 for USDC) — set gas limits accordingly. Numbers and method: `builder-guide.md` → _Gas overhead of paying fees in a stablecoin_. See `builder-guide.md` → _Allowed Fee Currencies (Mainnet)_ for the canonical table and underlying mechanics (CIP-64, FeeCurrencyDirectory).
 
 > **Bridged-token caveat:** the decimals above are for the **canonical** USDC/USDT on Celo. Bridged variants from other chains may have different decimals or different contract addresses. Always verify against the token's contract on Celoscan before integrating.
 

@@ -65,7 +65,7 @@ const serviceContext = OdisUtils.Query.getServiceContext(
 );
 ```
 
-For **Alfajores**, use `OdisContextName.ALFAJORES` instead.
+For testnet, use the **Celo Sepolia** context. (`OdisContextName.ALFAJORES` appears in older guides — Alfajores is sunset; see `network-info.md` → _Alfajores is sunset_.)
 
 **Important:** The **combiner URL and public key** bundled in your installed `@celo/identity` may **differ** from older blog/docs tables (e.g. legacy `cloudfunctions.net` URLs). Trust the SDK’s `getServiceContext` for the version you ship.
 

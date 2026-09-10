@@ -187,6 +187,8 @@ Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-l
 | Axelar (Satellite) | https://satellite.money | Cross-chain |
 | Chainlink CCIP (Transporter) | https://www.transporter.io | Cross-chain messaging |
 | Squid Router | https://v2.app.squidrouter.com | Liquidity routing |
+| LI.FI | https://li.fi | Bridge + swap aggregator; `@lifi/sdk` for programmatic cross-chain swaps |
+| LayerZero | https://layerzero.network | Cross-chain messaging |
 | Jumper Exchange | https://jumper.exchange | Cross-chain DEX |
 | Hyperlane Nexus | https://www.usenexus.org | Cross-chain messaging |
 | AllBridge | https://app.allbridge.io | Multi-chain |

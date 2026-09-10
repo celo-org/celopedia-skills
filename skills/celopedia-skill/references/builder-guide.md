@@ -62,6 +62,54 @@ The table above is the common subset. The **full allowlist is larger** — it al
 
 > **Wallet/SDK support:** fee abstraction works in Celo-native wallets (MiniPay, Valora) today, with **Ledger support coming soon**. On the SDK side, **viem** supports the `feeCurrency` field natively — **ethers.js and web3.js do not**.
 
+### Gas overhead of paying fees in a stablecoin
+
+Paying the network fee in a stablecoin costs meaningfully more gas than paying
+in CELO — the debit and credit run through the fee-currency machinery (and,
+for 6-decimal tokens, an adapter) on top of the transaction itself.
+
+**A widely repeated figure puts this at "approximately 50,000 gas". That is
+low, and it is not a constant — it depends on the token.** Measured over
+**2,600 consecutive Celo mainnet blocks** (ending block 77,155,261), comparing
+the `gasUsed` of plain ERC-20 `transfer` calls that paid in CELO against
+identical `transfer` calls that set `feeCurrency`:
+
+| Fee currency | Gas — paid in CELO | Gas — paid in the token | Overhead | Samples (token / CELO) |
+|---|---|---|---|---|
+| **USDm** (18-dec, no adapter) | 39,799 | 80,499 | **≈ +40,700** | 1 / 1 |
+| **USDT** (6-dec, adapter) | 43,801 | 115,501 | **≈ +71,700** | 6,970 / 3,143 |
+| **USDC** (6-dec, adapter) | 45,047 | 159,759 | **≈ +114,712** | 7 / 100 |
+
+Medians; distributions are tight (USDT p25 = p75 = 115,501).
+
+**What this means in practice:**
+
+- **Budget ~2.5–3.5× the gas** of an equivalent CELO-paid transaction, not
+  ~50,000 flat. The old figure is roughly right only for the 18-decimal,
+  no-adapter case.
+- **The adapter costs real gas.** 6-decimal tokens (USDC, USDT) carry
+  substantially more overhead than 18-decimal Mento stablecoins, because the
+  adapter normalizes decimals on both the debit and the refund.
+- **USDC is the expensive one.** Its overhead measured ~1.6× USDT's. If you're
+  choosing a default fee currency for a high-frequency app and your users hold
+  both, USDT is cheaper per transaction.
+- Absolute cost is still tiny — Celo gas is ~$0.0005 per transaction — so this
+  matters for **contract design and gas limits**, not for user-visible pricing.
+  Set gas limits from the fee-currency figures, or transactions will fail
+  estimation.
+
+> **Confidence:** the USDT row is measured across ~10,000 transactions and is
+> solid. **USDm and USDC fee-currency samples are small** (n=1 and n=7) because
+> almost nobody pays fees in them — of 6,978 fee-currency ERC-20 transfers in
+> the window, 6,970 were USDT. Treat those two rows as indicative. An
+> independent controlled check (re-estimating real USDC CIP-64 transfers at
+> their original block, with and without `feeCurrency`) returned a consistent
+> +130,161, which agrees on the order of magnitude.
+>
+> **Reproduce it:** sample recent blocks, keep successful `transfer` calls
+> (selector `0xa9059cbb`) to a given token, bucket by whether the transaction
+> carries a `feeCurrency` field, and compare median `gasUsed`.
+
 The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C6276` governs the allowlist. Query it:
 
 ```typescript
@@ -125,7 +173,7 @@ In `foundry.toml`:
 ```toml
 [etherscan]
 celo = { key = "${ETHERSCAN_API_KEY}", chain = 42220 }
-alfajores = { key = "${ETHERSCAN_API_KEY}", chain = 44787 }
+celoSepolia = { key = "${ETHERSCAN_API_KEY}", chain = 11142220 }
 ```
 
 Then:
@@ -149,6 +197,30 @@ forge verify-contract <CONTRACT_ADDRESS> <CONTRACT_NAME> \
   --verifier blockscout \
   --verifier-url https://celo.blockscout.com/api
 ```
+
+### Sourcify
+
+Decentralized verification — the source is stored publicly rather than inside
+one explorer, and Blockscout picks it up automatically. Useful when you want
+the verification to outlive any single explorer, or when you deployed from
+Remix and never had a local build.
+
+```bash
+curl -X POST "https://sourcify.dev/server/verify" \
+  -F "address=0xYOUR_ADDRESS" \
+  -F "chain=42220" \
+  -F "files[0]=@MyContract.sol" \
+  -F "files[1]=@metadata.json"
+```
+
+The `metadata.json` is the compiler output — Sourcify matches its hash against
+the deployed bytecode, so the match is exact rather than a recompile guess.
+
+From Remix: activate the **Sourcify** plugin in Plugin Manager, pick the
+deployed contract and the network (Celo `42220`, Celo Sepolia `11142220`), and
+verify. **MiniPay note:** listing requires contracts verified on **Celoscan**
+specifically — Sourcify is a complement, not a substitute. See
+`minipay-requirements.md` §5.
 
 ---
 

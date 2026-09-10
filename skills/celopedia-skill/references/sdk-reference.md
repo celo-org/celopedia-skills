@@ -214,6 +214,54 @@ Note: Like ethers.js, web3.js does NOT have native `feeCurrency` support. Use vi
 | JAW | Wallet abstraction | https://docs.celo.org/tooling/libraries-sdks/jaw/index |
 | Portal | Wallet infrastructure | https://docs.celo.org/tooling/libraries-sdks/portal/index |
 
+### Reown AppKit — Celo config
+
+The wagmi adapter, with Celo mainnet and the current testnet. Get a project ID
+at https://cloud.reown.com.
+
+```typescript
+// config.ts
+import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
+import { celo, celoSepolia } from "@reown/appkit/networks";
+
+export const wagmiAdapter = new WagmiAdapter({
+  networks: [celo, celoSepolia],
+  projectId: process.env.NEXT_PUBLIC_REOWN_PROJECT_ID!,
+  ssr: true,
+});
+
+export const config = wagmiAdapter.wagmiConfig;
+```
+
+```tsx
+// providers.tsx
+"use client";
+import { createAppKit } from "@reown/appkit/react";
+import { celo, celoSepolia } from "@reown/appkit/networks";
+import { wagmiAdapter } from "./config";
+
+createAppKit({
+  adapters: [wagmiAdapter],
+  networks: [celo, celoSepolia],
+  projectId: process.env.NEXT_PUBLIC_REOWN_PROJECT_ID!,
+  metadata: {
+    name: "My Celo App",
+    description: "Celo dApp",
+    url: "https://myapp.com",
+    icons: ["https://myapp.com/icon.png"],
+  },
+});
+```
+
+> ⚠️ Most Reown/AppKit examples still import **`celoAlfajores`**. That chain is
+> sunset — use `celoSepolia`. See `network-info.md` → _Alfajores is sunset_.
+>
+> ⚠️ **Do not use AppKit inside MiniPay.** Like RainbowKit, it renders a
+> multi-wallet selection modal, which conflicts with MiniPay's injected-wallet
+> auto-connect requirement. Use `injected()` or raw
+> `custom(window.ethereum)` there — see the MiniPay row below and
+> `minipay-requirements.md` §1.
+
 ---
 
 ## When to Use What
