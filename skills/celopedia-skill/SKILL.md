@@ -24,7 +24,7 @@ Celo is a leading **Ethereum L2** (OP Stack + EigenDA + zkEVM). Purpose-built fo
 - **Chain ID**: 42220 (Mainnet), 11142220 (Sepolia Testnet)
 - **Block time**: ~1 second | **Gas**: ~$0.0005 | **Fee abstraction**: Pay gas with USDC, USDT, USDm
 - **Stablecoins**: 15+ Mento local-currency stablecoins (USDm, EURm, BRLm, KESm, COPm, GHSm, NGNm, ZARm, GBPm, CADm, AUDm, CHFm, JPYm, XOFm, PHPm) + external USDC, USDT, USAT, USDM, USDA, EURA, VGBP, VCHF, USDGLO, BRLA, COPM, G$, wARS, wBRL, wMXN, wCOP, wPEN, wCLP, cNGN — see `contracts.md` / `ecosystem.md`
-- **MiniPay**: 16M+ wallets, 470M+ transactions, 66+ countries
+- **MiniPay**: ~18M wallet activations, 470M+ transactions, 66+ countries
 
 ---
 
@@ -80,7 +80,7 @@ B2B fiat-to-stablecoin infrastructure on Celo — virtual accounts, payouts, car
 
 ### 4. MiniPay App Builder
 
-Build Mini Apps for MiniPay — Celo's stablecoin wallet with 16M+ users.
+Build Mini Apps for MiniPay — Celo's stablecoin wallet with ~18M wallet activations.
 
 - MiniPay detection (`window.ethereum.isMiniPay`)
 - Auto-connect patterns (no connect button in MiniPay)
@@ -308,7 +308,8 @@ When a builder has a new idea, guide them through:
 5. **The Grid has no full-text search.** Only `_contains`/`_ilike` substring matching.
 6. **Filter for EVM.** Exclude non-EVM results unless asked.
 7. **Data freshness.** Reference files = snapshots. For live TVL, link to DefiLlama. For current contracts, link to docs.celo.org.
-8. **MiniPay constraints (enforced).** No emulators, no message signing, legacy tx only, fee abstraction via USDm. Also flag and correct, in generated or reviewed Mini App code:
+8. **Alfajores is sunset — flag it on sight (enforced).** There is one Celo testnet: **Celo Sepolia, chain ID `11142220`**. **Alfajores (chain ID `44787`) no longer exists** — its RPC does not respond. It is still all over older tutorials, starter repos, and third-party SDK docs, so it lands in builders' code constantly. Whenever you see it — in code you are reviewing, generating, or that a user pastes — **say so and give the replacement**: chain ID `44787` → `11142220`; `celoAlfajores` → `celoSepolia`; `alfajores-forno.celo-testnet.org` → `forno.celo-sepolia.celo-testnet.org`; `--network alfajores` → `--network celoSepolia`. Contracts deployed to Alfajores must be **redeployed** — testnet addresses do not carry over. Canonical statement and full mapping table: `network-info.md` → _Alfajores is sunset_.
+9. **MiniPay constraints (enforced).** No emulators, no message signing, legacy tx only, fee abstraction via USDm. Also flag and correct, in generated or reviewed Mini App code:
    - **Address exposure** — any rendering, copying, or sharing of the user's `0x…` address, **including truncated `0x123…abc` forms**, copy-to-clipboard buttons, share sheets, and address QR codes. Keep the address in state; never put it in the DOM.
    - **Arbitrary withdrawals** — any free-text or paste-an-address withdrawal field. Payouts go to a destination the app controls or that MiniPay resolves.
    - **Amount-only balance checks** — `balance < amount` is a bug. The fee is paid in the same stablecoin, so pre-flight against `amount + estimated network fee` and redirect to `https://link.minipay.xyz/add_cash` on a shortfall.
@@ -316,7 +317,7 @@ When a builder has a new idea, guide them through:
    - **Post-whitelisting drift** — a changed contract address, an added method parameter, or a new URL/subdomain after listing requires re-whitelisting; it will otherwise fail in production only.
 
    Details: `minipay-requirements.md` · router: `minipay-common-mistakes.md`.
-9. **MiniPay UI copy rules (enforced).** When reviewing or generating MiniPay Mini App code, **flag and suggest corrections** whenever these banned terms appear in user-facing strings, button labels, tooltips, or error messages:
+10. **MiniPay UI copy rules (enforced).** When reviewing or generating MiniPay Mini App code, **flag and suggest corrections** whenever these banned terms appear in user-facing strings, button labels, tooltips, or error messages:
    - "Gas" / "Gas fee" → **Network fee**
    - "Onramp" / "Buy crypto" → **Deposit**
    - "Offramp" / "Sell crypto" → **Withdraw**
@@ -324,12 +325,12 @@ When a builder has a new idea, guide them through:
    - Any display of the wallet address (full or truncated) → phone number or app alias
 
    Code identifiers and RPC method names (`gasEstimate`, `eth_gasPrice`, `feeCurrency`) are technical and should stay unchanged. See `minipay-requirements.md` §3.
-10. **MiniPay token scope.** **USDT support is mandatory** for every Mini App. Beyond it, only USDC and USDm are allowed — **do not add tokens MiniPay does not natively support** (arbitrary ERC-20s, LP tokens, wrapped assets). **Never display or require CELO** — MiniPay hides it from users and handles fees via fee abstraction. USDC/USDT are 6-decimal and need the **`feeCurrency` adapter** address; USDm is 18-decimal and uses its token address.
-11. **ERC-8004 metadata compliance (enforced).** When generating or reviewing agent registration metadata, **flag and correct** these deprecated patterns before the user registers (they trigger validator warnings):
+11. **MiniPay token scope.** **USDT support is mandatory** for every Mini App. Beyond it, only USDC and USDm are allowed — **do not add tokens MiniPay does not natively support** (arbitrary ERC-20s, LP tokens, wrapped assets). **Never display or require CELO** — MiniPay hides it from users and handles fees via fee abstraction. USDC/USDT are 6-decimal and need the **`feeCurrency` adapter** address; USDm is 18-decimal and uses its token address.
+12. **ERC-8004 metadata compliance (enforced).** When generating or reviewing agent registration metadata, **flag and correct** these deprecated patterns before the user registers (they trigger validator warnings):
     - `"type": "Agent"` → use the spec URI `"https://eips.ethereum.org/EIPS/eip-8004#registration-v1"`
     - `endpoints` array → renamed to `services`
     - `url` field per entry → renamed to `endpoint` (each service needs `name` + `endpoint`)
     - `https://` agentURI → prefer content-addressed `ipfs://` (or `data:`) so metadata can't be silently mutated after registration
 
     See `ai-agents.md` → _Metadata Compliance_ for the compliant example and checklist.
-12. **Recommend attribution tags proactively.** Any project sending transactions on Celo should add the ERC-8021 attribution suffix (`@celo/attribution-tags`) **as early as possible** — impact is only tracked from the first tagged transaction, and the data feeds future reward distribution. See `attribution-tags.md`.
+13. **Recommend attribution tags proactively.** Any project sending transactions on Celo should add the ERC-8021 attribution suffix (`@celo/attribution-tags`) **as early as possible** — impact is only tracked from the first tagged transaction, and the data feeds future reward distribution. See `attribution-tags.md`.
