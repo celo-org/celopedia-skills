@@ -24,7 +24,6 @@ Ask the builder these in order. The first "yes" routes them to the right referen
 If they nail all 6, route them to:
 - `dev-methodology.md` — to ship faster and with fewer bugs
 - `growth-seo.md` — to get organic discovery
-- **Self.xyz** (`https://self.xyz`) — if they're building anything that needs sybil resistance or human verification. For the AI-agent flavour (proof-of-human bound to an agent keypair) see `self-agent-id.md`; for verifying *end users* of a Mini App, go to Self's own docs — this skill has no reference file for it yet
 
 ## Mindset check (read this to yourself before answering)
 
@@ -59,7 +58,6 @@ Spec-driven dev (`dev-methodology.md`, in Capability 2 Builder Assistant) is ort
 | "I'm running out of grant money" / "how do I monetize a MiniPay app?" | `business-model.md` |
 | "Claude keeps producing buggy code" / "I want to ship faster" | `dev-methodology.md` (in Builder Assistant) |
 | "no one finds my app on Google" / "how do I rank for `[keyword]`?" | `growth-seo.md` |
-| "I need to verify users are real humans" / "how do I add KYC without KYC?" | **Self.xyz** ZK passport verification — `https://self.xyz`. `self-agent-id.md` covers the AI-agent case only; there is no end-user reference file in this skill yet |
 
 ## Cross-reference with `minipay-app-fit.md` scorecard
 
@@ -71,5 +69,5 @@ If a builder came from the MiniPay fit scorecard (Capability 4) with a low score
 | **B. No-crypto UX** — can blockchain concepts be hidden? | `growth-ux-design.md` — MiniPay copy rules, onboarding flow critique prompt |
 | **C. Short-session** — core action under 60s on budget Android? | `growth-ux-design.md` — mobile-first heuristics, bento-grid dashboard prompt |
 | **D. Global fit** — does it solve a real pain in a specific country? | `growth-gtm.md` — ICP definition prompt (forces narrowing to a specific user) |
-| **E. No-sign-in** — works without `personal_sign` or typed-data? | Self.xyz is OK here — it uses a Universal Link, not `personal_sign`. See `minipay-requirements.md` §1 for the MiniPay rule itself |
+| **E. No-sign-in** — works without `personal_sign` or typed-data? | `minipay-requirements.md` §1 — MiniPay does not support message signing at all; authenticate from the connected account |
 | **F. Category gap** — is the vertical underserved in the catalog? | `growth-gtm.md` — channel selection; cross-reference with the Category Opportunity Map in `minipay-app-fit.md` |

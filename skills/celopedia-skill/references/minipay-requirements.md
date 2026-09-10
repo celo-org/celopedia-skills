@@ -82,7 +82,17 @@ Everything below is what MiniPay assesses against in the readiness form **after 
 
 - **Zero-Click Connect** — do **not** show a "Connect Wallet" button inside MiniPay. Auto-retrieve the wallet address from `window.ethereum`. Pattern: `minipay-templates.md` §1; detection: `minipay-guide.md` → MiniPay Detection; docs: https://docs.minipay.xyz/getting-started/wallet-connection.html.
 - **No Message Signing** — do **not** prompt users to `personal_sign` or `eth_signTypedData` to access or authenticate. MiniPay does not support these methods. See `minipay-guide.md` → Important Constraints #4 and the wallet-connection doc above.
-- **No Address Exposure** — do **not display, copy, or share the user's wallet address anywhere in the app**. This is stricter than "don't use it as the primary identifier": no address text, no copy-to-clipboard button, no share sheet, no QR of the address, and a **truncated `0x1234…abcd` form is not an escape hatch**. Use the phone number (resolved via ODIS → FederatedAttestations) or an app-specific alias as the user-visible identity. Lookup flow: `odis-socialconnect.md` and `minipay-guide.md` → Phone Number → Address Resolution; docs: https://docs.minipay.xyz/technical-references/phone-number-lookup.html.
+- **No Address Exposure** — do **not display, copy, or share the user's wallet address anywhere in the app**. This is stricter than "don't use it as the primary identifier": no address text, no copy-to-clipboard button, no share sheet, no QR of the address, and a **truncated `0x1234…abcd` form is not an escape hatch — it is still the address**.
+
+  **Show a username instead.** The identity ladder, in order:
+
+  1. **A username the user set.** Prompt for one during onboarding if your app has any social surface.
+  2. **A generated display name**, if they haven't set one. Pick deterministically from a word list — adjective + noun, fruits, animals, whatever fits your product — seeded from the address so it stays stable across sessions. Users read these as names; they read `0x7a3f…` as an error.
+  3. **"Unknown"**, or simply nothing at all.
+
+  **Even showing nothing is better than showing an address.** These are consumer users, largely first-time app users; a hex string is noise at best and a support ticket at worst. There is no case where the address is the right thing to put on screen.
+
+  The phone number (resolved via ODIS → FederatedAttestations) also works as an identity where your product genuinely needs to show *who* someone is. Lookup flow: `odis-socialconnect.md` and `minipay-guide.md` → Phone Number → Address Resolution; docs: https://docs.minipay.xyz/technical-references/phone-number-lookup.html.
 - **No Arbitrary Withdrawals** — apps are **prohibited from allowing withdrawals to arbitrary or external wallet addresses**. No free-text address input, no paste-an-address flow, no "send to any wallet" option. Payouts must go to a destination the app already controls or that MiniPay resolves for you (the connected user, or a phone number resolved via ODIS). If your product genuinely needs an off-platform payout, route it through the MiniPay withdrawal surfaces instead of building your own.
 - **Transaction Feedback** — every on-chain action needs explicit pending / success / failure states. Full rule: §9 below.
 

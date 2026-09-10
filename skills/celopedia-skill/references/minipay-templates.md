@@ -13,6 +13,7 @@ Ready-to-use code for common Mini App patterns. Canonical reference docs: https:
 | 5 | Multi-Token Balance Display | Show USDm/USDC/USDT balances with correct decimals | `components/Balances.tsx` |
 | 6 | Preferred Stablecoin Selection | Pick the user's highest-balance stablecoin (+ low-balance deeplink + graceful degradation) | `lib/stablecoins.ts` |
 | 7 | Pre-Flight Check & Transaction Status | Verify balance covers amount + network fee, then drive pending/success/failure states | `hooks/usePaymentFlow.ts` |
+| 8 | Display Name (never show an address) | Username → stable generated name → "Unknown"; keeps the address out of the DOM | `lib/displayName.ts` |
 
 Each template is standalone and copy-paste ready. USDC/USDT `feeCurrency` uses adapter addresses — see `builder-guide.md` → _Allowed Fee Currencies (Mainnet)_.
 
@@ -778,3 +779,80 @@ export function PayButton({ payment }: { payment: PayArgs }) {
 > **Note:** the button is never left dead — `checking` and `pending` both render
 > a labelled busy state, and `feeCurrency` must be the **adapter** address for
 > 6-decimal USDC/USDT.
+
+---
+
+## 8. Display Name — never show an address
+
+_Drop this into: `lib/displayName.ts`_
+
+MiniPay prohibits displaying, copying, or sharing the wallet address —
+**including truncated `0x1234…abcd` forms**. Users need something to read, so
+give them a name. See `minipay-requirements.md` §1.
+
+The generated name is **deterministic**: the same address always produces the
+same name, so a user is recognisable across sessions and to other users,
+without any storage and without leaking the address.
+
+```typescript
+// Small, boring word lists. Swap them for whatever suits your product —
+// fruits, animals, cities. 24 x 32 = 768 combinations is plenty for a
+// friends-and-contacts surface; widen both lists if you need more.
+const ADJECTIVES = [
+  "swift", "quiet", "bright", "clever", "gentle", "bold", "calm", "eager",
+  "kind", "lucky", "merry", "noble", "proud", "sunny", "warm", "wise",
+  "brave", "cheery", "crisp", "deft", "fair", "keen", "neat", "spry",
+] as const;
+
+const NOUNS = [
+  "mango", "papaya", "guava", "lychee", "banana", "cocoa", "cashew", "date",
+  "fig", "ginger", "jackfruit", "kiwi", "lime", "melon", "olive", "peach",
+  "plum", "quince", "berry", "tamarind", "avocado", "coconut", "orange", "pear",
+  "heron", "ibis", "kudu", "lynx", "otter", "sable", "tern", "zebra",
+] as const;
+
+/** FNV-1a — small, stable, no dependency. Any stable hash works. */
+function hash(input: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < input.length; i++) {
+    h ^= input.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h >>> 0;
+}
+
+/**
+ * The user-visible identity. Never returns anything address-shaped.
+ *
+ * @param address  used ONLY as a hash seed — it never reaches the return value
+ * @param username whatever the user set, if anything
+ */
+export function displayName(
+  address: `0x${string}` | undefined,
+  username?: string | null,
+): string {
+  const trimmed = username?.trim();
+  if (trimmed) return trimmed;
+  if (!address) return "Unknown";
+
+  const h = hash(address.toLowerCase());
+  const adjective = ADJECTIVES[h % ADJECTIVES.length];
+  const noun = NOUNS[(h >>> 8) % NOUNS.length];
+  return `${adjective} ${noun}`; // e.g. "clever mango"
+}
+```
+
+```tsx
+// Usage — the address is a seed, never output.
+<p>{displayName(address, profile?.username)}</p>
+```
+
+> **Prompt for a real username** during onboarding if your app has any social
+> surface (leaderboards, transfers between users, comments). A generated name
+> is a good default, not a substitute for letting people choose.
+>
+> **Also acceptable:** the phone number resolved via ODIS, where your product
+> genuinely needs to identify a real person — see `odis-socialconnect.md`.
+>
+> **Not acceptable, ever:** the address, in any form, anywhere — no copy button,
+> no share sheet, no address QR code. Showing nothing at all beats showing it.

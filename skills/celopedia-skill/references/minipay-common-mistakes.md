@@ -43,9 +43,12 @@ server-side identity, bind it to the account without a signature.
 **Why it fails:** apps must not display, copy, or share the user's address —
 a user-safety rule. **A truncated `0x123…abc` does not count as an exception.**
 Copy buttons, share sheets, and address QR codes are all covered.
-**Fix:** identify users by phone number (ODIS) or an app-specific alias. Keep
-the address in state for `balanceOf` and as the transaction `account` — just
-never render it.
+**Fix:** show a **username**. If the user set one, use it; if not, generate a
+stable display name from a word list seeded by the address (adjective + noun —
+fruits, animals, colours); failing that show "Unknown", or nothing. Phone
+number via ODIS also works where you need to identify a real person. Keep the
+address in state for `balanceOf` and as the transaction `account` — just never
+render it. **Nothing on screen is better than an address.**
 → `minipay-requirements.md` §1 · `minipay-guide.md` → _UI rule: never expose
 wallet addresses_ · `odis-socialconnect.md`
 

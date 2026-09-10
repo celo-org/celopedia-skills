@@ -147,6 +147,5 @@ Spec-driven dev is foundational — it makes everything else in the toolkit easi
 - **Design work** ([growth-ux-design.md](growth-ux-design.md)) — produce a design spec, then implement against it
 - **Analytics instrumentation** ([growth-analytics.md](growth-analytics.md)) — spec the events to capture, then implement
 - **Business model implementation** ([business-model.md](business-model.md)) — spec the monetization (fee math, treasury address, edge cases), then implement
-- **Integration patterns** — high-quirk integrations like Self.xyz (`https://self.xyz`) especially benefit from spec-first discipline
 
 Install Superpowers once. Use it everywhere. It's the closest thing to a 2× productivity multiplier currently available to solo Celo founders.

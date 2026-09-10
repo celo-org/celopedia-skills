@@ -360,12 +360,21 @@ copy, or share the address anywhere. No address text, no copy-to-clipboard
 button, no share sheet, no address QR code. **A truncated `0x123…abc` is not an
 exception** — it is still the address, and it still gets flagged in review.
 
-When you need to show "who paid you" or "send to", use:
+**Show a username.** When you need to show "who paid you" or "send to", the
+ladder is:
 
-1. The phone number resolved via FederatedAttestations (when available).
-2. An app-specific alias / username the user has set.
-3. If neither exists, show nothing — a label like "Your account" or the
-   transaction itself is enough.
+1. **A username the user set** — prompt for one at onboarding if your app has
+   any social surface at all.
+2. **A generated display name** if they haven't set one — adjective + noun from
+   a word list (fruits, animals, colours, whatever fits), seeded
+   deterministically from the address so the same user always gets the same
+   name. Users read these as names; they read `0x7a3f…` as an error message.
+3. **The phone number** resolved via FederatedAttestations, where your product
+   genuinely needs to identify a real person.
+4. **"Unknown", or nothing at all.**
+
+**Nothing beats an address.** There is no case where a hex string is the right
+thing to put in front of a MiniPay user.
 
 Related: apps must also **not** offer withdrawals to arbitrary or external
 addresses (no free-text address field). Both rules are part of MiniPay's
