@@ -183,10 +183,17 @@ These are technical constraints that need to be addressed before your app can fu
 
 | Item | What to do |
 |---|---|
-| App uses `personal_sign` | Replace with wallet-address-only identity or ODIS phone resolution. See `odis-socialconnect.md`. |
+| App uses `personal_sign` | Replace with a flow that authenticates from the connected account alone, or ODIS phone resolution. See `odis-socialconnect.md`. |
 | App uses `eth_signTypedData` | Replace with a flow that only requires `eth_sendTransaction`. |
 | App displays CELO balance or requires CELO payment | Remove CELO from your UI entirely. MiniPay handles gas automatically — users never see it. |
 | App sets EIP-1559 transaction fields | Remove `maxFeePerGas` / `maxPriorityFeePerGas`. Use legacy transaction format. |
+| App displays, copies, or shares the wallet address | Remove it entirely — including truncated `0x123…abc` forms, copy buttons, share sheets, and address QR codes. Identify users by phone number or an app alias. |
+| App has a "withdraw to address" field | Remove it. Withdrawals to arbitrary or external addresses are prohibited; pay out to a destination you control or that MiniPay resolves. |
+| App does not support USDT | Add it. USDT support is mandatory for listing. |
+| App supports tokens MiniPay doesn't | Remove them. Only USDT / USDC / USDm belong in a Mini App. |
+| App checks balance against the amount only | Check against **amount + network fee** before triggering the transaction, and redirect to the Add Cash deeplink on a shortfall. |
+| Transactions have no pending / success / failure states | Add all three, with error copy mapped from error **codes**, not message text. |
+| First version tries to ship everything | Cut to the core flow. Complex multi-step v1s fail review and lose users on slow connections. |
 | Bundle size > 2 MB or heavy images | Use SVG/WebP, lazy-load aggressively, and keep your initial JS bundle small. |
 
 ---
@@ -196,7 +203,7 @@ These are technical constraints that need to be addressed before your app can fu
 Before applying the scorecard, answer these questions. A single "No" on items 1–3 is an immediate Tier 4:
 
 - [ ] Can the entire core user flow run inside MiniPay's WebView?
-- [ ] Can you build the UI without showing CELO or raw `0x…` addresses?
+- [ ] Can you build the UI without showing CELO, and without displaying, copying, or sharing wallet addresses anywhere?
 - [ ] Can a non-crypto user understand what the app does from the first screen?
 
 ---

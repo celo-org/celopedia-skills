@@ -228,6 +228,57 @@ const totalFee = gasEstimate * BigInt(gasPrice);
 const feeFormatted = formatUnits(totalFee, 18); // e.g., "0.0001"
 ```
 
+### Pre-flight check: amount **+** network fee
+
+The single most common transaction bug in Mini Apps is checking only that the
+user can afford the **amount**. The fee is paid in the same stablecoin, so the
+real precondition is `balance >= amount + fee`:
+
+```typescript
+const fee = gasEstimate * BigInt(gasPrice);
+
+if (balance < amount + fee) {
+  // Do NOT throw a raw error at the user. Explain, then send them to top up.
+  return {
+    ok: false,
+    shortfall: amount + fee - balance,
+    // "You need a little more USDT to cover this payment and the network fee."
+    depositUrl: "https://link.minipay.xyz/add_cash?tokens=USDm,USDC,USDT",
+  };
+}
+```
+
+Full drop-in helper (preflight + status machine): `minipay-templates.md` §7.
+
+---
+
+## Transaction States
+
+Every on-chain action needs three explicit UI states. This is a listing
+requirement, not a nicety — see `minipay-requirements.md` §9.
+
+| State | What the user must see |
+|---|---|
+| **Pending** | A loading indicator the moment they sign, held through both submission and confirmation. Never a dead button. |
+| **Success** | UI updates on **on-chain confirmation** (`waitForTransactionReceipt`), not on submission. Optionally deep-link to `https://link.minipay.xyz/receipt?tx=<hash>`. |
+| **Failure** | A descriptive, user-friendly message. "Transaction failed" is not descriptive. |
+
+**Map errors from codes, not message text.** Provider and RPC message strings
+change between versions and locales; codes do not.
+
+```typescript
+// EIP-1193 / viem error codes — stable. Message strings — not.
+function messageFor(err: unknown): string {
+  const code = (err as { code?: number }).code;
+  if (code === 4001) return "You cancelled the payment.";
+  if (code === -32000) return "Not enough balance to cover the amount and network fee.";
+  if (err instanceof Error && err.name === "TransactionExecutionError") {
+    return "The payment could not be completed. Please try again.";
+  }
+  return "Something went wrong. Please try again in a moment.";
+}
+```
+
 ---
 
 ## Phone Number → Address Resolution
@@ -281,15 +332,24 @@ const { accounts } = await federated.lookupAttestations(obfuscatedIdentifier, [
 
 See **`references/odis-socialconnect.md`** for troubleshooting, **DEK (`ENCRYPTION_KEY`)** auth, viem alternatives, and doc links.
 
-### UI rule: never display raw addresses
+### UI rule: never expose wallet addresses
 
-MiniPay requires that apps identify users by **phone number**, not `0x…` hex addresses. When you need to show "who paid you" or "send to", prefer in order:
+MiniPay requires that apps identify users by **phone number**, not `0x…` hex
+addresses — and the rule is **exposure**, not just primacy: do not display,
+copy, or share the address anywhere. No address text, no copy-to-clipboard
+button, no share sheet, no address QR code. **A truncated `0x123…abc` is not an
+exception** — it is still the address, and it still gets flagged in review.
+
+When you need to show "who paid you" or "send to", use:
 
 1. The phone number resolved via FederatedAttestations (when available).
 2. An app-specific alias / username the user has set.
-3. A truncated `0x123…abc` only as a secondary hint — never as the primary identifier.
+3. If neither exists, show nothing — a label like "Your account" or the
+   transaction itself is enough.
 
-This is part of MiniPay's submission requirements — see `minipay-requirements.md` §1.
+Related: apps must also **not** offer withdrawals to arbitrary or external
+addresses (no free-text address field). Both rules are part of MiniPay's
+submission requirements — see `minipay-requirements.md` §1.
 
 ---
 
@@ -594,8 +654,13 @@ The ngrok dashboard at `http://localhost:4040` shows all requests for debugging.
 5. **Small screens** — Design for mobile-first, low-bandwidth environments
 6. **2MB footprint** — Keep Mini App bundle size small
 7. **No CELO in UI** — MiniPay hides CELO from users. Your app must only display and accept USDT / USDC / USDm; fee abstraction handles the network fee in stablecoins automatically
-8. **Submission checklist** — before listing, review `minipay-requirements.md` for the 7-section official checklist (copy rules, 360×640, PageSpeed, ToS / Privacy, 24h SLA)
+8. **Submission checklist** — before listing, review `minipay-requirements.md` for the 11-section official checklist (copy rules, 360×640, PageSpeed, ToS / Privacy / About / How to Use, 24h SLA, whitelisting integrity, dependency security)
 9. **No geolocation on iOS** — MiniPay iOS does not bridge `navigator.geolocation` to the OS. `getCurrentPosition` and `watchPosition` hang silently, no callback ever fires, even with location permission granted to MiniPay at the OS level. Same code works fine in MetaMask in-app browser (iOS and Android) and Safari with extension wallets, which points at MiniPay's WKWebView delegate not implementing the geolocation permission handlers. Android behavior untested. Tracked at https://github.com/celo-org/minipay/issues/44. Workaround: detect `isIOS && window.ethereum.isMiniPay` and offer a deep link out to MetaMask (`https://metamask.app.link/dapp/<host>`)
+10. **No address exposure** — do **not display, copy, or share the user's wallet address** anywhere in the app. No address text, no copy button, no share sheet, no address QR — and a truncated `0x1234…abcd` form does not count as an exception. Use the phone number (ODIS) or an app-specific alias as the user-visible identity
+11. **No arbitrary withdrawals** — apps must **not** let users withdraw to an arbitrary or external wallet address. No free-text address field, no paste-an-address flow. Payouts go to a destination the app controls or that MiniPay resolves
+12. **USDT is mandatory** — every Mini App must support USDT natively, and must **not** add support for tokens MiniPay does not natively support
+13. **Pre-flight balance check** — before triggering any transaction, verify the user's balance covers **the amount plus the estimated network fee**. Checking the amount alone is the common bug: the transfer is affordable, the fee is not, and the transaction reverts. On a shortfall, explain and redirect to `https://link.minipay.xyz/add_cash` rather than surfacing a raw error
+14. **Whitelisting is frozen** — after listing, the contract addresses, method signatures, parameters, and URLs you submitted are enforced by an allowlist. Adding a parameter to a whitelisted method, redeploying to a new address, or moving to a new URL/subdomain will make calls fail in production while the same build works fine outside MiniPay. Re-whitelist before shipping such a change. See `minipay-requirements.md` §10
 
 ---
 
@@ -613,6 +678,9 @@ The ngrok dashboard at `http://localhost:4040` shows all requests for debugging.
 - **Show your app identity** — display your name and logo so users understand the service is operated by you, not by MiniPay
 - **In-app support link** — Telegram, WhatsApp, email, or web portal, reachable from any screen
 - **Link to ToS + Privacy Policy** from inside the app (footer or settings) — required for listing
+- **Add "About" and "How to Use" screens** — reachable from the footer or menu, alongside ToS, Privacy, and support. Many MiniPay users are first-time app users; a short how-to cuts support volume you'd otherwise have to answer inside the 24h SLA
+- **State who operates the app** — an explicit line such as "Operated by <Your Company>. Not affiliated with Opera or MiniPay." A logo alone is not enough
+- **Ship a narrow first version** — core flow only. Extra steps are where slow connections and review failures both bite
 
 See `minipay-requirements.md` for the full submission checklist.
 
