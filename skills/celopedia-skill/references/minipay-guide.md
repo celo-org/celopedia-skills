@@ -209,6 +209,26 @@ const txHash = await walletClient.sendTransaction({
 MiniPay users pay the network fee in stablecoins. Estimate the network fee in USDm:
 
 ```typescript
+import { createPublicClient, http, rpcSchema, formatUnits } from "viem";
+import { celo } from "viem/chains";
+
+// Celo extends eth_gasPrice with a feeCurrency parameter. viem's default
+// public schema types it as taking none, so the request below will NOT
+// typecheck under `strict` unless you declare the schema.
+type CeloRpcSchema = [
+  {
+    Method: "eth_gasPrice";
+    Parameters: [feeCurrency: `0x${string}`];
+    ReturnType: `0x${string}`;
+  },
+];
+
+const publicClient = createPublicClient({
+  chain: celo,
+  transport: http(),
+  rpcSchema: rpcSchema<CeloRpcSchema>(),
+});
+
 // Estimate gas units (internal — UI copy should say "network fee")
 const gasEstimate = await publicClient.estimateGas({
   account: address,

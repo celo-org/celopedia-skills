@@ -170,7 +170,7 @@ dependency tree is in scope for review.
 **Fix:** pin exact npm versions (no `^`/`~`), wait 7+ days before adopting a
 new version, set `ignore-scripts=true` in `.npmrc`, commit the lockfile, and
 use frozen installs in CI.
-→ `minipay-requirements.md` §11 · `agent-security.md`
+→ `minipay-requirements.md` §11
 
 ---
 

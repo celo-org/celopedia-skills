@@ -234,7 +234,7 @@ A Mini App handles user funds inside a wallet, so its supply chain is in scope f
 - **Set `ignore-scripts=true`** in `.npmrc` so install-time scripts cannot run
 - **Commit the lockfile** and use frozen installs in CI (`npm ci` / `pnpm install --frozen-lockfile`)
 
-For the broader application-layer threat model (prompt injection, key handling, agent surfaces), see `agent-security.md`.
+(`agent-security.md` is a *different* layer — prompt injection and key handling for LLM-backed agents. It does not cover npm supply chain; read it only if your Mini App ships an agent or chatbot.)
 
 ---
 

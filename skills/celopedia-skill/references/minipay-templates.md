@@ -82,7 +82,7 @@ export default function MiniPayApp() {
       if (mp) {
         const client = createWalletClient({
           chain: celo,
-          transport: custom(window.ethereum),
+          transport: custom(window.ethereum!),
         });
         const [addr] = await client.getAddresses();
         setAddress(addr);
@@ -178,7 +178,7 @@ export function useMiniPay() {
       if (mp) {
         const client = createWalletClient({
           chain: celo,
-          transport: custom(window.ethereum),
+          transport: custom(window.ethereum!),
         });
         const [addr] = await client.getAddresses();
         setAddress(addr);
@@ -211,10 +211,22 @@ import {
   encodeFunctionData,
   parseUnits,
   formatUnits,
+  rpcSchema,
 } from "viem";
 import { celo } from "viem/chains";
 
 const USDM_ADDRESS = "0x765DE816845861e75A25fCA122bb6898B8B1282a" as const;
+
+// Celo extends eth_gasPrice with a feeCurrency parameter. viem's default
+// public schema types it as taking none, so declare it or the call will not
+// typecheck under `strict`.
+type CeloRpcSchema = [
+  {
+    Method: "eth_gasPrice";
+    Parameters: [feeCurrency: `0x${string}`];
+    ReturnType: `0x${string}`;
+  },
+];
 
 const ERC20_ABI = [
   {
@@ -242,12 +254,13 @@ async function sendPayment(
 ) {
   const walletClient = createWalletClient({
     chain: celo,
-    transport: custom(window.ethereum),
+    transport: custom(window.ethereum!),
   });
 
   const publicClient = createPublicClient({
     chain: celo,
     transport: http(),
+    rpcSchema: rpcSchema<CeloRpcSchema>(),
   });
 
   const [senderAddress] = await walletClient.getAddresses();
@@ -281,7 +294,7 @@ async function sendPayment(
     method: "eth_gasPrice",
     params: [USDM_ADDRESS], // fee currency
   });
-  const networkFee = gasEstimate * BigInt(gasPrice as string);
+  const networkFee = gasEstimate * BigInt(gasPrice);
 
   if (balance < amount + networkFee) {
     // Return a typed shortfall — do NOT throw a raw error at the user.
@@ -366,7 +379,7 @@ export default function BillPayment() {
     try {
       const client = createWalletClient({
         chain: celo,
-        transport: custom(window.ethereum),
+        transport: custom(window.ethereum!),
       });
 
       const data = encodeFunctionData({
@@ -579,8 +592,20 @@ import {
   custom,
   http,
   formatUnits,
+  rpcSchema,
 } from "viem";
 import { celo } from "viem/chains";
+
+/** Celo extends eth_gasPrice with a feeCurrency parameter; viem's default
+ *  public schema types it as taking none, so declare it. Without this the
+ *  request below fails to typecheck under `strict`. */
+type CeloRpcSchema = [
+  {
+    Method: "eth_gasPrice";
+    Parameters: [feeCurrency: `0x${string}`];
+    ReturnType: `0x${string}`;
+  },
+];
 
 export type PaymentStatus =
   | { phase: "idle" }
@@ -625,7 +650,11 @@ export function usePaymentFlow() {
       /** Current balance in base units. */
       balance: bigint;
     }) => {
-      const publicClient = createPublicClient({ chain: celo, transport: http() });
+      const publicClient = createPublicClient({
+        chain: celo,
+        transport: http(),
+        rpcSchema: rpcSchema<CeloRpcSchema>(),
+      });
       const walletClient = createWalletClient({
         chain: celo,
         transport: custom(window.ethereum!),
@@ -642,10 +671,10 @@ export function usePaymentFlow() {
           data: opts.data,
           feeCurrency: opts.feeCurrency,
         });
-        const gasPrice = (await publicClient.request({
+        const gasPrice = await publicClient.request({
           method: "eth_gasPrice",
           params: [opts.feeCurrency],
-        })) as string;
+        });
         const networkFee = gasEstimate * BigInt(gasPrice);
 
         if (opts.balance < opts.amount + networkFee) {
@@ -698,7 +727,12 @@ export function usePaymentFlow() {
 ### Rendering the states
 
 ```tsx
-export function PayButton(/* … */) {
+import { usePaymentFlow } from "@/hooks/usePaymentFlow";
+
+/** Everything `pay` needs — build it once where you know the token and amount. */
+type PayArgs = Parameters<ReturnType<typeof usePaymentFlow>["pay"]>[0];
+
+export function PayButton({ payment }: { payment: PayArgs }) {
   const { status, pay, reset } = usePaymentFlow();
 
   if (status.phase === "insufficient") {
@@ -734,7 +768,7 @@ export function PayButton(/* … */) {
 
   const busy = status.phase === "checking" || status.phase === "pending";
   return (
-    <button disabled={busy} onClick={() => pay(/* … */)}>
+    <button disabled={busy} onClick={() => pay(payment)}>
       {busy ? "Sending…" : "Pay"}
     </button>
   );
