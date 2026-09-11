@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.11.0"
+  version: "2.11.1"
 ---
 
 # Celopedia Skill
@@ -167,7 +167,7 @@ Chain IDs, RPCs, explorers, faucets, RPC limits (`eth_getLogs` block range), and
 
 Non-protocol-technical guidance that turns a working Celo project into a shipped, growing, sustainable one. Differentiator: not "is your app a good fit?" but "here's the skill, tool, or prompt to make it better." Composes with Capability 4's MiniPay app-fit framework (separate PR by Beni) — that scorecard tells you *whether* to build for MiniPay; this toolkit tells you *how* to make whatever you ship better.
 
-- **Design** (anti-AI-slop): UI/UX Pro Max skill, Anthropic's Claude Design, logo prompts for Gemini/ChatGPT
+- **Design** (anti-AI-slop): UI/UX Pro Max skill, Anthropic's Claude Design, logo prompts for Gemini/ChatGPT, where Celo's own brand assets live (brand kit, not the archived GitHub repo) and favicon gotchas
 - **Comms**: one-sentence pitch forging, build-in-public weekly cadence, launch posts, "strip AI-slop" rewrite prompt
 - **GTM**: ICP definition, channel selection for Celo/MiniPay audiences, Remotion + Screen Studio video loop, public MCP servers as a distribution channel
 - **Referrals**: dual-sided incentives, 4 referral pattern archetypes (flat bounty / revenue share / fee waiver / leaderboard), leaderboards that don't demotivate the long tail, on-chain tracking patterns, anti-sybil, k-factor metrics
@@ -244,6 +244,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | Governance | Check `governance.md` |
 | SDK help | Check `sdk-reference.md` |
 | Builder asks about design / UI / "looks bad" / logo | Check `growth-ux-design.md` |
+| Celo logo / symbol / brand kit / "which file is the official Celo mark" / favicon for a Celo property | Check `growth-ux-design.md` §6 — source is https://celo.org/brand-kit; `github.com/celo-org/brand` is archived and wrong |
 | Builder asks about launch posts / threads / build-in-public | Check `growth-comms.md` |
 | Builder asks about first users / distribution / channels / Remotion videos / public MCP servers | Check `growth-gtm.md` |
 | Builder asks about referrals / leaderboards / viral loops / share incentives | Check `growth-referrals.md` |
