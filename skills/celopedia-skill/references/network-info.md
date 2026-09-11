@@ -59,7 +59,7 @@ The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C62
 
 ### ⚠️ Alfajores is sunset — Celo Sepolia replaces it
 
-**Alfajores (chain ID `44787`) no longer exists.** Its RPC
+**Alfajores (chain ID `44787`) was sunset in 2025, along with Baklava, and no longer exists.** Its RPC
 (`https://alfajores-forno.celo-testnet.org`) does not respond. There is exactly
 one Celo testnet now: **Celo Sepolia, chain ID `11142220`**.
 
