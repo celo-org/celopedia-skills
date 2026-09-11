@@ -39,9 +39,15 @@ framing below might suggest).
 - Last verified: 2026-09-07
 - Core protocol contracts (mainnet + Sepolia testnet), all Mento
   stablecoins, all external stablecoins/tokens, Uniswap V4 (mainnet),
-  Uniswap V3 (mainnet + Alfajores testnet), and all L1 contracts (mainnet +
+  Uniswap V3 (mainnet only — V3 is not deployed on Celo Sepolia), and all L1 contracts (mainnet +
   the previously-tracked Sepolia subset) verified byte-for-byte unchanged.
 - Registry address: `0x000000000000000000000000000000000000ce10` — unchanged
+- **Do not re-import testnet V3 addresses.** `docs.celo.org/tooling/contracts/
+  uniswap-contracts` and Uniswap's own Celo deployments page both still list a
+  V3 table for **Alfajores**, a sunset testnet. Celo Sepolia is the only
+  testnet this repo documents. Skip that table on every run — it is not
+  drift, and it must not be copied back into `contracts.md`. If upstream ever
+  adds a *Celo Sepolia* V3 table, that is a real `reference update`.
 - **New this run**: Uniswap V4 has been deployed to Celo Sepolia testnet
   (wasn't there before) — added its 7-contract table to `contracts.md`.
 - **Still flagged, not fixed** (needs review, carried over unchanged from
