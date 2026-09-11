@@ -44,7 +44,7 @@ framing below might suggest).
 - Registry address: `0x000000000000000000000000000000000000ce10` — unchanged
 - **Do not re-import testnet V3 addresses.** `docs.celo.org/tooling/contracts/
   uniswap-contracts` and Uniswap's own Celo deployments page both still list a
-  V3 table for **Alfajores**, a sunset testnet. Celo Sepolia is the only
+  V3 table for **Alfajores**, which was sunset in 2025 (along with Baklava). Celo Sepolia is the only
   testnet this repo documents. Skip that table on every run — it is not
   drift, and it must not be copied back into `contracts.md`. If upstream ever
   adds a *Celo Sepolia* V3 table, that is a real `reference update`.
