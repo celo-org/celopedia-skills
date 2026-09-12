@@ -201,3 +201,24 @@ If a builder has a deployed app that looks generic, these 4 changes do the most 
 This is the most common objection. The honest answer:
 
 > *You don't need to be a designer. You need to make 3 deliberate decisions: one font, one color, one layout pattern. AI tools execute those decisions; you supply the taste. UI/UX Pro Max gives you the menu — you pick from it. That's the whole job.*
+
+---
+
+## 6. Using Celo's own brand assets (logo, symbol, favicon)
+
+This section is about the **Celo** mark, not the builder's logo. It exists because an official `celo.org` property shipped the retired pre-rebrand logo in its favicon after an agent found the wrong source on GitHub and treated it as authoritative.
+
+### Source of truth: https://celo.org/brand-kit — and nowhere else
+
+- The brand-kit page is Framer-rendered; its **Download** buttons link two public Google Drive folders:
+  - **Wordmark** — `https://drive.google.com/drive/folders/1B6VSHjK6BTNH2ryNjKMJeePJshMIb0Df`
+  - **Symbol** — `https://drive.google.com/drive/folders/1ZXEF0EaA2_q9sAeKRDaFRH341W3sRpWr`
+  Each has `RGB` / `CMYK` / `PMS` subfolders with SVG, PNG and EPS. The symbol is the yellow-square "C"; the brand yellow is **Prosperity Yellow `#FCFF52`**. Digital work uses the `RGB` files, e.g. `Celo_Symbol_RGB_ProsperityYellow.svg`.
+- **Do not use `github.com/celo-org/brand`.** It is archived, was last pushed in 2019, is PNG-only, and contains only the retired interlocking-rings mark. Nothing on the repo says so, which is exactly why it keeps getting picked up. If a search turns up "Celo Brand Assets" on GitHub, that is the wrong one.
+- **Use assets unmodified.** The brand-kit policy: you may not modify Celo brand assets — no changes to design or colour, no added words or elements. Ship the published file byte-for-byte; do not redraw the mark as inline SVG "for crispness".
+
+### Favicon gotchas (learned the hard way)
+
+- **The standalone symbol is not a favicon.** Its "C" is a transparent cut-out, so on a dark browser tab it renders as a bare yellow "C". `celo.org` itself uses a composite — yellow square, black "C" — as its favicon and apple-touch-icon. If a site should look like celo.org in the tab, copy what celo.org serves (`view-source:https://celo.org/`, the `<link rel="icon">` and `apple-touch-icon` hrefs), or render a 16/32/48 px `.ico` of that composite.
+- **Browsers cache favicons by URL and do not refetch on reload**, hard reload included. Replacing the bytes behind an existing `/favicon.png` is invisible to every returning visitor. When the icon changes, change the **file name** too, ship a real `/favicon.ico` (browsers request it unprompted regardless of markup), and send an explicit `Cache-Control` (a day is a good default) so the next swap propagates predictably.
+- **Verify by hash, not by status code.** SPA servers typically answer `200 text/html` for any path, so `curl -I /favicon.png → 200` proves nothing. Compare `shasum -a 256` of the served file with the source file, and check `Content-Type`.
