@@ -398,7 +398,7 @@ A tiered program for AI agents that transact on Celo — the further your agent 
 | **Work Visa** | Self Agent ID verification · 1,000+ txns · $5K+ volume (or 1,000 unique contracts) · live product with real utility | DeFi incentives, liquidity support, featured placement |
 | **Citizenship** | Work Visa criteria + 10,000+ txns or $15K+ volume · manual review | Flagship support, deepest integrations |
 
-Benefits across tiers include access to MiniPay's 16M+ users, DeFi incentives (Uniswap, Aave, Mento, Velodrome), token-launch liquidity, mentorship, and co-marketing. Self Agent ID is the gate for the Work tier — register it first.
+Benefits across tiers include access to MiniPay's ~18M activated wallets, DeFi incentives (Uniswap, Aave, Mento, Velodrome), token-launch liquidity, mentorship, and co-marketing. Self Agent ID is the gate for the Work tier — register it first.
 
 ---
 

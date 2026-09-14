@@ -242,7 +242,7 @@ Deploy, verify, then assert the things a fork cannot tell you:
 Moving is the floor. These are the reasons to stay:
 
 - **Fee abstraction** — users transact holding only stablecoins. `builder-guide.md`.
-- **MiniPay** — 16M+ wallets, distribution to emerging markets. `minipay-guide.md`, and `minipay-requirements.md` for the listing checklist.
+- **MiniPay** — ~18M wallet activations, distribution to emerging markets. `minipay-guide.md`, and `minipay-requirements.md` for the listing checklist.
 - **Mento local stablecoins** — 15+ local currencies (KESm, NGNm, GHSm, ZARm, COPm, PHPm…). Nothing equivalent on Lisk. `defi-protocols.md`.
 - **Grants** — `grants-funding.md`, and always check `celopg.eco/programs` live.
 

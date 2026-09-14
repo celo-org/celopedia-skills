@@ -85,3 +85,40 @@ section below were left untouched this run.
 - Note: several of the above end dates are now in the past relative to this
   run (2026-08-24) — likely flipped to "Past" but unconfirmed. Re-check
   status on the next run once celopg.eco is reachable.
+
+## 6. MiniPay docs (`minipay-docs-map.md`, `minipay-requirements.md`, `minipay-common-mistakes.md`)
+
+- Source: `docs.minipay.xyz` (page tree, submission page, best-practices page,
+  deeplinks page)
+- Last verified: 2026-09-10
+- **Page tree** as cached in `minipay-docs-map.md`: Getting Started (overview,
+  why-minipay, availability, quick-start), Installation (project-setup,
+  setup-react, test-in-minipay, faq), Guides (wallet-connection,
+  ui-and-container, smart-contracts, best-practices, deployment,
+  submit-your-miniapp), Reference (technical-references overview, deeplinks,
+  retrieve-balance, send-transaction, gas-estimation, phone-number-lookup),
+  Custom Methods (overview, get-exchange-rate, scan-qr-code, request-contact).
+  Note the flat `getting-started/` prefix on the Guides pages — a move to a
+  `guides/` prefix would be a structural change worth catching (bare
+  `/guides/*.html` paths currently 404).
+- **Deeplinks** (host `link.minipay.xyz`): `add_cash` (opt.
+  `?tokens=USDm,USDC,USDT`), `browse?url=`, `discover`, `receipt?tx=[&celebrate]`,
+  `qr`, `invite_friends`, `balance`. `minipay.opera.com` does **not** resolve —
+  if it reappears anywhere in the references, that's a regression.
+- **Submission URLs**: `https://minipay.to/mini-apps` (Stage 1 intake, cached)
+  and `https://developer.minipay.to/mini-app-listing` (same form as linked from
+  the docs page). Both returned 200 this run.
+- **Listing policy currently cached** in `minipay-requirements.md` — treat any
+  divergence as `needs review`, never an auto-edit:
+  USDT support mandatory · no non-native tokens · no CELO in UI · zero-click
+  connect · no `personal_sign` / `eth_signTypedData` · no display/copy/share of
+  wallet addresses · no withdrawals to arbitrary external addresses ·
+  pre-flight balance check against amount + network fee · pending/success/failure
+  transaction states · UI copy rules (Network fee / Deposit / Withdraw /
+  Stablecoin) · 360×640 minimum viewport · SVG/WebP assets · PageSpeed score
+  submitted · URL/origin manifest · contracts verified on Celoscan + sample tx
+  hashes · in-app support link · 24h critical-fix SLA · ToS + Privacy + Support
+  + About + How to Use in footer/menu · operator disclaimer (not Opera/MiniPay) ·
+  whitelisting integrity (frozen addresses/signatures/URLs post-approval) ·
+  dependency security (pinned versions, 7-day minimum age, `ignore-scripts=true`,
+  committed lockfile, frozen CI installs).

@@ -3,7 +3,7 @@
 > **Single source of truth:** https://docs.minipay.xyz/
 > This file is the canonical index of all MiniPay developer documentation pages.
 > All other `minipay-*.md` skill files defer to URLs listed here for authoritative content.
-> Last updated: 2026-05-22
+> Last updated: 2026-09-10
 
 Use this to find the right page in MiniPay's developer docs for any topic. Links go directly to `docs.minipay.xyz`.
 
@@ -98,6 +98,7 @@ These are the same MiniPay topics mirrored under `docs.celo.org`. Both sets are 
 | Resource | URL |
 |----------|-----|
 | MiniPay intake form (Stage 1) | https://minipay.to/mini-apps |
+| Same form, as linked from the docs | https://developer.minipay.to/mini-app-listing |
 | Submission docs page | https://docs.minipay.xyz/getting-started/submit-your-miniapp.html |
 
 > Stage 1 = the public intake form. Stage 2 = the readiness form sent after the first call. Full checklist in `minipay-requirements.md`.
@@ -117,5 +118,7 @@ These are the same MiniPay topics mirrored under `docs.celo.org`. Both sets are 
 | Smart-contract reads / writes / batching | `getting-started/smart-contracts.html` · `faq.html` Q12 |
 | Test on a real device | `getting-started/test-in-minipay.html` · `faq.html` Q13 |
 | Submit for listing | `getting-started/submit-your-miniapp.html` · `faq.html` Q14 |
+| App rejected / failing review / recurring bugs | `minipay-common-mistakes.md` |
+| Whitelisting / "permission denied" after listing | `minipay-requirements.md` §10 · `minipay-common-mistakes.md` #15 |
 | Add Cash deeplink (low-balance redirect) | `technical-references/deeplinks.html` |
 | Available countries & platforms | `getting-started/availability.html` |

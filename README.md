@@ -49,7 +49,7 @@ Foundry/Hardhat configs for Celo, fee abstraction implementation, SDK selection 
 Deep protocol reference for Uniswap V3/V4, Aave V3, Carbon DeFi, Morpho Blue, Mento stablecoins, stCELO, Velodrome, and Curve on Celo. Includes contract addresses, interaction patterns, and yield strategies.
 
 ### MiniPay App Builder
-Build Mini Apps for MiniPay (16M+ wallets). Wallet detection, auto-connect patterns, stablecoin payments, phone number resolution, testing with ngrok, and ready-to-use code templates. Includes the official submission checklist (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA).
+Build Mini Apps for MiniPay (~18M wallet activations). Wallet detection, auto-connect patterns, stablecoin payments, phone number resolution, testing with ngrok, and ready-to-use code templates. Includes the official submission checklist (UI copy rules, 360×640, PageSpeed, ToS/Privacy, 24h SLA).
 
 ### AI Agent Builder
 ERC-8004 (Agent Trust Protocol), Self Agent ID (proof-of-human), the Celo Agent Visa program, x402 (HTTP micropayments, with Celo's hosted facilitator at [x402.celo.org](https://x402.celo.org)), Celo MCP Server, and the Agent Skills specification. Build onchain agents that transact autonomously on Celo.
@@ -138,6 +138,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`odis-socialconnect.md`](skills/celopedia-skill/references/odis-socialconnect.md) | ODIS (PnP), OdisPayments, FederatedAttestations |
 | [`minipay-live-apps.md`](skills/celopedia-skill/references/minipay-live-apps.md) | Discovery snapshot: live Mini Apps, categories, country targeting |
 | [`minipay-requirements.md`](skills/celopedia-skill/references/minipay-requirements.md) | Two-stage MiniPay listing flow: Stage 1 intake form (`minipay.to/mini-apps`) and Stage 2 post-call readiness checklist |
+| [`minipay-common-mistakes.md`](skills/celopedia-skill/references/minipay-common-mistakes.md) | Symptom → cause → fix router for rejected or misbehaving Mini Apps |
 | [`minipay-performance.md`](skills/celopedia-skill/references/minipay-performance.md) | Measure and optimize Mini App load speed against the listing requirement |
 | [`minipay-docs-map.md`](skills/celopedia-skill/references/minipay-docs-map.md) | Page-by-page index of `docs.minipay.xyz` (getting started, guides, technical references, deeplinks) |
 
