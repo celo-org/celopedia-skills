@@ -76,6 +76,8 @@
 | Untangled Vault | Capital allocation | https://untangled.finance |
 | Tether Gold (XAUt) | Tokenized gold | https://gold.tether.to |
 
+> DefiLlama's "Tether Gold" protocol entry no longer lists Celo among its tracked chains as of this run (the same pattern as Uniswap V4, which also has no separate DefiLlama TVL entry on Celo — see `docs-watch/snapshot.md` §4) — but XAUt0 is confirmed live on Celo mainnet as a governance-approved fee currency (`contracts.md`, `network-info.md`), so this is treated as a DefiLlama indexing gap, not a real removal; no action taken.
+
 ### Payments & Streaming
 
 | Protocol | Description | Website |
