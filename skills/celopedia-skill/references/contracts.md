@@ -85,12 +85,15 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 | Wrapped Ether | WETH | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` |
 | CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
 | cNGN (Nigerian Naira, regulated) | cNGN | `0xF6829D7393dAe24509eb1E52eE8e572e2E271a4f` |
+| IDRX (Indonesian Rupiah) | IDRX | `0x18Bc5bcC660cf2B9cE3cd51a404aFe1a0cBD3C22` |
 
 > Third-party stablecoins above are sourced from and verified against the official list: https://docs.celo.org/build-on-celo/build-with-local-stablecoin (addresses confirmed on-chain).
 >
 > **Ticker collisions to watch** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury-backed) is **not** Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) is **not** Mento's **COPm** (`0x8A56…`).
 
 > **USAT** (Tether America USD) launched on Celo in April 2026 — a USD stablecoin backed by short-term T-bills + cash (supervised by Anchorage Digital). **6 decimals** (like USDC/USDT). It is a whitelisted fee currency; its `feeCurrency` adapter is `0x0357EE22278c922e1D36cFe6b899269b161880C4` (18-decimal adapter — use the adapter, not the token, in the `feeCurrency` field). Caveat: upstream price oracles don't yet index the Celo contract address, so Valora-derived wallets may show `priceUsd: NaN` until that's resolved.
+
+> **IDRX** (Indonesian Rupiah, issued by [IDRX](https://idrx.co/)) is live on Celo Mainnet as of 2026-09-09 — the same address it uses on Base, Lisk and other EVM chains (`0x18Bc…3C22`), per IDRX's own [supported-chain list](https://docs.idrx.co/introduction/supported-chain-and-contract-address). **2 decimals** — `name()`/`symbol()` both return `IDRX`, `decimals()` returns `2`, read on-chain 2026-09-14 — so `1 IDRX = 100` raw units; anything that assumes 6 or 18 decimals is off by 10⁴ or 10¹⁶ silently. It is an upgradeable proxy (ERC-1967/UUPS). It is **not** a fee currency and has no `permit()` / EIP-3009 — a transfer needs CELO for gas.
 
 **Ripio wFIAT notes** (added Jul 2026):
 - `wBRL` ≠ `BRLm`: `wBRL` is Ripio-issued; `BRLm` (cREAL) is Mento-issued — different issuers, different risk profiles
