@@ -87,7 +87,12 @@ section below were left untouched this run.
   protocol crossed into "notable" territory and none of the tracked ones
   dropped off. Moola Market and Uniswap V4's DefiLlama-indexing quirk
   remain as previously noted, unchanged.
-- No drift — `ecosystem.md` required no edits this run.
+- No drift from live sources — `ecosystem.md` required no data edits this run.
+  One note was carried over from the 2026-09-07 run (#70, closed unmerged):
+  DefiLlama's **Tether Gold** entry no longer lists Celo, but XAUt0 is live on
+  mainnet as a governance-approved fee currency, so it is an indexing gap, not
+  a delisting. Recorded in `ecosystem.md` so the next run does not
+  re-investigate it.
 
 ## 5. Grant programs (`grants-funding.md`)
 
