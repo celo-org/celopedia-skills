@@ -1,7 +1,7 @@
 # Celo Contract Addresses
 
 > Source: https://docs.celo.org/tooling/contracts/
-> Last updated: 2026-08-06
+> Last updated: 2026-09-14
 
 All addresses verified from official Celo documentation. **Do not guess addresses not listed here.**
 
@@ -250,6 +250,22 @@ Supported assets: USDC, USDT, EURm, USDm, CELO, WETH
 > that reuses the mainnet mental model will point at the wrong token. Verified by
 > `eth_call symbol()` against `forno.celo-sepolia.celo-testnet.org` and
 > `forno.celo.org` on 2026-08-28.
+
+### Uniswap V4 (Celo Sepolia Testnet)
+
+> New since the last check — Uniswap V4 is now also deployed on Celo Sepolia, at different addresses than mainnet.
+
+| Contract | Address |
+|----------|---------|
+| PoolManager | `0x2af85C83CFe7bC5182F81E5aE82661b4E9F15A1e` |
+| PositionManager | `0xB104b7c42DAB49d31fe3Ea91Dd80305348Cc37C1` |
+| PositionDescriptor | `0x3B13783e319Be24E2b9Db588745eA3202723B497` |
+| V4Quoter | `0xca5E523FA87c7dC67762c8E7f4a65783899b3c72` |
+| StateView | `0xF7e0Ba08d608cE1c90498c763e9fa001404e2a4b` |
+| UniversalRouter | `0x8891A0A682cC7f0bda7912E79C80167403d96103` |
+| Permit2 | `0x000000000022D473030F116dDEE9F6B43aC78BA3` |
+
+> **Uniswap V3 is not deployed on Celo Sepolia** — only V4 (above). For V3, use the mainnet addresses. The Alfajores V3 addresses previously listed here were removed: Alfajores and Baklava were both sunset in 2025, so those addresses are stale and must not be used. Verified against Uniswap's Celo deployments page and `docs.celo.org/tooling/contracts/uniswap-contracts`, and by `eth_getCode` on chain `11142220` (all seven V4 addresses above have bytecode).
 
 ### L1 Contracts on Sepolia
 
