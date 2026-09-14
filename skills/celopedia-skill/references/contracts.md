@@ -265,16 +265,7 @@ Supported assets: USDC, USDT, EURm, USDm, CELO, WETH
 | UniversalRouter | `0x8891A0A682cC7f0bda7912E79C80167403d96103` |
 | Permit2 | `0x000000000022D473030F116dDEE9F6B43aC78BA3` |
 
-### Uniswap V3 (Alfajores Testnet)
-
-| Contract | Address |
-|----------|---------|
-| UniswapV3Factory | `0x229Fd76DA9062C1a10eb4193768E192bdEA99572` |
-| NonfungiblePositionManager | `0x0eC9d3C06Bc0A472A80085244d897bb604548824` |
-| SwapRouter02 | `0x8C456F41A3883bA0ba99f810F7A2Da54D9Ea3EF0` |
-| QuoterV2 | `0x3c1FCF8D6f3A579E98F4AE75EB0adA6de70f5673` |
-| UniversalRouter | `0x84904B9E85F76a421223565be7b596d7d9A8b8Ce` |
-| Permit2 | `0x000000000022D473030F116dDEE9F6B43aC78BA3` |
+> **Uniswap V3 is not deployed on Celo Sepolia** — only V4 (above). For V3, use the mainnet addresses. The Alfajores V3 addresses previously listed here were removed: Alfajores and Baklava were both sunset in 2025, so those addresses are stale and must not be used. Verified against Uniswap's Celo deployments page and `docs.celo.org/tooling/contracts/uniswap-contracts`, and by `eth_getCode` on chain `11142220` (all seven V4 addresses above have bytecode).
 
 ### L1 Contracts on Sepolia
 

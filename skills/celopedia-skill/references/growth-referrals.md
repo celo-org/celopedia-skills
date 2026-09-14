@@ -151,8 +151,6 @@ The biggest risk of an open referral program: one person creates 100 wallets, re
 
 **Recommended starting stack**: cap rewards per referrer per week + require invitee to take a meaningful first action + hold rewards in 7-day escrow. This blocks 90%+ of sybil attempts without adding friction for real users.
 
-If you're paying meaningful USDT (>$5 per referral) or your app explicitly markets the referral program ("earn $$ by inviting friends"), graduate to Self.xyz ZK passport verification — see `minipay-self-zk.md` (ships in a follow-up PR). The 10-20% drop-off is worth it when fraud risk is real money.
-
 ---
 
 ## 7. The metrics that matter (viral coefficient ≥ 1.0 is the goal)

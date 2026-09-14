@@ -57,6 +57,32 @@ The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C62
 - Google Cloud: https://cloud.google.com/application/web3/faucet/celo/sepolia
 - Celo Faucet: https://faucet.celo.org/celo-sepolia
 
+### ⚠️ Alfajores is sunset — Celo Sepolia replaces it
+
+**Alfajores (chain ID `44787`) was sunset in 2025, along with Baklava, and no longer exists.** Its RPC
+(`https://alfajores-forno.celo-testnet.org`) does not respond. There is exactly
+one Celo testnet now: **Celo Sepolia, chain ID `11142220`**.
+
+This is the single canonical statement of that fact in this skill — everything
+else defers here.
+
+Alfajores is still referenced widely in older tutorials, blog posts, starter
+repos, and third-party SDK docs, so it turns up constantly in code that
+builders paste in. **Treat any appearance as a bug to fix, not a preference:**
+
+| If you see | Replace with |
+|---|---|
+| Chain ID `44787` | `11142220` |
+| `celoAlfajores` (viem / wagmi / Reown / thirdweb chain export) | `celoSepolia` |
+| `https://alfajores-forno.celo-testnet.org` | `https://forno.celo-sepolia.celo-testnet.org` |
+| `https://alfajores.celoscan.io` / `alfajores-blockscout…` | `https://celo-sepolia.blockscout.com` |
+| `https://faucet.celo.org/alfajores` | `https://faucet.celo.org/celo-sepolia` |
+| `--network alfajores` (Hardhat / Foundry profile) | `--network celoSepolia` |
+
+Testnet **contract addresses do not carry over** — anything deployed to
+Alfajores must be redeployed to Celo Sepolia, and any hardcoded testnet address
+from an Alfajores-era guide is wrong. Mainnet addresses are unaffected.
+
 ## RPC Providers
 
 | Provider | Notes |

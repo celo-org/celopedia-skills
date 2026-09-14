@@ -52,8 +52,15 @@ section below were left untouched this run.
   this between runs. No outstanding needs-review item here.
 - **Reference update applied**: added a new "Uniswap V4 (Celo Sepolia
   Testnet)" address table — Uniswap V4 is now also deployed on Sepolia
-  (previously only on mainnet), at different addresses than the existing
-  V3-on-Alfajores table.
+  (previously only on mainnet), at different addresses than mainnet V4.
+- Uniswap V3 tracked on **mainnet only** — V3 is not deployed on Celo Sepolia.
+- **Do not re-import testnet V3 addresses.** `docs.celo.org/tooling/contracts/
+  uniswap-contracts` and Uniswap's own Celo deployments page both still list a
+  V3 table for **Alfajores**, which was sunset in 2025 (along with Baklava).
+  Celo Sepolia is the only testnet this repo documents, and that table was
+  removed from `contracts.md` in #72. Skip it on every run — it is not drift,
+  and it must not be copied back in. If upstream ever adds a *Celo Sepolia* V3
+  table, that is a real `reference update`.
 
 ## 3. Network info (`network-info.md`)
 
@@ -100,3 +107,40 @@ section below were left untouched this run.
   than this snapshot section suggests. This section still can't be
   refreshed from live data until celopg.eco is reachable again, so it is
   left as-is rather than guessed at.
+
+## 6. MiniPay docs (`minipay-docs-map.md`, `minipay-requirements.md`, `minipay-common-mistakes.md`)
+
+- Source: `docs.minipay.xyz` (page tree, submission page, best-practices page,
+  deeplinks page)
+- Last verified: 2026-09-10
+- **Page tree** as cached in `minipay-docs-map.md`: Getting Started (overview,
+  why-minipay, availability, quick-start), Installation (project-setup,
+  setup-react, test-in-minipay, faq), Guides (wallet-connection,
+  ui-and-container, smart-contracts, best-practices, deployment,
+  submit-your-miniapp), Reference (technical-references overview, deeplinks,
+  retrieve-balance, send-transaction, gas-estimation, phone-number-lookup),
+  Custom Methods (overview, get-exchange-rate, scan-qr-code, request-contact).
+  Note the flat `getting-started/` prefix on the Guides pages — a move to a
+  `guides/` prefix would be a structural change worth catching (bare
+  `/guides/*.html` paths currently 404).
+- **Deeplinks** (host `link.minipay.xyz`): `add_cash` (opt.
+  `?tokens=USDm,USDC,USDT`), `browse?url=`, `discover`, `receipt?tx=[&celebrate]`,
+  `qr`, `invite_friends`, `balance`. `minipay.opera.com` does **not** resolve —
+  if it reappears anywhere in the references, that's a regression.
+- **Submission URLs**: `https://minipay.to/mini-apps` (Stage 1 intake, cached)
+  and `https://developer.minipay.to/mini-app-listing` (same form as linked from
+  the docs page). Both returned 200 this run.
+- **Listing policy currently cached** in `minipay-requirements.md` — treat any
+  divergence as `needs review`, never an auto-edit:
+  USDT support mandatory · no non-native tokens · no CELO in UI · zero-click
+  connect · no `personal_sign` / `eth_signTypedData` · no display/copy/share of
+  wallet addresses · no withdrawals to arbitrary external addresses ·
+  pre-flight balance check against amount + network fee · pending/success/failure
+  transaction states · UI copy rules (Network fee / Deposit / Withdraw /
+  Stablecoin) · 360×640 minimum viewport · SVG/WebP assets · PageSpeed score
+  submitted · URL/origin manifest · contracts verified on Celoscan + sample tx
+  hashes · in-app support link · 24h critical-fix SLA · ToS + Privacy + Support
+  + About + How to Use in footer/menu · operator disclaimer (not Opera/MiniPay) ·
+  whitelisting integrity (frozen addresses/signatures/URLs post-approval) ·
+  dependency security (pinned versions, 7-day minimum age, `ignore-scripts=true`,
+  committed lockfile, frozen CI installs).

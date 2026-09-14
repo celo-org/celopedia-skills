@@ -61,7 +61,7 @@ templates below — ask the user only for the fields that are still blank.
 2. <step>
 
 ### Environment
-<tool + version, OS, network (mainnet/alfajores), links>
+<tool + version, OS, network (mainnet / Celo Sepolia), links>
 
 ### Additional context
 <logs, screenshots, references>
