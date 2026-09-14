@@ -96,10 +96,18 @@ section below were left untouched this run.
 - **Not verified this run (second run in a row)** — `celopg.eco` returned a
   403 from the sandbox's org egress policy again (not the site itself,
   confirmed via `curl -v` and the proxy's own recent-failures log); see PR
-  docs-watch/2026-09-14. Same failure as the 2026-08-24 run — this looks
-  like a persistent egress allow-list gap rather than a transient outage,
-  worth a human adding `celopg.eco` to the allow-list rather than waiting
-  for it to resolve on its own.
+  docs-watch/2026-09-14.
+- **Correction (from PR #75 review, 2026-09-14) — don't just allow-list this
+  domain and assume that fixes it.** A reviewer testing from a network with
+  no egress policy found `https://www.celopg.eco/programs` itself returns a
+  Netlify 404 (same for `/programs/`, `/grants`, `/funding`) — the root
+  `celopg.eco/` resolves but as a client-side SPA shell with no
+  server-rendered links. So the sandbox's 403 has been masking a second,
+  real problem: even with network access, this URL may no longer serve the
+  programs list. Next run: first confirm the domain is reachable at all
+  (needs the allow-list fix regardless), then check whether `/programs`
+  still 404s — if so, don't conclude "no programs are live," go find where
+  the list moved (new path, or API-served) before touching this file's data.
 - Note: unlike the snapshot's own facts below (last touched 2026-05-18,
   now stale), `grants-funding.md` itself was independently updated by a
   human on 2026-08-28 with current program data (Agents at Work Hackathon,
