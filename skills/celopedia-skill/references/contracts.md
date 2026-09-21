@@ -1,7 +1,7 @@
 # Celo Contract Addresses
 
 > Source: https://docs.celo.org/tooling/contracts/
-> Last updated: 2026-08-06
+> Last updated: 2026-09-21
 
 All addresses verified from official Celo documentation. **Do not guess addresses not listed here.**
 

@@ -83,15 +83,15 @@ All deeplinks require MiniPay installed and the user logged in.
 
 ## External: Build-on-MiniPay on docs.celo.org
 
-These are the same MiniPay topics mirrored under `docs.celo.org`. Both sets are canonical and stay in sync; either is fine to link from a Mini App project.
+**As of 2026-09-21 this is no longer a full mirror.** `docs.celo.org` consolidated its
+Quickstart, Code Library, Deeplinks, and Ngrok Setup pages down to a single Overview page
+(the other three URLs now 308-redirect to it) — `docs.minipay.xyz` below is the only place
+with the full page tree, so use it, not `docs.celo.org`, for anything beyond a high-level
+overview.
 
 | Topic | URL |
 |-------|-----|
 | Overview | https://docs.celo.org/build-on-celo/build-on-minipay/overview |
-| Quickstart | https://docs.celo.org/build-on-celo/build-on-minipay/quickstart |
-| Code Library | https://docs.celo.org/build-on-celo/build-on-minipay/code-library |
-| Deeplinks | https://docs.celo.org/build-on-celo/build-on-minipay/deeplinks |
-| Ngrok Setup (device testing) | https://docs.celo.org/build-on-celo/build-on-minipay/prerequisites/ngrok-setup |
 
 ## Submission
 
