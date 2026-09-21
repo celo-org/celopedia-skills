@@ -2,7 +2,7 @@
 
 > Sources: docs.celo.org, DefiLlama, celo.org/ecosystem
 > For live TVL data, always refer to https://defillama.com/chain/Celo
-> Last updated: 2026-08-24
+> Last updated: 2026-09-21
 
 ---
 
@@ -273,9 +273,11 @@ MiniPay is Celo's flagship stablecoin wallet, built into Opera Mini and also ava
 
 ### Building for MiniPay
 
-- Quickstart: https://docs.celo.org/build-on-celo/build-on-minipay/quickstart
-- Code Library: https://docs.celo.org/build-on-celo/build-on-minipay/code-library
-- Deeplinks: https://docs.celo.org/build-on-celo/build-on-minipay/deeplinks
+- Overview: https://docs.celo.org/build-on-celo/build-on-minipay/overview (docs.celo.org's
+  Quickstart/Code Library/Deeplinks pages were consolidated into this single page as of
+  2026-09-21 and now redirect here — see `docs-map.md` → _Build on MiniPay_)
+- Full docs (Quickstart, Code Library, Deeplinks, etc.): https://docs.minipay.xyz/ — see
+  `minipay-docs-map.md` for the page-by-page index
 - Detection: Check `window.ethereum.isMiniPay` in browser
 
 ---
