@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.12.0"
+  version: "2.13.0"
 ---
 
 # Celopedia Skill
@@ -77,6 +77,21 @@ B2B fiat-to-stablecoin infrastructure on Celo — virtual accounts, payouts, car
 - EEA caveat: USDT and USDB unavailable to EEA users — use USDC for EU flows
 
 **References**: `stablecoin-orchestration.md`
+
+### 3b. Bulk Payouts & Mass Distribution (On-Chain)
+
+Paying many recipients at once — creator rewards, referral payouts, payroll, airdrops, cashback.
+
+- **No first-party Celo "blast sender" product**, but the standard batch-distribution contracts are all deployed at their canonical addresses: **Disperse**, **Safe** + MultiSendCallOnly, **Permit2**, **Superfluid**. Verified table in `contracts.md` → _Batch Distribution & Utility Contracts_
+- **Measured costs** (Mainnet): a stablecoin transfer to a first-time recipient is **57,443 gas** (~$0.0011), so **1,000 payouts ≈ $1.10 total**. Block gas limit 30M → chunk at **250–400 recipients per transaction**
+- **`Multicall3` cannot send token payouts** — inside the batch `msg.sender` is Multicall3, so `transfer` moves Multicall3's balance, not the caller's. Most common wrong answer to "how do I batch ERC-20 sends"
+- **A deployed contract and a supporting UI are different things** — disperse.app's hosted frontend does not appear to list Celo even though the contract works. Check both before pointing a builder at a hosted tool
+- **EIP-7702 is live** (Isthmus, 2025-07-09, block 40,172,442) — an EOA can batch transfers directly without approving a third-party contract
+- Pair with **fee abstraction** so the payout treasury holds one asset and never needs CELO top-ups
+- **Recurring fixed per-head rewards are a sybil target** — always pair a payout design with treasury spend caps, a qualifying action, and escrow. See `growth-referrals.md`, `self-agent-id.md`
+- If recipients are identified by phone number, resolve via ODIS first (`odis-socialconnect.md`); if they need fiat in a bank account, that's `stablecoin-orchestration.md`
+
+**References**: `bulk-payouts.md`, `contracts.md`, `builder-guide.md`, `growth-referrals.md`
 
 ### 4. MiniPay App Builder
 
@@ -229,6 +244,8 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | Contract address | Look up in `contracts.md` |
 | Protocol integration | Check `defi-protocols.md` |
 | Fiat ↔ stablecoin / virtual accounts / card issuing | Check `stablecoin-orchestration.md` |
+| Bulk payouts / mass distribution / airdrop / "blast sender" / paying thousands of recipients | Check `bulk-payouts.md` |
+| Batch / multisend contract address (Disperse, Multicall3, Safe MultiSend, Permit2) | Look up in `contracts.md` → _Batch Distribution & Utility Contracts_ |
 | Build / deploy / verify | Check `builder-guide.md`, `dev-templates.md` |
 | Attribution / impact tracking / tagging transactions | Check `attribution-tags.md` |
 | MiniPay development | Check `minipay-guide.md`, `minipay-templates.md` |
