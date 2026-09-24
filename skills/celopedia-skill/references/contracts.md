@@ -202,6 +202,32 @@ Supported assets: USDC, USDT, EURm, USDm, CELO, WETH
 
 ---
 
+## Batch Distribution & Utility Contracts (Mainnet)
+
+For bulk payouts, airdrops, and mass distribution. Every address below was confirmed to
+hold bytecode on Celo Mainnet on 2026-09-24. Usage guidance, gas costs, and batch sizing:
+`bulk-payouts.md`.
+
+| Contract | Address | Notes |
+|----------|---------|-------|
+| Disperse | `0xD152f549545093347A162Dce210e7293f1452150` | `disperseEther` `0xe63d38ed`, `disperseToken` `0xc73a2d60`, `disperseTokenSimple` `0x51ba162c` |
+| Multicall3 | `0xcA11bde05977b3631167028862bE2a173976CA11` | Batched **reads** only. Inside a Multicall3 call `msg.sender` is Multicall3, so it cannot move a caller's tokens. |
+| Safe singleton 1.4.1 | `0x41675C099F32341bf84BFc5382aF534df5C7461a` | |
+| Safe singleton 1.3.0 (L2) | `0x3E5c63644E683549055b9Be8653de26E0B4CD36E` | |
+| SafeProxyFactory 1.3.0 | `0xa6B71E26C5e0845f74c812102Ca7114b6a896AB2` | |
+| MultiSend 1.3.0 | `0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761` | `delegatecall` variant |
+| MultiSendCallOnly 1.3.0 | `0x40A2aCCbd92BCA938b02010E17A5b8929b49130D` | Used by the Safe CSV Airdrop app |
+| MultiSendCallOnly 1.4.1 | `0x9641d764fc13c8B624c04430C7356C1C7C8102e2` | |
+| Permit2 | `0x000000000022D473030F116dDEE9F6B43aC78BA3` | Signature-based approvals |
+| Superfluid Host | `0xA4Ff07cF81C02CFD356184879D953970cA957585` | Streaming / distribution pools |
+| Superfluid CFAv1 | `0x9d369e78e1a682cE0F8d9aD849BeA4FE1c3bD3Ad` | Constant Flow Agreement |
+
+Safe supports Celo officially (chain `42220`, UI at <https://safe.celo.org>). Note the
+`Multicall2` entry in the Uniswap V3 table above is **Uniswap's own deployment**, not a
+general-purpose multicall.
+
+---
+
 ## Testnet Contracts (Celo Sepolia)
 
 ### Core Protocol
