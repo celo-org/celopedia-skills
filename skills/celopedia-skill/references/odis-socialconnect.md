@@ -186,8 +186,7 @@ You may call **FederatedAttestations** with **viem** `readContract` and **`Feder
 ## Documentation links
 
 - [Query On-Chain Identifiers with ODIS (ContractKit)](https://docs.celo.org/tooling/libraries-sdks/contractkit/odis)
-- [Data encryption key (DEK)](https://docs.celo.org/developer/contractkit/data-encryption-key) (Celo docs)
-- Legacy context: [ODIS use case: phone number privacy](https://docs.celo.org/legacy/protocol/identity/odis-use-case-phone-number-privacy)
+- [Data encryption key (DEK)](https://docs.celo.org/tooling/libraries-sdks/contractkit/data-encryption-key) (Celo docs)
 
 ---
 

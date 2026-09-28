@@ -1,7 +1,7 @@
 # Celo Contract Addresses
 
 > Source: https://docs.celo.org/tooling/contracts/
-> Last updated: 2026-08-06
+> Last updated: 2026-09-28
 
 All addresses verified from official Celo documentation. **Do not guess addresses not listed here.**
 
@@ -153,6 +153,22 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 | StateView | `0xbc21f8720babf4b20d195ee5c6e99c52b76f2bfb` |
 | UniversalRouter | `0xcb695bc5d3aa22cad1e6df07801b061a05a0233a` |
 | Permit2 | `0x000000000022D473030F116dDEE9F6B43aC78BA3` |
+
+## Uniswap V4 (Celo Sepolia Testnet)
+
+> Do not assume these match mainnet — Uniswap addresses are **not** deployed at the same address across chains for Celo. Confirm mappings against the live `uniswap-contracts` docs page before integrating.
+
+| Contract | Address |
+|----------|---------|
+| PoolManager | `0x2af85C83CFe7bC5182F81E5aE82661b4E9F15A1e` |
+| PositionManager | `0xB104b7c42DAB49d31fe3Ea91Dd80305348Cc37C1` |
+| PositionDescriptor | `0x3B13783e319Be24E2b9Db588745eA3202723B497` |
+| V4Quoter | `0xca5E523FA87c7dC67762c8E7f4a65783899b3c72` |
+| StateView | `0xF7e0Ba08d608cE1c90498c763e9fa001404e2a4b` |
+| UniversalRouter | `0x8891A0A682cC7f0bda7912E79C80167403d96103` |
+| Permit2 | `0x000000000022D473030F116dDEE9F6B43aC78BA3` |
+
+> On Celo Sepolia, `UniversalRouter` and `PositionManager` use the CELO ERC-20 (`0x471EcE3750Da237f93B8E339c536989b8978a438`) as their wrapped-native (`weth9`) slot. CELO does not implement `deposit()`/`withdraw()` on the L2, so the router's `WRAP_ETH`/`UNWRAP_WETH` commands will revert — pools using the native asset (`address(0)`) or CELO as an ERC-20 are unaffected.
 
 ## Uniswap V3 (Mainnet)
 

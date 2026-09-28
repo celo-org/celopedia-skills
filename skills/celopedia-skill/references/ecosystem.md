@@ -2,7 +2,7 @@
 
 > Sources: docs.celo.org, DefiLlama, celo.org/ecosystem
 > For live TVL data, always refer to https://defillama.com/chain/Celo
-> Last updated: 2026-08-24
+> Last updated: 2026-09-28
 
 ---
 
@@ -22,6 +22,7 @@
 | Ubeswap | Celo-native DEX (V2 + V3) | https://ubeswap.org |
 | Carbon DeFi | Automated on-chain trading strategies (Bancor) | https://app.carbondefi.xyz |
 | Mento V3 | Multi-currency FX infrastructure | https://app.mento.org |
+| Textile FX | Multi-chain credit/lending-style DEX (also on Ethereum, BNB, Base) | https://app.textilecredit.com |
 
 ### Lending & Borrowing
 
@@ -273,9 +274,8 @@ MiniPay is Celo's flagship stablecoin wallet, built into Opera Mini and also ava
 
 ### Building for MiniPay
 
-- Quickstart: https://docs.celo.org/build-on-celo/build-on-minipay/quickstart
-- Code Library: https://docs.celo.org/build-on-celo/build-on-minipay/code-library
-- Deeplinks: https://docs.celo.org/build-on-celo/build-on-minipay/deeplinks
+- Overview: https://docs.celo.org/build-on-celo/build-on-minipay/overview
+- Full developer docs (quickstart, guides, deeplinks): https://docs.minipay.xyz — see `minipay-docs-map.md`
 - Detection: Check `window.ethereum.isMiniPay` in browser
 
 ---
