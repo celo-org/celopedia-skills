@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.12.0"
+  version: "2.13.0"
 ---
 
 # Celopedia Skill
@@ -106,13 +106,14 @@ Build AI agents that transact on Celo.
 - **Self Agent ID**: proof-of-human extension on ERC-8004 (soulbound NFT bound to a passport ZK proof) — sybil resistance; register at `https://app.ai.self.xyz`. See `self-agent-id.md`.
 - **Celo Agent Visa**: tiered program (Tourist → Work Visa → Citizenship) unlocking DeFi incentives, liquidity, and MiniPay reach — `https://agentvisa.self.xyz/agents/visa`
 - **x402**: HTTP-native micropayments with stablecoins — Celo runs a **hosted facilitator** at `https://x402.celo.org` (dashboard/API keys; mainnet API `api.x402.celo.org`, testnet `api.x402.sepolia.celo.org`; sponsored gas, USDC/USDT via EIP-3009). Agent-readable integration guide: `https://x402.celo.org/SKILL.md` — fetch it before writing integration code. Details: `ai-agents.md` → _Hosted Celo Facilitator_
+- **x402 seller discoverability**: how a paid endpoint gets found — a 402 that carries the `bazaar` extension (method, example input, input schema, example output), agent402.tools registration, an ERC-8004 identity, a Buy catalog listing request; Coinbase's index and x402scan need an offer on a network they support (Coinbase's facilitator does not settle on Celo). See `x402-seller-discoverability.md`.
 - **Celo MCP Server**: Query blockchain data from coding assistants
 - **Agent Skills**: Modular skill system for AI coding agents
 - **Agents at Work Hackathon** (Aug 28 – Sep 14, 2026, $5K in CELO across 5 tracks): agents that move real value between independent parties, or reach real users. Register + submit via the **Celo Builders skill** (`npx skills add https://celobuilders.xyz`) — registration returns your ERC-8021 attribution tag, and every track's leaderboard only counts tagged transactions. Mainnet only; public repo required. Details: `https://celoplatform.notion.site/Agents-at-Work-Hackathon-3c1d5cb803de81139de7f4f3d09e55dc` · leaderboard `https://dune.com/celo/agents-at-work-hackathon`. See `grants-funding.md`.
 - Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
 - **Securing an agent or chatbot**: `agent-security.md` — rendering model output safely, scoping by grounding rather than prompt instructions, treating tool output as untrusted, Denial of Wallet budgeting, and what changes once the agent holds a key (injection reaching a signing path, x402 spend, permanent ERC-8004 reputation). Read it before shipping anything public.
 
-**References**: `ai-agents.md`, `self-agent-id.md`, `agent-security.md`
+**References**: `ai-agents.md`, `self-agent-id.md`, `agent-security.md`, `x402-seller-discoverability.md`
 
 ### 6. Security & Audit Readiness
 
@@ -240,6 +241,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | ODIS / phone lookup / SocialConnect | Check `odis-socialconnect.md`, `minipay-guide.md`, `contracts.md` |
 | AI agent building | Check `ai-agents.md` |
 | x402 / pay-per-use API / paid endpoints | Check `ai-agents.md` → x402; hosted facilitator guide: `https://x402.celo.org/SKILL.md` |
+| "How do agents find my paid API" / get listed / discoverability / Bazaar / agent402 / x402scan | Check `x402-seller-discoverability.md` — self-describing 402 + index-by-index entry rules |
 | Security / audit prep | Check `security-patterns.md` (Celo-specific); defer general Solidity audits to `pashov/skills` |
 | Grants / funding | Check `grants-funding.md` |
 | Documentation | Check `docs-map.md` |

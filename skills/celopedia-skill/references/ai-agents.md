@@ -187,6 +187,8 @@ Celo runs an official hosted x402 facilitator, so builders don't need to run the
 
 **Always fetch `https://x402.celo.org/SKILL.md` before writing integration code** — it carries the current, settlement-verified seller (`@x402/hono` / `@x402/express`) and buyer (`@x402/fetch`) code for this facilitator.
 
+**Getting found:** a working 402 is invisible until it describes itself and is listed. Baseline for any Celo endpoint: the `bazaar` extension in the 402, an agent402.tools registration, an ERC-8004 identity, and a Buy catalog listing request. Coinbase's index and x402scan need an offer on a network they support. Full entry rules and a verified snippet: `x402-seller-discoverability.md`.
+
 **Metering model** (snapshot — confirm via `/api/config`): connect a wallet on the dashboard and sign a message (no gas) → API key with free starter credits (500 mainnet / 1,000 testnet). Each on-chain `/settle` costs 1 credit (flat $0.001, topped up with USDC on the dashboard). `/verify` and `/supported` are free and need no key.
 
 **Integration gotchas for this facilitator:**
