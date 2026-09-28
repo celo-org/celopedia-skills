@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.14.0"
+  version: "2.15.0"
 ---
 
 # Celopedia Skill
@@ -125,13 +125,14 @@ Build AI agents that transact on Celo.
 - **Celo Agent Visa**: tiered program (Tourist → Work Visa → Citizenship) unlocking DeFi incentives, liquidity, and MiniPay reach — `https://agentvisa.self.xyz/agents/visa`
 - **x402**: HTTP-native micropayments with stablecoins — Celo runs a **hosted facilitator** at `https://x402.celo.org` (dashboard/API keys; mainnet API `api.x402.celo.org`, testnet `api.x402.sepolia.celo.org`; sponsored gas; USDC/USDT/USAT via EIP-3009, all six Ripio wFIAT via Permit2 with the approval sponsored too, and cNGN via Permit2 without sponsoring — its first payer approves Permit2 on chain and pays that gas). Agent-readable integration guide: `https://x402.celo.org/SKILL.md` — fetch it before writing integration code. Details: `ai-agents.md` → _Hosted Celo Facilitator_
 - **buy** (`https://usebuy.ai`): the **paying** side of x402. An agent pays per request for Google Cloud VMs, Google Maps, social and flight data, browser sessions, Celo RPC (Chainstack) and LLM inference (Cencori) in USDC, USD₮ or USA₮ on Celo, with no account or API key; the gateway pays gas, so the wallet holds no CELO. CLI and MCP server: `@celo/buy` (`buy mcp install --client all`). Task-level skills, checked against the live gateway: `https://github.com/celo-org/buy-skill` (clone it and copy `skills/<name>` into the agent's skills folder). **No stablecoins:** Google Cloud's Celo faucet (`https://cloud.google.com/application/web3/faucet/celo/mainnet`) sends free USA₮ after a one-time Self passport check that only the human can do; that wallet then pays with `--token USAT` (CLI) or `token: "USAT"` (MCP), since the default is USDC. Payments are final; beta without an external security review. Docs: `https://usebuy.ai/docs`
+- **x402 seller discoverability**: how a paid endpoint gets found — a 402 that carries the `bazaar` extension (method, example input, input schema, example output), agent402.tools registration, an ERC-8004 identity, a Buy catalog listing request; Coinbase's index and x402scan need an offer on a network they support (Coinbase's facilitator does not settle on Celo). See `x402-seller-discoverability.md`.
 - **Celo MCP Server**: Query blockchain data from coding assistants
 - **Agent Skills**: Modular skill system for AI coding agents
 - **Agents on Open Rails Hackathon** (Oct 6 – Nov 9, 2026, $5K in CELO across 3 tracks, on **Loops House**, with Celo Devs): agents that earn, pay, and settle on live payment rails with real money moving — tracks *Stable Agents: LatAm* (Ripio wFIAT), *Open Corridors* (Textile FX; USA₮ via x402), and *Build with buy*. Register at `https://www.loops.house/agents-on-open-rails/`. Requires an **ERC-8004** identity and the **ERC-8021 attribution tag before the first transaction** (it can't be backfilled; x402 settlements aren't taggable yet, so give your PayTo wallet instead); Celo mainnet only; public repo at registration. Telegram `https://t.me/realworldagentshackathon`. Details, rules, and dates: `grants-funding.md`.
 - Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
 - **Securing an agent or chatbot**: `agent-security.md` — rendering model output safely, scoping by grounding rather than prompt instructions, treating tool output as untrusted, Denial of Wallet budgeting, and what changes once the agent holds a key (injection reaching a signing path, x402 spend, permanent ERC-8004 reputation). Read it before shipping anything public.
 
-**References**: `ai-agents.md`, `self-agent-id.md`, `agent-vault.md`, `agent-security.md`
+**References**: `ai-agents.md`, `self-agent-id.md`, `agent-vault.md`, `agent-security.md`, `x402-seller-discoverability.md`
 
 ### 6. Security & Audit Readiness
 
@@ -264,6 +265,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | x402 / pay-per-use API / paid endpoints | Check `ai-agents.md` → x402; hosted facilitator guide: `https://x402.celo.org/SKILL.md` |
 | Agent needs to PAY for an API or service per request (compute, data, RPC, LLM) / buy / usebuy.ai | Route to buy (AI agents section above) and its skills in `https://github.com/celo-org/buy-skill`. No crypto → the Self-gated USA₮ faucet, then pay in USAT. Building a paid endpoint instead → the x402 row |
 | Agent paying by card / agent logging in to websites / Agent Vault / agent shopping safely | Check `agent-vault.md` — not Celo-specific; say so, and route onchain payments to x402 |
+| "How do agents find my paid API" / get listed / discoverability / Bazaar / agent402 / x402scan | Check `x402-seller-discoverability.md` — self-describing 402 + index-by-index entry rules |
 | Security / audit prep | Check `security-patterns.md` (Celo-specific); defer general Solidity audits to `pashov/skills` |
 | Grants / funding / current hackathon (dates, tracks, rules, how to register) | Check `grants-funding.md` — fetch the hackathon page live for deadlines |
 | Documentation | Check `docs-map.md` |
