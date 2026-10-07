@@ -13,29 +13,23 @@
 > **Proof of Ship has been sunset** and is no longer accepting submissions. For hackathon and
 > new-program announcements, subscribe to the Celo Devs newsletter: https://celo-devs.beehiiv.com/subscribe
 
-### Agents at Work Hackathon
+### Agents on Open Rails Hackathon
 
 - **Type**: Hackathon
-- **Amount**: **$5,000 total**, distributed in CELO
-- **Dates**: **Aug 28 – Sep 14, 2026**; submission deadline **Sep 14, 09:00 GMT**, winners announced **Sep 25**
+- **Amount**: **$5,000 total**, distributed in $CELO
+- **Dates**: **Oct 6, 2026 – Nov 9, 2026**; submission window 2026-10-06T12:00Z → 2026-11-09T09:00Z
 - **Host**: Celo Devs
-- **Details**: https://celoplatform.notion.site/Agents-at-Work-Hackathon-3c1d5cb803de81139de7f4f3d09e55dc
-- **Register / submit**: through an agent — `npx skills add https://celobuilders.xyz`, then ask it to register you. Registration returns an ERC-8021 attribution tag (`celo_...`) instantly.
-- **Live leaderboard**: https://dune.com/celo/agents-at-work-hackathon
-- **Telegram**: https://t.me/realworldagentshackathon
+- **Platform**: Loops House
+- **Kick-off recording**: https://youtu.be/tn0tDEOwqgg
+- **Announcement**: https://x.com/CeloDevs/status/2107440784534561278
+- **Partners**: Ripio · Textile · Chainstack
 - **Tracks**:
 
-  | Track | Prize | Decided on |
-  |-------|-------|------------|
-  | Value Moved | $2,000 | Most value moved **between independent parties** on Celo |
-  | Real World Adoption | $1,750 ($1,000 + $750 Best Stablecoin Adoption) | Verified + returning users, distinct signers |
-  | AskBots CLI Growth | $500 | Biggest measured improvement between two review rounds |
-  | Judges' Favorite | $500 | Most innovative use of Celo primitives with real distribution |
-  | Best Feedback for cPay | $250 (5 × $50) | Most valuable closed-beta feedback |
-
-- **Register on day one**: every track's leaderboard only counts transactions carrying your attribution tag. See [attribution-tags.md](attribution-tags.md).
-- **Rules that catch people out**: Celo **mainnet only** (testnet counts for nothing); the GitHub repo must be **public at registration and still resolve at judging**; counterparties must be independent (not your wallets, not first funded by you, with Celo activity predating Aug 28). Sponsored gas does not count as builder contribution, but **EIP-3009 authorisers and sponsored-relay signers do count as users** — a gasless MiniPay flow is not penalised.
-- **Best for**: agent projects that move real value or reach real users through a distribution channel you already own (MiniPay, Telegram, WhatsApp)
+  | Track | Prize | Focus |
+  |-------|-------|-------|
+  | Stable Agents: LatAm | $2,000 | Agents for real users on Ripio's wFIAT rails |
+  | Open Corridors | $2,000 | FX agents on Textile + real settlement in USA₮ via Celo's x402 |
+  | Build with `buy` | $1,000 | Best projects leveraging buy's agent service marketplace |
 
 ### Prezenti: Season 3
 
@@ -73,6 +67,7 @@
 
 | Program | Funding | Dates | Host |
 |---------|---------|-------|------|
+| Agents at Work | $5K CELO | Aug 28 – Sep 14, 2026 | Celo Devs |
 | Synthesis | 10K USDT | Mar 11–25, 2026 | Celo Devs |
 | Build Agents for Real World | $8.5K USDT | Mar 2–22, 2026 | Celo Public Goods |
 | Cel'EU Cirkvit S1 | 27K CELO | Nov–Dec 2025 | Celo Europe |
@@ -102,5 +97,5 @@
 | Building… | Recommended Program |
 |-----------|---------------------|
 | Project built on Celo, focus on MiniPay | **Prezenti Anchor Pool (S3)** — $25K+ (confirm status, see above) |
-| AI agents or agent-economy infrastructure | **Agents at Work Hackathon** — $5K, to Sep 14 2026 · **Prezenti Frontier Pool (S3)** |
+| AI agents or agent-economy infrastructure | **Agents on Open Rails Hackathon** — $5K, Oct 6 – Nov 9 2026 · **Prezenti Frontier Pool (S3)** |
 | Post-launch app with measurable traction (1K+ MAU / 500+ daily tx / $50K+ TVL / $5K+/mo revenue) | **Celo Builder Fund** — $25K SAFE |
