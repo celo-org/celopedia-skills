@@ -13,6 +13,22 @@
 > **Proof of Ship has been sunset** and is no longer accepting submissions. For hackathon and
 > new-program announcements, subscribe to the Celo Devs newsletter: https://celo-devs.beehiiv.com/subscribe
 
+### Agents on Open Rails Hackathon
+
+- **Type**: Hackathon
+- **Amount**: **$5,000 total**
+- **Dates**: **Oct 6, 2026 –** (end date TBC); kick-off call Oct 6 12pm GMT
+- **Host**: Celo Devs
+- **Kick-off recording**: https://lu.ma/uk27jw1q
+- **Announcement**: https://x.com/CeloDevs/status/2106021545999258063
+- **Register**: through Loops House (details in kick-off call)
+- **Tracks / focus areas** (from kick-off):
+  - Ripio local-currency stablecoins (wBRL, wMXN, wCOP, wARS, wPEN, wCLP)
+  - Textile FX
+  - USA₮ over Celo's x402 facilitator
+  - `buy` — the agent service marketplace
+- **⚠️ Details page not yet published** — check https://celoplatform.notion.site for the full rules page and track prize breakdown
+
 ### Prezenti: Season 3
 
 - **Type**: Milestone-based grants, three pools
@@ -79,5 +95,5 @@
 | Building… | Recommended Program |
 |-----------|---------------------|
 | Project built on Celo, focus on MiniPay | **Prezenti Anchor Pool (S3)** — $25K+ (confirm status, see above) |
-| AI agents or agent-economy infrastructure | **Prezenti Frontier Pool (S3)** — milestone-based (confirm status, see above) |
+| AI agents or agent-economy infrastructure | **Agents on Open Rails Hackathon** — $5K, started Oct 6 2026 (details TBC) · **Prezenti Frontier Pool (S3)** |
 | Post-launch app with measurable traction (1K+ MAU / 500+ daily tx / $50K+ TVL / $5K+/mo revenue) | **Celo Builder Fund** — $25K SAFE |
