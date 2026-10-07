@@ -20,7 +20,7 @@
 - **Dates**: **Oct 6, 2026 – Nov 9, 2026**; submission window 2026-10-06T12:00Z → 2026-11-09T09:00Z
 - **Host**: Celo Devs
 - **Platform**: Loops House
-- **Kick-off**: https://lu.ma/uk27jw1q
+- **Kick-off recording**: https://youtu.be/tn0tDEOwqgg
 - **Announcement**: https://x.com/CeloDevs/status/2107440784534561278
 - **Partners**: Ripio · Textile · Chainstack
 - **Tracks**:
