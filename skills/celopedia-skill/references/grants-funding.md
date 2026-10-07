@@ -25,11 +25,11 @@
 - **Partners**: Ripio · Textile · Chainstack
 - **Tracks**:
 
-  | Track | Focus |
-  |-------|-------|
-  | Stable Agents: LatAm | Ripio local-currency stablecoins (wBRL, wMXN, wCOP, wARS, wPEN, wCLP) |
-  | Stable Agents: Open Corridors | USA₮ — Tether America on Celo |
-  | Build with `buy` | Agent service marketplace (usebuy.ai) |
+  | Track | Prize | Focus |
+  |-------|-------|-------|
+  | Stable Agents: LatAm | $2,000 | Agents for real users on Ripio's wFIAT rails |
+  | Open Corridors | $2,000 | FX agents on Textile + real settlement in USA₮ via Celo's x402 |
+  | Build with `buy` | $1,000 | Best projects leveraging buy's agent service marketplace |
 
 ### Prezenti: Season 3
 
