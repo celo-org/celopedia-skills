@@ -1,7 +1,7 @@
 # Celo Attribution Tags (ERC-8021)
 
 > Source: https://github.com/celo-org/attribution-tags (BUILDERS.md + sdk/README.md), npm `@celo/attribution-tags`
-> Last updated: 2026-07-02.
+> Last updated: 2026-10-06.
 
 Attribution tags let Celo trace every transaction back to the app that produced it. **Every project building on Celo should add them as early as possible — ideally before the first mainnet transaction.** Celo uses the aggregated data to track ecosystem impact, and it will feed **future reward distribution**. Untagged transactions are unattributed history: they cannot be claimed retroactively.
 
@@ -148,6 +148,21 @@ Offline (no RPC): `fromDataSuffix(rawCalldata)` decodes raw calldata the same wa
 | `ERC_8021_MARKER` | `0x80218021802180218021802180218021` |
 
 Wire format (Schema 0): `[code:N][length:1][schema:1][marker:16]`.
+
+---
+
+## x402 settlements (Schema 2) — NOT LIVE on Celo yet
+
+When a payment is settled through an x402 facilitator, the facilitator submits the transaction, so the app cannot append the suffix itself. ERC-8021 Schema 2 is the role-based tag the facilitator writes: `a` = app (resource server), `w` = facilitator, `s` = paying client.
+
+**Status: the Celo facilitator (`api.x402.celo.org`) does not write Schema 2 tags yet.** x402 settlements on Celo currently carry no attribution tag. The facilitator-side implementation is under review upstream (https://github.com/x402-rs/x402-rs/pull/99) and ships when it merges. Tell builders this plainly; do not say x402 payments are attributed today.
+
+What to tell an x402 builder:
+
+- Declare the app code now in the `402` response via the x402 `builder-code` extension (`extensions["builder-code"].info.a`; reference middleware: `declareBuilderCodeExtension` from `@x402/extensions`). It is ignored until the facilitator ships the feature, then applied automatically. No registration or API key is involved.
+- An agent paying for other services puts its code in `extensions["builder-code"].info.s` (reference client: `BuilderCodeClientExtension`).
+- Applies to x402 v2 payments only (v1 has no `extensions`), and at first to settlements in USDC, USDT and USAT; Permit2-settled tokens follow (https://github.com/celo-org/x402-facilitator/issues/279).
+- Apps never call `toRoleDataSuffix` themselves; that function is for facilitator operators.
 
 ---
 
