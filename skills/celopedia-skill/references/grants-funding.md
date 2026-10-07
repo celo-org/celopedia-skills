@@ -16,18 +16,20 @@
 ### Agents on Open Rails Hackathon
 
 - **Type**: Hackathon
-- **Amount**: **$5,000 total**
-- **Dates**: **Oct 6, 2026 –** (end date TBC); kick-off call Oct 6 12pm GMT
+- **Amount**: **$5,000 total**, distributed in $CELO
+- **Dates**: **Oct 6, 2026 – Nov 9, 2026**; submission window 2026-10-06T12:00Z → 2026-11-09T09:00Z
 - **Host**: Celo Devs
-- **Kick-off recording**: https://lu.ma/uk27jw1q
-- **Announcement**: https://x.com/CeloDevs/status/2106021545999258063
-- **Register**: through Loops House (details in kick-off call)
-- **Tracks / focus areas** (from kick-off):
-  - Ripio local-currency stablecoins (wBRL, wMXN, wCOP, wARS, wPEN, wCLP)
-  - Textile FX
-  - USA₮ over Celo's x402 facilitator
-  - `buy` — the agent service marketplace
-- **⚠️ Details page not yet published** — check https://celoplatform.notion.site for the full rules page and track prize breakdown
+- **Platform**: Loops House
+- **Kick-off**: https://lu.ma/uk27jw1q
+- **Announcement**: https://x.com/CeloDevs/status/2107440784534561278
+- **Partners**: Ripio · Textile · Chainstack
+- **Tracks**:
+
+  | Track | Focus |
+  |-------|-------|
+  | Stable Agents: LatAm | Ripio local-currency stablecoins (wBRL, wMXN, wCOP, wARS, wPEN, wCLP) |
+  | Stable Agents: Open Corridors | USA₮ — Tether America on Celo |
+  | Build with `buy` | Agent service marketplace (usebuy.ai) |
 
 ### Prezenti: Season 3
 
@@ -95,5 +97,5 @@
 | Building… | Recommended Program |
 |-----------|---------------------|
 | Project built on Celo, focus on MiniPay | **Prezenti Anchor Pool (S3)** — $25K+ (confirm status, see above) |
-| AI agents or agent-economy infrastructure | **Agents on Open Rails Hackathon** — $5K, started Oct 6 2026 (details TBC) · **Prezenti Frontier Pool (S3)** |
+| AI agents or agent-economy infrastructure | **Agents on Open Rails Hackathon** — $5K, Oct 6 – Nov 9 2026 · **Prezenti Frontier Pool (S3)** |
 | Post-launch app with measurable traction (1K+ MAU / 500+ daily tx / $50K+ TVL / $5K+/mo revenue) | **Celo Builder Fund** — $25K SAFE |
