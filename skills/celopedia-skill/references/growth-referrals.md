@@ -122,7 +122,7 @@ function depositWithReferrer(uint256 amount, address referrer) external {
 
 ### Pattern 2 — Off-chain attribution → on-chain payout
 
-The frontend uses a referral code (`?ref=ABCD`) in the URL. Your backend matches the code to the inviter address. Payouts are batched on-chain weekly.
+The frontend uses a referral code (`?ref=ABCD`) in the URL. Your backend matches the code to the inviter address. Payouts are batched on-chain weekly. For the batching mechanics — which contract to use, gas costs, chunk sizes, and the idempotency trap that makes a retried run double-pay — see `bulk-payouts.md`.
 
 **Pros**: works for users who don't see the referrer field (e.g. mobile WebView quirks), allows non-on-chain referral sources (Twitter, WhatsApp share links).
 **Cons**: requires you to trust the backend's attribution — if your team is questioned about referral fraud, you can't prove the chain of attribution like Pattern 1.
