@@ -5,6 +5,8 @@
 > Last updated: 2026-08-28 (cache — always fetch live per directive below)
 
 > ⚠️ **Live data required.** Program status (Live/Past), dates, rewards, and eligibility change frequently — often mid-quarter. **Always fetch the current list from `https://www.celopg.eco/programs` before answering any grant question.** The tables below are a cached reference and may be stale the moment a program's status flips. See `live-data-sources.md` §2 for the fetch command. For eligibility / submission cadence / rewards, extract from the live page — do not infer from this file.
+>
+> ⚠️ **This URL may be dead, not just cached-stale (unconfirmed from the docs-watch sandbox — its egress to celopg.eco is blocked, so it can only see a 403 from its own proxy, not the site's actual response).** A PR reviewer testing from an unrestricted network on 2026-09-14 reported `https://www.celopg.eco/programs` returns a Netlify 404, same for `/programs/`, `/grants`, and `/funding` — the root `celopg.eco/` still resolves, but as a client-side SPA shell with no server-rendered links. If confirmed, "fetch live" above will 404, not return an empty list — don't mistake that for "no programs are live." The list may have moved to a new path or become API-served; find the new source before treating this file as unrecoverable.
 
 ---
 
