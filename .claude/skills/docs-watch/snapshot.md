@@ -4,11 +4,18 @@ Baseline seeded: 2026-07-07 (from the repo's own reference files, not a fresh
 live fetch — their own "Last updated" stamp is 2026-04-15, so treat this
 snapshot as unverified against live sources until the first real run).
 
-Last attempt: 2026-08-24 — PARTIAL BLOCK (celopg.eco: 403, org egress policy
-denial — see PR for the run's docs-watch/2026-08-24 branch). Sources 1-4
-(docs sitemap, contracts, network info, DefiLlama TVL) were reachable and
-verified; source 5 (grant programs) was not — `grants-funding.md` and its
-section below were left untouched this run.
+Last attempt: 2026-10-12 — PARTIAL BLOCK (celopg.eco: unreachable — org
+egress policy denial, same restriction as 2026-08-24; confirmed via curl
+through the agent proxy: "connect_rejected: the egress proxy denied the
+CONNECT (organization policy)", and via WebFetch: "getaddrinfo ENOTFOUND
+celopg.eco" — see PR for the run's docs-watch/blocked-2026-10-12 branch).
+Sources 1-4 (docs sitemap, contracts, network info, DefiLlama TVL) were
+reachable this run; source 5 (grant programs) was not. Per the current
+docs-watch skill, a blocked source makes the whole run "blocked" — no
+reference files were edited this run (not even for the reachable sources)
+and the facts below are untouched; only this line was updated. A real
+diff pass against sources 1-4 is still owed once celopg.eco is reachable
+again.
 
 ## 1. Docs sitemap (`docs-map.md`)
 
