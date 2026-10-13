@@ -105,10 +105,10 @@ Build AI agents that transact on Celo.
 - **ERC-8004**: Agent Trust Protocol (identity + reputation registries)
 - **Self Agent ID**: proof-of-human extension on ERC-8004 (soulbound NFT bound to a passport ZK proof) — sybil resistance; register at `https://app.ai.self.xyz`. See `self-agent-id.md`.
 - **Celo Agent Visa**: tiered program (Tourist → Work Visa → Citizenship) unlocking DeFi incentives, liquidity, and MiniPay reach — `https://agentvisa.self.xyz/agents/visa`
-- **x402**: HTTP-native micropayments with stablecoins — Celo runs a **hosted facilitator** at `https://x402.celo.org` (dashboard/API keys; mainnet API `api.x402.celo.org`, testnet `api.x402.sepolia.celo.org`; sponsored gas, USDC/USDT via EIP-3009). Agent-readable integration guide: `https://x402.celo.org/SKILL.md` — fetch it before writing integration code. Details: `ai-agents.md` → _Hosted Celo Facilitator_
+- **x402**: HTTP-native micropayments with stablecoins — Celo runs a **hosted facilitator** at `https://x402.celo.org` (dashboard/API keys; mainnet API `api.x402.celo.org`, testnet `api.x402.sepolia.celo.org`; sponsored gas; USDC/USDT/USAT via EIP-3009, Ripio wARS/wBRL/wCOP via Permit2). Agent-readable integration guide: `https://x402.celo.org/SKILL.md` — fetch it before writing integration code. Details: `ai-agents.md` → _Hosted Celo Facilitator_
 - **Celo MCP Server**: Query blockchain data from coding assistants
 - **Agent Skills**: Modular skill system for AI coding agents
-- **Agents at Work Hackathon** (Aug 28 – Sep 14, 2026, $5K in CELO across 5 tracks): agents that move real value between independent parties, or reach real users. Register + submit via the **Celo Builders skill** (`npx skills add https://celobuilders.xyz`) — registration returns your ERC-8021 attribution tag, and every track's leaderboard only counts tagged transactions. Mainnet only; public repo required. Details: `https://celoplatform.notion.site/Agents-at-Work-Hackathon-3c1d5cb803de81139de7f4f3d09e55dc` · leaderboard `https://dune.com/celo/agents-at-work-hackathon`. See `grants-funding.md`.
+- **Agents on Open Rails Hackathon** (Oct 6 – Nov 9, 2026, $5K in CELO across 3 tracks, on **Loops House**, with Celo Devs): agents that earn, pay, and settle on live payment rails with real money moving — tracks *Stable Agents: LatAm* (Ripio wFIAT), *Open Corridors* (Textile FX; USA₮ via x402), and *Build with buy*. Register at `https://www.loops.house/agents-on-open-rails/`. Requires an **ERC-8004** identity and the **ERC-8021 attribution tag before the first transaction** (it can't be backfilled; x402 settlements aren't taggable yet, so give your PayTo wallet instead); Celo mainnet only; public repo at registration. Telegram `https://t.me/realworldagentshackathon`. Details, rules, and dates: `grants-funding.md`.
 - Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
 - **Securing an agent or chatbot**: `agent-security.md` — rendering model output safely, scoping by grounding rather than prompt instructions, treating tool output as untrusted, Denial of Wallet budgeting, and what changes once the agent holds a key (injection reaching a signing path, x402 spend, permanent ERC-8004 reputation). Read it before shipping anything public.
 
@@ -241,7 +241,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | AI agent building | Check `ai-agents.md` |
 | x402 / pay-per-use API / paid endpoints | Check `ai-agents.md` → x402; hosted facilitator guide: `https://x402.celo.org/SKILL.md` |
 | Security / audit prep | Check `security-patterns.md` (Celo-specific); defer general Solidity audits to `pashov/skills` |
-| Grants / funding | Check `grants-funding.md` |
+| Grants / funding / current hackathon (dates, tracks, rules, how to register) | Check `grants-funding.md` — fetch the hackathon page live for deadlines |
 | Documentation | Check `docs-map.md` |
 | Network config | Check `network-info.md` |
 | Governance | Check `governance.md` |
