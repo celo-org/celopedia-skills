@@ -41,6 +41,7 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Use Celo Docs with AI Tools | https://docs.celo.org/build-on-celo/build-with-ai/use-docs-with-ai |
 | ERC-8004: Agent Trust Protocol | https://docs.celo.org/build-on-celo/build-with-ai/8004 |
 | x402: Agent Payments | https://docs.celo.org/build-on-celo/build-with-ai/x402 |
+| x402: Get your endpoint discovered | https://docs.celo.org/build-on-celo/build-with-ai/x402-get-discovered |
 | MPP: Machine Payments Protocol | https://docs.celo.org/build-on-celo/build-with-ai/mpp |
 | Celopedia | https://docs.celo.org/build-on-celo/build-with-ai/celopedia |
 | MCP Server | https://docs.celo.org/build-on-celo/build-with-ai/mcp/celo-mcp |
