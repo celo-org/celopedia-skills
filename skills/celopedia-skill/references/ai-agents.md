@@ -526,6 +526,7 @@ Celo is **actively pushing builders toward onchain agents** — agents that hold
 
 - **Consumer money (save / send / spend)**: savings-coach and round-up agents, group savings (chama / stokvel) pools, remittance concierge, bill-pay & autopay, FX-hedging agents that dollarize a local-currency paycheck. Highest PMF — emerging-market retail.
 - **Agentic commerce & marketplaces**: local-commerce concierge with escrow, cross-border shopping agents, subscription managers — settling via x402 micropayments.
+- **Agents that pay by card or sign in to websites** (merchants with no stablecoin or x402 option): Agent Vault by Self Labs gives an agent spending-limited card payments and logins without exposing the card number or password. It is not a Celo protocol and does not use x402 — see [agent-vault.md](agent-vault.md).
 - **DeFAI (crypto-native)**: conversational DeFi agents that compose Mento + Aave + Ubeswap, set-and-forget yield optimizers, DCA / strategy agents, onchain tax & portfolio assistants.
 - **Social, predictions & viral**: localized prediction markets, tip-to-earn creator agents, donation / round-up-to-cause agents.
 - **SMB, freelancers & identity infra**: invoice / get-paid agents, sybil-resistant airdrop & quest tools, SMS/USSD wallets for feature phones, and an MCP server for Celo. Pair human- or operator-facing flows with **Self Agent ID** for trust.

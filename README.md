@@ -171,6 +171,7 @@ Non-protocol problems — the things that stall a project after the code works.
 | [`governance.md`](skills/celopedia-skill/references/governance.md) | On-chain governance reference |
 | [`ai-agents.md`](skills/celopedia-skill/references/ai-agents.md) | ERC-8004, x402 + hosted Celo facilitator, MCP, Agent Skills |
 | [`self-agent-id.md`](skills/celopedia-skill/references/self-agent-id.md) | Self Agent ID: proof-of-human on ERC-8004, soulbound NFT on Celo |
+| [`agent-vault.md`](skills/celopedia-skill/references/agent-vault.md) | Agent Vault (Self Labs): card payments and logins for agents with spending limits — not a Celo protocol |
 | [`security-patterns.md`](skills/celopedia-skill/references/security-patterns.md) | Celo-specific security risks (pairs with [pashov/skills](https://github.com/pashov/skills)) |
 | [`feedback.md`](skills/celopedia-skill/references/feedback.md) | Route bug reports / feature requests to the right Celo repo and file via `gh` |
 

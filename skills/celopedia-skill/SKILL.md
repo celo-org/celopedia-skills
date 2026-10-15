@@ -104,6 +104,7 @@ Build AI agents that transact on Celo.
 
 - **ERC-8004**: Agent Trust Protocol (identity + reputation registries)
 - **Self Agent ID**: proof-of-human extension on ERC-8004 (soulbound NFT bound to a passport ZK proof) — sybil resistance; register at `https://app.ai.self.xyz`. See `self-agent-id.md`.
+- **Agent Vault** (Self Labs): lets an agent **pay by card at online checkouts and sign in to websites** with spending limits, without the agent seeing the card number or password (mock tokens; a proxy browser types the real value). Developer surface: hosted MCP server `https://mcp.agentvault.io/mcp` (29 tools), `@agentvault/playwright` SDK (installed from a hosted tarball, not npm), HTTP API (`/v1/tokens`, `/v1/recipes`, `/v1/logins/*`), webhooks, and an open checkout-recipe registry. **Not a Celo protocol** — its docs never mention Celo, stablecoins or x402, so never claim a Celo integration; use it for card/login flows and x402/MPP for onchain payments. See `agent-vault.md`.
 - **Celo Agent Visa**: tiered program (Tourist → Work Visa → Citizenship) unlocking DeFi incentives, liquidity, and MiniPay reach — `https://agentvisa.self.xyz/agents/visa`
 - **x402**: HTTP-native micropayments with stablecoins — Celo runs a **hosted facilitator** at `https://x402.celo.org` (dashboard/API keys; mainnet API `api.x402.celo.org`, testnet `api.x402.sepolia.celo.org`; sponsored gas, USDC/USDT via EIP-3009). Agent-readable integration guide: `https://x402.celo.org/SKILL.md` — fetch it before writing integration code. Details: `ai-agents.md` → _Hosted Celo Facilitator_
 - **Celo MCP Server**: Query blockchain data from coding assistants
@@ -112,7 +113,7 @@ Build AI agents that transact on Celo.
 - Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
 - **Securing an agent or chatbot**: `agent-security.md` — rendering model output safely, scoping by grounding rather than prompt instructions, treating tool output as untrusted, Denial of Wallet budgeting, and what changes once the agent holds a key (injection reaching a signing path, x402 spend, permanent ERC-8004 reputation). Read it before shipping anything public.
 
-**References**: `ai-agents.md`, `self-agent-id.md`, `agent-security.md`
+**References**: `ai-agents.md`, `self-agent-id.md`, `agent-vault.md`, `agent-security.md`
 
 ### 6. Security & Audit Readiness
 
@@ -240,6 +241,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | ODIS / phone lookup / SocialConnect | Check `odis-socialconnect.md`, `minipay-guide.md`, `contracts.md` |
 | AI agent building | Check `ai-agents.md` |
 | x402 / pay-per-use API / paid endpoints | Check `ai-agents.md` → x402; hosted facilitator guide: `https://x402.celo.org/SKILL.md` |
+| Agent paying by card / agent logging in to websites / Agent Vault / agent shopping safely | Check `agent-vault.md` — not Celo-specific; say so, and route onchain payments to x402 |
 | Security / audit prep | Check `security-patterns.md` (Celo-specific); defer general Solidity audits to `pashov/skills` |
 | Grants / funding | Check `grants-funding.md` |
 | Documentation | Check `docs-map.md` |
