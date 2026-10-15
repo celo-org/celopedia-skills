@@ -20,9 +20,12 @@
 - **Dates**: **Oct 6, 2026 – Nov 9, 2026**; submission window 2026-10-06T12:00Z → 2026-11-09T09:00Z
 - **Host**: Celo Devs
 - **Platform**: Loops House
-- **Kick-off recording**: https://youtu.be/tn0tDEOwqgg
+- **Kick-off recording** (Oct 6 livestream): https://www.youtube.com/watch?v=ik4_h2hhDME
+- **Build with buy launch livestream** (Oct 13, with partners Cencori, Chainstack, and SQD; covers the buy track): https://www.youtube.com/live/w1A_mP3r8aQ
+- **Ripio track livestream** (Oct 8): https://www.youtube.com/watch?v=kjRJUaf1Fgo
+- **buy demo** (from the Agents at Work beta tests, not this hackathon's launch): https://youtu.be/tn0tDEOwqgg
 - **Announcement**: https://x.com/CeloDevs/status/2107440784534561278
-- **Partners**: Ripio · Textile · Chainstack
+- **Partners**: Ripio, Textile FX, buy, Chainstack, and Prezenti
 - **Tracks**:
 
   | Track | Prize | Focus |
@@ -30,6 +33,15 @@
   | Stable Agents: LatAm | $2,000 | Agents for real users on Ripio's wFIAT rails |
   | Open Corridors | $2,000 | FX agents on Textile + real settlement in USA₮ via Celo's x402 |
   | Build with `buy` | $1,000 | Best projects leveraging buy's agent service marketplace |
+
+- **Register / details**: https://www.loops.house/agents-on-open-rails/ (enrolment is behind a Loops House login — not via the Celo Builders skill). Telegram: https://t.me/realworldagentshackathon · Office hours: Thursdays 12:00 GMT. Regional builder sessions: Oct 17 in six Argentine cities (Celo Core Co. and Ripio).
+- **Required stack**: an **ERC-8004** identity for every entry; the **ERC-8021 attribution tag** (issued when you enrol) in place **before the first transaction** (it cannot be backfilled — see [attribution-tags.md](attribution-tags.md)); **Celo mainnet only**; public GitHub repo at registration that still resolves at judging; code written during the hackathon. You can enter several tracks but win one prize per track.
+- **Independent users**: a wallet that is not yours, was not first funded by you or your main funder, and had its own Celo activity before the hackathon started. Wallets made just for the hackathon don't count; gasless flows are fine (signers/authorisers count); sponsored gas is not a builder contribution.
+- **Scoring**: live leaderboard queries plus a human panel that reviews the repo (per the hackathon page). **Build with buy** entries must state which services they used and provide payment proof; spamming the cheapest calls scores nothing, and independent users are a qualifier. Gas a relayer pays on your behalf does not count as builder contribution — disclose it in your submission. A project that fits no track should enter the closest one and say so in the submission.
+- **x402 + wFIAT gotchas**: the LatAm track names six Ripio wFIAT tokens, but the hosted Celo x402 facilitator currently settles only **wARS, wBRL, and wCOP** (Permit2); wMXN and wPEN are not enabled yet — see [ai-agents.md](ai-agents.md) → _Hosted Celo Facilitator_. **x402 settlements cannot carry an attribution tag yet** (see [attribution-tags.md](attribution-tags.md)); for x402 transactions the hackathon page asks you to provide your **PayTo wallet address** instead. Sellers get an API key with 20 free mainnet settlements.
+- **Naming**: the hackathon page writes **USA₮**; this skill calls the same token **USAT** (address in [contracts.md](contracts.md)).
+- **Track resources** (per the hackathon page): *LatAm* — wFIAT tokens are 18 decimals; on-ramp via `ramp.ripio.com` with query parameters (no credentials needed for the hackathon) or the Ripio Ramps API (needs a registered legal entity at platform.ripio.com), and the bridge at `bridge.ripio.com`. *Textile FX* — a permissionless onchain FX marketplace for cNGN, wARS, wBRL, and USDC against USD₮ (https://app.textilecredit.com). *USA₮* — eligible users can get USA₮ from the Google Cloud Web3 faucet after verifying with Self on Celo mainnet.
+- **Perks** (per the hackathon page): 3 months of Chainstack's Growth Plan free for every team; Prezenti grants (the page cites $165K for the season — confirm on prezenti.xyz); Builder Graph rating and Certify credential for every submission; co-marketing and mentorship for winners; winning agents listed in a curated Celo set on Aigora.
 
 ### Prezenti: Season 3
 
@@ -68,6 +80,7 @@
 | Program | Funding | Dates | Host |
 |---------|---------|-------|------|
 | Agents at Work | $5K CELO | Aug 28 – Sep 14, 2026 | Celo Devs |
+| Onchain Agents Hackathon | $5K CELO | May 22 – Jun 15, 2026 | Celo DevRel |
 | Synthesis | 10K USDT | Mar 11–25, 2026 | Celo Devs |
 | Build Agents for Real World | $8.5K USDT | Mar 2–22, 2026 | Celo Public Goods |
 | Cel'EU Cirkvit S1 | 27K CELO | Nov–Dec 2025 | Celo Europe |

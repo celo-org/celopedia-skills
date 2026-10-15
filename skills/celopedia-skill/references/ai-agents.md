@@ -187,7 +187,7 @@ Celo runs an official hosted x402 facilitator, so builders don't need to run the
 
 **Always fetch `https://x402.celo.org/SKILL.md` before writing integration code** — it carries the current, settlement-verified seller (`@x402/hono` / `@x402/express`) and buyer (`@x402/fetch`) code for this facilitator.
 
-**Metering model** (snapshot — confirm via `/api/config`): connect a wallet on the dashboard and sign a message (no gas) → API key with free starter credits (500 mainnet / 1,000 testnet). Each on-chain `/settle` costs 1 credit (flat $0.001, topped up with USDC on the dashboard). `/verify` and `/supported` are free and need no key.
+**Metering model** (snapshot of `/api/config` as of 2026-10-13 — confirm there, it changes): connect a wallet on the dashboard and sign a message (no gas) → API key with free starter credits (**20 mainnet** / 1,000 testnet). After the free credits, the config shows `pricePerTxMicro: 4000` (= $0.004 per settlement) and `feeBps: 30` (0.3% of payment value); the Agents on Open Rails page describes the paid tier as gas at cost plus 0.3% from a prepaid balance (topped up with USDC on the dashboard) — check the dashboard for the exact current schedule. `/verify` and `/supported` are free and need no key.
 
 **Integration gotchas for this facilitator:**
 
@@ -195,7 +195,7 @@ Celo runs an official hosted x402 facilitator, so builders don't need to run the
 - Celo is **not in the x402 packages' default-asset table** — a bare `price: "$0.01"` type-checks but throws at request time. Always pass the explicit price object: `{ amount: "10000", asset: USDC_ADDRESS, extra: { name: "USDC", version: "2" } }` (string amounts in 6-decimal base units; `$0.01 = "10000"`).
 - Attach the API key with `HTTPFacilitatorClient({ createAuthHeaders })` as `X-API-Key` — it goes only to the facilitator, never to buyers or the browser.
 - `payTo` is the **seller's own receiving wallet** — not the facilitator, not the buyer.
-- **Token support (EIP-3009)**: USDC (mainnet + Sepolia) and USDT (mainnet). **USDm is NOT supported by this facilitator** — Mento `StableTokenV2` implements only EIP-2612 `permit`, not EIP-3009. USDT's EIP-712 domain is `name: "Tether USD", version: "1"` (its `version()` method reverts).
+- **Token support**: USDC, USDT, and USAT settle via **EIP-3009**; the Ripio **wARS, wBRL, and wCOP** stablecoins settle via **Permit2** (set `assetTransferMethod: "permit2"` in the route config). **wMXN and wPEN are not yet enabled**, and **USDm / Mento locals are NOT supported** — Mento `StableTokenV2` implements only EIP-2612 `permit`, not EIP-3009. Testnet supports USDC only. See _Enabled tokens_ below; the live list is in `https://x402.celo.org/SKILL.md`. USDT's EIP-712 domain is `name: "Tether USD", version: "1"` (its `version()` method reverts).
 - Test on Celo Sepolia first — testnet USDC from https://faucet.circle.com (buyers need no testnet CELO; gas is sponsored).
 
 The thirdweb flow below is an **alternative** that uses thirdweb's own facilitator instead — and it is the path to take when you want to charge in **USDm or other Mento local stablecoins**, which the hosted facilitator cannot settle (see the USDm caveat below).
@@ -208,7 +208,19 @@ The thirdweb flow below is an **alternative** that uses thirdweb's own facilitat
 | USDT | `0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e` | 6 |
 | USDm | `0x765DE816845861e75A25fCA122bb6898B8B1282a` | 18 |
 
-> ⚠️ **USDm / Mento local stablecoin caveat.** USDm — and the rest of the Mento family (EURm, BRLm, KESm, …; all `StableTokenV2`/`V3` implementations, verified on-chain) — implements EIP-2612 `permit` only, **not** EIP-3009 `transferWithAuthorization`. So Mento stablecoins do **not** work with the hosted Celo facilitator, whose engine currently implements only the EIP-3009 transfer method. The x402 `exact` EVM spec also defines Permit2 / EIP-2612 fallback methods, and facilitators that implement them (e.g. **thirdweb**, which accepts "ERC-2612 permit" tokens) can settle USDm and the local stablecoins. This matters for agents that price or settle in local currencies — e.g. FX and trading agents paying per-request in KESm or BRLm — which should use the thirdweb flow. Rule: **match the token to your facilitator's supported transfer methods** — hosted Celo facilitator → USDC/USDT; thirdweb → also USDm + Mento locals.
+**Enabled on the hosted Celo facilitator (mainnet, `eip155:42220`)** — snapshot from `https://x402.celo.org/SKILL.md` as of 2026-10-07; confirm there before shipping. Addresses for the USAT and Ripio rows are in [contracts.md](contracts.md).
+
+| Token | Transfer method | Decimals |
+|-------|-----------------|----------|
+| USDC | EIP-3009 | 6 |
+| USDT | EIP-3009 | 6 |
+| USAT (shown as USA₮ in some partner copy) | EIP-3009 | 6 |
+| wARS, wBRL, wCOP (Ripio) | Permit2 — needs `assetTransferMethod: "permit2"` | 18 |
+| wMXN, wPEN (Ripio) | not yet enabled | 18 |
+
+Testnet (`eip155:11142220`): USDC only.
+
+> ⚠️ **USDm / Mento local stablecoin caveat.** USDm — and the rest of the Mento family (EURm, BRLm, KESm, …; all `StableTokenV2`/`V3` implementations, verified on-chain) — implements EIP-2612 `permit` only, **not** EIP-3009 `transferWithAuthorization`. So Mento stablecoins do **not** work with the hosted Celo facilitator, whose engine implements EIP-3009 (USDC/USDT/USAT) and Permit2 for the Ripio wFIAT tokens, but not the EIP-2612 permit path Mento tokens rely on. The x402 `exact` EVM spec also defines Permit2 / EIP-2612 fallback methods, and facilitators that implement them (e.g. **thirdweb**, which accepts "ERC-2612 permit" tokens) can settle USDm and the local stablecoins. This matters for agents that price or settle in local currencies — e.g. FX and trading agents paying per-request in KESm or BRLm — which should use the thirdweb flow. Rule: **match the token to your facilitator's supported transfer methods** — hosted Celo facilitator → USDC/USDT/USAT plus wARS/wBRL/wCOP (Permit2); thirdweb → also USDm + Mento locals.
 
 ### Server Implementation (Next.js)
 
@@ -540,7 +552,9 @@ Many of these benefit from **Self Agent ID** (one-human-one-spot) to prevent syb
 
 ---
 
-## Onchain Agents Hackathon
+## Onchain Agents Hackathon (past)
+
+> **Ended June 15, 2026.** Kept as a reference for how Celo hackathons are run; for the current one see `grants-funding.md` → _Agents on Open Rails Hackathon_.
 
 A Celo DevRel-run hackathon for building onchain agents focused on **real-world payments and everyday applications** — May 22 – June 15, 2026, **$5K prize pool in CELO**. Winning agents generate real transactions and demonstrate genuine on-chain utility (not prototypes). Full details: **https://bit.ly/OnchainAgentsHackathon**
 
