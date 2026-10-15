@@ -126,6 +126,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 |------|------|
 | [`defi-protocols.md`](skills/celopedia-skill/references/defi-protocols.md) | Deep protocol reference (Uniswap, Aave, Carbon DeFi, Morpho, Mento) with live APY fetching |
 | [`stablecoin-orchestration.md`](skills/celopedia-skill/references/stablecoin-orchestration.md) | Fiat ↔ stablecoin rails via Bridge (Stripe): virtual accounts, payouts, cards, issuance |
+| [`bulk-payouts.md`](skills/celopedia-skill/references/bulk-payouts.md) | Mass payouts on-chain: verified batch contracts, measured gas and batch sizing, anti-sybil |
 
 ### MiniPay App Builder
 
