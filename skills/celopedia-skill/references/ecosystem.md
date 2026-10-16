@@ -30,6 +30,7 @@
 |----------|-------------|---------|
 | Aave V3 | Multi-asset lending, largest on Celo | https://aave.com |
 | Morpho Blue | Permissionless isolated lending markets | https://app.morpho.org |
+| Moola Market | Non-custodial lending (~$1.25M TVL); frontend still shows legacy cUSD/cEUR/cREAL names — the underlying assets are USDm/EURm/BRLm | https://moola.market |
 | Feather | Risk-adjusted permissionless lending (DefiLlama now categorizes it "Risk Curators" rather than "Lending" — same protocol, no functional change observed) | https://app.feather.zone |
 
 > **For live TVL data**, query DefiLlama per-chain TVL: `curl -s https://api.llama.fi/protocol/<slug> | jq '.currentChainTvls.Celo'` —
