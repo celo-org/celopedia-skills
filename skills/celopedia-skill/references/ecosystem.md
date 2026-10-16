@@ -2,7 +2,7 @@
 
 > Sources: docs.celo.org, DefiLlama, celo.org/ecosystem
 > For live TVL data, always refer to https://defillama.com/chain/Celo
-> Last updated: 2026-10-05
+> Last updated: 2026-10-16
 
 ---
 
@@ -22,9 +22,7 @@
 | Ubeswap | Celo-native DEX (V2 + V3) | https://ubeswap.org |
 | Carbon DeFi | Automated on-chain trading strategies (Bancor) | https://app.carbondefi.xyz |
 | Mento V3 | Multi-currency FX infrastructure | https://app.mento.org |
-| Textile FX | On-chain FX liquidity network | https://app.textilecredit.com |
-| AutoRange | Non-custodial Uniswap V3 concentrated-liquidity vaults | https://autorange.xyz |
-| Mobius Money | Cross-chain stableswap protocol | DefiLlama slug `mobius-money` — no live site URL found this run |
+| Textile FX | On-chain FX liquidity network (~$860K TVL on Celo) | https://app.textilecredit.com |
 
 ### Lending & Borrowing
 
@@ -33,16 +31,10 @@
 | Aave V3 | Multi-asset lending, largest on Celo | https://aave.com |
 | Morpho Blue | Permissionless isolated lending markets | https://app.morpho.org |
 | Feather | Risk-adjusted permissionless lending (DefiLlama now categorizes it "Risk Curators" rather than "Lending" — same protocol, no functional change observed) | https://app.feather.zone |
-| Prime Protocol | Cross-chain lending / prime brokerage | DefiLlama slug `prime-protocol` — no live site URL found this run |
 
-> ⚠️ **Needs review — Moola Market.** A prior run removed Moola Market from this table because
-> its site (`mm.moola.market`) appeared unreachable. This run, DefiLlama again lists Moola
-> Market in Celo's Lending category with ~$1.25M TVL — but this sandbox's network egress proxy
-> blocks `moola.market` / `mm.moola.market` outright (`connect_rejected`, org policy), so site
-> reachability still cannot be confirmed from here, and the same may have been true last time.
-> A human should check the site in a normal browser and decide whether to re-add Moola Market.
-
-> **For live TVL data**, query DefiLlama: `curl -s https://api.llama.fi/protocols | jq '[.[] | select(.chains[]? == "Celo")] | sort_by(-.tvl)'`
+> **For live TVL data**, query DefiLlama per-chain TVL: `curl -s https://api.llama.fi/protocol/<slug> | jq '.currentChainTvls.Celo'` —
+> not the protocol-wide `.tvl` field from the `/protocols` list, which sums every chain the
+> protocol is deployed on and overstates its Celo footprint for any multi-chain protocol.
 > See `live-data-sources.md` for more API examples.
 
 ### Yield & Liquidity Management
@@ -51,7 +43,6 @@
 |----------|-------------|---------|
 | Beefy | Autocompounding yield farming | https://beefy.com |
 | Autofarm | Yield aggregator | https://autofarm.network |
-| vfat.io | Yield aggregator (built on Sickle, a self-custody smart-contract wallet for farming) | https://vfat.io/yield |
 | Steer Protocol | Automated liquidity management | https://app.steer.finance |
 | ICHI | Algorithmic liquidity strategies | https://www.ichi.org |
 | TheDeep | Cross-chain DeFi liquidity automation | https://app.thedeep.ink |
@@ -105,7 +96,6 @@
 | Protocol | Description | Website |
 |----------|-------------|---------|
 | PoolTogether V3 | No-loss prize games | https://pooltogether.com |
-| UNCX Network V3 | Liquidity-lock / token-lock infrastructure (~$34M TVL on Celo) | https://uncx.network |
 
 ---
 
