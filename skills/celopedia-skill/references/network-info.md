@@ -96,6 +96,7 @@ from an Alfajores-era guide is wrong. Mainnet addresses are unaffected.
 | Lava | Decentralized RPC network |
 | OnFinality | Multi-chain RPC |
 | Dwellir | Nordic-hosted nodes |
+| SwiftNodes | HTTP and WebSocket RPC, [swiftnodes.io/celo-rpc](https://swiftnodes.io/celo-rpc). Free tier; flat-rate paid plans. **Celo mainnet only.** |
 
 Provider endpoints are per-account and issued from each dashboard, so there is no
 shared URL to publish for them. Chainstack endpoints are key- or password-protected
