@@ -2,7 +2,7 @@
 
 > Sources: docs.celo.org, DefiLlama, celo.org/ecosystem
 > For live TVL data, always refer to https://defillama.com/chain/Celo
-> Last updated: 2026-08-24
+> Last updated: 2026-10-16
 
 ---
 
@@ -22,6 +22,7 @@
 | Ubeswap | Celo-native DEX (V2 + V3) | https://ubeswap.org |
 | Carbon DeFi | Automated on-chain trading strategies (Bancor) | https://app.carbondefi.xyz |
 | Mento V3 | Multi-currency FX infrastructure | https://app.mento.org |
+| Textile FX | On-chain FX liquidity network (~$860K TVL on Celo) | https://app.textilecredit.com |
 
 ### Lending & Borrowing
 
@@ -29,9 +30,11 @@
 |----------|-------------|---------|
 | Aave V3 | Multi-asset lending, largest on Celo | https://aave.com |
 | Morpho Blue | Permissionless isolated lending markets | https://app.morpho.org |
-| Feather | Risk-adjusted permissionless lending | https://app.feather.zone |
+| Feather | Risk-adjusted permissionless lending (DefiLlama now categorizes it "Risk Curators" rather than "Lending" — same protocol, no functional change observed) | https://app.feather.zone |
 
-> **For live TVL data**, query DefiLlama: `curl -s https://api.llama.fi/protocols | jq '[.[] | select(.chains[]? == "Celo")] | sort_by(-.tvl)'`
+> **For live TVL data**, query DefiLlama per-chain TVL: `curl -s https://api.llama.fi/protocol/<slug> | jq '.currentChainTvls.Celo'` —
+> not the protocol-wide `.tvl` field from the `/protocols` list, which sums every chain the
+> protocol is deployed on and overstates its Celo footprint for any multi-chain protocol.
 > See `live-data-sources.md` for more API examples.
 
 ### Yield & Liquidity Management

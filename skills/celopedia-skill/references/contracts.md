@@ -1,7 +1,7 @@
 # Celo Contract Addresses
 
 > Source: https://docs.celo.org/tooling/contracts/
-> Last updated: 2026-08-06
+> Last updated: 2026-10-05
 
 All addresses verified from official Celo documentation. **Do not guess addresses not listed here.**
 
@@ -228,6 +228,7 @@ Supported assets: USDC, USDT, EURm, USDm, CELO, WETH
 | EURm | EURm | `0xA99dC247d6b7B2E3ab48a1fEE101b83cD6aCd82a` |
 | Celo Dollar (legacy) | cUSD | `0xEF4d55D6dE8e8d73232827Cd1e9b2F2dBb45bC80` |
 | Celo Euro (legacy) | cEUR | `0x6B172e333e2978484261D7eCC3DE491E79764BbC` |
+| Celo Brazilian Real (legacy) | cREAL | `0x13d68A1Bf4a8cB7d9feF54EF70401871b666269c` |
 | BRLm | BRLm | `0x2294298942fdc79417DE9E0D740A4957E0e7783a` |
 | USDC | USDC | `0x01C5C0122039549AD1493B8220cABEdD739BC44E` |
 | USDT | USDT | `0xd077A400968890Eacc75cdc901F0356c943e4fDb` |
