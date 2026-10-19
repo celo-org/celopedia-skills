@@ -1,18 +1,20 @@
 # Celo Documentation Map
 
 > Source: https://docs.celo.org/llms.txt
-> OpenAPI Spec: https://docs.celo.org/api-reference/openapi.json — **404 as of 2026-10-16**
+> OpenAPI Spec: https://docs.celo.org/api-reference/openapi.json — **404 as of 2026-10-19**
 > (pre-existing, not something this run's restructuring caused; flagged, not otherwise acted on).
-> Last updated: 2026-10-16
+> Last updated: 2026-10-19
 
 Use this to find the right documentation page for any topic. Links go directly to docs.celo.org.
 
-> **Second restructuring in two weeks.** docs.celo.org renamed `infra-partners/*` to
+> **Third restructuring in two months.** docs.celo.org renamed `infra-partners/*` to
 > `operate/*` and folded `specs/*` into `operate/specification/*` around 2026-08-24–09-10 (that
-> rename is stable and reflected below). Then, on **2026-10-06** — the day after this file was
-> last updated — it renamed `home/*` to `learn/*` and merged `build-on-celo/*` + `tooling/*`
-> into a single `build/*` tree (AI/agent pages moved to `build/agents/*`, everything else under
-> `tooling/*` moved to `build/tools/*`). Every URL below reflects the **2026-10-16** structure.
+> rename is stable and reflected below). On **2026-10-06** it renamed `home/*` to `learn/*` and
+> merged `build-on-celo/*` + `tooling/*` into a single `build/*` tree (AI/agent pages moved to
+> `build/agents/*`, everything else under `tooling/*` moved to `build/tools/*`). Most recently,
+> sometime between **2026-10-16 and 2026-10-19** (this run), it renamed `contribute-to-celo/*`
+> to `contribute/*` — see the Contributing section below. Every URL below reflects the
+> **2026-10-19** structure.
 
 ---
 
@@ -346,28 +348,33 @@ Use this to find the right documentation page for any topic. Links go directly t
 
 ## Contributing
 
-> Two pages this map previously tracked — "Regional DAOs" (`contribute-to-celo/daos`) and
-> "Attestation Service Release Process" (`contribute-to-celo/release-process/attestation-service`)
-> — no longer appear in the live sitemap. Dropped below. "Code of Conduct" remains removed (first
-> noted in an earlier run).
+> **Renamed 2026-10-19 (caught this run): `contribute-to-celo/*` → `contribute/*`**, a bare
+> rename (every old path 308s to the same slug under the new prefix — confirmed by
+> individually curling `contribute-to-celo/index` and `contribute-to-celo/builders` and
+> following the redirect to `contribute/index` / `contribute/builders`, both 200). All URLs
+> below updated. Two pages this map previously tracked — "Regional DAOs"
+> (`contribute-to-celo/daos`) and "Attestation Service Release Process"
+> (`contribute-to-celo/release-process/attestation-service`) — still don't appear in the live
+> sitemap (checked again under the new `contribute/*` prefix too). Dropped below. "Code of
+> Conduct" remains removed (first noted in an earlier run).
 
 | Topic | URL |
 |-------|-----|
-| Joining Celo | https://docs.celo.org/contribute-to-celo/index |
-| Builders | https://docs.celo.org/contribute-to-celo/builders |
-| Contributor Overview | https://docs.celo.org/contribute-to-celo/contributors/overview |
-| Code Contributors | https://docs.celo.org/contribute-to-celo/contributors/code-contributors |
-| Community Improvement Proposals (CIP) Contributors | https://docs.celo.org/contribute-to-celo/contributors/cip-contributors |
-| Documentation Contributors | https://docs.celo.org/contribute-to-celo/contributors/documentation-contributors |
-| How Community RPC Providers Work | https://docs.celo.org/contribute-to-celo/community-rpc-nodes/how-it-works |
-| Registering a Community RPC Provider | https://docs.celo.org/contribute-to-celo/community-rpc-nodes/registering-as-rpc-node |
-| Operating a Community RPC Node | https://docs.celo.org/contribute-to-celo/community-rpc-nodes/community-rpc-node |
-| Community RPC Provider Penalties | https://docs.celo.org/contribute-to-celo/community-rpc-nodes/penalties |
-| Community RPC Provider FAQ | https://docs.celo.org/contribute-to-celo/community-rpc-nodes/validator-rpc-faq |
-| Release Process Overview | https://docs.celo.org/contribute-to-celo/release-process/index |
-| Smart Contracts Release Process | https://docs.celo.org/contribute-to-celo/release-process/smart-contracts |
-| Blockchain Client Release Process | https://docs.celo.org/contribute-to-celo/release-process/blockchain-client |
-| CLI/ContractKit Release Process | https://docs.celo.org/contribute-to-celo/release-process/base-cli-contractkit-dappkit-utils |
+| Joining Celo | https://docs.celo.org/contribute/index |
+| Builders | https://docs.celo.org/contribute/builders |
+| Contributor Overview | https://docs.celo.org/contribute/contributors/overview |
+| Code Contributors | https://docs.celo.org/contribute/contributors/code-contributors |
+| Community Improvement Proposals (CIP) Contributors | https://docs.celo.org/contribute/contributors/cip-contributors |
+| Documentation Contributors | https://docs.celo.org/contribute/contributors/documentation-contributors |
+| How Community RPC Providers Work | https://docs.celo.org/contribute/community-rpc-nodes/how-it-works |
+| Registering a Community RPC Provider | https://docs.celo.org/contribute/community-rpc-nodes/registering-as-rpc-node |
+| Operating a Community RPC Node | https://docs.celo.org/contribute/community-rpc-nodes/community-rpc-node |
+| Community RPC Provider Penalties | https://docs.celo.org/contribute/community-rpc-nodes/penalties |
+| Community RPC Provider FAQ | https://docs.celo.org/contribute/community-rpc-nodes/validator-rpc-faq |
+| Release Process Overview | https://docs.celo.org/contribute/release-process/index |
+| Smart Contracts Release Process | https://docs.celo.org/contribute/release-process/smart-contracts |
+| Blockchain Client Release Process | https://docs.celo.org/contribute/release-process/blockchain-client |
+| CLI/ContractKit Release Process | https://docs.celo.org/contribute/release-process/base-cli-contractkit-dappkit-utils |
 
 ## Community Links
 

@@ -2,7 +2,7 @@
 
 > Sources: docs.celo.org, DefiLlama, celo.org/ecosystem
 > For live TVL data, always refer to https://defillama.com/chain/Celo
-> Last updated: 2026-10-16
+> Last updated: 2026-10-19
 
 ---
 
@@ -105,7 +105,7 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 
 ### Mento Stablecoins (see contracts.md for addresses)
 
-> Canonical list + how to build with them: https://docs.celo.org/build-on-celo/build-with-local-stablecoin
+> Canonical list + how to build with them: https://docs.celo.org/build/build-with-local-stablecoin
 
 | Currency | Symbol | Region |
 |----------|--------|--------|
@@ -127,7 +127,7 @@ Celo is known as the "Home of Stablecoins" with 15+ Mento local-currency stablec
 
 ### External & third-party stablecoins
 
-Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-local-stablecoin), addresses verified on-chain. See `contracts.md` for the full table.
+Sourced from the official list (https://docs.celo.org/build/build-with-local-stablecoin), addresses verified on-chain. See `contracts.md` for the full table.
 
 | Token | Symbol | Issuer | Address |
 |-------|--------|--------|---------|
@@ -165,21 +165,21 @@ Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-l
 
 | Provider | Docs |
 |----------|------|
-| Chainlink | https://docs.celo.org/tooling/oracles/chainlink-oracles |
-| Band Protocol | https://docs.celo.org/tooling/oracles/band-protocol |
-| RedStone | https://docs.celo.org/tooling/oracles/redstone |
-| Supra | https://docs.celo.org/tooling/oracles/supra |
-| Quex | https://docs.celo.org/tooling/oracles/quex-oracles |
+| Chainlink | https://docs.celo.org/build/tools/oracles/chainlink-oracles |
+| Band Protocol | https://docs.celo.org/build/tools/oracles/band-protocol |
+| RedStone | https://docs.celo.org/build/tools/oracles/redstone |
+| Supra | https://docs.celo.org/build/tools/oracles/supra |
+| Quex | https://docs.celo.org/build/tools/oracles/quex-oracles |
 
 ### Data Indexers
 
 | Provider | Docs |
 |----------|------|
-| The Graph | https://docs.celo.org/tooling/indexers/the-graph |
-| Envio | https://docs.celo.org/tooling/indexers/envio |
-| SubQuery | https://docs.celo.org/tooling/indexers/subquery |
-| GoldRush (Covalent) | https://docs.celo.org/tooling/indexers/goldrush |
-| Indexing Co | https://docs.celo.org/tooling/indexers/indexing-co |
+| The Graph | https://docs.celo.org/build/tools/indexers/the-graph |
+| Envio | https://docs.celo.org/build/tools/indexers/envio |
+| SubQuery | https://docs.celo.org/build/tools/indexers/subquery |
+| GoldRush (Covalent) | https://docs.celo.org/build/tools/indexers/goldrush |
+| Indexing Co | https://docs.celo.org/build/tools/indexers/indexing-co |
 
 ### Bridges
 
@@ -198,7 +198,7 @@ Sourced from the official list (https://docs.celo.org/build-on-celo/build-with-l
 | Layerswap | https://layerswap.io | EVM/non-EVM transfers |
 | SmolRefuel | https://smolrefuel.com | Gas top-up |
 
-Cross-chain messaging docs: https://docs.celo.org/tooling/bridges/cross-chain-messaging
+Cross-chain messaging docs: https://docs.celo.org/build/tools/bridges/cross-chain-messaging
 
 ### Stablecoin Orchestration & Fintech Infrastructure
 
@@ -224,7 +224,7 @@ See `stablecoin-orchestration.md` for the full Bridge integration reference.
 
 Wallet infrastructure (WaaS): Privy, Alchemy Smart Wallets, Thirdweb, Reown, Portal, JAW, Dynamic
 
-Wallet docs: https://docs.celo.org/tooling/wallets/index
+Wallet docs: https://docs.celo.org/build/tools/wallets/index
 
 ### Block Explorers
 
@@ -237,23 +237,27 @@ Wallet docs: https://docs.celo.org/tooling/wallets/index
 
 | Library | Docs |
 |---------|------|
-| Viem | https://docs.celo.org/tooling/libraries-sdks/viem/index |
-| Ethers.js | https://docs.celo.org/tooling/libraries-sdks/ethers/index |
-| Web3.js | https://docs.celo.org/tooling/libraries-sdks/web3/index |
-| ContractKit | https://docs.celo.org/tooling/libraries-sdks/contractkit/index |
-| Thirdweb SDK | https://docs.celo.org/tooling/libraries-sdks/thirdweb-sdk/index |
-| Reown (WalletConnect) | https://docs.celo.org/tooling/libraries-sdks/reown/index |
-| Composer Kit UI | https://docs.celo.org/tooling/libraries-sdks/composer-kit |
-| Celo CLI | https://docs.celo.org/tooling/libraries-sdks/cli/index |
+| Viem | https://docs.celo.org/build/tools/libraries-sdks/viem/index |
+| Ethers.js | https://docs.celo.org/build/tools/libraries-sdks/ethers/index |
+| Web3.js | https://docs.celo.org/build/tools/libraries-sdks/web3/index |
+| ContractKit | https://docs.celo.org/build/tools/libraries-sdks/contractkit/index |
+| Reown (WalletConnect) | https://docs.celo.org/build/tools/libraries-sdks/reown/index |
+| Composer Kit UI | https://docs.celo.org/build/tools/libraries-sdks/composer-kit |
+| Celo CLI | https://docs.celo.org/build/tools/libraries-sdks/cli/index |
+
+> "Thirdweb SDK" (previously `tooling/libraries-sdks/thirdweb-sdk/index`) no longer appears in
+> the live sitemap at all — removed, not moved (confirmed by `docs-map.md`'s source-1 fetch).
+> Dropped above. "Thirdweb" under Development Environments below still covers using Thirdweb
+> on Celo.
 
 ### Development Environments
 
 | Tool | Docs |
 |------|------|
-| Foundry | https://docs.celo.org/tooling/dev-environments/foundry |
-| Hardhat | https://docs.celo.org/tooling/dev-environments/hardhat |
-| Remix | https://docs.celo.org/tooling/dev-environments/remix |
-| Thirdweb | https://docs.celo.org/tooling/dev-environments/thirdweb/overview |
+| Foundry | https://docs.celo.org/build/tools/dev-environments/foundry |
+| Hardhat | https://docs.celo.org/build/tools/dev-environments/hardhat |
+| Remix | https://docs.celo.org/build/tools/dev-environments/remix |
+| Thirdweb | https://docs.celo.org/build/tools/dev-environments/thirdweb |
 
 ---
 
@@ -276,9 +280,9 @@ MiniPay is Celo's flagship stablecoin wallet, built into Opera Mini and also ava
 
 ### Building for MiniPay
 
-- Quickstart: https://docs.celo.org/build-on-celo/build-on-minipay/quickstart
-- Code Library: https://docs.celo.org/build-on-celo/build-on-minipay/code-library
-- Deeplinks: https://docs.celo.org/build-on-celo/build-on-minipay/deeplinks
+- Overview (docs.celo.org): https://docs.celo.org/build/mini-apps/overview — the separate
+  Quickstart/Code Library/Deeplinks pages this used to link to were consolidated into this one
+  page on 2026-10-06; see `minipay-docs-map.md` for the fuller `docs.minipay.xyz` picture.
 - Detection: Check `window.ethereum.isMiniPay` in browser
 
 ---
@@ -288,15 +292,19 @@ MiniPay is Celo's flagship stablecoin wallet, built into Opera Mini and also ava
 Celo is positioning itself for AI agent use cases:
 
 - **ERC-8004 (Agent Trust Protocol)**: Identity, Reputation, and Validation registries for AI agents
-  - Docs: https://docs.celo.org/build-on-celo/build-with-ai/8004
+  - Docs: https://docs.celo.org/build/agents/8004
 - **x402 Protocol**: HTTP-native micropayments using stablecoins
-  - Docs: https://docs.celo.org/build-on-celo/build-with-ai/x402
-- **Agent Skills**: Modular capabilities for AI coding agents
-  - Docs: https://docs.celo.org/build-on-celo/build-with-ai/agent-skills
+  - Docs: https://docs.celo.org/build/agents/x402
 - **Celo MCP Server**: Model Context Protocol for blockchain data
-  - Docs: https://docs.celo.org/build-on-celo/build-with-ai/mcp/celo-mcp
+  - Docs: https://docs.celo.org/build/agents/mcp/celo-mcp
 - **Vibe Coding**: AI-assisted development on Celo
-  - Docs: https://docs.celo.org/build-on-celo/build-with-ai/vibe-coding
+  - Docs: https://docs.celo.org/build/agents/vibe-coding
+
+> The standalone "Agent Skills" page this section used to link to no longer exists in the live
+> sitemap (confirmed again this run — its old URL now redirects to the Celopedia page, which
+> covers different content). Dropped above; see `docs-map.md` → _Build — Agents_ for the current
+> agent-docs page list, which also covers newer additions (Self Agent ID, Agent Vault) not yet
+> reflected here.
 
 ---
 
