@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.12.1"
+  version: "2.13.0"
 ---
 
 # Celopedia Skill
@@ -75,8 +75,9 @@ B2B fiat-to-stablecoin infrastructure on Celo — virtual accounts, payouts, car
 - Celo supported via `payment_rail: "celo"` on transfer/virtual-account/liquidation-address endpoints
 - Pairs naturally with **fee abstraction** (USDT in + USDT gas)
 - EEA caveat: USDT and USDB unavailable to EEA users — use USDC for EU flows
+- **Ripio wFIAT (wARS, wBRL, wMXN, wCOP, wPEN, wCLP)**: how to get each token on Celo (DEX, Textile, Ripio Ramp, Ripio Bridge), which work outside LatAm, and where wFIAT earns yield — see `wfiat-access.md`
 
-**References**: `stablecoin-orchestration.md`
+**References**: `stablecoin-orchestration.md`, `wfiat-access.md`
 
 ### 4. MiniPay App Builder
 
@@ -106,7 +107,7 @@ Build AI agents that transact on Celo.
 - **Self Agent ID**: proof-of-human extension on ERC-8004 (soulbound NFT bound to a passport ZK proof) — sybil resistance; register at `https://app.ai.self.xyz`. See `self-agent-id.md`.
 - **Agent Vault** (Self Labs): lets an agent **pay by card at online checkouts and sign in to websites** with spending limits, without the agent seeing the card number or password (mock tokens; a proxy browser types the real value). Developer surface: hosted MCP server `https://mcp.agentvault.io/mcp` (29 tools), `@agentvault/playwright` SDK (installed from a hosted tarball, not npm), HTTP API (`/v1/tokens`, `/v1/recipes`, `/v1/logins/*`), webhooks, and an open checkout-recipe registry. **Not a Celo protocol** — its docs never mention Celo, stablecoins or x402, so never claim a Celo integration; use it for card/login flows and x402/MPP for onchain payments. See `agent-vault.md`.
 - **Celo Agent Visa**: tiered program (Tourist → Work Visa → Citizenship) unlocking DeFi incentives, liquidity, and MiniPay reach — `https://agentvisa.self.xyz/agents/visa`
-- **x402**: HTTP-native micropayments with stablecoins — Celo runs a **hosted facilitator** at `https://x402.celo.org` (dashboard/API keys; mainnet API `api.x402.celo.org`, testnet `api.x402.sepolia.celo.org`; sponsored gas; USDC/USDT/USAT via EIP-3009, Ripio wARS/wBRL/wCOP via Permit2). Agent-readable integration guide: `https://x402.celo.org/SKILL.md` — fetch it before writing integration code. Details: `ai-agents.md` → _Hosted Celo Facilitator_
+- **x402**: HTTP-native micropayments with stablecoins — Celo runs a **hosted facilitator** at `https://x402.celo.org` (dashboard/API keys; mainnet API `api.x402.celo.org`, testnet `api.x402.sepolia.celo.org`; sponsored gas; USDC/USDT/USAT via EIP-3009, all six Ripio wFIAT + cNGN via Permit2). Agent-readable integration guide: `https://x402.celo.org/SKILL.md` — fetch it before writing integration code. Details: `ai-agents.md` → _Hosted Celo Facilitator_
 - **Celo MCP Server**: Query blockchain data from coding assistants
 - **Agent Skills**: Modular skill system for AI coding agents
 - **Agents on Open Rails Hackathon** (Oct 6 – Nov 9, 2026, $5K in CELO across 3 tracks, on **Loops House**, with Celo Devs): agents that earn, pay, and settle on live payment rails with real money moving — tracks *Stable Agents: LatAm* (Ripio wFIAT), *Open Corridors* (Textile FX; USA₮ via x402), and *Build with buy*. Register at `https://www.loops.house/agents-on-open-rails/`. Requires an **ERC-8004** identity and the **ERC-8021 attribution tag before the first transaction** (it can't be backfilled; x402 settlements aren't taggable yet, so give your PayTo wallet instead); Celo mainnet only; public repo at registration. Telegram `https://t.me/realworldagentshackathon`. Details, rules, and dates: `grants-funding.md`.
@@ -230,6 +231,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | Contract address | Look up in `contracts.md` |
 | Protocol integration | Check `defi-protocols.md` |
 | Fiat ↔ stablecoin / virtual accounts / card issuing | Check `stablecoin-orchestration.md` |
+| Getting wARS / wBRL / wMXN / wCOP / wPEN / wCLP, Ripio Ramp or Bridge, yield on wFIAT | Check `wfiat-access.md` — re-run its _Re-verify_ commands before quoting liquidity |
 | Build / deploy / verify | Check `builder-guide.md`, `dev-templates.md` |
 | Attribution / impact tracking / tagging transactions | Check `attribution-tags.md` |
 | MiniPay development | Check `minipay-guide.md`, `minipay-templates.md` |
