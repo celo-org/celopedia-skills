@@ -15,7 +15,7 @@
 
 MiniPay publishes the kinds of Mini Apps it is prioritizing, and where it is heading, in its quarterly updates on the Celo forum. **Check the latest MiniPay update on [forum.celo.org](https://forum.celo.org/) before recommending a category** (at the time of writing, [MiniPay Update Q3 2026](https://forum.celo.org/t/minipay-update-q3-2026/13926)). Do not steer a builder toward a category from memory.
 
-> ⚠️ **Payment apps (local payments, QR pay, transfers) are for projects with a long-term background in DeFi only**, to ensure the highest quality and security for users. Per guidance from the Celo team, they must also hold the licenses required in every market they operate in and provide their own liquidity. If that does not describe the builder, recommend something else.
+> ⚠️ **Payment apps (local payments, QR pay, transfers) are for projects with a long-term background in DeFi only**, to ensure the highest quality and security for users. They must also hold the licenses required in every market they operate in and provide their own liquidity. If that does not describe the builder, recommend something else.
 
 ---
 
