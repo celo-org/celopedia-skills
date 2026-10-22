@@ -216,7 +216,7 @@ The thirdweb flow below is an **alternative** that uses thirdweb's own facilitat
 | USDT | EIP-3009 | 6 |
 | USAT (shown as USA₮ in some partner copy) | EIP-3009 | 6 |
 | wARS, wBRL, wMXN, wCOP, wPEN, wCLP (Ripio) | Permit2 — needs `assetTransferMethod: "permit2"` | 18 |
-| cNGN | Permit2 | 6 |
+| cNGN | Permit2 — needs `assetTransferMethod: "permit2"`; no EIP-2612 `permit()`, so the payer sends `approve(Permit2, amount)` once (again when it runs out) and the route must not declare `eip2612GasSponsoring` | 6 |
 
 Testnet (`eip155:11142220`): USDC only.
 

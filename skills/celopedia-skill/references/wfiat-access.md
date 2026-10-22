@@ -1,7 +1,7 @@
-# Ripio wFIAT on Celo — how to get each token, bridges, and yield
+# Ripio wFIAT on Celo — how to get each token, and bridges
 
 > Sources: on-chain reads (forno.celo.org, Blockscout), ramp.ripio.com API, bridge.ripio.com/developers,
-> Textile RFQ API, LI.FI, GeckoTerminal / DexScreener, DefiLlama, Morpho API, BCRA API
+> Textile RFQ API, LI.FI, GeckoTerminal / DexScreener, Aave v3 Pool (Celo)
 > Last verified: 2026-10-21
 >
 > **Liquidity figures change daily — sometimes hourly.** Re-run the commands in _Re-verify_ before
@@ -123,56 +123,16 @@ Across has no Celo routes. Full list: https://docs.celo.org/tooling/bridges/brid
 
 ## Yield on wFIAT
 
-**No protocol on Celo pays meaningful yield on any wFIAT today.**
-
-- Aave v3 on Celo lists only USDC, USDT, WETH, USDm, CELO, EURm (`getReservesList` on Pool
-  `0x3E59A31363E2ad014dcbc521c4a0d5757d9f3402`).
-- Morpho has no wFIAT markets or vaults on Celo.
-- Uniswap v3 wARS/USDT LP on Celo: ~0.04% APY (DefiLlama).
-- **CapyFi is not deployed on Celo.** It is a Compound v2 fork on Ethereum, Base, World Chain, and
-  LaChain (https://docs.capyfi.com/networks); its contracts have no code on Celo and its app configures
-  chains 1, 480, 8453 only. Treat "CapyFi on Celo" claims as planned until a deployment appears.
-
-Where wARS yield exists (2026-10-21):
-
-| Chain | Protocol | APY | Size | Driver |
-|---|---|---|---|---|
-| Ethereum | Morpho vault "KPK wARS Yield" `0xb5ce3CA2C774b72955C25875022FdD91f7a7B938` | ~24.5% | ~$6.3M | ~0.1% organic + Merkl rewards renewed every ~3 days by an unidentified funder |
-| Ethereum | CapyFi caWARS `0xf80eeec09f417Fa7FCc4A848Ef03af9dF2658d7B` | ~12.7% | ~$507k supplied | Organic borrow demand (60% utilization) |
-| Ethereum | Morpho market wARS/USDC | ~11.9% | ~$52k | Organic |
-| World Chain | Morpho "Re7 WARS" | ~26% | ~$120k | Mostly WLD rewards |
-| Base | CapyFi caWARS | ~1.7% | ~$30k | Low utilization |
-
-wBRL earns ~0.16% on CapyFi; other wFIAT have no yield venue of meaningful size.
-
-CapyFi notes: caTokens (8 decimals); supply = `approve` + `mint(amount)`, withdraw =
-`redeemUnderlying(amount)`; wARS/wBRL collateral factor is 0 (lend only); oracle is Chainlink's ARS/USD
-fiat feed (a wARS de-peg is invisible to it); admin is a 4-of-7 Safe that can enable a whitelist.
-
-**Benchmarks to show users (BCRA, 2026-10-19):** CPI 33.4% YoY (1.9% in September), plazo fijo 30 days
-~21.2% TNA. Both wARS yields sit below inflation and bank deposits — never present wARS yield as an
-inflation hedge.
-
-### Pattern: a Celo wFIAT product with a yield sleeve
-
-1. Keep user balances and payments on Celo; hold a Celo buffer sized for expected redemptions (the Celo
-   wARS pool is only ~$110k).
-2. Bridge treasury capital Celo → Ethereum with the Ripio Bridge (~15 min, 1,500 wARS fee).
-3. On Ethereum, a Safe/smart account supplies to the Morpho KPK vault (ERC-4626 `deposit`/`redeem`) and
-   CapyFi caWARS (keep under ~10% of the market; check `getCash()` before withdrawing).
-4. Rebalance from CapyFi `supplyRatePerBlock` and Morpho `netApy`; claim Merkl rewards on a schedule.
-5. Withdraw → bridge back (round trip ~30 min).
-
-Risks: reward subsidy can drop to ~0.1% at any renewal; small markets can lock withdrawals above the
-80% utilization kink; wARS is upgradeable with pause/blocklist roles; the bridge is Ripio-operated;
-reserves sit in Argentine banks without deposit insurance.
+No protocol on Celo pays meaningful yield on any wFIAT today (Aave v3 Celo reserves checked via
+`getReservesList`; no Morpho markets; CapyFi has no code on Celo). Don't point builders to a Celo yield
+venue for wFIAT — re-run the Aave / CapyFi checks in _Re-verify_ before saying otherwise.
 
 ---
 
 ## x402
 
-The hosted Celo facilitator lists **all six wFIAT** as Permit2 assets (verified 2026-10-21 via
-`/supported`). See `ai-agents.md` → x402 for integration.
+The hosted Celo facilitator lists **all six wFIAT** as Permit2 assets, with the Permit2 approval gas-sponsored via EIP-2612 (verified 2026-10-21 via
+`/supported` and `/api/config`). See `ai-agents.md` → x402 for integration.
 
 ---
 
@@ -195,8 +155,8 @@ curl -s https://api.geckoterminal.com/api/v2/networks/celo/tokens/0x0dc4f92879b7
 # Same-chain route USDT -> wARS (10 USDT)
 curl -s "https://li.quest/v1/quote?fromChain=42220&toChain=42220&fromToken=0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e&toToken=0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d&fromAmount=10000000&fromAddress=0x000000000000000000000000000000000000dEaD" | jq '{tool, toAmount: .estimate.toAmount}'
 
-# wFIAT yield pools across chains
-curl -s https://yields.llama.fi/pools | jq '[.data[] | select(.symbol | test("WARS|WBRL|WMXN|WCOP|WPEN|WCLP"))] | map({chain, project, symbol, apy, tvlUsd})'
+# Aave v3 Celo reserves (no wFIAT expected) — returns the reserve address list
+curl -s -X POST https://forno.celo.org -H 'content-type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"eth_call","params":[{"to":"0x3E59A31363E2ad014dcbc521c4a0d5757d9f3402","data":"0xd1946dbc"},"latest"]}'
 
 # CapyFi on Celo? (empty "0x" = not deployed)
 curl -s -X POST https://forno.celo.org -H 'content-type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"eth_getCode","params":["0x0b9af1fd73885aD52680A1aeAa7A3f17AC702afA","latest"]}'
