@@ -228,3 +228,24 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
   operator disclaimer, whitelisting integrity, dependency security).
 - Re-check all of this as soon as `docs.minipay.xyz` is reachable from this
   environment.
+
+## 7. wFIAT access (`wfiat-access.md`)
+
+- Sources: x402 `/supported` + `/api/config`, `ramp.ripio.com/api/countries`,
+  Textile `v2/rfq/levels?chainId=42220`, GeckoTerminal, LI.FI, Aave v3 Pool
+  `getReservesList`, CapyFi Comptroller `eth_getCode` on Celo
+- Last verified: 2026-10-22 (seeded from PR #92's checks; first scheduled
+  run re-verifies)
+- x402 mainnet assets: USDC, USDT, USAT (eip3009); wARS, wBRL, wMXN, wCOP,
+  wPEN, wCLP, cNGN (permit2). `eip2612GasSponsoring`: true for the six
+  wFIAT, false for cNGN and the eip3009 assets.
+- Ripio Ramp countries: AR, BR, MX, CO. PE and CL → "Country not supported".
+  Celo (42220) offers CELO, USDC, USDT and all six wFIAT.
+- Textile Celo buy side (USDT → token): wARS non-zero (tens of USDT), wBRL
+  ~87.7k USDT, wCOP ~5.1k USDT, wMXN zero. wPEN, wCLP not listed.
+- LI.FI same-chain route from USDT: wARS, wBRL yes; wMXN, wCOP, wPEN, wCLP no.
+- Celo DEX pools: wARS (Uniswap v3/v4), wBRL (Uniswap v3/v4); none for the
+  other four.
+- Aave v3 Celo reserves: USDC, USDT, WETH, USDm, CELO, EURm (no wFIAT).
+  CapyFi Comptroller `0x0b9af1fd73885aD52680A1aeAa7A3f17AC702afA` on Celo:
+  no code.
