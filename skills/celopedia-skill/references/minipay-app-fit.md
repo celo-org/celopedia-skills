@@ -15,7 +15,7 @@
 
 MiniPay publishes the kinds of Mini Apps it is prioritizing, and where it is heading, in its quarterly updates on the Celo forum. **Check the latest MiniPay update on [forum.celo.org](https://forum.celo.org/) before recommending a category** (at the time of writing, [MiniPay Update Q3 2026](https://forum.celo.org/t/minipay-update-q3-2026/13926)). Do not steer a builder toward a category from memory.
 
-> ⚠️ **Payment apps (local payments, QR pay, transfers) are for projects with a long-term background in DeFi only**, to ensure the highest quality and security for users. They must also hold the licenses required in every market they operate in and provide their own liquidity. If that does not describe the builder, recommend something else.
+> ⚠️ **DeFi apps (lending, borrowing, savings and similar) are for projects with a long-term background in DeFi only**, to ensure the highest quality and security for users. They must also hold the licenses required in every market they operate in and provide their own liquidity. If that does not describe the builder, recommend something else.
 
 ---
 
@@ -45,7 +45,7 @@ Before scoring your idea, answer these questions honestly. Your profile changes 
 | B2B app, no traction yet | Not a good MiniPay fit right now. Come back when you have live users |
 | B2B app, proven traction | Strong fit — MiniPay gives you direct reach to 20M+ activated wallets |
 
-> ⚠️ **Financial apps (credit, lending, savings, FX) require licensing in most MiniPay primary markets.** Building without proper compliance puts your users at risk and your app at risk of removal. If you are not established in the domain, default to a lower-risk category from MiniPay's latest quarterly update instead. Payment apps carry the extra bar in *What MiniPay Is Looking For* above.
+> ⚠️ **Financial apps (credit, lending, savings, FX) require licensing in most MiniPay primary markets.** Building without proper compliance puts your users at risk and your app at risk of removal. If you are not established in the domain, default to a lower-risk category from MiniPay's latest quarterly update instead. DeFi apps carry the extra bar in *What MiniPay Is Looking For* above.
 
 ---
 
@@ -179,10 +179,9 @@ Current catalog density from `minipay-live-apps.md` (snapshot — verify before 
 | **News / media** | 1 | 🟢 High | Only Briefing. Untapped |
 | **Shopping** | 1 | 🟢 High | E-commerce + stablecoins is open — **only if you already have users/traction** |
 | **Utility** | 8 | 🟢 High | Bill payments and utilities are among MiniPay's best-performing categories. Bill pay is led by Bitgifty and Fonbank (Nigeria-focused); check which markets they do not cover — that gap is your opportunity |
-| **Payments — local / QR** | — | 🟠 DeFi-background projects only | Requires a long-term DeFi background, licensing in each market and your own liquidity. See *What MiniPay Is Looking For* |
 | **Sports** | 4 | 🟢 High | Africa-focused. Opportunities in other markets |
-| **Finance — savings/FX** | 7 | 🟠 Established builders only | Savings is a best-performing category and many markets are underserved, but this space suits teams with existing users and relevant domain background |
-| **Finance — credit/lending** | 0 | 🔴 Requires licensing | Massive market need, but requires financial licensing in each market. Not recommended without legal compliance and domain expertise |
+| **Finance — savings/FX** | 7 | 🟠 Established builders only | Savings is a best-performing category and many markets are underserved, but only for projects with a long-term DeFi background, licensing in each market and their own liquidity. See *What MiniPay Is Looking For* |
+| **Finance — credit/lending** | 0 | 🔴 Requires licensing | Massive market need, but requires financial licensing in each market. Not recommended without legal compliance and a long-term DeFi background. See *What MiniPay Is Looking For* |
 
 ---
 
