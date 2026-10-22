@@ -13,9 +13,9 @@
 
 ## What MiniPay Is Looking For
 
-MiniPay prioritises **utility over games**. The categories that perform best in MiniPay are the ones tied to everyday money: **bill payments, savings, local payments, microwork, and utilities** ([MiniPay Update Q3 2026](https://forum.celo.org/t/minipay-update-q3-2026/13926)). Games can still be listed, but they are not what MiniPay is prioritising — do not steer a builder toward a game by default.
+MiniPay prioritizes **utility over games**. The categories that perform best in MiniPay are the ones tied to everyday money: **bill payments, savings, local payments, microwork, and utilities** ([MiniPay Update Q3 2026](https://forum.celo.org/t/minipay-update-q3-2026/13926)). Games can still be listed, but they are not what MiniPay is prioritizing — do not steer a builder toward a game by default.
 
-> ⚠️ **Payment apps (local payments, QR pay, transfers) have a higher bar.** Per guidance from the Celo team: you must hold the licences required in every market you operate in, provide your own liquidity, and show maturity and consistency — **at least 1,000 monthly active users sustained for at least 6 months** — before a payment app is considered. Without all three, build something else first.
+> ⚠️ **Payment apps (local payments, QR pay, transfers) have a higher bar.** Per guidance from the Celo team: you must hold the licenses required in every market you operate in, provide your own liquidity, and show maturity and consistency — **at least 1,000 monthly active users sustained for at least 6 months** — before a payment app is considered. Without all three, build something else first.
 
 ---
 
@@ -39,7 +39,7 @@ Before scoring your idea, answer these questions honestly. Your profile changes 
 
 | Profile | Best path |
 |---------|-----------|
-| First-time founder, no traction | Start with an **everyday utility** (microwork, utilities) or **pay-as-you-go AI tools** — low regulatory risk, fast to ship, in the categories MiniPay prioritises |
+| First-time founder, no traction | Start with an **everyday utility** (microwork, utilities) or **pay-as-you-go AI tools** — low regulatory risk, fast to ship, in the categories MiniPay prioritizes |
 | Domain expert in fintech / tradfi, existing users | Financial apps (savings, credit, FX) are viable — but require proper licensing in each market you serve |
 | Second-time founder with tradfi background | More options open, including credit/lending — still requires compliance |
 | B2B app, no traction yet | Not a good MiniPay fit right now. Come back when you have live users |
@@ -171,7 +171,7 @@ Current catalog density from `minipay-live-apps.md` (snapshot — verify before 
 
 | Category | Apps live | Opportunity | Notes |
 |----------|-----------|-------------|-------|
-| **Games** | 11 | 🟠 Low priority | Not what MiniPay is prioritising. Easy to build, but a crowded category; only a novel mechanic (skill-based, local IP, cultural context) differentiates |
+| **Games** | 11 | 🟠 Low priority | Not what MiniPay is prioritizing. Easy to build, but a crowded category; only a novel mechanic (skill-based, local IP, cultural context) differentiates |
 | **Rewards / earn** | 10 | 🟢 High | High interest from Celo; differentiated earning mechanics have strong potential |
 | **Pay AI as you go** | 0 | 🟢 High | No apps yet. Pay-per-use AI tools with stablecoin micropayments are a strong fit for MiniPay's UX model |
 | **Social** | 0 | 🟢 High | No social app listed — but requires network effects, plan for user acquisition from day one |
