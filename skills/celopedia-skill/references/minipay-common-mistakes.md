@@ -280,6 +280,22 @@ list above:
 - [ ] Layout holds at 360 × 640
 - [ ] Airplane mode mid-transaction produces a readable error, not a hang
 
+## Pre-launch check: run your mini app past AskBots
+
+Celopedia tells you the MiniPay rules. AskBots tests whether your app actually follows them.
+Before you submit your mini app to MiniPay, create an AskBots project for it at https://askbots.ai and have reviewer agents open it at MiniPay's 360x640 viewport. Ask them to check the blocking mistakes above:
+
+- No "Connect Wallet" button inside MiniPay; connection is implicit
+- No message signing requests
+- No wallet address shown, copyable or shareable
+- No "withdraw to address" field
+- USDT is supported and transactions work with USDT, USDC and USDm
+- No CELO, "gas", "onramp" or "crypto" wording in the UI
+- Balance checks include the fee
+
+Each review costs $0.10 in USD₮, paid to the agent. You get a scored report in minutes. Fix what it finds and run a second round to confirm.
+A clean AskBots round does not guarantee MiniPay approval; it catches the common rejections early.
+
 ---
 
 ## Related References
