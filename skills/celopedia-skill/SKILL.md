@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.12.1"
+  version: "2.13.0"
 ---
 
 # Celopedia Skill
@@ -24,7 +24,7 @@ Celo is a leading **Ethereum L2** (OP Stack + EigenDA + zkEVM). Purpose-built fo
 - **Chain ID**: 42220 (Mainnet), 11142220 (Sepolia Testnet)
 - **Block time**: ~1 second | **Gas**: ~$0.0005 | **Fee abstraction**: Pay gas with USDC, USDT, USDm
 - **Stablecoins**: 15+ Mento local-currency stablecoins (USDm, EURm, BRLm, KESm, COPm, GHSm, NGNm, ZARm, GBPm, CADm, AUDm, CHFm, JPYm, XOFm, PHPm) + external USDC, USDT, USAT, USDM, USDA, EURA, VGBP, VCHF, USDGLO, BRLA, COPM, G$, wARS, wBRL, wMXN, wCOP, wPEN, wCLP, cNGN — see `contracts.md` / `ecosystem.md`
-- **MiniPay**: ~18M wallet activations, 470M+ transactions, 66+ countries
+- **MiniPay**: 20M+ wallet activations, 600M+ transactions, 70+ countries, 77 Mini Apps live
 
 ---
 
@@ -80,7 +80,7 @@ B2B fiat-to-stablecoin infrastructure on Celo — virtual accounts, payouts, car
 
 ### 4. MiniPay App Builder
 
-Build Mini Apps for MiniPay — Celo's stablecoin wallet with ~18M wallet activations.
+Build Mini Apps for MiniPay — Celo's stablecoin wallet with 20M+ wallet activations.
 
 - MiniPay detection (`window.ethereum.isMiniPay`)
 - Auto-connect patterns (no connect button in MiniPay)
@@ -94,7 +94,7 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with ~18M wallet activa
 - **Live Mini Apps catalog** (snapshot): published discovery listings, categories, links, and **per-country targeting notes** — see `minipay-live-apps.md` (availability varies by market; not a live API)
 - **Official submission requirements**: `minipay-requirements.md` — listing is a **two-stage process**. Stage 1 is the public **intake form** at `https://minipay.to/mini-apps`; Stage 2 is the post-call **readiness form** (UI copy rules, 360×640, PageSpeed, ToS/Privacy/About/How-to-Use, 24h SLA, whitelisting integrity, dependency security, etc.). **Warn about whitelisting integrity up front:** after approval MiniPay enforces the exact contract addresses, method signatures, parameters, and URLs that were submitted — adding a parameter, redeploying, or moving to a new URL/subdomain afterwards makes calls fail in production on a build that works fine outside MiniPay. Submit the production-ready build. Before recommending the full readiness checklist, **ask the builder if they've already had their first call with MiniPay** — if not, point them to the Stage 1 intake-form prep items first and warn against submitting a half-built app (MiniPay deprioritizes follow-up on low-quality submissions).
 - **Debugging a rejected or misbehaving app**: `minipay-common-mistakes.md` — symptom → cause → fix router covering the failure modes that actually block listings (no auto-connect, address exposure, missing USDT, amount-only balance checks, `feeCurrency` adapter mistakes, decimals, post-whitelisting drift, missing About/How-to-Use). Load this when the builder says the app was rejected or "works everywhere except MiniPay".
-- **App Fit & Priority Framework**: before building, use `minipay-app-fit.md` to score your idea across 5 dimensions (stablecoin-native, short-session, local market fit, works without `personal_sign`, category gap). Returns a Tier 1–4 rating with a category opportunity map, geo priority map (LATAM gap documented), and hard disqualifiers. Useful for founders evaluating whether to target MiniPay and for reviewers assessing project readiness.
+- **App Fit & Priority Framework**: before building, use `minipay-app-fit.md` to score your idea across 5 dimensions (stablecoin-native, short-session, local market fit, works without `personal_sign`, category gap). Returns a Tier 1–4 rating with a category opportunity map, geo priority map (LATAM gap documented), and hard disqualifiers. Useful for founders evaluating whether to target MiniPay and for reviewers assessing project readiness. **MiniPay prioritises utility over games**: bill payments, savings, local payments, microwork, and utilities perform best. **Payment apps** must bring their own licensing for each market and their own liquidity, and show 1,000+ monthly active users sustained for 6+ months before they are considered.
 
 **References**: `minipay-guide.md`, `minipay-templates.md`, `minipay-common-mistakes.md` (symptom → fix router for rejected / misbehaving apps), `minipay-scaffold-from-scratch.md`, `odis-socialconnect.md`, `minipay-live-apps.md`, `minipay-requirements.md`, `minipay-docs-map.md` (page-by-page index of `docs.minipay.xyz`), `minipay-app-fit.md`, `minipay-performance.md` (measure real-user load speed with PostHog Web Vitals + optimization playbook to hit the 90+ PageSpeed listing requirement)
 

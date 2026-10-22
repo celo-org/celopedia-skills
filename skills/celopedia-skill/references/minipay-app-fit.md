@@ -11,6 +11,14 @@
 
 ---
 
+## What MiniPay Is Looking For
+
+MiniPay prioritises **utility over games**. The categories that perform best in MiniPay are the ones tied to everyday money: **bill payments, savings, local payments, microwork, and utilities** ([MiniPay Update Q3 2026](https://forum.celo.org/t/minipay-update-q3-2026/13926)). Games can still be listed, but they are not what MiniPay is prioritising — do not steer a builder toward a game by default.
+
+> ⚠️ **Payment apps (local payments, QR pay, transfers) have a higher bar.** Per guidance from the Celo team: you must hold the licences required in every market you operate in, provide your own liquidity, and show maturity and consistency — **at least 1,000 monthly active users sustained for at least 6 months** — before a payment app is considered. Without all three, build something else first.
+
+---
+
 ## 0. Understand Your Builder Profile First
 
 Before scoring your idea, answer these questions honestly. Your profile changes what you should build.
@@ -31,13 +39,13 @@ Before scoring your idea, answer these questions honestly. Your profile changes 
 
 | Profile | Best path |
 |---------|-----------|
-| First-time founder, no traction | Start with **x2earn games** or **pay-as-you-go AI tools** — low regulatory risk, fastest to ship, high demand |
+| First-time founder, no traction | Start with an **everyday utility** (microwork, utilities) or **pay-as-you-go AI tools** — low regulatory risk, fast to ship, in the categories MiniPay prioritises |
 | Domain expert in fintech / tradfi, existing users | Financial apps (savings, credit, FX) are viable — but require proper licensing in each market you serve |
 | Second-time founder with tradfi background | More options open, including credit/lending — still requires compliance |
 | B2B app, no traction yet | Not a good MiniPay fit right now. Come back when you have live users |
-| B2B app, proven traction | Strong fit — MiniPay gives you direct reach to 14M+ wallets |
+| B2B app, proven traction | Strong fit — MiniPay gives you direct reach to 20M+ activated wallets |
 
-> ⚠️ **Financial apps (credit, lending, savings, FX) require licensing in most MiniPay primary markets.** Building without proper compliance puts your users at risk and your app at risk of removal. If you are not established in the domain, default to games or AI pay-as-you-go instead.
+> ⚠️ **Financial apps (credit, lending, savings, FX) require licensing in most MiniPay primary markets.** Building without proper compliance puts your users at risk and your app at risk of removal. If you are not established in the domain, default to an everyday utility, microwork, or AI pay-as-you-go instead. Payment apps carry the extra bar in *What MiniPay Is Looking For* above.
 
 ---
 
@@ -47,7 +55,7 @@ Before scoring your idea, know the person on the other end of the screen.
 
 | Dimension | Reality |
 |-----------|---------|
-| **Geography** | Global South — Nigeria, Kenya, Uganda, Ghana, South Africa, Brazil, Colombia, Philippines (60+ countries) |
+| **Geography** | Global South — Nigeria, Kenya, Uganda, Ghana, South Africa, Brazil, Colombia, Philippines (70+ countries) |
 | **Device** | Budget Android (most common), basic iOS. Expect small screens, low RAM |
 | **Connectivity** | Intermittent, low bandwidth. 2G/3G is common in primary markets |
 | **Financial profile** | Unbanked or underbanked. Stablecoins serve as the primary savings and payment tool |
@@ -163,16 +171,17 @@ Current catalog density from `minipay-live-apps.md` (snapshot — verify before 
 
 | Category | Apps live | Opportunity | Notes |
 |----------|-----------|-------------|-------|
-| **Games** | 11 | 🟢 High | Easiest to build and launch; strong Celo interest; novel mechanics (skill-based, local IP, cultural context) differentiate |
+| **Games** | 11 | 🟠 Low priority | Not what MiniPay is prioritising. Easy to build, but a crowded category; only a novel mechanic (skill-based, local IP, cultural context) differentiates |
 | **Rewards / earn** | 10 | 🟢 High | High interest from Celo; differentiated earning mechanics have strong potential |
 | **Pay AI as you go** | 0 | 🟢 High | No apps yet. Pay-per-use AI tools with stablecoin micropayments are a strong fit for MiniPay's UX model |
 | **Social** | 0 | 🟢 High | No social app listed — but requires network effects, plan for user acquisition from day one |
 | **Health / fitness** | 1 | 🟢 High | Only Squadletics. Large green field |
 | **News / media** | 1 | 🟢 High | Only Briefing. Untapped |
 | **Shopping** | 1 | 🟢 High | E-commerce + stablecoins is open — **only if you already have users/traction** |
-| **Utility** | 8 | 🟡 Medium | Bill pay led by Bitgifty and Fonbank (Nigeria-focused). Check which markets they do not cover — that gap is your opportunity |
+| **Utility** | 8 | 🟢 High | Bill payments and utilities are among MiniPay's best-performing categories. Bill pay is led by Bitgifty and Fonbank (Nigeria-focused); check which markets they do not cover — that gap is your opportunity |
+| **Payments — local / QR** | — | 🟠 Established builders only | A best-performing category, but requires licensing in each market, your own liquidity, and 1,000+ MAU sustained for 6+ months. See *What MiniPay Is Looking For* |
 | **Sports** | 4 | 🟢 High | Africa-focused. Opportunities in other markets |
-| **Finance — savings/FX** | 7 | 🟠 Established builders only | Many markets underserved, but this space suits teams with existing users and relevant domain background |
+| **Finance — savings/FX** | 7 | 🟠 Established builders only | Savings is a best-performing category and many markets are underserved, but this space suits teams with existing users and relevant domain background |
 | **Finance — credit/lending** | 0 | 🔴 Requires licensing | Massive market need, but requires financial licensing in each market. Not recommended without legal compliance and domain expertise |
 
 ---

@@ -292,7 +292,7 @@ Quick prototype?
 
 ## Building for MiniPay? Read This First
 
-MiniPay is Celo's embedded stablecoin wallet with 14M+ users across 60+ countries. If you are building a Mini App for MiniPay, the SDK patterns above apply — but with **important constraints and required patterns** that differ from a standard Celo dApp.
+MiniPay is Celo's embedded stablecoin wallet with 20M+ wallet activations across 70+ countries. If you are building a Mini App for MiniPay, the SDK patterns above apply — but with **important constraints and required patterns** that differ from a standard Celo dApp.
 
 ### SDK choice for MiniPay
 
