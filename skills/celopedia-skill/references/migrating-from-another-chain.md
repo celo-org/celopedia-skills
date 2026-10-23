@@ -251,7 +251,7 @@ Moving is the floor. These are the reasons to stay:
 ## Remaining gotchas
 
 - **Block time halves, 2s → 1s.** Any code treating block count as elapsed time is now **2× fast**. Audit vesting schedules, timelocks, TWAPs, cooldowns, and `block.number` deadlines. Prefer `block.timestamp`.
-- **`eth_getLogs` caps at ~50,000 blocks** — indexers must paginate. `network-info.md` → _RPC Limits & Gotchas_.
+- **`eth_getLogs` caps at 5,000 blocks on Forno mainnet** — indexers must paginate. `network-info.md` → _RPC Limits & Gotchas_.
 - **Subgraph coverage lags** other chains — verify freshness before depending on one. `defi-protocols.md`.
 - **CELO is hidden in MiniPay** — never display or require it in a Mini App.
 

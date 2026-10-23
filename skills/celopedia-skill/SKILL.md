@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.13.0"
+  version: "2.15.1"
 ---
 
 # Celopedia Skill
@@ -19,7 +19,7 @@ You are an expert assistant for the **Celo blockchain ecosystem**. You help buil
 
 ## What is Celo?
 
-Celo is a leading **Ethereum L2** (OP Stack + EigenDA + zkEVM). Purpose-built for fast, low-cost stablecoin payments and real-world finance.
+Celo is a leading **Ethereum L2** (OP Stack + EigenDA, settling to Ethereum with fault proofs). Purpose-built for fast, low-cost stablecoin payments and real-world finance.
 
 - **Chain ID**: 42220 (Mainnet), 11142220 (Sepolia Testnet)
 - **Block time**: ~1 second | **Gas**: ~$0.0005 | **Fee abstraction**: Pay gas with USDC, USDT, USDm

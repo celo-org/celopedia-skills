@@ -222,69 +222,81 @@ Testnet (`eip155:11142220`): USDC only.
 
 > ⚠️ **USDm / Mento local stablecoin caveat.** USDm — and the rest of the Mento family (EURm, BRLm, KESm, …; all `StableTokenV2`/`V3` implementations, verified on-chain) — implements EIP-2612 `permit` only, **not** EIP-3009 `transferWithAuthorization`. So Mento stablecoins do **not** work with the hosted Celo facilitator, whose engine implements EIP-3009 (USDC/USDT/USAT) and Permit2 for the Ripio wFIAT tokens, but not the EIP-2612 permit path Mento tokens rely on. The x402 `exact` EVM spec also defines Permit2 / EIP-2612 fallback methods, and facilitators that implement them (e.g. **thirdweb**, which accepts "ERC-2612 permit" tokens) can settle USDm and the local stablecoins. This matters for agents that price or settle in local currencies — e.g. FX and trading agents paying per-request in KESm or BRLm — which should use the thirdweb flow. Rule: **match the token to your facilitator's supported transfer methods** — hosted Celo facilitator → USDC/USDT/USAT plus the six Ripio wFIAT and cNGN (Permit2); thirdweb → also USDm + Mento locals.
 
-### Server Implementation (Next.js)
+### Server Implementation (Next.js, thirdweb)
+
+`settlePayment` builds the 402 response itself, so the route never writes payment requirements by hand. This follows the `thirdweb/x402` API as of `thirdweb@5.122.0`; check the version you install.
 
 ```typescript
+import { createThirdwebClient } from "thirdweb";
+import { celo } from "thirdweb/chains";
 import { settlePayment, facilitator } from "thirdweb/x402";
 
+const client = createThirdwebClient({ secretKey: process.env.THIRDWEB_SECRET_KEY! });
+const thirdwebFacilitator = facilitator({
+  client,
+  serverWalletAddress: process.env.SERVER_WALLET_ADDRESS!, // your thirdweb server wallet, which settles
+});
+
 export async function POST(req: Request) {
-  const paymentHeader =
-    req.headers.get("payment-signature") || req.headers.get("x-payment");
-
-  if (!paymentHeader) {
-    return new Response(JSON.stringify({
-      error: "Payment Required",
-      scheme: "fixed",
-      price: "100000",        // 0.10 USDC (6 decimals)
-      // x402 `currency` = the ERC-20 being charged (USDC token address). NOT the `feeCurrency`
-      // adapter. Gas for the on-chain settlement is separate — if the settler pays gas in USDC,
-      // it must use the USDC adapter (0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B) in `feeCurrency`.
-      currency: "0xcebA9300f2b948710d2653dD7B07f33A8B32118C",
-      chainId: 42220,
-    }), { status: 402 });
-  }
-
   const result = await settlePayment({
-    paymentHeader,
-    facilitator,
-    secretKey: process.env.THIRDWEB_SECRET_KEY!,
+    resourceUrl: req.url,
+    method: "POST",
+    paymentData: req.headers.get("PAYMENT-SIGNATURE") ?? req.headers.get("X-PAYMENT"), // v2 header, v1 fallback
+    payTo: process.env.PAY_TO_ADDRESS!, // the seller's receiving wallet
+    network: celo,
+    // 0.10 USDC (6 decimals). Name the asset explicitly rather than relying on "$0.10",
+    // whose default asset per chain comes from the facilitator.
+    price: { amount: "100000", asset: { address: "0xcebA9300f2b948710d2653dD7B07f33A8B32118C", decimals: 6 } },
+    facilitator: thirdwebFacilitator,
   });
 
-  if (!result.success) {
-    return new Response("Payment failed", { status: 402 });
+  if (result.status !== 200) {
+    // 402 with the PAYMENT-REQUIRED header and body, or a verification/settlement error
+    return Response.json(result.responseBody, { status: result.status, headers: result.responseHeaders });
   }
 
-  // Deliver the resource
-  return new Response(JSON.stringify({ data: "your content here" }));
+  return Response.json({ data: "your content here" });
 }
 ```
 
-### Client Implementation (React)
+What goes over the wire (x402 v2, [HTTP transport spec](https://github.com/coinbase/x402/blob/main/specs/transports-v2/http.md)): the server answers `402` with a `PAYMENT-REQUIRED` header holding the base64-encoded payment requirements (`scheme: "exact"` for a fixed price; `"upto"` caps a metered one). The client retries with a base64 `PAYMENT-SIGNATURE` header, and the server returns the settlement result in `PAYMENT-RESPONSE`. v1 used `X-PAYMENT` and `X-PAYMENT-RESPONSE`. For EIP-3009 tokens the signed authorization carries a random 32-byte `nonce` and a `validAfter`/`validBefore` window, and the token contract rejects a nonce it has already seen, so a captured payment cannot be replayed.
+
+### Client Implementation (React, thirdweb)
 
 ```typescript
 import { useFetchWithPayment } from "thirdweb/react";
 
 function MyComponent() {
-  const fetchWithPayment = useFetchWithPayment();
+  const { fetchWithPayment } = useFetchWithPayment(client); // the thirdweb client from createThirdwebClient
 
   async function callPaidAPI() {
-    const response = await fetchWithPayment("/api/paid-endpoint", {
+    const data = await fetchWithPayment("/api/paid-endpoint", {
       method: "POST",
       body: JSON.stringify({ query: "hello" }),
     });
-    const data = await response.json();
   }
 }
 ```
 
-### Client Implementation (TypeScript)
+### Client Implementation (TypeScript, thirdweb)
 
 ```typescript
+import { createThirdwebClient } from "thirdweb";
+import { celo } from "thirdweb/chains";
+import { createWalletAdapter, privateKeyToAccount } from "thirdweb/wallets";
 import { wrapFetchWithPayment } from "thirdweb/x402";
-import { privateKeyToAccount } from "thirdweb/wallets";
 
-const account = privateKeyToAccount(process.env.PRIVATE_KEY!);
-const fetchWithPayment = wrapFetchWithPayment(fetch, account);
+const client = createThirdwebClient({ clientId: process.env.THIRDWEB_CLIENT_ID! });
+const account = privateKeyToAccount({ client, privateKey: process.env.PRIVATE_KEY! });
+// wrapFetchWithPayment takes a Wallet, not an Account, so wrap the key-backed account in one.
+const wallet = createWalletAdapter({
+  client,
+  adaptedAccount: account,
+  chain: celo,
+  onDisconnect: () => {},
+  switchChain: () => {},
+});
+const fetchWithPayment = wrapFetchWithPayment(fetch, client, wallet);
 
 const response = await fetchWithPayment("https://api.example.com/data");
 ```
@@ -353,7 +365,7 @@ pipx install celo-mcp
 | `get_validator_group_details` | Details of one validator group, including members and performance data |
 | `get_total_staking_info` | Network-wide staking information, including total votes and participation metrics |
 
-These 15 tools are the ones registered in `list_tools` at [celo-org/celo-mcp@77bfcca](https://github.com/celo-org/celo-mcp/blob/77bfcca1dd15b14b25280bf32fbb512637d0de88/src/celo_mcp/server.py) (`async def list_tools`). The installed version may differ; the server's `tools/list` response is authoritative.
+These 15 tools are the ones registered in `list_tools` at [celo-org/celo-mcp@77bfcca](https://github.com/celo-org/celo-mcp/blob/77bfcca1dd15b14b25280bf32fbb512637d0de88/src/celo_mcp/server.py) (`async def list_tools`). The installed version may differ; the server's `tools/list` response is authoritative. `main` has since added two faucet tools for Celo Sepolia, `request_faucet_funds` and `get_faucet_request_status` ([celo-org/celo-mcp#33](https://github.com/celo-org/celo-mcp/pull/33)); they are not in `celo-mcp` 0.4.1, the latest PyPI release as of 2026-10-23.
 
 Covers network and block data, token and stable-token balances, gas fees, governance proposals, and staking and validator-group data.
 

@@ -310,9 +310,9 @@ Celo staking operations (via stCELO Manager) are expensive: ~800K-1M gas per ope
 
 Celo migrated from L1 to L2 on March 26, 2025 (block 31,056,500). Old tutorials referencing Celo as an L1 are outdated. The current stack is OP Stack + EigenDA + ZK fault proofs.
 
-### 8. `eth_getLogs` — 50K Block Range Limit
+### 8. `eth_getLogs` — 5,000 Block Range Limit
 
-Celo RPCs reject `eth_getLogs` spans > ~50,000 blocks with error `-32011 block range is too large`. Any indexer or event-history feature must paginate. See `network-info.md` → _RPC Limits & Gotchas_ for the chunked viem workaround.
+Forno mainnet rejects `eth_getLogs` when `toBlock - fromBlock` is more than 5,000, with error `-32602 query exceeds range, retry smaller (max block range 5000, …)`. Any indexer or event-history feature must paginate. See `network-info.md` → _RPC Limits & Gotchas_ for the chunked viem workaround.
 
 ### 9. viem strict EIP-55 checksum
 
