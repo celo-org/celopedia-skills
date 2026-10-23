@@ -221,6 +221,7 @@ hold bytecode on Celo Mainnet on 2026-09-24. Usage guidance, gas costs, and batc
 | Permit2 | `0x000000000022D473030F116dDEE9F6B43aC78BA3` | Signature-based approvals |
 | Superfluid Host | `0xA4Ff07cF81C02CFD356184879D953970cA957585` | Streaming / distribution pools |
 | Superfluid CFAv1 | `0x9d369e78e1a682cE0F8d9aD849BeA4FE1c3bD3Ad` | Constant Flow Agreement |
+| Superfluid GDAv1 | `0x308b7405272d11494716e30C6E972DbF6fb89555` | General Distribution Agreement (distribution pools) |
 
 Safe supports Celo officially (chain `42220`, UI at <https://safe.celo.org>). Note the
 `Multicall2` entry in the Uniswap V3 table above is **Uniswap's own deployment**, not a
