@@ -114,6 +114,8 @@ account as the destination.
   <https://celo.org/ecosystem?category=Ramps> (coverage is per-country and changes often —
   always check live rather than relying on a cached list)
 * You're moving funds between users entirely on-chain — use the Celo SDKs directly
+* You're paying many recipients who already hold wallets — batch on-chain instead; see
+  `bulk-payouts.md` (1,000 stablecoin payouts cost roughly $1.10 in network fees)
 * You serve only EEA consumers and need USDT specifically — Bridge can't serve that route
 
 ### Useful Bridge endpoints
