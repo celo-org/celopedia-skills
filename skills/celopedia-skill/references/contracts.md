@@ -1,7 +1,7 @@
 # Celo Contract Addresses
 
-> Source: https://docs.celo.org/tooling/contracts/
-> Last updated: 2026-10-05
+> Source: https://docs.celo.org/build/tools/contracts/core-contracts
+> Last updated: 2026-10-19
 
 All addresses verified from official Celo documentation. **Do not guess addresses not listed here.**
 
@@ -87,7 +87,7 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 | cNGN (Nigerian Naira, regulated) | cNGN | `0xF6829D7393dAe24509eb1E52eE8e572e2E271a4f` |
 | IDRX (Indonesian Rupiah) | IDRX | `0x18Bc5bcC660cf2B9cE3cd51a404aFe1a0cBD3C22` |
 
-> Third-party stablecoins above are sourced from and verified against the official list: https://docs.celo.org/build-on-celo/build-with-local-stablecoin (addresses confirmed on-chain).
+> Third-party stablecoins above are sourced from and verified against the official list: https://docs.celo.org/build/build-with-local-stablecoin (addresses confirmed on-chain).
 >
 > **Ticker collisions to watch** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury-backed) is **not** Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) is **not** Mento's **COPm** (`0x8A56…`).
 

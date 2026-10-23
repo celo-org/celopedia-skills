@@ -1,8 +1,10 @@
 # Celo Grants & Funding Programs
 
 > Source: https://www.celopg.eco/programs
-> Additional: https://docs.celo.org/build-on-celo/fund-your-project
-> Last updated: 2026-08-28 (cache — always fetch live per directive below)
+> Additional: https://docs.celo.org/build/fund-your-project
+> Last updated: 2026-08-28 (cache — always fetch live per directive below; the docs.celo.org
+> cross-link above was corrected 2026-10-19 using source-1 sitemap data, not a celopg.eco
+> re-verification — celopg.eco itself was blocked this run, see snapshot.md)
 
 > ⚠️ **Live data required.** Program status (Live/Past), dates, rewards, and eligibility change frequently — often mid-quarter. **Always fetch the current list from `https://www.celopg.eco/programs` before answering any grant question.** The tables below are a cached reference and may be stale the moment a program's status flips. See `live-data-sources.md` §2 for the fetch command. For eligibility / submission cadence / rewards, extract from the live page — do not infer from this file.
 
