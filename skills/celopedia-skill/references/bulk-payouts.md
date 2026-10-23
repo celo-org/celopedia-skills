@@ -41,7 +41,7 @@ batch-call implementation and perform N transfers in a single transaction with
 
 | Contract | Address | Notes |
 | --- | --- | --- |
-| Disperse | `0xD152f549545093347A162Dce210e7293f1452150` | `disperseEther(address[],uint256[])` `0xe63d38ed` · `disperseToken(address[],uint256[])` `0xc73a2d60` · `disperseTokenSimple(...)` `0x51ba162c` |
+| Disperse | `0xD152f549545093347A162Dce210e7293f1452150` | `disperseEther(address[],uint256[])` `0xe63d38ed` · `disperseToken(address,address[],uint256[])` `0xc73a2d60` · `disperseTokenSimple(address,address[],uint256[])` `0x51ba162c` (first argument is the token) |
 | Multicall3 | `0xcA11bde05977b3631167028862bE2a173976CA11` | Reads and aggregation only — **not usable for token payouts**, see §4 |
 | Safe singleton 1.4.1 | `0x41675C099F32341bf84BFc5382aF534df5C7461a` | |
 | Safe singleton 1.3.0 (L2) | `0x3E5c63644E683549055b9Be8653de26E0B4CD36E` | |
@@ -51,7 +51,8 @@ batch-call implementation and perform N transfers in a single transaction with
 | MultiSendCallOnly 1.4.1 | `0x9641d764fc13c8B624c04430C7356C1C7C8102e2` | |
 | Permit2 | `0x000000000022D473030F116dDEE9F6B43aC78BA3` | Signature-based approvals, avoids a standing allowance |
 | Superfluid Host | `0xA4Ff07cF81C02CFD356184879D953970cA957585` | |
-| Superfluid CFAv1 | `0x9d369e78e1a682cE0F8d9aD849BeA4FE1c3bD3Ad` | |
+| Superfluid CFAv1 | `0x9d369e78e1a682cE0F8d9aD849BeA4FE1c3bD3Ad` | Constant Flow Agreement (1:1 streams) |
+| Superfluid GDAv1 | `0x308b7405272d11494716e30C6E972DbF6fb89555` | General Distribution Agreement — what distribution pools run on |
 
 **Safe supports Celo officially.** `safe-config.safe.global/api/v1/chains/42220/` returns
 `chainName: "Celo"`, `l2: true`, `isTestnet: false`. UI at <https://safe.celo.org>.
@@ -64,18 +65,18 @@ Measured on Mainnet via `eth_estimateGas`, not estimated from a table:
 
 | Operation | Gas |
 | --- | --- |
-| USDm (cUSD) `transfer` to an address with **no prior balance** (cold storage slot) | **57,443** |
-| USDm (cUSD) `transfer` to an **existing holder** (warm slot) | **35,326** |
+| USDm (cUSD) `transfer` to an address with **no prior balance** (balance goes zero → non-zero) | **57,696** |
+| USDm (cUSD) `transfer` to an **existing holder** (balance already non-zero) | **40,157** |
 
 Network conditions at time of measurement: block gas limit **30,000,000**, base fee
 **200 gwei**, gas price **202.5 gwei**, CELO **$0.094**.
 
-**Per payout**: 57,443 × 202.5 gwei ≈ 0.0116 CELO ≈ **$0.0011**
+**Per payout**: 57,696 × 202.5 gwei ≈ 0.0117 CELO ≈ **$0.0011**
 
-**Batch sizing**: 30,000,000 ÷ 57,443 ≈ **522 recipients per transaction** is the
-theoretical ceiling. Chunk at **250–400** to leave headroom for the warm/cold mix, the
+**Batch sizing**: 30,000,000 ÷ 57,696 ≈ **519 recipients per transaction** is the
+theoretical ceiling. Chunk at **250–400** to leave headroom for the new/existing-holder mix, the
 Disperse loop overhead, and block-fullness variation. Never size a batch so close to the
-limit that a colder-than-expected recipient set pushes it over — the whole transaction
+limit that more first-time recipients than expected push it over — the whole transaction
 reverts and you pay for the failure.
 
 **Worked example — 1,000 creators at $5/month:**
@@ -84,11 +85,12 @@ reverts and you pay for the failure.
 | --- | --- |
 | Disbursed | $5,000 |
 | Transactions | 3 (chunks of ~350) |
-| Total gas | ~57.4M |
+| Total gas | ~57.7M |
 | **Network fees** | **~$1.10** — about 0.02% of the amount disbursed |
 
-First-time recipients cost the most (cold slot); the same list next month costs ~40% less
-per recipient because the balance slots are already warm.
+First-time recipients cost the most, because their balance slot goes from zero to non-zero;
+the same list next month costs ~30% less per recipient because every balance is already
+non-zero.
 
 ---
 
@@ -98,16 +100,17 @@ per recipient because the balance slots are already warm.
 This is the most common wrong answer to "how do I batch ERC-20 sends". Inside a
 Multicall3 batch, `msg.sender` is *Multicall3*, so a batched `transfer` moves
 Multicall3's balance — which is zero — not yours. Multicall3 is for batching **reads**.
-Disperse works because it uses `transferFrom(msg.sender, recipient, amount)` behind a
-single approval, so the tokens move from the caller.
+Disperse works because it pulls from the caller behind a single approval. Its two token
+functions do it differently: `disperseToken` makes one `transferFrom(msg.sender, Disperse,
+total)` and then a `transfer` to each recipient; `disperseTokenSimple` makes one
+`transferFrom(msg.sender, recipient, amount)` per recipient. Approve the Disperse contract
+for the total either way.
 
-**2. disperse.app's hosted UI does not appear to offer Celo.**
-The contract is deployed and fully functional, but the hosted frontend's bundle
-references chain IDs 1, 10, 100, 137, 8453 and 42161, with no occurrence of 42220. Verify
-by connecting; if Celo isn't in the network list, call the contract directly with viem or
-`cast`, or use the Safe Transaction Builder. **The contract being deployed and the UI
-supporting the chain are two different things** — check both before telling a builder to
-"just use disperse.app".
+**2. A deployed contract and a supporting UI are different things.**
+Check both before pointing a builder at a hosted tool. disperse.app does configure Celo
+(42220) and Celo Sepolia in its chain list, alongside the canonical Disperse contract, but
+confirm the network shows up in the picker before relying on it. If a hosted UI doesn't list
+Celo, call the contract directly with viem or `cast`, or use the Safe Transaction Builder.
 
 **3. Decimals.** USDm (cUSD) is 18, USDC and USDT are 6, and some Celo tokens use other
 values entirely (IDRX is 2). A payout script that hardcodes one shape over- or under-pays

@@ -84,9 +84,9 @@ B2B fiat-to-stablecoin infrastructure on Celo — virtual accounts, payouts, car
 Paying many recipients at once — creator rewards, referral payouts, payroll, airdrops, cashback.
 
 - **No first-party Celo "blast sender" product**, but the standard batch-distribution contracts are all deployed at their canonical addresses: **Disperse**, **Safe** + MultiSendCallOnly, **Permit2**, **Superfluid**. Verified table in `contracts.md` → _Batch Distribution & Utility Contracts_
-- **Measured costs** (Mainnet): a stablecoin transfer to a first-time recipient is **57,443 gas** (~$0.0011), so **1,000 payouts ≈ $1.10 total**. Block gas limit 30M → chunk at **250–400 recipients per transaction**
+- **Measured costs** (Mainnet): a stablecoin transfer to a first-time recipient is **57,696 gas** (~$0.0011), so **1,000 payouts ≈ $1.10 total**. Block gas limit 30M → chunk at **250–400 recipients per transaction**
 - **`Multicall3` cannot send token payouts** — inside the batch `msg.sender` is Multicall3, so `transfer` moves Multicall3's balance, not the caller's. Most common wrong answer to "how do I batch ERC-20 sends"
-- **A deployed contract and a supporting UI are different things** — disperse.app's hosted frontend does not appear to list Celo even though the contract works. Check both before pointing a builder at a hosted tool
+- **A deployed contract and a supporting UI are different things** — check both before pointing a builder at a hosted tool (disperse.app configures Celo; still confirm it in the network picker)
 - **EIP-7702 is live** (Isthmus, 2025-07-09, block 40,172,442) — an EOA can batch transfers directly without approving a third-party contract
 - Pair with **fee abstraction** so the payout treasury holds one asset and never needs CELO top-ups
 - **Recurring fixed per-head rewards are a sybil target** — always pair a payout design with treasury spend caps, a qualifying action, and escrow. See `growth-referrals.md`, `self-agent-id.md`
