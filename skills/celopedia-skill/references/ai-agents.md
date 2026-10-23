@@ -337,24 +337,25 @@ pipx install celo-mcp
 
 | Tool | Description |
 |------|-------------|
-| `get_network_status` | Current block, gas price, chain info |
-| `get_block` | Block details by number |
-| `get_latest_blocks` | Recent blocks |
-| `get_account` | Account balance and nonce |
+| `get_network_status` | Network status and connection information |
+| `get_block` | Block details by number or hash |
 | `get_transaction` | Transaction details by hash |
-| `get_token_info` | ERC-20 token metadata |
-| `get_token_balance` | ERC-20 balance for address |
-| `get_celo_balances` | CELO + stablecoin balances |
-| `get_nft_info` | ERC-721/1155 metadata |
-| `get_nft_balance` | NFT balance for address |
-| `call_contract_function` | Read contract state |
-| `estimate_contract_gas` | Estimate gas for contract call |
-| `estimate_transaction` | Estimate gas for transaction |
-| `get_gas_fee_data` | Current gas fee data |
-| `get_governance_proposals` | List governance proposals |
-| `get_proposal_details` | Proposal details by ID |
+| `get_latest_blocks` | Most recent blocks, with offset support |
+| `get_token_balance` | Token balance for an address, given the token contract address |
+| `get_celo_balances` | CELO and stable token balances for an address |
+| `get_stable_token_balance` | Balances of major stable tokens and CELO for an address, via multicall |
+| `get_gas_fee_data` | Current gas fee data, including EIP-1559 fees |
+| `get_governance_proposals` | Governance proposals, with pagination |
+| `get_proposal_details` | Details of a governance proposal by ID |
+| `get_staking_balances` | Active and pending stakes for an address, by validator group |
+| `get_activatable_stakes` | Pending stakes that can be activated |
+| `get_validator_groups` | Validator groups with members, votes, capacity, and performance metrics |
+| `get_validator_group_details` | Details of one validator group, including members and performance data |
+| `get_total_staking_info` | Network-wide staking information, including total votes and participation metrics |
 
-Supports: ERC-20, ERC-721, ERC-1155, Mento stablecoins, governance proposals.
+These 15 tools are the ones registered in `list_tools` at [celo-org/celo-mcp@77bfcca](https://github.com/celo-org/celo-mcp/blob/77bfcca1dd15b14b25280bf32fbb512637d0de88/src/celo_mcp/server.py) (`async def list_tools`). The installed version may differ; the server's `tools/list` response is authoritative.
+
+Covers network and block data, token and stable-token balances, gas fees, governance proposals, and staking and validator-group data.
 
 ---
 
