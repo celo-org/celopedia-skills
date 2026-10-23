@@ -1,6 +1,6 @@
 # Celo Contract Addresses
 
-> Source: https://docs.celo.org/build/tools/contracts/
+> Source: https://docs.celo.org/build/tools/contracts/core-contracts
 > Last updated: 2026-10-19
 
 All addresses verified from official Celo documentation. **Do not guess addresses not listed here.**

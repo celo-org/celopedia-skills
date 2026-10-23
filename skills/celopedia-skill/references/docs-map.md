@@ -12,9 +12,9 @@ Use this to find the right documentation page for any topic. Links go directly t
 > rename is stable and reflected below). On **2026-10-06** it renamed `home/*` to `learn/*` and
 > merged `build-on-celo/*` + `tooling/*` into a single `build/*` tree (AI/agent pages moved to
 > `build/agents/*`, everything else under `tooling/*` moved to `build/tools/*`). Most recently,
-> sometime between **2026-10-16 and 2026-10-19** (this run), it renamed `contribute-to-celo/*`
-> to `contribute/*` — see the Contributing section below. Every URL below reflects the
-> **2026-10-19** structure.
+> sometime between **2026-10-16 and 2026-10-19**, it renamed `contribute-to-celo/*` to
+> `contribute/*`, caught on the 2026-10-19 run — see the Contributing section below. Every URL
+> below reflects the **2026-10-19** structure.
 
 ---
 
@@ -348,8 +348,9 @@ Use this to find the right documentation page for any topic. Links go directly t
 
 ## Contributing
 
-> **Renamed 2026-10-19 (caught this run): `contribute-to-celo/*` → `contribute/*`**, a bare
-> rename (every old path 308s to the same slug under the new prefix — confirmed by
+> **Renamed sometime between 2026-10-16 and 2026-10-19 (caught on the 2026-10-19 run):
+> `contribute-to-celo/*` → `contribute/*`**, a bare rename (every old path 308s to the same
+> slug under the new prefix — confirmed by
 > individually curling `contribute-to-celo/index` and `contribute-to-celo/builders` and
 > following the redirect to `contribute/index` / `contribute/builders`, both 200). All URLs
 > below updated. Two pages this map previously tracked — "Regional DAOs"

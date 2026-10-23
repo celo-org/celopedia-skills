@@ -246,9 +246,9 @@ Wallet docs: https://docs.celo.org/build/tools/wallets/index
 | Celo CLI | https://docs.celo.org/build/tools/libraries-sdks/cli/index |
 
 > "Thirdweb SDK" (previously `tooling/libraries-sdks/thirdweb-sdk/index`) no longer appears in
-> the live sitemap at all — removed, not moved (confirmed by `docs-map.md`'s source-1 fetch).
-> Dropped above. "Thirdweb" under Development Environments below still covers using Thirdweb
-> on Celo.
+> the live sitemap as its own page — folded into the single Thirdweb dev-environments page (the
+> old URL 308s there). Dropped above as a separate row; "Thirdweb" under Development Environments
+> below covers it.
 
 ### Development Environments
 
@@ -301,10 +301,10 @@ Celo is positioning itself for AI agent use cases:
   - Docs: https://docs.celo.org/build/agents/vibe-coding
 
 > The standalone "Agent Skills" page this section used to link to no longer exists in the live
-> sitemap (confirmed again this run — its old URL now redirects to the Celopedia page, which
-> covers different content). Dropped above; see `docs-map.md` → _Build — Agents_ for the current
-> agent-docs page list, which also covers newer additions (Self Agent ID, Agent Vault) not yet
-> reflected here.
+> sitemap (confirmed again this run — its old URL now 308s to the Celopedia page,
+> `docs.celo.org/build/agents/celopedia`, already listed in `docs-map.md` → _Build — Agents_).
+> Dropped above; see that section for the current agent-docs page list, which also covers newer
+> additions (Self Agent ID, Agent Vault) not yet reflected here.
 
 ---
 
