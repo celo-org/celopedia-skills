@@ -71,7 +71,7 @@ Resulting 402 (abridged): `resource.description`, `accepts[]`, and `extensions.b
 
 Gotchas:
 - No `extensions` block in the 402 → `registerExtension(bazaarResourceServerExtension)` missing, or the route has no `extensions` entry.
-- The explicit `price` object is optional for USDC/USDT/USAT on Celo (`@x402/evm`'s default-asset table has them); pass it to pin the asset, as above (see `ai-agents.md` → x402 gotchas).
+- The explicit `price` object is optional for USDC (since `@x402/evm` 2.21.0) and USDT/USAT (since 2.26.0) on Celo, which the default-asset table has; pass it to pin the asset, as above (see `ai-agents.md` → x402 gotchas).
 - The extension only *describes*. Whether a given facilitator catalogs it is that facilitator's choice; the Celo facilitator's `/discovery/resources` is not documented as available (check `https://api.x402.celo.org/discovery/resources` before promising it).
 
 ---
