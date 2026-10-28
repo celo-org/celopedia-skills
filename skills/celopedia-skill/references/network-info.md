@@ -1,6 +1,6 @@
 # Celo Network Information
 
-> Source: https://docs.celo.org/build-on-celo/network-overview
+> Source: https://docs.celo.org/learn/network/overview
 
 ## Celo Mainnet
 
@@ -34,7 +34,7 @@ Users can pay gas fees with these ERC-20 tokens instead of native CELO. The addr
 | WETH (Celo native bridge) | `0xD221812de1BD094f35587EE8E174B07B6167D9Af` | 18 decimals — token == adapter |
 | XAUt0 (Tether Gold) | `0x857BF24e29da0773687E804a743c2E421a394C16` | **adapter** — token is `0xaf37E8B6C9ED7f6318979f56Fc287d76c30847ff` |
 
-The full Mainnet allowlist also includes all 14 Mento local-currency stablecoins (AUDm, BRLm, CADm, CHFm, COPm, EURm, GBPm, GHSm, JPYm, KESm, NGNm, PHPm, XOFm, ZARm) — for these, `feeCurrency` == the token address (see `contracts.md`). Live, governable allowlist: `docs.celo.org/tooling/contracts/fee-currencies` (also queryable via `celocli network:whitelist`). Canonical table with full mechanics: `builder-guide.md` → _Allowed Fee Currencies (Mainnet)_ — **note**: as of this run, `builder-guide.md` documents only USDC/USDT/USDm/EURm and hasn't been updated for WETH/XAUt0/USAT/the full Mento set; it is out of this skill's tracked-file scope, so it isn't edited here — flagged for a follow-up.
+The full Mainnet allowlist also includes all 14 Mento local-currency stablecoins (AUDm, BRLm, CADm, CHFm, COPm, EURm, GBPm, GHSm, JPYm, KESm, NGNm, PHPm, XOFm, ZARm) — for these, `feeCurrency` == the token address (see `contracts.md`). Live, governable allowlist: `docs.celo.org/build/tools/contracts/fee-currencies` (also queryable via `celocli network:whitelist`). Canonical table with full mechanics: `builder-guide.md` → _Allowed Fee Currencies (Mainnet)_ — **note**: as of this run, `builder-guide.md` documents only USDC/USDT/USDm/EURm and hasn't been updated for WETH/XAUt0/USAT/the full Mento set; it is out of this skill's tracked-file scope, so it isn't edited here — flagged for a follow-up.
 
 The `FeeCurrencyDirectory` contract at `0x15F344b9E6c3Cb6F0376A36A64928b13F62C6276` governs the allowlist.
 

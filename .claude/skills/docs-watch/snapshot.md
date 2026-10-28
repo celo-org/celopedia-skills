@@ -4,18 +4,27 @@ Baseline seeded: 2026-07-07 (from the repo's own reference files, not a fresh
 live fetch — their own "Last updated" stamp is 2026-04-15, so treat this
 snapshot as unverified against live sources until the first real run).
 
-Last attempt: 2026-10-05, corrected 2026-10-16 — PARTIAL BLOCK (celopg.eco:
-EGRESS_BLOCKED via WebFetch, 403 connect_rejected via curl — org egress
-policy denial, not the site itself; docs.minipay.xyz: same, 403
-connect_rejected on the CONNECT tunnel) — see PR #81,
-docs-watch/2026-10-05 branch. Sources 1-4 (docs sitemap, contracts, network
-info, DefiLlama TVL) were reachable and verified, with substantial drift
-found and fixed. Source 5 (grant programs) and source 6 (MiniPay docs) were
-not reachable — `grants-funding.md`, `minipay-docs-map.md`,
-`minipay-requirements.md`, and `minipay-common-mistakes.md` were left
-untouched (the `minipay-docs-map.md` edit on 2026-10-16, below, only
-corrected dead docs.celo.org cross-links using source-1 data, not a
-source-6 re-verification).
+Last attempt: 2026-10-19 — PARTIAL BLOCK (celopg.eco: gateway 403 to CONNECT
+via curl, `getaddrinfo ENOTFOUND` via WebFetch — org egress policy denial,
+not the site itself; docs.minipay.xyz: same 403 via curl, same ENOTFOUND
+via WebFetch) — see PR for this run, `docs-watch/2026-10-19` branch.
+Sources 1-4 (docs sitemap, contracts, network info, DefiLlama TVL) were
+reachable and verified. Source 5 (grant programs) and source 6 (MiniPay
+docs) were not reachable — their own reference files (`grants-funding.md`'s
+Live/Past program table, and `minipay-docs-map.md` /
+`minipay-requirements.md` / `minipay-common-mistakes.md` in full) were left
+untouched. As in the 2026-10-16 correction round, one cross-link fix each
+in `grants-funding.md` and (previously) `minipay-docs-map.md` used
+source-1 sitemap data to repair a dead docs.celo.org link, not a
+source-5/6 re-verification — that distinction matters because it means
+neither file's own live-sourced content has been checked since, respectively,
+2026-08-28 and 2026-09-10.
+
+Previous run: 2026-10-05, corrected 2026-10-16 — see PR #81,
+`docs-watch/2026-10-05` branch, for the full record of that run (a
+docs.celo.org Home/Build restructuring caught a day late, a DefiLlama TVL
+methodology bug found and fixed by human review, and the Moola
+Market/Mobius Money "needs a working site" decisions below).
 
 **2026-10-16 correction round:** a human review on PR #81 (ghozzza) found
 two real bugs in the 2026-10-05 run and one process violation, all fixed
@@ -51,9 +60,21 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
 ## 1. Docs sitemap (`docs-map.md`)
 
 - Source: `docs.celo.org/llms.txt`
-- Last verified: 2026-10-16 (originally 2026-10-05; re-verified and
-  rewritten again 11 days later after a second live restructuring — see
-  below)
+- Last verified: 2026-10-19 (originally 2026-10-05; re-verified 2026-10-16
+  after a second live restructuring, and again this run after a third)
+- **2026-10-19 finding: `contribute-to-celo/*` → `contribute/*` rename.**
+  Diffed the live `llms.txt` (224 pages) against the file's own URL list
+  and found every `contribute-to-celo/*` page 308-redirects to the same
+  slug under `contribute/*` (spot-checked `index` and `builders`, both
+  200 at the new path) — a bare prefix rename, no page additions or
+  removals within that section. All 15 Contributing-section URLs in
+  `docs-map.md` updated; "Regional DAOs" and "Attestation Service Release
+  Process" re-confirmed absent under the new prefix too (404). The other
+  39 live-vs-file URL deltas this diff turned up were pre-existing, already
+  out of this file's tracked scope, not new drift: the Celo CLI's 19
+  per-subcommand pages and 6 ContractKit migration/notes subpages, both
+  already covered only by the index-page note at `docs-map.md` lines
+  ~202-208, not by individual rows.
 - **2026-08-24–09-10 restructuring** (stable, unaffected by what follows):
   `infra-partners/*` → `operate/*` wholesale (node operators, notices,
   hardfork archive); the old `/specs/*` section folded into
@@ -96,17 +117,20 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
 
 ## 2. Contract addresses (`contracts.md`)
 
-- Source: `docs.celo.org/tooling/contracts/*`
-- Last verified: 2026-10-05
-- Core protocol contracts (mainnet): 20 tracked — all addresses verified
-  unchanged against `core-contracts`, `stablecoin-contracts`, `l1-contracts`,
-  `uniswap-contracts`.
-- Mento stablecoins tracked: 15 — all mainnet + testnet addresses verified
-  unchanged.
-- External/third-party stablecoins (mainnet): all 20 tracked tokens verified
-  unchanged (case differences in some live-page addresses are checksum
-  formatting only, not address changes).
-- L1 (Ethereum) contracts, Uniswap V3/V4 mainnet: all verified unchanged.
+- Source: `docs.celo.org/build/tools/contracts/*` (was `tooling/contracts/*`
+  before the 2026-10-06 restructuring; `contracts.md`'s own "Source:" link
+  and its third-party-stablecoin cross-link were still pointing at the old
+  path until this run — fixed, using source-1 data, not new contract-data
+  drift)
+- Last verified: 2026-10-19 (previously 2026-10-05)
+- **No address drift this run.** Re-verified address-by-address against
+  live `core-contracts`, `stablecoin-contracts`, `l1-contracts`,
+  `uniswap-contracts`: all 24 core protocol mainnet contracts, all 15 Mento
+  stablecoins (mainnet + testnet), all 20 external/third-party stablecoins
+  (mainnet; case-only differences on a handful are checksum formatting, not
+  address changes — same as last run), all 31 L1 mainnet contracts + the
+  7 tracked L1 Sepolia contracts, all Uniswap V3 (14) and V4 (7) mainnet
+  contracts, and the 11-contract Sepolia core-protocol subset, unchanged.
 - **Resolved from last run's flag:** the 2026-08-24 snapshot flagged
   Sepolia USDm/EURm as possibly colliding with the legacy cUSD/cEUR
   addresses in `contracts.md`. On inspection, `contracts.md` already has
@@ -126,24 +150,64 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
 
 ## 3. Network info (`network-info.md`)
 
-- Source: `docs.celo.org/build-on-celo/network-overview`
-- Last verified: 2026-10-05
+- Source: `docs.celo.org/learn/network/overview` (was `build-on-celo/network-overview`
+  before 2026-10-06; `network-info.md`'s own "Source:" link and its
+  fee-currencies cross-link were still on the old paths until this run —
+  fixed, using source-1 data)
+- Last verified: 2026-10-19 (previously 2026-10-05)
 - Mainnet chain ID: `42220`; Sepolia testnet chain ID: `11142220` — unchanged
 - Public RPC: `https://forno.celo.org` — unchanged
-- **No fact drift.** Note: the live `network-overview` page itself dropped
-  its fee-currency table (it now only covers chain IDs / RPC / explorers);
-  the canonical source for fee-currency addresses is now
-  `docs.celo.org/tooling/contracts/fee-currencies`, which `network-info.md`
-  already cites inline for the full allowlist — so no edit was needed. All
-  7 named fee-currency addresses (USDm, EURm, USDC, USD₮, USA₮, WETH,
-  XAUt0) and the `FeeCurrencyDirectory` address were individually verified
-  against the live `fee-currencies` page and are unchanged.
+- **No fact drift.** The live page (now at `learn/network/overview`) still
+  only covers chain IDs / RPC / explorers, no fee-currency table — the
+  canonical source for those stays `docs.celo.org/build/tools/contracts/fee-currencies`
+  (was `tooling/contracts/fee-currencies`). All 7 named fee-currency
+  addresses (USDm, EURm, USDC, USD₮, USA₮, WETH, XAUt0) re-verified
+  against the live `fee-currencies` page at its current path, unchanged.
+  The `FeeCurrencyDirectory` address itself isn't printed on that page (it
+  only names the directory as the allowlist source) — unchanged from
+  `contracts.md`'s tracked value, not independently re-confirmed there
+  this run; same as last run.
 
 ## 4. Ecosystem / TVL (`ecosystem.md`)
 
 - Source: DefiLlama (`api.llama.fi/protocols`, `api.llama.fi/protocol/<slug>`),
   docs.celo.org, celo.org/ecosystem
-- Last verified: 2026-10-05, TVL methodology corrected 2026-10-16
+- Last verified: 2026-10-19 (TVL methodology corrected 2026-10-16, reused
+  correctly this run — see process note below)
+- **2026-10-19: no TVL-driven addition or removal.** Pulled
+  `currentChainTvls.Celo` for all 85 DefiLlama protocols listing Celo as a
+  chain, plus every protocol this file already tracks. Nothing currently
+  listed has dropped off DefiLlama's Celo chain list or fallen out of its
+  category; nothing crossing the ~$100K Celo-TVL floor is missing from the
+  file (the two candidates that do clear it, Moola Market ~$1.12M and
+  Mobius Money ~$350K, are the same two already excluded as of the
+  2026-10-16 review for an unreachable site — unchanged this run, not
+  re-flagged below since nothing new to decide).
+- **Finding: `ecosystem.md`'s own docs.celo.org cross-links were stale**
+  (`tooling/*` and `build-on-celo/*` paths, pre-dating the 2026-10-06
+  restructuring that `docs-map.md` already captured) — missed by the
+  2026-10-16 run, which only fixed `minipay-docs-map.md`'s links. Fixed
+  using source-1 data: all Oracles/Indexers/Bridges/Wallets/SDK/Dev-env
+  links moved to `build/tools/*`, the stablecoin-build-guide link to
+  `build/build-with-local-stablecoin`, the MiniPay quickstart links
+  consolidated to the single `build/mini-apps/overview` page (the separate
+  quickstart/code-library/deeplinks pages they pointed at no longer exist,
+  per `docs-map.md`), and the AI & Agent Infrastructure links to
+  `build/agents/*`. Two rows pointed at pages confirmed gone outright
+  (not moved) rather than just renamed — "Thirdweb SDK" under Developer
+  SDKs & Libraries, and "Agent Skills" under AI & Agent Infrastructure —
+  dropped, each with a one-line note, matching how `docs-map.md` already
+  treats both removals.
+- **Observed, no action: Uniswap V4's DefiLlama `chains` list omits
+  Celo.** `/protocols` shows `uniswap-v4`'s tracked chains without Celo,
+  even though `contracts.md`'s Uniswap V4 mainnet addresses were
+  independently re-verified live against `docs.celo.org` this same run
+  (section 2) — so the V4 deployment itself is real, DefiLlama simply
+  isn't attributing TVL to it on this chain yet. `ecosystem.md` already
+  lists Uniswap V4 on the strength of the docs.celo.org contract listing,
+  not DefiLlama, so this is a DefiLlama coverage gap, not an ecosystem fact
+  to change — noted for whoever next wonders why a TVL-sourced lookup
+  for "uniswap-v4" comes back chainless.
 - **Added and kept** (DefiLlama-listed on Celo, verified against
   `currentChainTvls.Celo`, above the ~$100K floor): Textile FX (DEX,
   ~$860K TVL on Celo).
@@ -187,10 +251,13 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
 
 - Source: `www.celopg.eco/programs` (status changes frequently — this file
   is explicitly a stale-prone cache per its own header)
-- **Not verified this run** — `celopg.eco` is blocked by this sandbox's
-  network egress proxy (`EGRESS_BLOCKED` via WebFetch; `403 connect_rejected`
-  on the CONNECT tunnel via curl) — an org policy denial, not a site-side
-  failure. Same blocker as the 2026-08-24 run (then reported as a 403).
+- **Not verified this run (third consecutive block)** — `celopg.eco` is
+  blocked by this sandbox's network egress proxy (gateway 403 to CONNECT
+  via curl; `getaddrinfo ENOTFOUND` via WebFetch) — an org policy denial,
+  not a site-side failure. Same blocker as 2026-08-24 (then a 403) and
+  2026-10-05 (then `EGRESS_BLOCKED`/403). Its `docs.celo.org` cross-link
+  was still fixed this run using source-1 data (see top of file) — that is
+  not a celopg.eco re-verification.
 - Currently-Live programs tracked (as of 2026-05-18, unverified since):
   Proof of Ship S2 (file itself now also independently notes Proof of Ship
   has been sunset — contradicts its own "Live" framing, pre-existing
@@ -199,21 +266,22 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
   (through 2026-05-18), Celo Builder Fund (year-round through 2026-12-31),
   plus Agents at Work Hackathon and Prezenti Season 3 added since.
 - Note: several of the above end dates are now well in the past relative to
-  this run (2026-10-05) — very likely flipped to "Past" but still
-  unconfirmed two runs running. Re-check status as soon as celopg.eco is
-  reachable from this environment — this is the second consecutive blocked
-  attempt, worth raising as an environment/allowlist issue if it recurs
-  again.
+  this run (2026-10-19) — very likely flipped to "Past" but still
+  unconfirmed three runs running. Re-check status as soon as celopg.eco is
+  reachable from this environment — this is the third consecutive blocked
+  attempt; worth raising as an environment/allowlist issue if a fourth
+  occurs.
 
 ## 6. MiniPay docs (`minipay-docs-map.md`, `minipay-requirements.md`, `minipay-common-mistakes.md`)
 
 - Source: `docs.minipay.xyz` (page tree, submission page, best-practices page,
   deeplinks page)
-- **Not verified this run** — `docs.minipay.xyz` is blocked by this
-  sandbox's network egress proxy (`EGRESS_BLOCKED` via WebFetch; `403
-  connect_rejected` on the CONNECT tunnel via curl, same as celopg.eco) —
-  an org policy denial, not a site-side failure. This is a new blocker;
-  the 2026-09-10 run reached this source fine.
+- **Not verified this run (second consecutive block)** — `docs.minipay.xyz`
+  is blocked by this sandbox's network egress proxy (gateway 403 to
+  CONNECT via curl; `getaddrinfo ENOTFOUND` via WebFetch, same as
+  celopg.eco) — an org policy denial, not a site-side failure. Same
+  blocker as the 2026-10-05 run; the 2026-09-10 run reached this source
+  fine.
 - Facts as last verified 2026-09-10 (unchanged below, not re-checked this
   run): page tree (Getting Started, Installation, Guides, Reference,
   Custom Methods), deeplinks (`add_cash`, `browse`, `discover`, `receipt`,
@@ -227,7 +295,8 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
   tx hashes, in-app support link, 24h SLA, footer legal/about links,
   operator disclaimer, whitelisting integrity, dependency security).
 - Re-check all of this as soon as `docs.minipay.xyz` is reachable from this
-  environment.
+  environment — this is now two consecutive blocked attempts for this
+  source specifically.
 
 ## 7. wFIAT access (`wfiat-access.md`)
 
