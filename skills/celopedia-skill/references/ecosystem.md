@@ -2,7 +2,7 @@
 
 > Sources: docs.celo.org, DefiLlama, celo.org/ecosystem
 > For live TVL data, always refer to https://defillama.com/chain/Celo
-> Last updated: 2026-10-19
+> Last updated: 2026-10-26
 
 ---
 
@@ -22,7 +22,7 @@
 | Ubeswap | Celo-native DEX (V2 + V3) | https://ubeswap.org |
 | Carbon DeFi | Automated on-chain trading strategies (Bancor) | https://app.carbondefi.xyz |
 | Mento V3 | Multi-currency FX infrastructure | https://app.mento.org |
-| Textile FX | On-chain FX liquidity network (~$860K TVL on Celo) | https://app.textilecredit.com |
+| Textile FX | On-chain FX liquidity network (~$1.35M TVL on Celo) | https://app.textilecredit.com |
 
 ### Lending & Borrowing
 
