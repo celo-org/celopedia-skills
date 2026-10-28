@@ -3,7 +3,7 @@
 > Source: https://docs.celo.org/llms.txt
 > OpenAPI Spec: https://docs.celo.org/api-reference/openapi.json — **404 as of 2026-10-19**
 > (pre-existing, not something this run's restructuring caused; flagged, not otherwise acted on).
-> Last updated: 2026-10-19
+> Last updated: 2026-10-26
 
 Use this to find the right documentation page for any topic. Links go directly to docs.celo.org.
 
@@ -11,10 +11,12 @@ Use this to find the right documentation page for any topic. Links go directly t
 > `operate/*` and folded `specs/*` into `operate/specification/*` around 2026-08-24–09-10 (that
 > rename is stable and reflected below). On **2026-10-06** it renamed `home/*` to `learn/*` and
 > merged `build-on-celo/*` + `tooling/*` into a single `build/*` tree (AI/agent pages moved to
-> `build/agents/*`, everything else under `tooling/*` moved to `build/tools/*`). Most recently,
-> sometime between **2026-10-16 and 2026-10-19**, it renamed `contribute-to-celo/*` to
-> `contribute/*`, caught on the 2026-10-19 run — see the Contributing section below. Every URL
-> below reflects the **2026-10-19** structure.
+> `build/agents/*`, everything else under `tooling/*` moved to `build/tools/*`). Sometime between
+> **2026-10-16 and 2026-10-19**, it renamed `contribute-to-celo/*` to `contribute/*`, caught on
+> the 2026-10-19 run — see the Contributing section below. **New on 2026-10-26:** nine pages
+> added (not a restructuring) — three under `build/agents/*` (AI Resources, Give Your Agent a
+> Wallet and Test Funds, AskBots) and six under `build/tools/libraries-sdks/contractkit/*` (see
+> those sections below). Every URL below reflects the **2026-10-26** structure.
 
 ---
 
@@ -123,13 +125,16 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Topic | URL |
 |-------|-----|
 | Build with AI on Celo (overview) | https://docs.celo.org/build/agents/overview |
+| AI Resources | https://docs.celo.org/build/agents/ai-resources |
 | Use Celo Docs with AI Tools | https://docs.celo.org/build/agents/use-docs-with-ai |
 | ERC-8004: Agent Trust Protocol | https://docs.celo.org/build/agents/8004 |
 | Self Agent ID | https://docs.celo.org/build/agents/self-agent-id |
 | Agent Vault: Card Payments and Logins for Agents | https://docs.celo.org/build/agents/agent-vault |
+| Give Your Agent a Wallet and Test Funds | https://docs.celo.org/build/agents/agent-wallet |
 | x402: Agent Payments | https://docs.celo.org/build/agents/x402 |
 | x402: Get your endpoint discovered | https://docs.celo.org/build/agents/x402-get-discovered |
 | MPP: Machine Payments Protocol | https://docs.celo.org/build/agents/mpp |
+| AskBots: Paid reviews from AI agents | https://docs.celo.org/build/agents/askbots |
 | Celopedia | https://docs.celo.org/build/agents/celopedia |
 | Vibe Coding | https://docs.celo.org/build/agents/vibe-coding |
 | MCP Overview | https://docs.celo.org/build/agents/mcp/index |
@@ -140,7 +145,10 @@ Use this to find the right documentation page for any topic. Links go directly t
 
 > **New since the 2026-10-05 run: Agent Vault** (added 2026-10-15) — let an agent pay at online
 > checkouts and sign in to websites via MCP server, SDK, or HTTP API, using mock tokens instead
-> of real card numbers and passwords. The standalone "Agent Skills" page remains removed.
+> of real card numbers and passwords. **New on 2026-10-26:** AI Resources, Give Your Agent a
+> Wallet and Test Funds, and an official AskBots page — docs.celo.org now documents AskBots
+> directly (the askbots.ai-sourced content in `ai-agents.md` is unchanged and still the fuller
+> reference). The standalone "Agent Skills" page remains removed.
 
 ## Build — MiniPay
 
@@ -200,11 +208,19 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Portal | https://docs.celo.org/build/tools/libraries-sdks/portal/index |
 | Celo CLI (overview) | https://docs.celo.org/build/tools/libraries-sdks/cli/index |
 | Celo CLI — full commands reference | https://docs.celo.org/build/tools/libraries-sdks/cli/commands |
+| Core Contracts (Wrapper/Registry) | https://docs.celo.org/build/tools/libraries-sdks/contractkit/contracts-wrappers-registry |
+| Data Encryption Key | https://docs.celo.org/build/tools/libraries-sdks/contractkit/data-encryption-key |
+| Migrating to viem | https://docs.celo.org/build/tools/libraries-sdks/contractkit/migrating-to-viem |
+| Migrating to ContractKit v2.0 | https://docs.celo.org/build/tools/libraries-sdks/contractkit/migrating-to-contractkit-v2 |
+| Migrating to ContractKit v1.0 | https://docs.celo.org/build/tools/libraries-sdks/contractkit/migrating-to-contractkit-v1 |
+| Using Web3 from ContractKit | https://docs.celo.org/build/tools/libraries-sdks/contractkit/notes-web3-with-contractkit |
 
 > The Celo CLI's per-subcommand reference (account, autocomplete, config, election, epochs,
 > governance, help, identity, lockedcelo, multisig, network, node, oracle, plugins, releasecelo,
 > rewards, transfer, validator, validatorgroup) lives under
 > `build/tools/libraries-sdks/cli/<subcommand>` — see the commands reference page for the index.
+> **The six ContractKit rows above are new on 2026-10-26** — added to the live sitemap, not
+> previously listed here individually (they were covered only by this note's predecessor).
 > **"Thirdweb SDK" (previously `tooling/libraries-sdks/thirdweb-sdk/index`) no longer appears in
 > the live sitemap at all — removed, not moved.** The Thirdweb dev-environment page above still
 > covers using Thirdweb on Celo.

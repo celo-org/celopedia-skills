@@ -4,6 +4,34 @@ Baseline seeded: 2026-07-07 (from the repo's own reference files, not a fresh
 live fetch — their own "Last updated" stamp is 2026-04-15, so treat this
 snapshot as unverified against live sources until the first real run).
 
+Last attempt: 2026-10-26 — PARTIAL BLOCK, wider than previous runs (403
+connect_rejected on the CONNECT tunnel, confirmed persistent with a retry,
+for every host below): `celopg.eco`, `docs.minipay.xyz` (same two blocked
+on every run since 2026-08-24), plus — new this run — `minipay.to`,
+`developer.minipay.to`, `link.minipay.xyz` (MiniPay's own submission/
+deeplink hosts, previously reachable), `askbots.ai`/`www.askbots.ai`,
+`api.x402.celo.org`/`x402.celo.org`, `ramp.ripio.com`, `bridge.ripio.com`,
+`api.textilecredit.com`, `api.geckoterminal.com`, `li.quest`,
+`moola.market`/`mm.moola.market`, `toucan.earth`, `mobius.money`.
+Reachable: `docs.celo.org`, `api.llama.fi`, `forno.celo.org` — sources 1-4
+were fully checked on these, and source 7's on-chain checks (Aave
+`getReservesList`, CapyFi `eth_getCode` via `forno.celo.org`) ran fine, but
+every third-party wFIAT API was blocked. **Worth flagging as an
+environment/allowlist issue** — this run's allowlist was noticeably
+narrower than the 2026-10-21/10-22 runs that reached all of those hosts
+successfully. See PR for this run, `docs-watch/2026-10-26` branch.
+**2026-10-28 review correction (ghozzza, on the first push of this
+branch):** that first push was cut from `main` before #89 (the
+2026-10-19 run below) merged, so it redid #89's `contribute-to-celo`
+rename and stale-link fixes and re-bumped `SKILL.md` to a version #89 had
+already taken — rebased onto `main` post-#89 and reduced to just this
+run's actual new findings (the 9 new docs.celo.org pages, the Textile FX
+refresh, and this blocked-sources list); `SKILL.md` now bumps
+2.13.1 → 2.13.2. The reviewer also independently confirmed `toucan.earth`
+returns 200 with a live site despite DefiLlama's `deadUrl: true` — see
+section 4, Toucan is **not** flagged as needs-review below (that first
+push's flag was a false positive, withdrawn).
+
 Last attempt: 2026-10-19 — PARTIAL BLOCK (celopg.eco: gateway 403 to CONNECT
 via curl, `getaddrinfo ENOTFOUND` via WebFetch — org egress policy denial,
 not the site itself; docs.minipay.xyz: same 403 via curl, same ENOTFOUND
@@ -60,8 +88,23 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
 ## 1. Docs sitemap (`docs-map.md`)
 
 - Source: `docs.celo.org/llms.txt`
-- Last verified: 2026-10-19 (originally 2026-10-05; re-verified 2026-10-16
-  after a second live restructuring, and again this run after a third)
+- Last verified: 2026-10-26 (originally 2026-10-05; re-verified 2026-10-16
+  after a second live restructuring, 2026-10-19 after a third, and again
+  this run for new pages)
+- **2026-10-26 finding: 9 new pages, not a restructuring.** Diffed the
+  full live `llms.txt` URL list against every URL currently in the file —
+  three under `build/agents/*` (`ai-resources`, `agent-wallet` "Give Your
+  Agent a Wallet and Test Funds", `askbots` — docs.celo.org now has its
+  own AskBots page; the askbots.ai-sourced content in `ai-agents.md` is
+  unchanged) and six under `build/tools/libraries-sdks/contractkit/*`
+  (`contracts-wrappers-registry`, `data-encryption-key`,
+  `migrating-to-viem`, `migrating-to-contractkit-v2`,
+  `migrating-to-contractkit-v1`, `notes-web3-with-contractkit` — these
+  are the same 6 ContractKit subpages the 2026-10-19 run's note at
+  `docs-map.md` lines ~202-208 said were covered only by an index-page
+  note, not individual rows; now added as rows). All 9 added to
+  `docs-map.md`. No other live-vs-file deltas this run beyond the Celo
+  CLI's 19 per-subcommand pages, still out of scope per that same note.
 - **2026-10-19 finding: `contribute-to-celo/*` → `contribute/*` rename.**
   Diffed the live `llms.txt` (224 pages) against the file's own URL list
   and found every `contribute-to-celo/*` page 308-redirects to the same
@@ -122,7 +165,11 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
   and its third-party-stablecoin cross-link were still pointing at the old
   path until this run — fixed, using source-1 data, not new contract-data
   drift)
-- Last verified: 2026-10-19 (previously 2026-10-05)
+- Last verified: 2026-10-26 (previously 2026-10-19, 2026-10-05)
+- **2026-10-26: re-verified, no drift.** Spot-checked mainnet core,
+  Mento, L1, and Uniswap V3/V4 addresses plus the Sepolia core/Mento/
+  legacy-token subset against the live pages again — all unchanged from
+  the 2026-10-19 re-verification below.
 - **No address drift this run.** Re-verified address-by-address against
   live `core-contracts`, `stablecoin-contracts`, `l1-contracts`,
   `uniswap-contracts`: all 24 core protocol mainnet contracts, all 15 Mento
@@ -154,7 +201,14 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
   before 2026-10-06; `network-info.md`'s own "Source:" link and its
   fee-currencies cross-link were still on the old paths until this run —
   fixed, using source-1 data)
-- Last verified: 2026-10-19 (previously 2026-10-05)
+- Last verified: 2026-10-26 (previously 2026-10-19, 2026-10-05)
+- **2026-10-26: re-verified by raw-fetching both pages' `.md` source
+  directly, no drift.** Chain IDs, RPC, and all 7 named fee-currency
+  addresses plus the 15 Mento fee-currencies match. The live page still
+  doesn't carry block time / L2 stack / data availability / fault-proof /
+  migration-date facts that `network-info.md` states — consistent with
+  the already-known fee-currency-table drop below, not new; nothing
+  contradicts those facts, so left as-is.
 - Mainnet chain ID: `42220`; Sepolia testnet chain ID: `11142220` — unchanged
 - Public RPC: `https://forno.celo.org` — unchanged
 - **No fact drift.** The live page (now at `learn/network/overview`) still
@@ -172,8 +226,31 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
 
 - Source: DefiLlama (`api.llama.fi/protocols`, `api.llama.fi/protocol/<slug>`),
   docs.celo.org, celo.org/ecosystem
-- Last verified: 2026-10-19 (TVL methodology corrected 2026-10-16, reused
-  correctly this run — see process note below)
+- Last verified: 2026-10-26 (TVL methodology corrected 2026-10-16)
+- **2026-10-26: Textile FX TVL refreshed.** Read `chainTvls.Celo` directly
+  from the bulk `/protocols` response (no need to hit `/protocol/<slug>`
+  individually — that response already carries the per-chain breakdown):
+  ~$860K → **~$1.35M** (reviewer independently confirmed $1,346,979 on
+  `api.llama.fi/protocols` at review time). Updated in `ecosystem.md`.
+  Everything else already tracked above the ~$100K floor checked
+  unchanged in substance (Uniswap V3 $3.68M, Aave V3 $3.01M, Mento V2
+  $1.41M, stCELO $1.28M, Ubeswap V2 $788K, Feather $551K, Morpho Blue
+  $541K, Mento V3 $508K, Superfluid $444K, Curve DEX $272K, TheDeep
+  $252K, ICHI $230K, SushiSwap $218K, Untangled Vault $144K) — no numbers
+  cited for these to go stale. AutoRange ($55K) and Velodrome V3 ($81K)
+  stay below/at the floor; Mobius Money ($345K, still `deadUrl: true`)
+  stays excluded.
+- **2026-10-26: Toucan Protocol checked, false positive — no action.**
+  DefiLlama shows `deadUrl: true` and an empty `url` for it (Celo TVL
+  still ~$159K), the same signal that excluded Mobius Money/Prime
+  Protocol on 2026-10-16. This sandbox's egress proxy blocks
+  `toucan.earth` outright (confirmed with a retry), so an earlier push of
+  this branch flagged it as needs-review rather than guessing. The
+  2026-10-28 reviewer checked from an unrestricted network and found
+  `toucan.earth` returns 200 with a live site ("Carbon credit market
+  infrastructure") — DefiLlama's `deadUrl` flag is wrong for this one.
+  Toucan stays in `ecosystem.md`'s RWA table unchanged; this flag is now
+  closed.
 - **2026-10-19: no TVL-driven addition or removal.** Pulled
   `currentChainTvls.Celo` for all 85 DefiLlama protocols listing Celo as a
   chain, plus every protocol this file already tracks. Nothing currently
@@ -223,14 +300,15 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
   marks its URL dead; same bar as Moola Market below.
 - **Needs review (PR body only — not written into `ecosystem.md` itself,
   per SKILL.md step 5):** Moola Market reappears in DefiLlama's Celo
-  Lending list (~$1.25M TVL) after being removed from `ecosystem.md` in an
-  earlier run for having an unreachable site. This sandbox's egress proxy
-  still blocks `moola.market`/`mm.moola.market` outright, so site
-  reachability can't be independently confirmed from here — but the
-  2026-10-16 reviewer checked from an unrestricted network and found
-  `moola.market` returns 200 while `mm.moola.market` still doesn't
-  connect. Leaving Moola out remains the right call; a human can swap in
-  the working domain if they want it back in.
+  Lending list (~$1.09M-1.25M TVL across recent runs) after being removed
+  from `ecosystem.md` in an earlier run for having an unreachable site.
+  This sandbox's egress proxy still blocks `moola.market`/`mm.moola.market`
+  outright (re-confirmed 2026-10-26), so site reachability can't be
+  independently confirmed from here — but the 2026-10-16 reviewer checked
+  from an unrestricted network and found `moola.market` returns 200 while
+  `mm.moola.market` still doesn't connect. Leaving Moola out remains the
+  right call; a human can swap in the working domain if they want it back
+  in.
 - Not re-added (TVL too low to distinguish from dead/test deployments,
   no action): Symmetric, DONASWAP V2, Tegisto, Poof Cash, Chee Finance, and
   ~15 other DefiLlama-listed Celo protocols under roughly $100K TVL on
@@ -271,6 +349,9 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
   reachable from this environment — this is the third consecutive blocked
   attempt; worth raising as an environment/allowlist issue if a fourth
   occurs.
+- **2026-10-26: fourth consecutive blocked attempt** — same `403
+  connect_rejected`, confirmed with a retry. See the environment/
+  allowlist flag at the top of this file.
 
 ## 6. MiniPay docs (`minipay-docs-map.md`, `minipay-requirements.md`, `minipay-common-mistakes.md`)
 
@@ -297,14 +378,28 @@ longer existed; deleted. `api-reference/openapi.json` returns 404
 - Re-check all of this as soon as `docs.minipay.xyz` is reachable from this
   environment — this is now two consecutive blocked attempts for this
   source specifically.
+- **2026-10-26: still blocked, and wider** — same `403 connect_rejected`
+  for `docs.minipay.xyz`, confirmed with a retry, plus — new this run —
+  `minipay.to`, `developer.minipay.to`, and `link.minipay.xyz` (the
+  submission-form and deeplink hosts, previously reachable even while
+  `docs.minipay.xyz` itself was blocked) are now also blocked. Facts
+  below remain unchanged from 2026-09-10, three runs blocked running.
 
 ## 7. wFIAT access (`wfiat-access.md`)
 
 - Sources: x402 `/supported` + `/api/config`, `ramp.ripio.com/api/countries`,
   Textile `v2/rfq/levels?chainId=42220`, GeckoTerminal, LI.FI, Aave v3 Pool
   `getReservesList`, CapyFi Comptroller `eth_getCode` on Celo
-- Last verified: 2026-10-22 (seeded from PR #92's checks; first scheduled
-  run re-verifies)
+- Last verified: 2026-10-22 for everything below (seeded from PR #92's
+  checks). **2026-10-26: partially blocked.** `forno.celo.org` on-chain
+  reads succeeded — Aave `getReservesList` and the CapyFi `eth_getCode`
+  check both re-ran clean and match the facts below, unchanged — but
+  every third-party API this section depends on (`api.x402.celo.org`,
+  `ramp.ripio.com`, `bridge.ripio.com`, `api.textilecredit.com`,
+  `api.geckoterminal.com`, `li.quest`) returned `403 connect_rejected`,
+  confirmed with a retry. So the liquidity/route/x402-asset facts below
+  are unverified this run and still dated 2026-10-22; no edits made —
+  nothing contradicts them, there's just no live confirmation this time.
 - x402 mainnet assets: USDC, USDT, USAT (eip3009); wARS, wBRL, wMXN, wCOP,
   wPEN, wCLP, cNGN (permit2). `eip2612GasSponsoring`: true for the six
   wFIAT, false for cNGN and the eip3009 assets.
