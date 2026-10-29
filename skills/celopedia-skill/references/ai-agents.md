@@ -162,14 +162,14 @@ Registering an agent runs metadata through a validator (e.g. 8004scan). The four
 
 Protocol enabling pay-per-request APIs using HTTP 402 status code and stablecoin payments.
 
-**Reference**: https://www.x402.org | https://github.com/coinbase/x402
+**Reference**: https://www.x402.org | https://github.com/x402-foundation/x402
 
 ### How It Works
 
 1. Client sends request to protected endpoint
 2. Server returns `402 Payment Required` with payment requirements
 3. Client signs a stablecoin payment
-4. Client retries with `X-PAYMENT` header containing signed payment
+4. Client retries with a `PAYMENT-SIGNATURE` header containing the signed payment (`X-PAYMENT` in x402 v1)
 5. Server verifies payment via facilitator
 6. Server settles on-chain and delivers response
 
@@ -192,13 +192,11 @@ Celo runs an official hosted x402 facilitator, so builders don't need to run the
 **Integration gotchas for this facilitator:**
 
 - Use the **v2 scoped `@x402/*` packages** (`@x402/hono` or `@x402/express` + `@x402/core` + `@x402/evm`; buyer: `@x402/fetch`). The legacy `x402-express` / `x402-fetch` packages have no Celo entry in their network enum and will not work.
-- Celo is **not in the x402 packages' default-asset table** — a bare `price: "$0.01"` type-checks but throws at request time. Always pass the explicit price object: `{ amount: "10000", asset: USDC_ADDRESS, extra: { name: "USDC", version: "2" } }` (string amounts in 6-decimal base units; `$0.01 = "10000"`).
+- Do not use a bare `price: "$0.01"`. It type-checks, and at request time the middleware resolves the network's default asset, which for Celo is **USDC** (first entry of the `@x402/evm` default-asset table, checked on 2.29.0), so the route silently prices in USDC whatever you meant to charge in. Always pass the explicit price object: `{ amount: "10000", asset: USDC_ADDRESS, extra: { name: "USDC", version: "2" } }` (string amounts in 6-decimal base units; `$0.01 = "10000"`).
 - Attach the API key with `HTTPFacilitatorClient({ createAuthHeaders })` as `X-API-Key` — it goes only to the facilitator, never to buyers or the browser.
 - `payTo` is the **seller's own receiving wallet** — not the facilitator, not the buyer.
 - **Token support**: USDC, USDT, and USAT settle via **EIP-3009**; all six Ripio wFIAT stablecoins (**wARS, wBRL, wMXN, wCOP, wPEN, wCLP**) and cNGN settle via **Permit2** (set `assetTransferMethod: "permit2"` in the route config), and **USDm / Mento locals are NOT supported** — Mento `StableTokenV2` implements only EIP-2612 `permit`, not EIP-3009. Testnet supports USDC only. See _Enabled tokens_ below; the live list is in `https://x402.celo.org/SKILL.md`. USDT's EIP-712 domain is `name: "Tether USD", version: "1"` (its `version()` method reverts).
 - Test on Celo Sepolia first — testnet USDC from https://faucet.circle.com (buyers need no testnet CELO; gas is sponsored).
-
-The thirdweb flow below is an **alternative** that uses thirdweb's own facilitator instead — and it is the path to take when you want to charge in **USDm or other Mento local stablecoins**, which the hosted facilitator cannot settle (see the USDm caveat below).
 
 ### Supported Tokens on Celo
 
@@ -220,86 +218,100 @@ The thirdweb flow below is an **alternative** that uses thirdweb's own facilitat
 
 Testnet (`eip155:11142220`): USDC only.
 
-> ⚠️ **USDm / Mento local stablecoin caveat.** USDm — and the rest of the Mento family (EURm, BRLm, KESm, …; all `StableTokenV2`/`V3` implementations, verified on-chain) — implements EIP-2612 `permit` only, **not** EIP-3009 `transferWithAuthorization`. So Mento stablecoins do **not** work with the hosted Celo facilitator, whose engine implements EIP-3009 (USDC/USDT/USAT) and Permit2 for the Ripio wFIAT tokens, but not the EIP-2612 permit path Mento tokens rely on. The x402 `exact` EVM spec also defines Permit2 / EIP-2612 fallback methods, and facilitators that implement them (e.g. **thirdweb**, which accepts "ERC-2612 permit" tokens) can settle USDm and the local stablecoins. This matters for agents that price or settle in local currencies — e.g. FX and trading agents paying per-request in KESm or BRLm — which should use the thirdweb flow. Rule: **match the token to your facilitator's supported transfer methods** — hosted Celo facilitator → USDC/USDT/USAT plus the six Ripio wFIAT and cNGN (Permit2); thirdweb → also USDm + Mento locals.
+> ⚠️ **USDm / Mento local stablecoin caveat.** USDm — and the rest of the Mento family (EURm, BRLm, KESm, …; all `StableTokenV2`/`V3` implementations, verified on-chain) — implements EIP-2612 `permit` only, **not** EIP-3009 `transferWithAuthorization`. So Mento stablecoins do **not** work with the hosted Celo facilitator, whose engine implements EIP-3009 (USDC/USDT/USAT) and Permit2 for the Ripio wFIAT tokens and cNGN, but not a payment authorized by the token's own EIP-2612 `permit`. This matters for agents that price or settle in local currencies, e.g. FX and trading agents paying per request. Rule: **match the token to your facilitator's supported transfer methods**, and check a facilitator's `/supported` before pricing in a token. On the hosted Celo facilitator that is USDC/USDT/USAT plus the six Ripio wFIAT and cNGN (Permit2).
 
-### Server Implementation (Next.js, thirdweb)
+### Seller (Hono, hosted Celo facilitator)
 
-`settlePayment` builds the 402 response itself, so the route never writes payment requirements by hand. This follows the `thirdweb/x402` API as of `thirdweb@5.122.0`; check the version you install.
+Adapted from `https://x402.celo.org/SKILL.md`, which is the source of truth for this facilitator; re-check it before shipping. For Express, swap `@x402/hono` for `@x402/express`. The only custom piece is the facilitator client that attaches your API key. A runnable seller and buyer pair is at https://github.com/celo-org/x402-celo-example.
+
+```bash
+npm i @x402/hono @x402/core @x402/evm viem
+```
 
 ```typescript
-import { createThirdwebClient } from "thirdweb";
-import { celo } from "thirdweb/chains";
-import { settlePayment, facilitator } from "thirdweb/x402";
+import { Hono } from "hono";
+import { serve } from "@hono/node-server";
+import { HTTPFacilitatorClient, type RoutesConfig } from "@x402/core/server";
+import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
+import { ExactEvmScheme } from "@x402/evm/exact/server";
+import { getAddress } from "viem";
 
-const client = createThirdwebClient({ secretKey: process.env.THIRDWEB_SECRET_KEY! });
-const thirdwebFacilitator = facilitator({
-  client,
-  serverWalletAddress: process.env.SERVER_WALLET_ADDRESS!, // your thirdweb server wallet, which settles
+const NETWORK = "eip155:11142220"; // Celo Sepolia (mainnet: eip155:42220, api.x402.celo.org)
+const USDC = getAddress("0x01C5C0122039549AD1493B8220cABEdD739BC44E"); // Sepolia USDC
+
+// The API key goes only to the facilitator, never to buyers or the browser.
+const facilitator = new HTTPFacilitatorClient({
+  url: "https://api.x402.sepolia.celo.org",
+  createAuthHeaders: async () => {
+    const h = { "X-API-Key": process.env.X402_API_KEY! };
+    return { verify: h, settle: h, supported: h };
+  },
 });
 
-export async function POST(req: Request) {
-  const result = await settlePayment({
-    resourceUrl: req.url,
-    method: "POST",
-    paymentData: req.headers.get("PAYMENT-SIGNATURE") ?? req.headers.get("X-PAYMENT"), // v2 header, v1 fallback
-    payTo: process.env.PAY_TO_ADDRESS!, // the seller's receiving wallet
-    network: celo,
-    // 0.10 USDC (6 decimals). Name the asset explicitly rather than relying on "$0.10",
-    // whose default asset per chain comes from the facilitator.
-    price: { amount: "100000", asset: { address: "0xcebA9300f2b948710d2653dD7B07f33A8B32118C", decimals: 6 } },
-    facilitator: thirdwebFacilitator,
-  });
+const server = new x402ResourceServer(facilitator);
+server.register("eip155:*", new ExactEvmScheme());
 
-  if (result.status !== 200) {
-    // 402 with the PAYMENT-REQUIRED header and body, or a verification/settlement error
-    return Response.json(result.responseBody, { status: result.status, headers: result.responseHeaders });
-  }
+// Typed, so `network` stays a CAIP-2 string instead of widening to `string`.
+const routes: RoutesConfig = {
+  "GET /premium": {
+    accepts: [
+      {
+        scheme: "exact",
+        network: NETWORK,
+        payTo: getAddress(process.env.SELLER_PAY_TO!), // your own receiving wallet
+        price: {
+          amount: "10000", // $0.01 in USDC base units (6 decimals)
+          asset: USDC,
+          extra: { name: "USDC", version: "2" }, // EIP-712 domain for EIP-3009
+        },
+      },
+    ],
+    description: "Premium content",
+  },
+};
 
-  return Response.json({ data: "your content here" });
-}
+const app = new Hono();
+app.use(paymentMiddleware(routes, server)); // routes first, then the server
+app.get("/premium", (c) => c.json({ data: "this response cost $0.01" }));
+
+serve({ fetch: app.fetch, port: 3000 });
 ```
 
-What goes over the wire (x402 v2, [HTTP transport spec](https://github.com/coinbase/x402/blob/main/specs/transports-v2/http.md)): the server answers `402` with a `PAYMENT-REQUIRED` header holding the base64-encoded payment requirements (`scheme: "exact"` for a fixed price; `"upto"` caps a metered one). The client retries with a base64 `PAYMENT-SIGNATURE` header, and the server returns the settlement result in `PAYMENT-RESPONSE`. v1 used `X-PAYMENT` and `X-PAYMENT-RESPONSE`. For EIP-3009 tokens the signed authorization carries a random 32-byte `nonce` and a `validAfter`/`validBefore` window, and the token contract rejects a nonce it has already seen, so a captured payment cannot be replayed.
+What goes over the wire (x402 v2, [HTTP transport spec](https://github.com/x402-foundation/x402/blob/main/specs/transports-v2/http.md)): the server answers `402` with a `PAYMENT-REQUIRED` header holding the base64-encoded payment requirements (`scheme: "exact"` for a fixed price; `"upto"` caps a metered one). The client retries with a base64 `PAYMENT-SIGNATURE` header, and the server returns the settlement result in `PAYMENT-RESPONSE`. v1 used `X-PAYMENT` and `X-PAYMENT-RESPONSE`. For EIP-3009 tokens the signed authorization carries a random 32-byte `nonce` and a `validAfter`/`validBefore` window, and the token contract rejects a nonce it has already seen, so a captured payment cannot be replayed.
 
-### Client Implementation (React, thirdweb)
+### Buyer (`@x402/fetch`)
 
-```typescript
-import { useFetchWithPayment } from "thirdweb/react";
+The buyer needs a wallet holding the asset the seller prices in, no facilitator API key, and no CELO for gas on the hosted facilitator.
 
-function MyComponent() {
-  const { fetchWithPayment } = useFetchWithPayment(client); // the thirdweb client from createThirdwebClient
-
-  async function callPaidAPI() {
-    const data = await fetchWithPayment("/api/paid-endpoint", {
-      method: "POST",
-      body: JSON.stringify({ query: "hello" }),
-    });
-  }
-}
+```bash
+npm i @x402/fetch @x402/evm viem
 ```
 
-### Client Implementation (TypeScript, thirdweb)
-
 ```typescript
-import { createThirdwebClient } from "thirdweb";
-import { celo } from "thirdweb/chains";
-import { createWalletAdapter, privateKeyToAccount } from "thirdweb/wallets";
-import { wrapFetchWithPayment } from "thirdweb/x402";
+import { x402Client, wrapFetchWithPayment } from "@x402/fetch";
+import { ExactEvmScheme } from "@x402/evm/exact/client";
+import { privateKeyToAccount } from "viem/accounts";
+import { getAddress } from "viem";
 
-const client = createThirdwebClient({ clientId: process.env.THIRDWEB_CLIENT_ID! });
-const account = privateKeyToAccount({ client, privateKey: process.env.PRIVATE_KEY! });
-// wrapFetchWithPayment takes a Wallet, not an Account, so wrap the key-backed account in one.
-const wallet = createWalletAdapter({
-  client,
-  adaptedAccount: account,
-  chain: celo,
-  onDisconnect: () => {},
-  switchChain: () => {},
+const account = privateKeyToAccount(process.env.BUYER_PRIVATE_KEY as `0x${string}`);
+const NETWORK = "eip155:11142220"; // Celo Sepolia (mainnet: eip155:42220)
+const USDC = getAddress("0x01C5C0122039549AD1493B8220cABEdD739BC44E"); // Sepolia USDC
+
+const client = new x402Client();
+// The client refuses, before signing, any asset outside its default-asset table and
+// anything above "$1" per payment. Allow the asset with an atomic per-payment cap.
+client.setSpendControls({
+  allowedAssets: [{ network: NETWORK, asset: USDC, maxAmountPerPayment: "10000" }],
 });
-const fetchWithPayment = wrapFetchWithPayment(fetch, client, wallet);
+// { rpcUrl } lets the scheme read the chain; Permit2 assets need it to sign the sponsored permit.
+client.register("eip155:*", new ExactEvmScheme(account, { rpcUrl: "https://forno.celo.org" }));
+const payFetch = wrapFetchWithPayment(fetch, client);
 
-const response = await fetchWithPayment("https://api.example.com/data");
+const res = await payFetch("https://your-server.example/premium"); // pays on 402, then retries
+console.log(res.status, await res.json());
 ```
+
+For a Permit2 asset (wARS, wBRL, wCOP, wMXN, wPEN, wCLP, cNGN), list its address in `allowedAssets` the same way, with the cap in that token's own base units; these are not in the default-asset table and are refused otherwise.
 
 ### Why Celo for x402
 
