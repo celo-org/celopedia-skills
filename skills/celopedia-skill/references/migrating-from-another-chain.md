@@ -85,7 +85,7 @@ rg -n 'parseEther|formatEther|msg\.value|nativeCurrency|\bWETH\b|deposit\{value'
 # two, so `IERC20(usdc).transfer(to, amt)` and JS `res.send`/`mailer.send` stay out.
 # (Misses a call whose single argument spans lines or contains a nested call —
 # review those by hand.)
-rg -n '\.transfer\(|\.send\('
+rg -n '\.(transfer|send)\(\s*[^,()]*\s*\)' -g '*.sol'
 
 # User-facing "ETH"
 rg -n '"[^"]*\bETH\b[^"]*"' -g '*.tsx' -g '*.ts'
