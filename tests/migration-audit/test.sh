@@ -52,7 +52,9 @@ for i in "${!names[@]}"; do
   pattern="${patterns[$i]:-}"
   [ -n "$pattern" ] || continue
   # rg exits 1 on no match; the diff below is the assertion, so tolerate it.
-  actual="$(cd "$here/fixture" && eval "$pattern" | cut -d: -f1,2 | sort || true)"
+  # </dev/null: with no path argument and a pipe on stdin, rg searches stdin, not the
+  # directory (caught when a CI-style pipe made a pattern hang).
+  actual="$(cd "$here/fixture" && eval "$pattern" </dev/null | cut -d: -f1,2 | sort || true)"
   expected="$(sort "$here/expected/p$n.txt")"
   if [ "$actual" = "$expected" ]; then
     echo "ok   p$n $name ($(printf '%s\n' "$expected" | grep -c . || true) hits)"
