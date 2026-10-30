@@ -126,15 +126,15 @@ Both explorers are authoritative for chain state. Pick based on the specific tas
 
 ## RPC Limits & Gotchas
 
-### `eth_getLogs` — 50,000 block range limit
+### `eth_getLogs` — 5,000 block range limit on Forno mainnet
 
-Celo's public RPC endpoints (and most managed providers) reject `eth_getLogs` requests spanning more than ~50,000 blocks with:
+Forno mainnet (`https://forno.celo.org`) rejects an `eth_getLogs` request when `toBlock - fromBlock` is more than 5,000, with HTTP 400 and:
 
 ```json
-{"code": -32011, "message": "block range is too large"}
+{"code": -32602, "message": "query exceeds range, retry smaller (max block range 5000, got 5001)"}
 ```
 
-At ~1s block time this is only ~14 hours of history per request. Any indexer, analytics page, or event-history feature must paginate.
+At 1s block time that is about 83 minutes of history per request, so any indexer, analytics page or event-history feature must paginate. Celo Sepolia's Forno accepted a 50,000-block range when measured (2026-10-23), so code tested only on testnet can pass there and fail on mainnet. Other providers set their own limits; check the one you use.
 
 **TypeScript workaround (viem):**
 
@@ -143,7 +143,7 @@ import { createPublicClient, http, parseAbiItem } from "viem";
 import { celo } from "viem/chains";
 
 const client = createPublicClient({ chain: celo, transport: http() });
-const CHUNK = 45_000n; // under the 50k limit with headroom
+const CHUNK = 5_000n; // toBlock - fromBlock may be at most 5,000 on Forno mainnet
 
 async function getLogsChunked(params: {
   address: `0x${string}`;
