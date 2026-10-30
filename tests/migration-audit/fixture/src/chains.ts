@@ -20,3 +20,11 @@ export const RPC_CELO = "https://forno.celo.org";
 
 const fee = parseEther("0.1");
 const decimals = parseUnits("1", 6);
+export const ID_LISK = 1135;
+export const ID_LISK_SEPOLIA = 4202;
+export const ID_BASE = 8453;
+export const ID_MODE = 34443;
+export const ID_INK = 57073;
+export const ID_SONEIUM = 1868;
+export const ID_ZORA = 7777777;
+const ETH = 3000;
