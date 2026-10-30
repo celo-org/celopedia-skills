@@ -1,6 +1,6 @@
 # Celo SDK Quick Reference
 
-> Sources: docs.celo.org/tooling/libraries-sdks/*, celo-org/agent-skills
+> Sources: docs.celo.org/build/tools/libraries-sdks/*, celo-org/agent-skills
 
 ---
 
@@ -63,7 +63,7 @@ await walletClient.writeContract({
 });
 ```
 
-**Docs**: https://docs.celo.org/tooling/libraries-sdks/viem/index
+**Docs**: https://docs.celo.org/build/tools/libraries-sdks/viem/index
 
 ---
 
@@ -107,7 +107,7 @@ function PayWithUSDm() {
 }
 ```
 
-**Docs**: https://docs.celo.org/tooling/libraries-sdks/wagmi (if available) or https://wagmi.sh
+**Docs**: https://wagmi.sh
 
 ---
 
@@ -137,7 +137,7 @@ const election = await kit.contracts.getElection();
 const validators = await election.getValidatorGroupsVotes();
 ```
 
-**Docs**: https://docs.celo.org/tooling/libraries-sdks/contractkit/index
+**Docs**: https://docs.celo.org/build/tools/libraries-sdks/contractkit/index
 
 ---
 
@@ -145,9 +145,9 @@ const validators = await election.getValidatorGroupsVotes();
 
 Pre-built React components themed for Celo dApps.
 
-**Install**: Check https://docs.celo.org/tooling/libraries-sdks/composer-kit for latest install instructions.
+**Install**: Check https://docs.celo.org/build/tools/libraries-sdks/composer-kit for latest install instructions.
 
-**Docs**: https://docs.celo.org/tooling/libraries-sdks/composer-kit
+**Docs**: https://docs.celo.org/build/tools/libraries-sdks/composer-kit
 
 ---
 
@@ -170,7 +170,7 @@ const contract = getContract({
 });
 ```
 
-**Docs**: https://docs.celo.org/tooling/libraries-sdks/thirdweb-sdk/index
+**Docs**: https://docs.celo.org/build/tools/dev-environments/thirdweb
 
 ---
 
@@ -189,7 +189,7 @@ const balance = await provider.getBalance("0xAddress");
 
 Note: ethers.js does NOT have native `feeCurrency` support. Use viem for fee abstraction.
 
-**Docs**: https://docs.celo.org/tooling/libraries-sdks/ethers/index
+**Docs**: https://docs.celo.org/build/tools/libraries-sdks/ethers/index
 
 ---
 
@@ -201,7 +201,7 @@ Standard web3.js works with Celo.
 
 Note: Like ethers.js, web3.js does NOT have native `feeCurrency` support. Use viem for fee abstraction.
 
-**Docs**: https://docs.celo.org/tooling/libraries-sdks/web3/index
+**Docs**: https://docs.celo.org/build/tools/libraries-sdks/web3/index
 
 ---
 
@@ -209,10 +209,10 @@ Note: Like ethers.js, web3.js does NOT have native `feeCurrency` support. Use vi
 
 | Library | Use Case | Docs |
 |---------|----------|------|
-| Reown (WalletConnect) | Multi-wallet connection | https://docs.celo.org/tooling/libraries-sdks/reown/index |
-| Dynamic | Embedded wallets + social login | https://docs.celo.org/tooling/libraries-sdks/dynamic/index |
-| JAW | Wallet abstraction | https://docs.celo.org/tooling/libraries-sdks/jaw/index |
-| Portal | Wallet infrastructure | https://docs.celo.org/tooling/libraries-sdks/portal/index |
+| Reown (WalletConnect) | Multi-wallet connection | https://docs.celo.org/build/tools/libraries-sdks/reown/index |
+| Dynamic | Embedded wallets + social login | https://docs.celo.org/build/tools/libraries-sdks/dynamic/index |
+| JAW | Wallet abstraction | https://docs.celo.org/build/tools/libraries-sdks/jaw/index |
+| Portal | Wallet infrastructure | https://docs.celo.org/build/tools/libraries-sdks/portal/index |
 
 ### Reown AppKit — Celo config
 

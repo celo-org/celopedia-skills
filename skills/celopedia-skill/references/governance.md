@@ -1,6 +1,6 @@
 # Celo Governance Reference
 
-> Source: docs.celo.org/home/protocol/governance/*
+> Source: docs.celo.org/learn/protocol/governance/*
 
 Celo uses on-chain governance where CELO holders can propose and vote on protocol changes.
 
@@ -44,7 +44,7 @@ Celo uses on-chain governance where CELO holders can propose and vote on protoco
 
 Celo Mondo is the simplest way to vote: https://mondo.celo.org
 
-Docs: https://docs.celo.org/home/protocol/governance/voting-in-governance-using-mondo
+Docs: https://docs.celo.org/learn/protocol/governance/voting-in-governance-using-mondo
 
 ### With CeloCLI
 
@@ -84,7 +84,7 @@ The Celo L2 Security Council manages protocol upgrades and emergency fixes since
 - **Community members**: L2Beat, Hyperlane, Valora, Mento, Nitya Subramanian, Kris Kaczor, Tim Moreton, Aaron Boyd
 - **Responsibilities**: Upgrading L1 protocol contracts, modifying role designations (sequencers, proposers, challengers), executing urgent security hotfixes
 - **Note**: Regular governance for Core Contracts and Community Fund remains unchanged and is separate from the Security Council
-- Details: https://docs.celo.org/home/protocol/security-council
+- Details: https://docs.celo.org/learn/protocol/security-council
 
 ---
 
@@ -95,7 +95,7 @@ On Celo L2, epoch rewards are distributed for:
 - **Community fund** — Treasury for ecosystem development
 - **Carbon offsetting** — 10% of transaction fees + 0.1% of epoch rewards go to carbon offset fund
 
-Docs: https://docs.celo.org/home/protocol/epoch-rewards/index
+Docs: https://docs.celo.org/learn/protocol/epoch-rewards/index
 
 ---
 
@@ -109,23 +109,23 @@ Common governable parameters include:
 - Reward rates
 - Fee handler configuration
 
-Full cheat sheet: https://docs.celo.org/home/protocol/governance/governable-parameters
+Full cheat sheet: https://docs.celo.org/learn/protocol/governance/governable-parameters
 
 ---
 
 ## Creating a Governance Proposal
 
-Full guide: https://docs.celo.org/home/protocol/governance/create-governance-proposal
+Full guide: https://docs.celo.org/learn/protocol/governance/create-governance-proposal
 
 ### Using the Governance Toolkit
 
 The Governance Toolkit provides templates for common proposal types:
-https://docs.celo.org/home/protocol/governance/governance-toolkit
+https://docs.celo.org/learn/protocol/governance/governance-toolkit
 
 ### Smart Contract Upgrades via Governance
 
 Protocol contracts use transparent proxies. Upgrades require governance approval:
-https://docs.celo.org/home/protocol/governance/smart-contracts-upgrades
+https://docs.celo.org/learn/protocol/governance/smart-contracts-upgrades
 
 ---
 
@@ -133,7 +133,7 @@ https://docs.celo.org/home/protocol/governance/smart-contracts-upgrades
 
 Celo has a challenger system for disputing invalid state roots as part of the OP Stack fault proof mechanism.
 
-Details: https://docs.celo.org/home/protocol/challengers
+Details: https://docs.celo.org/learn/protocol/challengers
 
 ---
 
@@ -144,4 +144,4 @@ Details: https://docs.celo.org/home/protocol/challengers
 | Governance Portal (Mondo) | https://mondo.celo.org |
 | Governance Forum | https://forum.celo.org |
 | Active Proposals | Check via CeloCLI or Mondo |
-| Governance Docs | https://docs.celo.org/home/protocol/governance/overview |
+| Governance Docs | https://docs.celo.org/learn/protocol/governance/overview |
