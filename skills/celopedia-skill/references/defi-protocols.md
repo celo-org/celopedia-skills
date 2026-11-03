@@ -455,7 +455,7 @@ Swap between Mento stablecoins at: https://app.mento.org
 
 6 USD-pegged + 20 regional currency stablecoins available on Celo.
 
-- Docs: https://docs.celo.org/build-on-celo/build-with-local-stablecoin
+- Docs: https://docs.celo.org/build/build-with-local-stablecoin
 - All Mento token addresses: see `contracts.md`
 
 ---
@@ -549,4 +549,4 @@ Aave V3 supports flash loans on Celo. Useful for liquidations, arbitrage, and co
 - **RedStone**: Pull-based oracle with wide asset coverage
 - **Band Protocol**: Live on Celo L2 from day one
 
-Oracle docs: https://docs.celo.org/tooling/oracles/index
+Oracle docs: https://docs.celo.org/build/tools/oracles/index

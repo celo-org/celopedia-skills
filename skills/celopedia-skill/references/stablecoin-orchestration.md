@@ -110,7 +110,7 @@ account as the destination.
 ### When it isn't
 
 * You only need a one-time consumer on-ramp — use a widget like Banxa, Transak, or MoonPay.
-  Current provider lists: <https://docs.celo.org/home/ramps> and
+  Current provider lists: <https://docs.celo.org/learn/ramps> and
   <https://celo.org/ecosystem?category=Ramps> (coverage is per-country and changes often —
   always check live rather than relying on a cached list)
 * You're moving funds between users entirely on-chain — use the Celo SDKs directly
@@ -151,7 +151,7 @@ and card events. Signature verification is supported via HMAC-SHA256. See
 
 ### Related skills and references
 
-* On/off-ramps — <https://docs.celo.org/home/ramps> and <https://celo.org/ecosystem?category=Ramps>
+* On/off-ramps — <https://docs.celo.org/learn/ramps> and <https://celo.org/ecosystem?category=Ramps>
 * `ecosystem.md` — broader Celo ecosystem directory: DEXes, bridges, wallets, infra
 * `builder-guide.md` — Celo-specific dev patterns including fee abstraction
 
