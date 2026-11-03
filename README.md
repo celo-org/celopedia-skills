@@ -108,7 +108,7 @@ The skill lives at `skills/celopedia-skill/` and is organized into topic-grouped
 | [`the-grid-skill.md`](skills/celopedia-skill/references/the-grid-skill.md) | 9 GraphQL query templates for The Grid |
 | [`grants-funding.md`](skills/celopedia-skill/references/grants-funding.md) | Grant programs with mandatory live-fetch directive |
 | [`docs-map.md`](skills/celopedia-skill/references/docs-map.md) | Full `docs.celo.org` sitemap (~150 pages) |
-| [`live-data-sources.md`](skills/celopedia-skill/references/live-data-sources.md) | DefiLlama, celopg.eco, RPC, Blockscout APIs |
+| [`live-data-sources.md`](skills/celopedia-skill/references/live-data-sources.md) | DefiLlama, Prezenti, RPC, Blockscout APIs |
 
 ### Builder Assistant
 

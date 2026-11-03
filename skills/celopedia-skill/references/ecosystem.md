@@ -316,4 +316,4 @@ Celo is positioning itself for AI agent use cases:
 | Uniswap V4 | DEX | October 2025 |
 | Self Protocol | ZK Identity (Aadhaar support) | 2025 |
 | Nightfall L3 (EY) | Privacy/ZK Layer | 2025 |
-| Prosperity Pass | Savings (2.5K accounts, $150K locked) | May 2025 |
+| Prosperity Pass | Savings (2.5K accounts, $150K locked); seasons ended, no new accounts | May 2025 |

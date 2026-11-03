@@ -717,7 +717,7 @@ See `minipay-requirements.md` for the full submission checklist.
 
 ## Funding for MiniPay Builders
 
-- **Celo Builder Fund** (Verda Ventures): $25K investment for MiniPay builders
+- **Verda Ventures** (MiniPay-focused): founders building for MiniPay and raising funding can send a deck and product demo
   - Contact: team@verda.ventures
 - **Celo Devs newsletter**: hackathons and new builder programs are announced here
   - Subscribe: https://celo-devs.beehiiv.com/subscribe

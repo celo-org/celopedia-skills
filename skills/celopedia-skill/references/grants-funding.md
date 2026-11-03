@@ -1,12 +1,9 @@
 # Celo Grants & Funding Programs
 
-> Source: https://www.celopg.eco/programs
-> Additional: https://docs.celo.org/build/fund-your-project
-> Last updated: 2026-08-28 (cache — always fetch live per directive below; the docs.celo.org
-> cross-link above was corrected 2026-10-19 using source-1 sitemap data, not a celopg.eco
-> re-verification — celopg.eco itself was blocked this run, see snapshot.md)
+> Sources: https://www.prezenti.xyz (grant pools), https://celo-devs.beehiiv.com/subscribe (program announcements), https://docs.celo.org/build/fund-your-project
+> Last updated: 2026-11-03. Checked against prezenti.xyz and its Anchor and Frontier forms on that date. `celopg.eco/programs` no longer lists programs (it returns 404), so it is not a source.
 
-> ⚠️ **Live data required.** Program status (Live/Past), dates, rewards, and eligibility change frequently — often mid-quarter. **Always fetch the current list from `https://www.celopg.eco/programs` before answering any grant question.** The tables below are a cached reference and may be stale the moment a program's status flips. See `live-data-sources.md` §2 for the fetch command. For eligibility / submission cadence / rewards, extract from the live page — do not infer from this file.
+> ⚠️ **Live data required.** Dates, amounts and eligibility change. **Check `https://www.prezenti.xyz` and the application forms it links before answering a Prezenti question**, and point builders to the Celo Devs newsletter for hackathons and new programs. The tables below are a cached reference. See `live-data-sources.md` §2 for the fetch command.
 
 ---
 
@@ -43,44 +40,29 @@
 - **x402 + wFIAT gotchas**: the hosted Celo x402 facilitator lists all six Ripio wFIAT tokens (Permit2, as of 2026-10-21) — see [ai-agents.md](ai-agents.md) → _Hosted Celo Facilitator_. **x402 settlements cannot carry an attribution tag yet** (see [attribution-tags.md](attribution-tags.md)); for x402 transactions the hackathon page asks you to provide your **PayTo wallet address** instead. Sellers get an API key with 20 free mainnet settlements.
 - **Naming**: the hackathon page writes **USA₮**; this skill calls the same token **USAT** (address in [contracts.md](contracts.md)).
 - **Track resources** (per the hackathon page): *LatAm* — wFIAT tokens are 18 decimals; on-ramp via `ramp.ripio.com` with query parameters (no credentials needed by the builder; the buyer still does KYC with Ripio, AR/BR/MX/CO only) or the Ripio Ramps API (needs a registered legal entity at platform.ripio.com), and the bridge at `bridge.ripio.com`. *Textile FX* — a permissionless onchain FX marketplace for cNGN, wARS, wBRL, and USDC against USD₮ (https://app.textilecredit.com). Getting each wFIAT on Celo, by token and by builder location: [wfiat-access.md](wfiat-access.md). *USA₮* — eligible users can get USA₮ from the Google Cloud Web3 faucet after verifying with Self on Celo mainnet.
-- **Perks** (per the hackathon page): 3 months of Chainstack's Growth Plan free for every team; Prezenti grants (the page cites $165K for the season — confirm on prezenti.xyz); Builder Graph rating and Certify credential for every submission; co-marketing and mentorship for winners; winning agents listed in a curated Celo set on Aigora.
+- **Perks** (per the hackathon page): 3 months of Chainstack's Growth Plan free for every team; Prezenti grants (the hackathon page cites $165K for the season; prezenti.xyz does not state a total); Builder Graph rating and Certify credential for every submission; co-marketing and mentorship for winners; winning agents listed in a curated Celo set on Aigora.
 
 ### Prezenti: Season 3
 
 - **Type**: Milestone-based grants, three pools
-- **Amount**: **$25K+ USD** (Anchor: $25K stage 2, $50K stage 3, case-by-case stage 4)
-- **Dates**: listed as **Aug 12 – Dec 29, 2026**
+- **Amount**: Anchor **$25,000+ USDm**, Frontier **$15,000+ USDm**, Boost invite only
+- **Dates**: applications open **Aug 12 to Dec 29, 2026** (prezenti.xyz, checked 2026-11-03)
 - **Host**: Prezenti
-- **Pools**: **Anchor** (teams with proven traction, open application) · **Frontier** (AI & agent-economy infrastructure, open application) · **Boost** (invite only, fast-track deployment from other ecosystems, with the Celo Foundation)
-- **Apply**: https://anchor.prezenti.xyz/ · https://frontier.prezenti.xyz/
-- **Timeline**: decisions within 2–4 weeks, rolling until funds are allocated
-- **⚠️ Status is contradictory at source — check before pointing anyone here.** As of 2026-08-28, prezenti.xyz shows the Season 3 Anchor round as "Open 12th Aug 2026 – 29th Dec 2026" while the same page also says "We are currently closed for applications. Season 3 has concluded." Both statements are on the live site; this file does not resolve which is right. Confirm directly before advising a builder to apply.
-- **Note**: Prezenti encourages applicants to **discuss fit before applying**.
-
-### Celo Builder Fund
-
-- **Type**: Investment via **Uncapped YC SAFE**
-- **Amount**: **$25K per project** (10–15 projects targeted)
-- **Dates**: Year-round, runs through **Dec 31, 2026**
-- **Host**: Celo Growth team
-- **Source**: https://www.celopg.eco/programs/celo-builder-fund
-- **Best for**: Projects in the **post-launch phase** (live MVP or v1) that are deployed to **Celo mainnet** with active GitHub development
-- **Eligibility — must meet at least 2 of 4 traction thresholds:**
-  - **1,000+ MAUs** (measured via on-chain usage or app analytics)
-  - **500+ daily transactions** sustained over a 2-week period
-  - **$50K+ TVL** (locked liquidity or usage-based lending/borrowing)
-  - **$5K+/month revenue** (total transaction volume or net GMV revenue)
-- **What's provided**: $25K seed funding, strategic growth support from the Celo Growth team, ecosystem exposure and investor introductions
-- **Graduation**: Projects hitting 10K+ MAU, $250K+ TVL, and sustained traction may access larger capital through **Verda**
-- **Required materials**: a deck and/or product demo plus quantitative traction data
-- **Contact**: lena.hierzi@celo.org
+- **Track record** (per prezenti.xyz): 575+ applications, 120+ grant contracts signed, $2M USDm granted
+- **Anchor Pool** (open application): teams with real traction. Stage 2 (10K to 100K daily transactions): about $25K, for Valora apps and Mini Apps. Stage 3 (100K to 500K): about $50K. Stage 4 (500K+): case by case. The form requires 5,000+ daily transactions (2-week moving average, with evidence) and rejects applicants below it. It also asks for a Karma GAP profile and MiniPay listing status.
+- **Frontier Pool** (open application): AI and agent economy infrastructure that other builders and agents use, not end-user apps. Focus areas: agent identity and discovery, agent-to-agent transactions, AI-native developer tooling, verification and trust, interoperability. Requires a Celo mainnet deployment, verifiable onchain activity, Self Agent ID, a distribution plan, and ERC-8004 registration (the form's note about AI infrastructure projects is cut off on the page, so confirm that exception with Prezenti). Open source preferred.
+- **Boost Pool** (invite only): fast-tracks proven projects from other ecosystems onto Celo, delivered with the Celo Core Co. DevRel team.
+- **Payout**: 20% upfront, 80% on completing the milestones. KYC applies (lead applicant and company country; Prezenti is a Canadian company). Funds go to a Celo address.
+- **Apply**: https://anchor.prezenti.xyz/ · https://frontier.prezenti.xyz/ (use these forms; the Apply buttons on the prezenti.xyz homepage go to an old H2 2024 page)
+- **Status check**: prezenti.xyz displays "open until 29th Dec 2026". The page source also contains an undisplayed line saying applications are closed and Season 3 has concluded. Confirm with Prezenti before telling a builder to apply close to the deadline.
 
 ---
 
-## Past Programs (from celopg.eco)
+## Past Programs
 
 | Program | Funding | Dates | Host |
 |---------|---------|-------|------|
+| Celo Builder Fund | $25K per project (uncapped SAFE) | Year-round, no longer active | Celo Growth team |
 | Agents at Work | $5K CELO | Aug 28 – Sep 14, 2026 | Celo Devs |
 | Onchain Agents Hackathon | $5K CELO | May 22 – Jun 15, 2026 | Celo DevRel |
 | Synthesis | 10K USDT | Mar 11–25, 2026 | Celo Devs |
@@ -111,6 +93,5 @@
 
 | Building… | Recommended Program |
 |-----------|---------------------|
-| Project built on Celo, focus on MiniPay | **Prezenti Anchor Pool (S3)** — $25K+ (confirm status, see above) |
-| AI agents or agent-economy infrastructure | **Agents on Open Rails Hackathon** — $5K, Oct 6 – Nov 9 2026 · **Prezenti Frontier Pool (S3)** |
-| Post-launch app with measurable traction (1K+ MAU / 500+ daily tx / $50K+ TVL / $5K+/mo revenue) | **Celo Builder Fund** — $25K SAFE |
+| Project with real traction (5K+ daily transactions), such as MiniPay apps | **Prezenti Anchor Pool (S3)**: $25,000+ USDm, applications open until Dec 29, 2026 |
+| AI agents or agent-economy infrastructure | **Agents on Open Rails Hackathon**: $5K, Oct 6 to Nov 9, 2026 · **Prezenti Frontier Pool (S3)**: $15,000+ USDm, applications open until Dec 29, 2026 |

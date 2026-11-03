@@ -39,19 +39,19 @@ curl -s https://api.llama.fi/protocol/aave-v3 | jq '.chainTvls.Celo'
 
 ---
 
-## 2. Grant Programs (celopg.eco)
+## 2. Grant Programs (Prezenti)
 
-### Fetch current programs
+`celopg.eco/programs` no longer lists programs (404 as of 2026-11-03). Use Prezenti:
 
 ```bash
-curl -s https://www.celopg.eco/programs
+curl -s https://www.prezenti.xyz/
 ```
 
-The page lists all programs with status badges (Live/Past), dates, hosts, and funding amounts. Parse the HTML to get current state.
+The page gives the round dates, pool amounts and stage criteria. The application forms (`https://anchor.prezenti.xyz/` and `https://frontier.prezenti.xyz/`) carry the eligibility requirements. The page source also holds an undisplayed "applications closed" line, so read the rendered page (browser) when status matters. For hackathons and new programs, use the Celo Devs newsletter: https://celo-devs.beehiiv.com/subscribe
 
-**MANDATORY for any grant/program question.** The `grants-funding.md` cache goes stale the moment a program's status flips (e.g. a program listed as "Past" may actually be Live this quarter). Never answer an eligibility, status, reward, or deadline question from the cache alone — always fetch.
+**MANDATORY for any grant or program question.** The `grants-funding.md` cache goes stale quickly. Never answer an eligibility, status, reward, or deadline question from the cache alone.
 
-**Key fields to extract**: status (Live vs Past), funding amount, date range, host organization, **eligibility requirements**, submission cadence (monthly/rolling/one-shot), submission deadlines.
+**Key fields to extract**: pool, funding amount, date range, eligibility requirements, payout terms, application link.
 
 ---
 
