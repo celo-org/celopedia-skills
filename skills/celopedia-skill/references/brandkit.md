@@ -1,6 +1,6 @@
 # Celo Brand Kit & Attribution
 
-> Source: Official Celo Brand Kit — `https://celo.org/brand-kit` (owned by the Celo Foundation).
+> Source: Official Celo Brand Kit — `https://celo.org/brand-kit` (owned by Celo Core Co.).
 > Last updated: 2026-07-17.
 
 This is the reference for anyone who wants to **reference Celo in their own project** —
@@ -43,7 +43,7 @@ to the Overview hub.
 
 ## Brand Policy — what you may and may not do
 
-The Celo Foundation owns all Celo Brand Assets. The kit exists so the community can
+Celo Core Co. owns all Celo Brand Assets. The kit exists so the community can
 "appropriately communicate Celo brand affiliation." Confirmed rules from the Brand Policy:
 
 **You may not:**
@@ -93,6 +93,6 @@ above rather than quoting numbers here.
 
 ## Freshness
 
-Brand assets, colors, fonts, and policy terms are maintained by the Celo Foundation and
+Brand assets, colors, fonts, and policy terms are maintained by Celo Core Co. and
 change over time. This file is a pointer and policy summary only — **always defer to the
 live brand kit** at `https://celo.org/brand-kit`.
