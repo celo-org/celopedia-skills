@@ -1,6 +1,6 @@
 # Live Data Sources
 
-Instead of relying on hardcoded snapshots, use these APIs and endpoints to fetch real-time data. **Always prefer live data over hardcoded reference files** for TVL, prices, protocol status, and grant programs.
+Instead of relying on hardcoded snapshots, use these APIs and endpoints to fetch real-time data. **Always prefer live data over hardcoded reference files** for TVL, prices, chain activity, protocol status, and grant programs.
 
 Hardcoded references (contracts.md, network-info.md) should still be trusted for contract addresses and chain configuration — those rarely change.
 
@@ -279,11 +279,48 @@ curl -s 'https://forum.celo.org/search.json?q=SEARCH_TERM' | jq '.topics[:5] | .
 
 ---
 
+## 11. Chain Activity (growthepie)
+
+growthepie publishes open analytics for Ethereum L2s, including Celo. No API key. Chain page: https://www.growthepie.com/chains/celo
+
+### Get a metric's daily series
+
+```bash
+# Daily active addresses on Celo, last 3 days: [unix ms (UTC day), value]
+curl -s https://api.growthepie.com/v1/metrics/chains/celo/daa.json | jq -c '.details.timeseries.daily.data[-3:]'
+```
+
+Checked 2026-11-04 (Nov 1 to Nov 3): `[[1793491200000,456801.0],[1793577600000,472180.0],[1793664000000,444915.0]]`
+
+The same URL pattern works for other metrics: `https://api.growthepie.com/v1/metrics/chains/celo/<metric>.json`
+
+| Metric ID | growthepie name | Celo value on 2026-11-03 |
+|-----------|-----------------|--------------------------|
+| `daa` | Active Addresses | 444,915 |
+| `txcount` | Transaction Count | 842,526 |
+| `fees` | Revenue | $3,206 |
+| `tvl` | Total Value Secured | $256.7M |
+| `stables_mcap` | Stablecoin Supply | $153.4M |
+
+**Gotchas**:
+- `tvl` is growthepie's Total Value Secured, not DeFi TVL. Use DefiLlama (§1) for DeFi TVL.
+- `chains/celo.json`, `export/celo.json` and `fundamentals_full.json` return 403. Use the per-metric URLs above (or `fundamentals.json`, a 3.8 MB file with every chain and metric).
+- Providers count active addresses differently, so Token Terminal, growthepie and celo.org report different daily figures. Name the source and the date when quoting one.
+
+### Keyed alternatives
+
+- **Token Terminal**: fees, active users and retention for Celo at https://tokenterminal.com/explorer/projects/celo (API needs a key)
+- **Dune**: SQL over Celo raw and decoded tables, with an MCP server (https://docs.dune.com/docs/agents/mcp) and the Celo agent activity dashboard (https://dune.com/celo/agent-activity-on-celo). API needs a key.
+
+**When to use**: chain-level activity (daily active addresses, transactions) when someone asks how active Celo is. Not for per-protocol data.
+
+---
+
 ## Priority Order for Data Sources
 
 When answering questions, prefer data sources in this order:
 
-1. **Live API** (DefiLlama, The Grid, Mondo, Forum, RPC, celopg.eco) — most current
+1. **Live API** (DefiLlama, The Grid, Mondo, Forum, RPC, growthepie): most current
 2. **Official docs** (docs.celo.org/llms.txt) — authoritative for technical info
 3. **Hardcoded references** (contracts.md, network-info.md) — stable, verified data
 4. **Ecosystem directory** (ecosystem.md) — curated snapshot, may be stale

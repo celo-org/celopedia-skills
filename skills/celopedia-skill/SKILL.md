@@ -246,6 +246,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | Need | Action |
 |------|--------|
 | Ecosystem search / competitors | Query The Grid (`the-grid-skill.md`) |
+| Chain activity / daily active addresses / transaction counts | Check `live-data-sources.md` §11 (growthepie) |
 | Contract address | Look up in `contracts.md` |
 | Protocol integration | Check `defi-protocols.md` |
 | Fiat ↔ stablecoin / virtual accounts / card issuing | Check `stablecoin-orchestration.md` |
@@ -294,6 +295,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 |-----------|-----------|----------|
 | DeFi TVL / protocols | DefiLlama API (`api.llama.fi`) | `ecosystem.md` snapshot |
 | Ecosystem products | The Grid GraphQL | `ecosystem.md` snapshot |
+| Chain activity (daily active addresses, transactions) | growthepie API (`api.growthepie.com`, no key) | Token Terminal or Dune (keyed) |
 | Grant programs | Check `prezenti.xyz` (rendered page) | `grants-funding.md` snapshot |
 | Contract addresses | `contracts.md` (stable, rarely changes) | — |
 | Docs pages | `curl docs.celo.org/llms.txt` | `docs-map.md` snapshot |
