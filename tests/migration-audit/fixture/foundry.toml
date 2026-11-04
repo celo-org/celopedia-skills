@@ -1,0 +1,8 @@
+[profile.default]
+src = "src"
+
+[rpc_endpoints]
+base = "https://mainnet.base.org"
+
+[etherscan]
+base = { key = "x" }
