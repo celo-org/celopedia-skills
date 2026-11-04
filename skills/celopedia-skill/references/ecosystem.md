@@ -228,7 +228,7 @@ Wallet infrastructure (WaaS): Privy, Alchemy Smart Wallets, Thirdweb, Reown, Por
 
 - **Openfort** (https://www.openfort.io): non-custodial embedded wallets with social login, server wallets, and account abstraction with paymasters that can pay fees in stablecoins. Listed on the Celo docs wallets page.
 - **Para** (https://docs.getpara.com/v3/developer-tools/ai-tooling/agent-skill): wallet and authentication suite with an agent skill and CLI. Its chain support page lists Celo (https://docs.getpara.com/v3/introduction/chain-support).
-- **Blockradar** (https://docs.blockradar.co/en/use-cases/accept-agent-payments): wallet as a service for fintechs handling stablecoin transactions, with agent payments over x402 and MPP and a docs MCP. Blockradar names Celo as an infrastructure partner and the Celo docs list it, but its own docs do not list Celo as a supported chain, so confirm Celo support with Blockradar before building on it.
+- **Blockradar** (https://docs.blockradar.co/en/use-cases/accept-agent-payments): wallet as a service for fintechs handling stablecoin transactions, with agent payments over x402 and MPP and a docs MCP. Its Supported Blockchains page (https://docs.blockradar.co/en/use-cases/integrations) lists Celo; the testnet it shows is the retired Alfajores, so confirm Celo Sepolia (11142220) support with Blockradar before testing there.
 
 Wallet docs: https://docs.celo.org/build/tools/wallets/index
 
