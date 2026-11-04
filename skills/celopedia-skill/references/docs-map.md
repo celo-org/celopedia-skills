@@ -3,7 +3,7 @@
 > Source: https://docs.celo.org/llms.txt
 > OpenAPI Spec: https://docs.celo.org/api-reference/openapi.json — **404 as of 2026-10-19**
 > (pre-existing, not something this run's restructuring caused; flagged, not otherwise acted on).
-> Last updated: 2026-10-26
+> Last updated: 2026-11-02
 
 Use this to find the right documentation page for any topic. Links go directly to docs.celo.org.
 
@@ -13,10 +13,12 @@ Use this to find the right documentation page for any topic. Links go directly t
 > merged `build-on-celo/*` + `tooling/*` into a single `build/*` tree (AI/agent pages moved to
 > `build/agents/*`, everything else under `tooling/*` moved to `build/tools/*`). Sometime between
 > **2026-10-16 and 2026-10-19**, it renamed `contribute-to-celo/*` to `contribute/*`, caught on
-> the 2026-10-19 run — see the Contributing section below. **New on 2026-10-26:** nine pages
+> the 2026-10-19 run — see the Contributing section below. **2026-10-26:** nine pages
 > added (not a restructuring) — three under `build/agents/*` (AI Resources, Give Your Agent a
 > Wallet and Test Funds, AskBots) and six under `build/tools/libraries-sdks/contractkit/*` (see
-> those sections below). Every URL below reflects the **2026-10-26** structure.
+> those sections below). **New on 2026-11-02:** one page added — "Sponsor gas with Pimlico on
+> Celo" under `build/tools/wallets/pimlico` (see Build — Tools: Wallets below). Every URL below
+> reflects the **2026-11-02** structure.
 
 ---
 
@@ -282,6 +284,7 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Connect Ledger to Celo Web Wallet | https://docs.celo.org/build/tools/wallets/ledger/to-celo-web |
 | Connect Ledger to Celo CLI | https://docs.celo.org/build/tools/wallets/ledger/to-celo-cli |
 | Ledger EIP-712 Signing Workaround | https://docs.celo.org/build/tools/wallets/ledger/eip712-workaround |
+| Sponsor Gas with Pimlico on Celo | https://docs.celo.org/build/tools/wallets/pimlico |
 
 ## Build — Tools: Other
 
