@@ -1,0 +1,8 @@
+   {
+     "name": "celopedia",
+     "displayName": "Celopedia",
+     "version": "1.0.0",
+     "description": "Build on Celo with verified contract addresses, ecosystem and protocol data, MiniPay, AI agent infrastructure, governance, grants and chain migration.",
+     "author": { "name": "Celo", "url": "https://celo.org" },
+     "license": "Apache-2.0"
+   }
