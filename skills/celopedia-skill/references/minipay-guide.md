@@ -1,7 +1,7 @@
 # MiniPay Development Guide
 
 > **Single source of truth:** https://docs.minipay.xyz/ — all implementation details in this file are derived from and cross-checked against the official MiniPay developer docs.
-> - docs.celo.org mirror: https://docs.celo.org/build-on-celo/build-on-minipay/*
+> - docs.celo.org mirror: https://docs.celo.org/build/mini-apps/overview*
 >
 > For the full page-by-page index of `docs.minipay.xyz`, see `minipay-docs-map.md`.
 

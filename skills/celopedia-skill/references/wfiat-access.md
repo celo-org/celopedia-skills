@@ -117,7 +117,7 @@ before recommending it as a Celo route.
 | Relay | USDC, CELO | Fast USDC |
 | Superbridge | Native OP Stack bridge from Ethereum | ETH-side assets |
 
-Across has no Celo routes. Full list: https://docs.celo.org/tooling/bridges/bridges
+Across has no Celo routes. Full list: https://docs.celo.org/build/tools/bridges/bridges
 
 ---
 
