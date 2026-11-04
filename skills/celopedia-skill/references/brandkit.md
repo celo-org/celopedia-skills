@@ -1,6 +1,6 @@
 # Celo Brand Kit & Attribution
 
-> Source: Official Celo Brand Kit — `https://celo.org/brand-kit` (owned by Celo Core Co.).
+> Source: Official Celo Brand Kit — `https://celo.org/brand-kit` (page copyright: Celo Core Co.).
 > Last updated: 2026-07-17.
 
 This is the reference for anyone who wants to **reference Celo in their own project** —
@@ -43,7 +43,7 @@ to the Overview hub.
 
 ## Brand Policy — what you may and may not do
 
-Celo Core Co. owns all Celo Brand Assets. The kit exists so the community can
+The live brand kit page states that the Celo Foundation owns all Celo Brand Assets (checked 2026-11-03). The kit exists so the community can
 "appropriately communicate Celo brand affiliation." Confirmed rules from the Brand Policy:
 
 **You may not:**
