@@ -581,7 +581,7 @@ Many of these benefit from **Self Agent ID** (one-human-one-spot) to prevent syb
 
 ## Onchain Agents Hackathon (past)
 
-> **Ended June 15, 2026.** Kept as a reference for how Celo hackathons are run; for the current one see `grants-funding.md` → _Agents on Open Rails Hackathon_.
+> **Ended June 15, 2026.** Kept as a reference for how Celo hackathons are run; for past hackathons see `grants-funding.md` → _Past Programs_.
 
 A Celo DevRel-run hackathon for building onchain agents focused on **real-world payments and everyday applications** — May 22 – June 15, 2026, **$5K prize pool in CELO**. Winning agents generate real transactions and demonstrate genuine on-chain utility (not prototypes). Full details: **https://bit.ly/OnchainAgentsHackathon**
 
