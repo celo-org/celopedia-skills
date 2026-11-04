@@ -180,6 +180,8 @@ Sourced from the official list (https://docs.celo.org/build/build-with-local-sta
 | SubQuery | https://docs.celo.org/build/tools/indexers/subquery |
 | GoldRush (Covalent) | https://docs.celo.org/build/tools/indexers/goldrush |
 | Indexing Co | https://docs.celo.org/build/tools/indexers/indexing-co |
+| Bitquery | https://bitquery.io/blockchains/celo-blockchain-api |
+| Zerion API | https://zerion.io/api/celo |
 
 ### Bridges
 
@@ -222,7 +224,11 @@ See `stablecoin-orchestration.md` for the full Bridge integration reference.
 | Safe Wallet | Multisig | Web | https://app.safe.global |
 | MetaMask | Browser extension + mobile | All platforms | https://metamask.io |
 
-Wallet infrastructure (WaaS): Privy, Alchemy Smart Wallets, Thirdweb, Reown, Portal, JAW, Dynamic
+Wallet infrastructure (WaaS): Privy, Alchemy Smart Wallets, Thirdweb, Reown, Portal, JAW, Dynamic, Openfort, Para, Blockradar
+
+- **Openfort** (https://www.openfort.io): non-custodial embedded wallets with social login, server wallets, and account abstraction with paymasters that can pay fees in stablecoins. Listed on the Celo docs wallets page.
+- **Para** (https://docs.getpara.com/v3/developer-tools/ai-tooling/agent-skill): wallet and authentication suite with an agent skill and CLI. Its chain support page lists Celo (https://docs.getpara.com/v3/introduction/chain-support).
+- **Blockradar** (https://docs.blockradar.co/en/use-cases/accept-agent-payments): wallet as a service for fintechs handling stablecoin transactions, with agent payments over x402 and MPP and a docs MCP. Blockradar names Celo as an infrastructure partner and the Celo docs list it, but its own docs do not list Celo as a supported chain, so confirm Celo support with Blockradar before building on it.
 
 Wallet docs: https://docs.celo.org/build/tools/wallets/index
 
