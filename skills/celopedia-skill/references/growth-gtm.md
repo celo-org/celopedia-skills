@@ -34,7 +34,7 @@ Ranked by realistic ROI for a solo founder with zero budget. Don't try all of th
 | Channel | Best for | Realistic effort | Realistic outcome (first 90 days) |
 |---------|----------|------------------|-----------------------------------|
 | **Twitter/X (CT)** | English-speaking crypto-native audience, grant program visibility | 30 min/day | 200-1000 followers, 2-3 outlet pickups |
-| **Farcaster** | English crypto-builder audience, Celo Foundation eyeballs | 15 min/day | 100-500 followers, but higher signal-per-follower than X |
+| **Farcaster** | English crypto-builder audience, Celo Core Co. team eyeballs | 15 min/day | 100-500 followers, but higher signal-per-follower than X |
 | **Local Telegram groups** | Emerging-market retail users — actual MiniPay users live here, especially in LatAm and SEA | 1 hr/week (you need to be a real participant, not a poster) | 50-500 first users from organic posts |
 | **WhatsApp Status / Groups** | Direct line to MiniPay's actual user base (especially Africa) | 1 hr/week | Highest conversion rate, hardest to measure |
 | **YouTube Shorts / TikTok / Reels** (with Remotion + Screen Studio) | Mass reach in regional markets — non-English content (Spanish, Portuguese, Swahili, Tagalog) has low competition for Celo/stablecoin topics | 2 hr/week to produce, 1 minute to post in 3 places | 1k-100k views per video, 1-3% to install |
