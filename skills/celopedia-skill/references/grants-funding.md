@@ -62,7 +62,7 @@
 
 | Program | Funding | Dates | Host |
 |---------|---------|-------|------|
-| Celo Builder Fund | $25K per project (uncapped SAFE) | Year-round, no longer active | Celo Growth team |
+| Celo Builder Fund | $25K per project (uncapped SAFE) | Year-round, no longer active | Celo Core Co. |
 | Agents at Work | $5K CELO | Aug 28 – Sep 14, 2026 | Celo Devs |
 | Onchain Agents Hackathon | $5K CELO | May 22 – Jun 15, 2026 | Celo DevRel |
 | Synthesis | 10K USDT | Mar 11–25, 2026 | Celo Devs |
