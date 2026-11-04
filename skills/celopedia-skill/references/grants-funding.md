@@ -62,7 +62,7 @@
 
 | Program | Funding | Dates | Host |
 |---------|---------|-------|------|
-| Celo Builder Fund | $25K per project (uncapped SAFE) | Year-round, no longer active | Celo Core Co. |
+| Celo Builder Fund | $25K per project (uncapped YC SAFE) | Listed Jan 1 to Dec 31, 2026; program page removed | Celo Core Co. |
 | Agents at Work | $5K CELO | Aug 28 – Sep 14, 2026 | Celo Devs |
 | Onchain Agents Hackathon | $5K CELO | May 22 – Jun 15, 2026 | Celo DevRel |
 | Synthesis | 10K USDT | Mar 11–25, 2026 | Celo Devs |
@@ -84,6 +84,8 @@
 | Proof of Impact S0 | 150K CELO | May–Jul 2025 | Celo Public Goods |
 
 > Note: Prezenti applications have **moved from Charmverse to Tally**. Old Charmverse links are inactive — use `https://anchor.prezenti.xyz/` and `https://frontier.prezenti.xyz/` for new submissions. Announcement: https://forum.celo.org/t/prezenti-grant-applications-have-moved-to-tally/13318
+
+> **Celo Builder Fund source:** the archived program page (https://web.archive.org/web/20260715164457/https://www.celopg.eco/programs/celo-builder-fund) shows the terms above. The live page returns 404 and celopg.eco no longer lists programs (checked 2026-11-03), so do not point builders to it. Verda Ventures runs a separate MiniPay Fund (see `minipay-guide.md`).
 
 ---
 
