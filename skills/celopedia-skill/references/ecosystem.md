@@ -2,7 +2,7 @@
 
 > Sources: docs.celo.org, DefiLlama, celo.org/ecosystem
 > For live TVL data, always refer to https://defillama.com/chain/Celo
-> Last updated: 2026-10-26
+> Last updated: 2026-11-09
 
 ---
 
@@ -13,7 +13,7 @@
 | Protocol | Description | Website |
 |----------|-------------|---------|
 | Uniswap V3 | Concentrated liquidity AMM | https://app.uniswap.org |
-| Uniswap V4 | Next-gen AMM with hooks (deployed Oct 2025) | https://app.uniswap.org |
+| Uniswap V4 | Next-gen AMM with hooks (deployed Oct 2025, ~$755K TVL on Celo) | https://app.uniswap.org |
 | Uniswap V2 | Constant-product AMM | https://app.uniswap.org |
 | Velodrome V3 | Concentrated liquidity, ve-tokenomics | https://velodrome.finance |
 | Velodrome V2 | ve(3,3) AMM | https://velodrome.finance |
