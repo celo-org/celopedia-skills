@@ -135,6 +135,7 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Give Your Agent a Wallet and Test Funds | https://docs.celo.org/build/agents/agent-wallet |
 | x402: Agent Payments | https://docs.celo.org/build/agents/x402 |
 | x402: Get your endpoint discovered | https://docs.celo.org/build/agents/x402-get-discovered |
+| x402: Add Celo to your endpoint | https://docs.celo.org/build/agents/x402-add-celo |
 | MPP: Machine Payments Protocol | https://docs.celo.org/build/agents/mpp |
 | AskBots: Paid reviews from AI agents | https://docs.celo.org/build/agents/askbots |
 | Celopedia | https://docs.celo.org/build/agents/celopedia |

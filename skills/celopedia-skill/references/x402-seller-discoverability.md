@@ -3,7 +3,7 @@
 > Source: x402 `bazaar` extension spec (github.com/x402-foundation/x402, `specs/extensions/bazaar.md`), `@x402/extensions` 2.27, `@x402/evm` 2.28.0, Coinbase seller docs (`docs.cdp.coinbase.com/x402/seller/get-discovered`, `/x402/network-support`), agent402.tools (github.com/MikeyPetrillo/Agent402), x402scan (github.com/Merit-Systems/x402scan), docs.celo.org/build/agents/x402-get-discovered
 > Last updated: 2026-10-23. Index entry rules change without notice; re-check before quoting.
 
-A working 402 endpoint on Celo is invisible until (1) its 402 response describes the endpoint in a machine-readable way and (2) it is listed where agents look. There is no single index. Use this reference when a builder asks "how do agents find my paid API?" or "how do I get listed?".
+A working 402 endpoint on Celo is invisible until (1) its 402 response describes the endpoint in a machine-readable way and (2) it is listed where agents look. There is no single index. Use this reference when a builder asks "how do agents find my paid API?" or "how do I get listed?". If the endpoint already sells on another network and does not accept Celo yet, start with `https://docs.celo.org/build/agents/x402-add-celo`.
 
 ---
 
