@@ -146,7 +146,7 @@ and card events. Signature verification is supported via HMAC-SHA256. See
 1. **Pair Bridge with fee abstraction.** If you're paying users in USDT on Celo, they can also
    *pay gas* in USDT via Celo's fee abstraction. The combination = a fully USD-denominated UX with
    no native gas friction. See `builder-guide.md` for fee abstraction patterns.
-2. **Treasury yield.** Hold operational stablecoin reserves in USDB rather than USDT/USDC to earn
+2. **Treasury yield.** Hold operational stablecoin reserves in USDB or sfrxUSD rather than USDT/USDC to earn
    automatic on-chain yield with no claim or stake step.
 
 ### Related skills and references

@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.15.1"
+  version: "2.16.0"
 ---
 
 # Celopedia Skill
@@ -23,7 +23,7 @@ Celo is a leading **Ethereum L2** (OP Stack + EigenDA, settling to Ethereum with
 
 - **Chain ID**: 42220 (Mainnet), 11142220 (Sepolia Testnet)
 - **Block time**: ~1 second | **Gas**: ~$0.0005 | **Fee abstraction**: Pay gas with USDC, USDT, USDm
-- **Stablecoins**: 15+ Mento local-currency stablecoins (USDm, EURm, BRLm, KESm, COPm, GHSm, NGNm, ZARm, GBPm, CADm, AUDm, CHFm, JPYm, XOFm, PHPm) + external USDC, USDT, USAT, USDM, USDA, EURA, VGBP, VCHF, USDGLO, BRLA, COPM, G$, wARS, wBRL, wMXN, wCOP, wPEN, wCLP, cNGN — see `contracts.md` / `ecosystem.md`
+- **Stablecoins**: 15+ Mento local-currency stablecoins (USDm, EURm, BRLm, KESm, COPm, GHSm, NGNm, ZARm, GBPm, CADm, AUDm, CHFm, JPYm, XOFm, PHPm) + external USDC, USDT, USAT, USDM, USDA, EURA, VGBP, VCHF, USDGLO, BRLA, COPM, G$, wARS, wBRL, wMXN, wCOP, wPEN, wCLP, cNGN, frxUSD, sfrxUSD (plus Frax's WFRAX, frxETH, sfrxETH) — see `contracts.md` / `ecosystem.md`
 - **MiniPay**: 20M+ wallet activations, 600M+ transactions, 70+ countries, 77 Mini Apps live
 
 ---

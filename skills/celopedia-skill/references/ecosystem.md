@@ -42,6 +42,7 @@
 | Protocol | Description | Website |
 |----------|-------------|---------|
 | Beefy | Autocompounding yield farming | https://beefy.com |
+| sfrxUSD (Frax) | Yield-bearing staked frxUSD, 18 decimals, native LayerZero OFT on Celo; yield accrues in the token | https://docs.frax.com/protocol/assets/frxusd/sfrxusd |
 | Autofarm | Yield aggregator | https://autofarm.network |
 | Steer Protocol | Automated liquidity management | https://app.steer.finance |
 | ICHI | Algorithmic liquidity strategies | https://www.ichi.org |
@@ -150,6 +151,10 @@ Sourced from the official list (https://docs.celo.org/build/build-with-local-sta
 | Wrapped Peruvian Sol | wPEN | Ripio | `0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE` |
 | Wrapped Chilean Peso | wCLP | Ripio | `0x61D450a098b6a7f69fC4b98CE68198fe59768651` |
 | cNGN (Nigerian Naira, regulated) | cNGN | Wrapped CBDC | `0xF6829D7393dAe24509eb1E52eE8e572e2E271a4f` |
+| Frax USD | frxUSD | Frax | `0x00000000D61733e7A393A10A5B48c311AbE8f1E5` |
+| Staked Frax USD (yield-bearing) | sfrxUSD | Frax | `0x00000000fD8C4B8A413A06821456801295921a71` |
+
+Frax also issues WFRAX, frxETH and sfrxETH natively on Celo as LayerZero OFTs (not stablecoins) — addresses and notes in `contracts.md`.
 
 > ⚠️ **Ticker collisions** (match on address, not symbol): Mountain Protocol's **USDM** (yield-bearing, US-Treasury backed, `0x59D9…508C`) ≠ Celo's **USDm** (cUSD, the Mento dollar). Minteo's **COPM** (`0xC92E…`) ≠ Mento's **COPm**.
 
@@ -192,6 +197,7 @@ Sourced from the official list (https://docs.celo.org/build/build-with-local-sta
 | Squid Router | https://v2.app.squidrouter.com | Liquidity routing |
 | LI.FI | https://li.fi | Bridge + swap aggregator; `@lifi/sdk` for programmatic cross-chain swaps |
 | LayerZero | https://layerzero.network | Cross-chain messaging |
+| Frax (OFT swap) | https://frax.com/swap | LayerZero OFT transfers of frxUSD, sfrxUSD, WFRAX, frxETH, sfrxETH to/from Celo |
 | Jumper Exchange | https://jumper.exchange | Cross-chain DEX |
 | Hyperlane Nexus | https://www.usenexus.org | Cross-chain messaging |
 | AllBridge | https://app.allbridge.io | Multi-chain |
