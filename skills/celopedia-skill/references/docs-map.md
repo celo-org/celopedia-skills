@@ -3,7 +3,7 @@
 > Source: https://docs.celo.org/llms.txt
 > OpenAPI Spec: https://docs.celo.org/api-reference/openapi.json — **404 as of 2026-10-19**
 > (pre-existing, not something this run's restructuring caused; flagged, not otherwise acted on).
-> Last updated: 2026-11-02
+> Last updated: 2026-11-16
 
 Use this to find the right documentation page for any topic. Links go directly to docs.celo.org.
 
@@ -16,9 +16,11 @@ Use this to find the right documentation page for any topic. Links go directly t
 > the 2026-10-19 run — see the Contributing section below. **2026-10-26:** nine pages
 > added (not a restructuring) — three under `build/agents/*` (AI Resources, Give Your Agent a
 > Wallet and Test Funds, AskBots) and six under `build/tools/libraries-sdks/contractkit/*` (see
-> those sections below). **New on 2026-11-02:** one page added — "Sponsor gas with Pimlico on
-> Celo" under `build/tools/wallets/pimlico` (see Build — Tools: Wallets below). Every URL below
-> reflects the **2026-11-02** structure.
+> those sections below). **2026-11-02:** one page added — "Sponsor gas with Pimlico on
+> Celo" under `build/tools/wallets/pimlico` (see Build — Tools: Wallets below). **New on
+> 2026-11-16:** one page added — "x402: Add Celo to your endpoint" under
+> `build/agents/x402-add-celo` (see Build — Agents below). Every URL below reflects the
+> **2026-11-16** structure.
 
 ---
 
@@ -134,8 +136,8 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Agent Vault: Card Payments and Logins for Agents | https://docs.celo.org/build/agents/agent-vault |
 | Give Your Agent a Wallet and Test Funds | https://docs.celo.org/build/agents/agent-wallet |
 | x402: Agent Payments | https://docs.celo.org/build/agents/x402 |
-| x402: Get your endpoint discovered | https://docs.celo.org/build/agents/x402-get-discovered |
 | x402: Add Celo to your endpoint | https://docs.celo.org/build/agents/x402-add-celo |
+| x402: Get your endpoint discovered | https://docs.celo.org/build/agents/x402-get-discovered |
 | MPP: Machine Payments Protocol | https://docs.celo.org/build/agents/mpp |
 | AskBots: Paid reviews from AI agents | https://docs.celo.org/build/agents/askbots |
 | Celopedia | https://docs.celo.org/build/agents/celopedia |
@@ -151,7 +153,10 @@ Use this to find the right documentation page for any topic. Links go directly t
 > of real card numbers and passwords. **New on 2026-10-26:** AI Resources, Give Your Agent a
 > Wallet and Test Funds, and an official AskBots page — docs.celo.org now documents AskBots
 > directly (the askbots.ai-sourced content in `ai-agents.md` is unchanged and still the fuller
-> reference). The standalone "Agent Skills" page remains removed.
+> reference). **New on 2026-11-16: "x402: Add Celo to your endpoint"** — how to accept
+> USDC/USDT/USA₮ on Celo from an existing x402 endpoint by adding Celo offers and the Celo
+> facilitator alongside an already-supported network; distinct from the existing "x402: Get your
+> endpoint discovered" page. The standalone "Agent Skills" page remains removed.
 
 ## Build — MiniPay
 
