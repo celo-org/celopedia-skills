@@ -387,6 +387,35 @@ Covers network and block data, token and stable-token balances, gas fees, govern
 
 ---
 
+## Agent wallets and payment tools (third party)
+
+Built by other teams, not by Celo. Docs: `https://docs.celo.org/build/agents/altana` and `https://docs.celo.org/build/agents/agent-vault`.
+
+### Altana: agent wallets with onchain limits
+
+`https://www.altana.network` · docs `https://docs.altana.network`. A Smart Agentic Wallet where the **owner keeps the admin key** and Altana never holds keys or funds. The agent gets a **session key**: a scoped, time-bounded delegation with a spend cap per token over a rolling period, an allowlist of contracts and methods, and an expiry. The wallet contract enforces these, so a call outside them reverts. Grants are registered in the **Keystore**, a public onchain registry anyone can read; the owner revokes a session in one transaction. An intent relay simulates each transaction before signing.
+
+- **Celo:** mainnet (42220) and Celo Sepolia (11142220). The relay takes its fee in CELO or in a stablecoin the wallet holds (USDC, USD₮, USA₮, EURm), so the agent needs no CELO.
+- **MCP server:** `@altananetwork/mcp` needs Bun 1.1+ and runs with `bunx`. `npx` fails with a TypeScript syntax error. Select the chain with `ALTANA_CHAIN` (`celo` or `celo-sepolia`); one server process serves one chain.
+  ```bash
+  claude mcp add altana -e ALTANA_CHAIN=celo -- bunx @altananetwork/mcp
+  ```
+- **Limits:** set both `calls` and `spend` on a session; without `calls` the session reaches any contract within its spend cap. Spend amounts are in the token's smallest unit (USDC and USD₮ use 6 decimals).
+- **SDK:** `@altananetwork/sdk` 1.1.0+ exports `CELO` (42220) and `CELO_SEPOLIA` (11142220); earlier versions do not. `createClient({ chains: [CELO] })`. If `npm install` resolves to 0.9.0, a registry cooldown policy is hiding the newer release; install `@1.1.0` explicitly.
+- **x402 on Celo:** `@altananetwork/x402-server` has `USDC_CELO`, `USDT_CELO`, `USAT_CELO` configs (6 decimals) and can settle through Celo's hosted facilitator (`https://api.x402.celo.org`; `POST /settle` needs an API key from `x402.celo.org`). Docs: `https://docs.altana.network/sdk/x402-server#celo`.
+- Partner contract addresses (Keystore) are on Altana's own networks page: `https://docs.altana.network/concepts/networks`.
+
+### Agent Vault (Self): payments and logins for agents
+
+`https://agentvault.io` · docs `https://docs.agentvault.io`. The agent works with mock tokens and never holds a card number, password or wallet key.
+
+- **Card and login flows:** hosted MCP server `https://mcp.agentvault.io/mcp`, a Playwright SDK, or an HTTP API.
+- **x402 on Celo:** Agent Vault creates an onchain wallet for the account holder on Celo mainnet (Celo Sepolia sandbox for testing) and pays x402 services from it for the agent. Tokens: USDC, USD₮, USA₮. No CELO needed. It pays for API calls sold on Buy, not for website checkouts. Spending limits come from the account holder's agent card, and a payment can wait for approval first. Payments are final.
+- **Custody:** Agent Vault holds the wallet key for the account holder, and only the account holder can withdraw. State the key-holding fact and do not label it: do not call it self-custodial or non-custodial.
+- **Which one:** Altana when the owner must keep the key and limits must be verifiable onchain; Agent Vault when logins, cards and payment authority must stay out of the agent's hands. They are complementary.
+
+---
+
 ## Agent Skills Specification
 
 Celo's modular skill system for AI coding assistants.
