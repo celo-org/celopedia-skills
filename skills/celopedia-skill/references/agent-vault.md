@@ -1,21 +1,27 @@
-# Agent Vault (Self Labs) — card payments and logins for agents
+# Agent Vault (Self Labs) — card payments, x402 on Buy and logins for agents
 
-> Sources: https://agentvault.io · https://docs.agentvault.io (agent-readable index: https://docs.agentvault.io/llms.txt).
-> Last verified: 2026-10-15. Plans, prices, limits, tool lists and the agent list change — re-check the docs before quoting a number or a name.
+> Sources: https://agentvault.io · https://docs.agentvault.io (agent-readable index: https://docs.agentvault.io/llms.txt) · wallet: https://docs.agentvault.io/dashboard/wallet.
+> Last verified: 2026-11-19. Plans, prices, limits, tool lists and the agent list change — re-check the docs before quoting a number or a name.
 
-Agent Vault is a product of **Self Labs** (self.xyz). Self is also the identity project behind [Self Agent ID](self-agent-id.md). It lets an AI agent **pay at online checkouts by card and sign in to websites** on a person's behalf, with spending limits, without the agent ever holding the card number or the password. The agent works with placeholder "mock tokens"; Agent Vault's proxy browser swaps in the real value at the moment of the fill. Developers reach it through an **MCP server, a Playwright SDK or an HTTP API**.
+Agent Vault is a product of **Self Labs** (self.xyz). Self is also the identity project behind [Self Agent ID](self-agent-id.md). It lets an AI agent **pay at online checkouts by card, pay x402 services sold on Buy in stablecoins on Celo, and sign in to websites** on a person's behalf, with spending limits, without the agent ever holding the card number, the password or a wallet key. Developers reach it through an **MCP server, a Playwright SDK or an HTTP API**.
 
-## Read this first: it is not a Celo protocol
+## x402 payments on Celo: Buy only
 
-Agent Vault's site and documentation **do not mention Celo, blockchains, stablecoins, wallets, x402 or ERC-8004**. It is a card-and-login layer for the ordinary web. Celopedia lists it because Self is part of the Celo ecosystem and builders on Celo will ask about it.
+Agent Vault creates an onchain wallet for the account holder on **Celo mainnet** (Celo Sepolia sandbox with test USDC) and pays x402 services from it for the agent.
 
-- **Never say** Agent Vault runs on Celo, settles in stablecoins, or integrates with x402, MPP, ERC-8004 or Self Agent ID. None of that is documented. If a builder asks, say it is not documented and point them to team@self.xyz.
-- **For onchain agent payments** (stablecoins, pay-per-request, agent identity), use `ai-agents.md` → x402, the hosted facilitator, and ERC-8004 / [Self Agent ID](self-agent-id.md).
-- **Use Agent Vault when** the agent has to pay a merchant that only accepts cards, or sign in to a site that has no API. It complements onchain rails; it does not replace them.
+- **Scope: only x402 services sold on Buy** (the pay-per-call API marketplace). It does not pay arbitrary x402 endpoints or website checkouts from the wallet. For any other x402 endpoint, use `buy` or an x402 client (`ai-agents.md` → x402).
+- **Tokens:** USDC, USD₮, USA₮ on Celo. No CELO needed for fees. Tokens not listed on the Wallet page cannot be withdrawn.
+- **Keys:** Agent Vault holds the wallet key for the account holder; only the account holder can withdraw. The agent never gets the key or signs. Do not call it self-custodial or non-custodial. For owner-held keys with onchain limits, see Altana (`ai-agents.md` → _Agent wallets and payment tools_).
+- **Limits:** set by the account holder's agent card; a payment can wait for approval. Payments are final.
+
+## It is not a Celo protocol
+
+Agent Vault is a Self Labs product, not part of Celo. It does not integrate with MPP, ERC-8004 or Self Agent ID; for agent identity use ERC-8004 / [Self Agent ID](self-agent-id.md).
 
 | The agent needs to… | Use |
 |---|---|
-| Pay an API or service per request in stablecoins on Celo | x402 / MPP (`ai-agents.md`) |
+| Pay an x402 service sold on Buy without holding a key | **Agent Vault** |
+| Pay any other API per request in stablecoins on Celo | x402 / MPP / `buy` (`ai-agents.md`) |
 | Prove a human stands behind the agent | Self Agent ID (`self-agent-id.md`) |
 | Buy something on a normal website with a card | **Agent Vault** |
 | Sign in to a website with the user's saved credentials | **Agent Vault** |
@@ -27,7 +33,7 @@ Agent Vault's site and documentation **do not mention Celo, blockchains, stablec
 3. The agent drives a browser that runs **inside Agent Vault's proxy** and fills fields with tokens.
 4. At each fill the proxy checks the account holder's rules, swaps the token for the real value and types it into the merchant's page. A login fills only on its registered site (URL locking).
 
-Agent Vault **moves no money**; the merchant and the card issuer keep the financial record. It does not hide the card from the merchant.
+For card payments Agent Vault **moves no money**; the merchant and the card issuer keep the financial record. It does not hide the card from the merchant.
 
 ## Choose an integration
 
