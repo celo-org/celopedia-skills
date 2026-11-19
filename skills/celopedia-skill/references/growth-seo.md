@@ -197,7 +197,7 @@ The kinds of backlinks that compound for Celo projects:
 
 | Source | Effort to acquire | DR/authority lift |
 |--------|-------------------|-------------------|
-| Celo official blog / Twitter | Email Celo Foundation when you launch | Very high |
+| Celo official blog / Twitter | Tell the Celo Core Co. DevRel team when you launch | Very high |
 | docs.celo.org "ecosystem" listing | PR to celo-org/docs | Very high |
 | The Grid (ecosystem directory) | Submit your project | Medium-high |
 | Coverage in local crypto media (Cripto247, DiarioBitcoin, etc.) | See [growth-comms.md](growth-comms.md) §4 | Medium |
