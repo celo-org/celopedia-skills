@@ -187,4 +187,4 @@ Data is sourced from official Celo documentation. If you find outdated informati
 
 ## License
 
-Apache-2.0
+[Apache-2.0](LICENSE)
