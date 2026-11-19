@@ -391,6 +391,8 @@ Covers network and block data, token and stable-token balances, gas fees, govern
 
 Built by other teams, not by Celo. Docs: `https://docs.celo.org/build/agents/altana` and `https://docs.celo.org/build/agents/agent-vault`.
 
+**Every wallet provider on Celo works as an agent wallet.** Agent-specific: Altana (owner-held key, onchain session limits), Agent Vault (Agent Vault holds the key, pays x402), Celina (LLM tools over SDK/MCP/REST). General wallet infrastructure that also serves agents: JAW (delegated agent permissions), Privy, Openfort, Alchemy Smart Wallets, thirdweb, Para, Portal, BlockRadar, Safe, Dynamic, Reown, Zerion. A raw viem key is fine for testing only. Full list: `https://docs.celo.org/build/agents/agent-wallet#choose-wallet-infrastructure-for-an-agent` and `https://docs.celo.org/build/tools/wallets/index`.
+
 ### Altana: agent wallets with onchain limits
 
 `https://www.altana.network` · docs `https://docs.altana.network`. A Smart Agentic Wallet where the **owner keeps the admin key** and Altana never holds keys or funds. The agent gets a **session key**: a scoped, time-bounded delegation with a spend cap per token over a rolling period, an allowlist of contracts and methods, and an expiry. The wallet contract enforces these, so a call outside them reverts. Grants are registered in the **Keystore**, a public onchain registry anyone can read; the owner revokes a session in one transaction. An intent relay simulates each transaction before signing.
