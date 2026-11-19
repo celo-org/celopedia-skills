@@ -19,6 +19,8 @@ A trust framework for AI agents with three on-chain registries: Identity, Reputa
 | Identity | `0x8004A169FB4a3325136EB29fA0ceB6D2e539a432` | `0x8004A818BFB912233c491871b3d84c89A494BD9e` |
 | Reputation | `0x8004BAa17C55a88189AE136b182e5fdA19dE9b63` | `0x8004B663056A597Dffe9eCcC1965A193B7388713` |
 
+**Validation Registry**: part of the ERC-8004 spec, but the official contracts repo (https://github.com/erc-8004/erc-8004-contracts) lists only the Identity and Reputation registries for Celo and marks the Validation section as still being revised. Do not give a Celo Validation Registry address. Check the repo before building on it.
+
 **SDK**: `npm install @chaoschain/sdk` / `pip install chaoschain-sdk`
 
 ### Protocol Stack
