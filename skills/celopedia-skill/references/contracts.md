@@ -86,6 +86,11 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 | CELO (ERC-20) | CELO | `0x471EcE3750Da237f93B8E339c536989b8978a438` |
 | cNGN (Nigerian Naira, regulated) | cNGN | `0xF6829D7393dAe24509eb1E52eE8e572e2E271a4f` |
 | IDRX (Indonesian Rupiah) | IDRX | `0x18Bc5bcC660cf2B9cE3cd51a404aFe1a0cBD3C22` |
+| Frax USD | frxUSD | `0x00000000D61733e7A393A10A5B48c311AbE8f1E5` |
+| Staked Frax USD | sfrxUSD | `0x00000000fD8C4B8A413A06821456801295921a71` |
+| Wrapped Frax | WFRAX | `0x00000000E9CE0f293D1Ce552768b187eBA8a56D4` |
+| Frax Ether | frxETH | `0x000000008c3930dCA540bB9B3A5D0ee78FcA9A4c` |
+| Staked Frax Ether | sfrxETH | `0x00000000883279097A49dB1f2af954EAd0C77E3c` |
 
 > Third-party stablecoins above are sourced from and verified against the official list: https://docs.celo.org/build/build-with-local-stablecoin (addresses confirmed on-chain).
 >
@@ -94,6 +99,8 @@ All addresses verified from official Celo documentation. **Do not guess addresse
 > **USAT** (Tether America USD) launched on Celo in April 2026 — a USD stablecoin backed by short-term T-bills + cash (supervised by Anchorage Digital). **6 decimals** (like USDC/USDT). It is a whitelisted fee currency; its `feeCurrency` adapter is `0x0357EE22278c922e1D36cFe6b899269b161880C4` (18-decimal adapter — use the adapter, not the token, in the `feeCurrency` field). Caveat: upstream price oracles don't yet index the Celo contract address, so Valora-derived wallets may show `priceUsd: NaN` until that's resolved.
 
 > **IDRX** (Indonesian Rupiah, issued by [IDRX](https://idrx.co/)) is live on Celo Mainnet as of 2026-09-09 — the same address it uses on Base, Lisk and other EVM chains (`0x18Bc…3C22`), per IDRX's own [supported-chain list](https://docs.idrx.co/introduction/supported-chain-and-contract-address). **2 decimals** — `name()`/`symbol()` both return `IDRX`, `decimals()` returns `2`, read on-chain 2026-09-14 — so `1 IDRX = 100` raw units; anything that assumes 6 or 18 decimals is off by 10⁴ or 10¹⁶ silently. It is an upgradeable proxy (ERC-1967/UUPS). It is **not** a fee currency and has no `permit()` / EIP-3009 — a transfer needs CELO for gas.
+
+> **Frax tokens** (frxUSD, sfrxUSD, WFRAX, frxETH, sfrxETH) are issued natively on Celo as [LayerZero OFTs](https://docs.layerzero.network/v2) — no wrapped copies; the same deterministic `0x00000000…` addresses Frax uses on its other OFT chains, listed on Frax's [cross-chain address page](https://docs.frax.com/protocol/crosschain/addresses). All five are **18 decimals**. Issuer descriptions: **frxUSD** is Frax's flagship stablecoin — a digital dollar built to the GENIUS standard, backed by tokenized US Treasuries, minted 1:1 through [FraxNet](https://net.frax.com). **sfrxUSD** is Frax's savings stablecoin; its yield comes mostly from frxUSD strategies in DeFi and **accrues in the token** (no claim step) — the one to use for a savings balance. **WFRAX** is wrapped FRAX, the value-accrual token of the Frax ecosystem, used for gas on Fraxtal and for governance through veFRAX. **frxETH** is Frax's ETH stablecoin, designed to track the price of ETH. **sfrxETH** is staked frxETH; it earns Ethereum staking yield while keeping ETH exposure. None of the five is a fee currency — a transfer needs CELO or another allowlisted token for gas. Move them to Celo with Frax's [swap UI](https://frax.com/swap); frxUSD ↔ sfrxUSD stake/unstake works cross-chain via Frax's Hop contract (Celo row on Frax's [supported-networks page](https://docs.frax.com/frxusd/stake-and-unstake-supported-networks)). Contracts are owned by a 3-of-6 Frax Safe on Celo (`0xFfdBB6221390d05366df8F6733E586c8CE92103C`). `symbol()` / `name()` / `decimals()` read on-chain 2026-11-16; supply was zero at that time, ahead of launch.
 
 **Ripio wFIAT notes** (added Jul 2026):
 - `wBRL` ≠ `BRLm`: `wBRL` is Ripio-issued; `BRLm` (cREAL) is Mento-issued — different issuers, different risk profiles

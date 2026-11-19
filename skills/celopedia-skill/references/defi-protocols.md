@@ -534,6 +534,7 @@ Use Uniswap V3 or Mento for swapping between stablecoins (USDm ↔ USDC ↔ USDT
 - Supply to Aave V3 → earn interest
 - Provide liquidity on Uniswap → earn fees + Merkl rewards
 - Use Beefy for autocompounding
+- Hold sfrxUSD (staked frxUSD, 18 decimals) → yield accrues in the token, no claim step
 
 ### 3. Leveraged Staking
 - Deposit stCELO as collateral on Morpho Blue
