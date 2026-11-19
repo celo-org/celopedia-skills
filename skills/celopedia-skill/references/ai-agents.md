@@ -402,7 +402,8 @@ Built by other teams, not by Celo. Docs: `https://docs.celo.org/build/agents/alt
   ```
 - **Limits:** set both `calls` and `spend` on a session; without `calls` the session reaches any contract within its spend cap. Spend amounts are in the token's smallest unit (USDC and USD₮ use 6 decimals).
 - **SDK:** `@altananetwork/sdk` 1.1.0+ exports `CELO` (42220) and `CELO_SEPOLIA` (11142220); earlier versions do not. `createClient({ chains: [CELO] })`. If `npm install` resolves to 0.9.0, a registry cooldown policy is hiding the newer release; install `@1.1.0` explicitly.
-- **x402 on Celo:** `@altananetwork/x402-server` has `USDC_CELO`, `USDT_CELO`, `USAT_CELO` configs (6 decimals) and can settle through Celo's hosted facilitator (`https://api.x402.celo.org`; `POST /settle` needs an API key from `x402.celo.org`). Docs: `https://docs.altana.network/sdk/x402-server#celo`.
+- **x402 on Celo, buying:** an agent pays x402 endpoints on Celo from its Altana wallet in USDC, USD₮ or USA₮ within the session's spend cap. Grant the session with `x402Tokens`, then `client.fetchWithX402({ session, url })`; it pays once and retries once. Run it server side. Docs: `https://docs.altana.network/sdk/x402`.
+- **x402 on Celo, selling:** `@altananetwork/x402-server` has `USDC_CELO`, `USDT_CELO`, `USAT_CELO` configs (6 decimals) and can settle through Celo's hosted facilitator (`https://api.x402.celo.org`; `POST /settle` needs an API key from `x402.celo.org`). Docs: `https://docs.altana.network/sdk/x402-server#celo`.
 - Partner contract addresses (Keystore) are on Altana's own networks page: `https://docs.altana.network/concepts/networks`.
 
 ### Agent Vault (Self): payments and logins for agents
