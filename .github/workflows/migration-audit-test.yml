@@ -1,0 +1,23 @@
+name: Migration audit greps
+
+on:
+  pull_request:
+    paths:
+      - 'skills/celopedia-skill/references/migrating-from-another-chain.md'
+      - 'tests/migration-audit/**'
+      - '.github/workflows/migration-audit-test.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Install ripgrep
+        run: sudo apt-get install -y ripgrep
+
+      - name: Run the Phase 1 pattern tests
+        run: tests/migration-audit/test.sh

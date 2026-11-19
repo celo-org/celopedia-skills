@@ -8,12 +8,19 @@ The Celopedia skill: a comprehensive, installable agent skill for building on Ce
 
 ## Commands
 
-**There is no build, no test suite, and no package manager here** — no `package.json`,
-no `Makefile`. The published markdown IS the artifact, so "does it build" is not a
-question this repo can answer. Verify content by reading it and by checking claims at
-their source (see Gotchas).
+**There is no build and no package manager here** — no `package.json`, no `Makefile`.
+The one test is `tests/migration-audit/test.sh` (below); nothing else is tested. The
+published markdown IS the artifact, so "does it build" is not a question this repo can
+answer. Verify content by reading it and by checking claims at their source (see
+Gotchas).
 
 The only executable things in the repo:
+
+- `tests/migration-audit/test.sh` — runs the Phase 1 `rg` patterns from
+  `references/migrating-from-another-chain.md` against a committed fixture and diffs
+  each hit set against `tests/migration-audit/expected/`. Needs `rg`. Run on pull
+  requests that touch that file by `.github/workflows/migration-audit-test.yml`. Add a
+  pattern there and the count check fails until you add a fixture and expected file.
 
 - `scripts/generate_minipay_live_apps.py` — rebuilds the MiniPay live-apps list; edit
   the generator, never its output
