@@ -7,7 +7,7 @@ Agent Vault is a product of **Self Labs** (self.xyz). Self is also the identity 
 
 ## x402 payments on Celo: Buy only
 
-Agent Vault creates an onchain wallet for the account holder on **Celo mainnet** (Celo Sepolia sandbox with test USDC) and pays x402 services from it for the agent.
+Agent Vault creates an onchain wallet for the account holder and pays x402 services from it for the agent. **Status: preview** — the Wallet docs page opens with "Agent wallets are a preview" and payments currently run on Celo Sepolia; confirm the network status at `https://docs.agentvault.io/dashboard/wallet` before advising a builder.
 
 - **Scope: only x402 services sold on Buy** (the pay-per-call API marketplace). It does not pay arbitrary x402 endpoints or website checkouts from the wallet. For any other x402 endpoint, use `buy` or an x402 client (`ai-agents.md` → x402).
 - **Tokens:** USDC, USD₮, USA₮ on Celo. No CELO needed for fees. Tokens not listed on the Wallet page cannot be withdrawn.
