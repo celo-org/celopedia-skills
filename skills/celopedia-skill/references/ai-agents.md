@@ -387,6 +387,38 @@ Covers network and block data, token and stable-token balances, gas fees, govern
 
 ---
 
+## Agent wallets and payment tools (third party)
+
+Built by other teams, not by Celo. Docs: `https://docs.altana.network` and `https://docs.agentvault.io`.
+
+**Every wallet provider on Celo works as an agent wallet.** Agent-specific: Altana (owner-held key, onchain session limits), Agent Vault (Agent Vault holds the key, pays x402 services on Buy only). Celina is not wallet infrastructure: it is an LLM toolkit (SDK, MCP server, REST API) whose local MCP server signs with a key you supply. General wallet infrastructure that also serves agents: JAW (delegated agent permissions), Privy, Openfort, Alchemy Smart Wallets, thirdweb, Para, Portal, BlockRadar, Safe, Dynamic, Reown, Zerion. A raw viem key is fine for testing only. Full list: `https://docs.celo.org/build/tools/wallets/index`.
+
+### Altana: agent wallets with onchain limits
+
+`https://www.altana.network` · docs `https://docs.altana.network`. A Smart Agentic Wallet where the **owner keeps the admin key** and Altana never holds keys or funds. The agent gets a **session key**: a scoped, time-bounded delegation with a spend cap per token over a rolling period, an allowlist of contracts and methods, and an expiry. The wallet contract enforces these, so a call outside them reverts. Grants are registered in the **Keystore**, a public onchain registry anyone can read; the owner revokes a session in one transaction. An intent relay simulates each transaction before signing.
+
+- **Celo:** mainnet (42220) and Celo Sepolia (11142220). The relay takes its fee in CELO or in a stablecoin the wallet holds (USDC, USD₮, USA₮, EURm). **The wallet needs CELO before the first session grant**: registering a session key in the Keystore costs ~8.45 CELO (read from `getRegistrationFeeInWei()` on the KeyStoreController). After that, relay fees can be paid in stablecoins.
+- **MCP server:** `@altananetwork/mcp` needs Bun 1.1+ and runs with `bunx`. `npx` fails with a TypeScript syntax error. Select the chain with `ALTANA_CHAIN` (`celo` or `celo-sepolia`); one server process serves one chain. **Note:** the MCP server exposes `wallet_execute`, which submits calls signed by the **admin key** (not the session key), and `create_wallet` stores the admin key on the local machine. An agent connected to this server is not limited to the session-key model described above — treat it with the same access level as the admin key.
+  ```bash
+  claude mcp add altana -e ALTANA_CHAIN=celo -- bunx @altananetwork/mcp
+  ```
+- **Limits:** set both `calls` and `spend` on a session; without `calls` the session reaches any contract within its spend cap. Spend amounts are in the token's smallest unit (USDC and USD₮ use 6 decimals).
+- **SDK:** `@altananetwork/sdk` 1.0.0+ exports `CELO` (42220) and `CELO_SEPOLIA` (11142220). `createClient({ chains: [CELO] })`. If `npm install` resolves to 0.9.0, a registry cooldown policy is hiding the newer release; install `@1.1.0` explicitly.
+- **x402 on Celo, buying:** an agent pays x402 endpoints on Celo from its Altana wallet in USDC, USD₮ or USA₮. Grant the session with `x402Tokens`, then `client.fetchWithX402({ session, url })`; it pays once and retries once. Run it server side. **x402 payments are signed, not sent as capped calls, so the session's daily spend cap does not bound them** (Altana changelog 1.1.0). Docs: `https://docs.altana.network/sdk/x402`.
+- **x402 on Celo, selling:** `@altananetwork/x402-server` **0.4.0+** has `USDC_CELO`, `USDT_CELO`, `USAT_CELO` configs (6 decimals; `USAT_CELO` is new in 0.4.0) and can settle through Celo's hosted facilitator (`https://api.x402.celo.org`; `POST /settle` needs an API key from `x402.celo.org`). Docs: `https://docs.altana.network/sdk/x402-server#celo`.
+- Partner contract addresses (Keystore) are on Altana's own networks page: `https://docs.altana.network/concepts/networks`.
+
+### Agent Vault (Self): payments and logins for agents
+
+`https://agentvault.io` · docs `https://docs.agentvault.io`. The agent works with mock tokens and never holds a card number, password or wallet key.
+
+- **Card and login flows:** hosted MCP server `https://mcp.agentvault.io/mcp`, a Playwright SDK, or an HTTP API.
+- **x402 on Celo (preview):** Agent Vault creates an onchain wallet for the account holder and pays x402 services from it for the agent via `pay_request` (MCP) or `POST /v1/wallet/pay` (HTTP). Tokens: USDC, USD₮, USA₮. No CELO needed. It pays for API calls sold on Buy, not for website checkouts. Spending limits come from the account holder's agent card, and a payment can wait for approval first. Payments are final. **Status: preview** — the Wallet docs page states "Agent wallets are a preview" and payments run on Celo Sepolia until Self Labs clears mainnet; confirm the current status at `https://docs.agentvault.io/dashboard/wallet` before advising a builder.
+- **Custody:** Agent Vault holds the wallet key for the account holder, and only the account holder can withdraw. State the key-holding fact and do not label it: do not call it self-custodial or non-custodial.
+- **Which one:** Altana when the owner must keep the key and limits must be verifiable onchain; Agent Vault when logins, cards and payment authority must stay out of the agent's hands. They are complementary.
+
+---
+
 ## Agent Skills Specification
 
 Celo's modular skill system for AI coding assistants.
@@ -567,7 +599,7 @@ Celo is **actively pushing builders toward onchain agents** — agents that hold
 
 - **Consumer money (save / send / spend)**: savings-coach and round-up agents, group savings (chama / stokvel) pools, remittance concierge, bill-pay & autopay, FX-hedging agents that dollarize a local-currency paycheck. Highest PMF — emerging-market retail.
 - **Agentic commerce & marketplaces**: local-commerce concierge with escrow, cross-border shopping agents, subscription managers — settling via x402 micropayments.
-- **Agents that pay by card or sign in to websites** (merchants with no stablecoin or x402 option): Agent Vault by Self Labs gives an agent spending-limited card payments and logins without exposing the card number or password. It is not a Celo protocol and does not use x402 — see [agent-vault.md](agent-vault.md).
+- **Agents that pay by card or sign in to websites** (merchants with no stablecoin or x402 option): Agent Vault by Self Labs gives an agent spending-limited card payments and logins without exposing the card number or password. It is not a Celo protocol; its x402 payments cover only services sold on Buy — see [agent-vault.md](agent-vault.md).
 - **DeFAI (crypto-native)**: conversational DeFi agents that compose Mento + Aave + Ubeswap, set-and-forget yield optimizers, DCA / strategy agents, onchain tax & portfolio assistants.
 - **Social, predictions & viral**: localized prediction markets, tip-to-earn creator agents, donation / round-up-to-cause agents.
 - **SMB, freelancers & identity infra**: invoice / get-paid agents, sybil-resistant airdrop & quest tools, SMS/USSD wallets for feature phones, and an MCP server for Celo. Pair human- or operator-facing flows with **Self Agent ID** for trust.
