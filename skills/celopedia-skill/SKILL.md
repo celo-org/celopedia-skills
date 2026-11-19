@@ -167,7 +167,7 @@ Verified addresses from `docs.celo.org` — core protocol, tokens, L1 bridge, Un
 
 All active Celo funding programs with a matchmaking guide.
 
-**Always fetch live program status from `celopg.eco/programs`** before answering — program status, dates, and eligibility change mid-quarter and the cached reference goes stale. See `live-data-sources.md` §2.
+**Always check `prezenti.xyz` for current grant status** before answering. Dates, amounts and eligibility change and the cached reference goes stale. For hackathons and new programs, point to the Celo Devs newsletter. See `live-data-sources.md` §2.
 
 > **Proof of Ship has been sunset.** If someone asks about it, say so and point them at the Celo Devs newsletter (https://celo-devs.beehiiv.com/subscribe) for hackathon and program announcements. Do not describe it as a route to funding.
 
@@ -246,6 +246,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | Need | Action |
 |------|--------|
 | Ecosystem search / competitors | Query The Grid (`the-grid-skill.md`) |
+| Chain activity / daily active addresses / transaction counts | Check `live-data-sources.md` §11 (growthepie) |
 | Contract address | Look up in `contracts.md` |
 | Protocol integration | Check `defi-protocols.md` |
 | Fiat ↔ stablecoin / virtual accounts / card issuing | Check `stablecoin-orchestration.md` |
@@ -294,7 +295,8 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 |-----------|-----------|----------|
 | DeFi TVL / protocols | DefiLlama API (`api.llama.fi`) | `ecosystem.md` snapshot |
 | Ecosystem products | The Grid GraphQL | `ecosystem.md` snapshot |
-| Grant programs | Fetch `celopg.eco/programs` | `grants-funding.md` snapshot |
+| Chain activity (daily active addresses, transactions) | growthepie API (`api.growthepie.com`, no key) | Token Terminal or Dune (keyed) |
+| Grant programs | Check `prezenti.xyz` (rendered page) | `grants-funding.md` snapshot |
 | Contract addresses | `contracts.md` (stable, rarely changes) | — |
 | Docs pages | `curl docs.celo.org/llms.txt` | `docs-map.md` snapshot |
 | On-chain data | Celo RPC (`forno.celo.org`) | — |

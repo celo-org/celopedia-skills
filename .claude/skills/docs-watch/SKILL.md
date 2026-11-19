@@ -23,7 +23,7 @@ a single PR as the one place everything gets reviewed.
 | 2 | Contract addresses | `https://docs.celo.org/build/tools/contracts/core-contracts` + `stablecoin-contracts` + `l1-contracts` + `uniswap-contracts` (WebFetch) | `contracts.md` |
 | 3 | Network info | `https://docs.celo.org/learn/network/overview` (WebFetch) | `network-info.md` |
 | 4 | Ecosystem / TVL | `curl -s https://api.llama.fi/protocols \| jq '[.[] \| select(.chains[]? == "Celo")]'` | `ecosystem.md` |
-| 5 | Grant programs | `curl -s https://www.celopg.eco/programs` (WebFetch) | `grants-funding.md` |
+| 5 | Grant programs | `curl -s https://www.prezenti.xyz/` (rendered page for status) | `grants-funding.md` |
 | 6 | MiniPay docs | `https://docs.minipay.xyz/` page tree + `getting-started/submit-your-miniapp.html` + `getting-started/best-practices.html` + `technical-references/deeplinks.html` (WebFetch) | `minipay-docs-map.md`, `minipay-requirements.md`, `minipay-common-mistakes.md` |
 | 7 | wFIAT access (Ripio tokens on Celo) | the commands in `wfiat-access.md` → _Re-verify_ (x402 `/supported` + `/api/config`, Ripio Ramp `/api/countries`, Textile RFQ levels, GeckoTerminal pools, LI.FI quotes, Aave `getReservesList`, CapyFi `eth_getCode`) | `wfiat-access.md`, plus the x402 token rows in `ai-agents.md` and `SKILL.md` |
 
