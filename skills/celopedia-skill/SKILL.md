@@ -130,7 +130,7 @@ Build AI agents that transact on Celo.
 - **Agent Vault (Self)**: card payments, x402 payments on Buy only in USDC/USD₮/USA₮ (**preview** — wallet feature is on Celo Sepolia until mainnet clears; confirm at docs.agentvault.io/dashboard/wallet) and website sign-in without the agent holding card, password or key; Agent Vault holds the wallet key for the account holder. See `ai-agents.md` → _Agent wallets and payment tools_
 - **Celo MCP Server**: Query blockchain data from coding assistants
 - **Agent Skills**: Modular skill system for AI coding agents
-- **Agents on Open Rails Hackathon** ended Nov 9, 2026. See Past Programs in `grants-funding.md`.
+- **Agents Open for Business Hackathon** (live): build opens Nov 20, 2026, submissions close Dec 7 at 09:00 GMT, winners announced Dec 11. $5,000 across four tracks: Stablecoin Corridors (Textile FX), Agent Vault, Self Agent ID, Altana Agent Wallets. Register at `https://www.loops.house/agents-open-for-business`. Every entry needs an ERC-8004 agent, Celo mainnet activity and an attribution tag on each counted transaction. Details and rules: `grants-funding.md`. Fetch the page for live status. The previous hackathon, Agents on Open Rails, ended Nov 9, 2026.
 - Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
 - **Securing an agent or chatbot**: `agent-security.md` — rendering model output safely, scoping by grounding rather than prompt instructions, treating tool output as untrusted, Denial of Wallet budgeting, and what changes once the agent holds a key (injection reaching a signing path, x402 spend, permanent ERC-8004 reputation). Read it before shipping anything public.
 
@@ -270,7 +270,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | Agent paying by card / agent logging in to websites / Agent Vault / agent shopping safely | Check `agent-vault.md` — card/login flows plus x402 on Buy only; route other x402 endpoints to x402/`buy` |
 | "How do agents find my paid API" / get listed / discoverability / Bazaar / agent402 / x402scan | Check `x402-seller-discoverability.md` — self-describing 402 + index-by-index entry rules |
 | Security / audit prep | Check `security-patterns.md` (Celo-specific); defer general Solidity audits to `pashov/skills` |
-| Grants / funding / current hackathon (dates, tracks, rules, how to register) | Check `grants-funding.md` — fetch the hackathon page live for deadlines |
+| Grants / funding / current hackathon (dates, tracks, rules, how to register) | Check `grants-funding.md`, and fetch the hackathon page (`https://www.loops.house/agents-open-for-business`) live for deadlines |
 | Documentation | Check `docs-map.md` |
 | Network config | Check `network-info.md` |
 | Governance | Check `governance.md` |

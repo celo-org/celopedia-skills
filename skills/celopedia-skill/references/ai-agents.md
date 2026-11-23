@@ -191,7 +191,7 @@ Celo runs an official hosted x402 facilitator, so builders don't need to run the
 
 **Getting found:** a working 402 is invisible until it describes itself and is listed. Baseline for any Celo endpoint: the `bazaar` extension in the 402, an agent402.tools registration, an ERC-8004 identity, and a Buy catalog listing request. Coinbase's index and x402scan need an offer on a network they support. Full entry rules and a verified snippet: `x402-seller-discoverability.md`.
 
-**Metering model** (snapshot of `/api/config` as of 2026-10-13 — confirm there, it changes): connect a wallet on the dashboard and sign a message (no gas) → API key with free starter credits (**20 mainnet** / 1,000 testnet). After the free credits, the config shows `pricePerTxMicro: 4000` (= $0.004 per settlement) and `feeBps: 30` (0.3% of payment value); the Agents on Open Rails page describes the paid tier as gas at cost plus 0.3% from a prepaid balance (topped up with USDC on the dashboard) — check the dashboard for the exact current schedule. `/verify` and `/supported` are free and need no key.
+**Metering model** (snapshot of `/api/config` as of 2026-11-23 — confirm there, it changes): connect a wallet on the dashboard and sign a message (no gas) → API key with free starter credits (**100 mainnet** / 1,000 testnet). After the free credits, the config shows `pricePerTxMicro: 4000` (= $0.004 per settlement) and `feeBps: 30` (0.3% of payment value); the config describes the paid tier as gas at cost plus 0.3% of the payment value, from a prepaid balance (topped up on the dashboard) — check the dashboard for the exact current schedule. `/verify` and `/supported` are free and need no key.
 
 **Integration gotchas for this facilitator:**
 
@@ -610,6 +610,17 @@ Many of these benefit from **Self Agent ID** (one-human-one-spot) to prevent syb
 - Agent ideas: https://github.com/celo-org/ai-agent-ideas
 - Uniswap pools: https://app.uniswap.org/explore/pools/celo
 - Merkl rewards: https://merkl.angle.money/?chain=42220
+
+---
+
+## Agents Open for Business Hackathon (live)
+
+Nov 20 to Dec 7, 2026 (submissions close 09:00 GMT), winners Dec 11, $5,000 across four tracks. Register at https://www.loops.house/agents-open-for-business. Tracks, prizes, rules, judging and livestream dates are in `grants-funding.md` → _Agents Open for Business_. What matters for agent builders:
+
+- **ERC-8004 is required in every track.** Register the agent from the wallet added to the entry, before the deadline. Self Agent ID is recommended, and required in the Self Agent ID track.
+- **Tag every transaction you want counted** with an ERC-8021 attribution tag (https://github.com/celo-org/attribution-tags). Only Celo mainnet counts. The tag cannot be added later.
+- **x402 payments carry no tag yet.** x402 sellers register their PayTo address at sign-up instead.
+- **Textile FX quotes**: request them with your wallet and append your tag to `transactions.swap.data` before sending. With a Textile API key, leave `includeAttribution` off so your tag is the only one.
 
 ---
 
