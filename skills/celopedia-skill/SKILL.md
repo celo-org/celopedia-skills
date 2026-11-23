@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.16.4"
+  version: "2.16.5"
 ---
 
 # Celopedia Skill
@@ -195,7 +195,7 @@ Non-protocol-technical guidance that turns a working Celo project into a shipped
 - **Comms**: one-sentence pitch forging, build-in-public weekly cadence, launch posts, "strip AI-slop" rewrite prompt
 - **GTM**: ICP definition, channel selection for Celo/MiniPay audiences, Remotion + Screen Studio video loop, public MCP servers as a distribution channel
 - **Referrals**: dual-sided incentives, 4 referral pattern archetypes (flat bounty / revenue share / fee waiver / leaderboard), leaderboards that don't demotivate the long tail, on-chain tracking patterns, anti-sybil, k-factor metrics
-- **Analytics**: PostHog + The Graph + direct RPC three-tier scaling strategy, with full code samples for caching, CORS hardening, and HogQL queries
+- **Analytics**: PostHog + The Graph + direct RPC three-tier scaling strategy, with full code samples for caching, CORS hardening, and HogQL queries; SQD through buy for event history before a subgraph exists
 - **Business model**: MRR-or-die framing, USDT monetization patterns (commission / product sale / subscription / agent calls), break-even calculator
 - **Dev methodology**: spec-driven development with Superpowers — ship faster with fewer regressions (see also Capability 2)
 - **SEO**: SEO Audit skill + Celo/MiniPay keyword strategy + on-page essentials
@@ -264,6 +264,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | MiniPay performance / load speed / Web Vitals / PageSpeed / slow first load | Check `minipay-performance.md` — measure real-user load speed with PostHog + optimization playbook to hit 90+ |
 | What Mini Apps are live / discovery ideas | Check `minipay-live-apps.md` (snapshot; country availability varies) |
 | ODIS / phone lookup / SocialConnect | Check `odis-socialconnect.md`, `minipay-guide.md`, `contracts.md` |
+| Event history / indexing past logs / `eth_getLogs` "query exceeds range" | Check `network-info.md` → _RPC Limits & Gotchas_: Forno caps a request at 5,000 blocks; SQD through buy streams longer ranges with no payment; Chainstack through buy batches chunked calls for $0.01 |
 | AI agent building | Check `ai-agents.md` |
 | x402 / pay-per-use API / paid endpoints | Check `ai-agents.md` → x402; hosted facilitator guide: `https://x402.celo.org/SKILL.md` |
 | Agent needs to PAY for an API or service per request (compute, data, RPC, LLM) / buy / usebuy.ai | Route to buy (AI agents section above) and its skills in `https://github.com/celo-org/buy-skill`. No crypto → the Self-gated USA₮ faucet, then pay in USAT. Building a paid endpoint instead → the x402 row |

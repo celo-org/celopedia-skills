@@ -84,6 +84,7 @@ You expose an MCP server (see [growth-gtm.md](growth-gtm.md) §5) and charge AI 
 - **Implementation**: x402 payment gate on the endpoint; receiver address collects USDC/USDT
 - **Pros**: scales infinitely without user-acquisition friction (agents discover you), aligned with AI adoption trajectory
 - **Cons**: requires AI ecosystem to actually find you (so promote the MCP server — see [growth-gtm.md](growth-gtm.md) §5)
+- **Reach agents that already pay on Celo**: once the endpoint answers with a 402, request a listing in the buy catalog so agents with a buy wallet can call it. Steps: [x402-seller-discoverability.md](x402-seller-discoverability.md) → buy catalog
 
 **Math example**: $0.01 per call × 100,000 calls/month from various agents = **$1,000 MRR**
 
