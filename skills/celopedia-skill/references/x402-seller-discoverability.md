@@ -18,7 +18,7 @@ A working 402 endpoint on Celo is invisible until (1) its 402 response describes
 | **Coinbase x402 discovery (Bazaar)** | Indexed after a paid call settles through **Coinbase's** facilitator. Only the CDP SDK's `createX402Server` (TypeScript) declares discovery automatically; with the bare `@x402/*` packages (as in the snippet below) or Python, register the Bazaar extension and declare it per route yourself | Coinbase's facilitator settles on Base, Polygon, Arbitrum, Monad, World, Solana (testnets: Base Sepolia, World Sepolia, Solana Devnet) — **not on Celo**. Whether a Celo offer listed next to a settled one is shown is not documented. Listings with no settlement for 30 days are removed. |
 | **x402scan** | Web form at `https://www.x402scan.com/resources/register`, or the API (`POST /api/x402/registry/register`, `/register-origin`, SIWX-authenticated) | Added if the URL returns a valid challenge; accepts **Base and Solana** resources only (`SUPPORTED_CHAINS = [BASE, SOLANA]`), so Celo-only endpoints are rejected. |
 | **8004scan** | Register an ERC-8004 identity on Celo; list endpoints under `services`, set `x402Support: true` in the registration file | Registry addresses and flow: `ai-agents.md` → ERC-8004, docs `/build/agents/8004`. |
-| **Buy catalog (usebuy.ai)** | Listing request via the buy-skill issue form `https://github.com/celo-org/buy-skill/issues/new/choose` | Curated; needs origin, description, price, networks, tokens. |
+| **buy catalog (usebuy.ai)** | Listing request via the buy-skill issue form `https://github.com/celo-org/buy-skill/issues/new/choose` | Curated; needs origin, description, price, networks, tokens. |
 
 Key consequence for advice: an endpoint that accepts only Celo cannot appear in Coinbase's index or on x402scan today. Recommend **agent402.tools + ERC-8004 + a self-describing 402** as the baseline. Add a second offer on a network those indexes support (for example Base via Coinbase's facilitator, alongside Celo via `api.x402.celo.org`) only if the builder specifically needs the Coinbase or x402scan surfaces, and don't promise that the Celo offer will be displayed there.
 
@@ -89,7 +89,7 @@ curl -X POST https://agent402.tools/api/index/register \
 - **x402scan**: web form `https://www.x402scan.com/resources/register`, or the SIWX-authenticated `POST /api/x402/registry/register` (Base/Solana resources only).
 - **Coinbase index**: settle one paid call through Coinbase's facilitator on a network it supports, keep the Celo offer in `accepts`, repeat at least every 30 days.
 - **8004scan**: ERC-8004 registration on Celo (Identity Registry `0x8004A169FB4a3325136EB29fA0ceB6D2e539a432`, Reputation Registry `0x8004BAa17C55a88189AE136b182e5fdA19dE9b63`); registration file `type: https://eips.ethereum.org/EIPS/eip-8004#registration-v1` with `services[]` and `x402Support: true`.
-- **Buy catalog**: issue form (link above).
+- **buy catalog**: issue form (link above).
 
 ---
 
@@ -99,6 +99,6 @@ curl -X POST https://agent402.tools/api/index/register \
 2. Origin is public and answers 402 to an unauthenticated request.
 3. Service manifest published at `/.well-known/x402`, then the origin registered on agent402.tools.
 4. ERC-8004 identity on Celo with `services` + `x402Support: true`.
-5. Listing request opened for the Buy catalog.
+5. Listing request opened for the buy catalog.
 6. Optional: a second offer on Base (or another supported network) for Coinbase's index and x402scan.
 7. Attribution tags on every transaction the seller sends (`attribution-tags.md`).
