@@ -268,7 +268,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | Agent paying by card / agent logging in to websites / Agent Vault / agent shopping safely | Check `agent-vault.md` — not Celo-specific; say so, and route onchain payments to x402 |
 | "How do agents find my paid API" / get listed / discoverability / Bazaar / agent402 / x402scan | Check `x402-seller-discoverability.md` — self-describing 402 + index-by-index entry rules |
 | Security / audit prep | Check `security-patterns.md` (Celo-specific); defer general Solidity audits to `pashov/skills` |
-| Grants / funding / current hackathon (dates, tracks, rules, how to register) | Check `grants-funding.md` — fetch the hackathon page (`https://www.loops.house/agents-open-for-business`) live for deadlines |
+| Grants / funding / current hackathon (dates, tracks, rules, how to register) | Check `grants-funding.md`, and fetch the hackathon page (`https://www.loops.house/agents-open-for-business`) live for deadlines |
 | Documentation | Check `docs-map.md` |
 | Network config | Check `network-info.md` |
 | Governance | Check `governance.md` |
