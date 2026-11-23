@@ -230,7 +230,10 @@ See `stablecoin-orchestration.md` for the full Bridge integration reference.
 | Safe Wallet | Multisig | Web | https://app.safe.global |
 | MetaMask | Browser extension + mobile | All platforms | https://metamask.io |
 
-Wallet infrastructure (WaaS): Privy, Alchemy Smart Wallets, Thirdweb, Reown, Portal, JAW, Dynamic, Openfort, Para, Blockradar
+Wallet infrastructure (WaaS): Privy, Alchemy Smart Wallets, Thirdweb, Reown, Portal, JAW, Dynamic, Openfort, Para, Blockradar, Altana, Agent Vault
+
+- **Altana** (https://www.altana.network): self-custodial agent wallets. The owner keeps the admin key; the agent holds a session key with a spend cap, contract allowlist and expiry enforced onchain. Live on Celo mainnet. See `ai-agents.md` → _Agent wallets and payment tools_.
+- **Agent Vault** (https://agentvault.io): agent wallet (**preview** — currently Celo Sepolia; confirm mainnet status at docs.agentvault.io/dashboard/wallet) that pays x402 services sold on Buy (only) in USDC, USD₮ or USA₮ within the account holder's limits; also card payments and website sign-in. Agent Vault holds the wallet key for the account holder. See `ai-agents.md` → _Agent wallets and payment tools_.
 
 - **Openfort** (https://www.openfort.io): non-custodial embedded wallets with social login, server wallets, and account abstraction with paymasters that can pay fees in stablecoins. Listed on the Celo docs wallets page.
 - **Para** (https://docs.getpara.com/v3/developer-tools/ai-tooling/agent-skill): wallet and authentication suite with an agent skill and CLI. Its chain support page lists Celo (https://docs.getpara.com/v3/introduction/chain-support).
