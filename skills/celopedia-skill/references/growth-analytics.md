@@ -32,6 +32,8 @@ Tier 3: + The Graph subgraph      →  $0/mo on Studio, unlimited history & char
 
 Start at Tier 1. Add Tier 2 the day you ship publicly. Add Tier 3 the day you need a time-series chart or leaderboard.
 
+Need past events before you have a subgraph? SQD's Celo dataset through buy streams logs for a block range with no payment and no account (`network-info.md` → _RPC Limits & Gotchas_). It returned `529` (overloaded) on most calls when tested on 2026-11-23, so cache what you fetch and keep The Graph for production charts.
+
 ---
 
 ## 3. Tier 1 — Direct RPC for on-chain stats
