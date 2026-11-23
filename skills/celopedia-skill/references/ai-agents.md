@@ -581,6 +581,17 @@ Many of these benefit from **Self Agent ID** (one-human-one-spot) to prevent syb
 
 ---
 
+## Agents Open for Business Hackathon (live)
+
+Nov 20 to Dec 7, 2026 (submissions close 09:00 GMT), winners Dec 11, $5,000 across four tracks. Register at https://www.loops.house/agents-open-for-business. Tracks, prizes, rules, judging and livestream dates are in `grants-funding.md` → _Agents Open for Business_. What matters for agent builders:
+
+- **ERC-8004 is required in every track.** Register the agent from the wallet added to the entry, before the deadline. Self Agent ID is recommended, and required in the Self Agent ID track.
+- **Tag every transaction you want counted** with an ERC-8021 attribution tag (https://github.com/celo-org/attribution-tags). Only Celo mainnet counts. The tag cannot be added later.
+- **x402 payments carry no tag yet.** x402 sellers register their PayTo address at sign-up instead.
+- **Textile FX quotes**: request them with your wallet and append your tag to `transactions.swap.data` before sending. With a Textile API key, leave `includeAttribution` off so your tag is the only one.
+
+---
+
 ## Onchain Agents Hackathon (past)
 
 > **Ended June 15, 2026.** Kept as a reference for how Celo hackathons are run; for past hackathons see `grants-funding.md` → _Past Programs_.

@@ -1,7 +1,7 @@
 # Celo Grants & Funding Programs
 
 > Sources: https://www.prezenti.xyz (grant pools), https://celo-devs.beehiiv.com/subscribe (program announcements), https://docs.celo.org/build/fund-your-project
-> Last updated: 2026-11-03. Checked against prezenti.xyz and its Anchor and Frontier forms on that date. `celopg.eco/programs` no longer lists programs (it returns 404), so it is not a source.
+> Last updated: 2026-11-23. Prezenti entries were checked against prezenti.xyz and its Anchor and Frontier forms on 2026-11-03. The hackathon entry was checked against its Loops House page on 2026-11-23. `celopg.eco/programs` no longer lists programs (it returns 404), so it is not a source.
 
 > ⚠️ **Live data required.** Dates, amounts and eligibility change. **Check `https://www.prezenti.xyz` and the application forms it links before answering a Prezenti question**, and point builders to the Celo Devs newsletter for hackathons and new programs. The tables below are a cached reference. See `live-data-sources.md` §2 for the fetch command.
 
@@ -11,6 +11,24 @@
 
 > **Proof of Ship has been sunset** and is no longer accepting submissions. For hackathon and
 > new-program announcements, subscribe to the Celo Devs newsletter: https://celo-devs.beehiiv.com/subscribe
+
+### Agents Open for Business (hackathon)
+
+- **Type**: Online hackathon on Loops House. Build agents that do real jobs on Celo mainnet.
+- **Prize pool**: **$5,000**, set in USD and paid in CELO at the USD equivalent to the payout wallet the team registers. Altana XP is credited by Altana to the wallet the team built with.
+- **Dates**: build opens **Fri Nov 20, 2026** (14:00 GMT, kickoff livestream). Submissions close **Mon Dec 7, 2026 at 09:00 GMT**. Winners announced **Fri Dec 11**.
+- **Register**: https://www.loops.house/agents-open-for-business (checked 2026-11-23). Enrolling issues the entry's attribution tag.
+- **Tracks** (one project can enter all four and win in up to two):
+  - **Stablecoin Corridors (Textile FX)**: 1st $1,000, 2nd $600, 3rd $400. Agents that pay, get paid or pay out in local stablecoins, converting on Textile FX between USD₮ and cNGN, IDRX or Ripio's wFIAT (wARS, wBRL, wMXN, wCOP). Needs at least one tagged Textile FX conversion on mainnet in a listed corridor.
+  - **Agent Vault: Online & Onchain Checkouts (Self)**: 1st $700, 2nd $300. Agents that sign in, check out and pay on regular websites with Agent Vault, and pay onchain with x402. A card checkout is optional; signing in meets the requirement. See `agent-vault.md`.
+  - **Self Agent ID: Verified Agent Payments (Self)**: 1st $700, 2nd $300. Services where Self Agent ID decides which agents get served, paid or limited, with payments through x402. See `self-agent-id.md`.
+  - **Altana Agent Wallets (Altana)**: 1st $750 + 25,000 XP, 2nd $250 + 10,000 XP. Product reviews earn 5,000 XP each, up to 10, one per team. Agents that act from a non-custodial Altana wallet under a session key (spend cap, contract allowlist, expiry).
+- **Rules**: Celo mainnet only. Every entry registers its agent on ERC-8004 (Self Agent ID recommended). Public GitHub repo at registration that still resolves at judging. An attribution tag (ERC-8021) in every transaction to be counted; it cannot be added later. x402 sellers register their PayTo address at sign-up, since x402 payments do not carry tags yet. Code is written during the hackathon. Sponsored gas is not a builder contribution.
+- **Judging**: Celo DevRel shortlists from onchain data and the Loops judge's reading of the repo. Textile and Celo Core Co. judge Stablecoin Corridors, Self judges the Agent Vault and Self Agent ID tracks, Altana judges its own track.
+- **Livestreams**: Tue Nov 24 14:00 GMT (Self: Agent Vault and Agent ID), Wed Nov 25 14:00 GMT (Altana), Tue Dec 1 14:00 GMT (Stablecoin Corridors). AskBots reviews of registered projects on Nov 24 and Dec 4.
+- **Support**: Telegram group https://t.me/celoagenthackathons, weekly office hours Thursdays at 12:00 GMT.
+- **Perks**: 3 months of Agent Vault Plus and 3 months of Chainstack's Growth Plan at no cost to registered teams. Paying for services on buy (`https://usebuy.ai`) is optional and counts as real use.
+- **Next step**: a track record here counts when applying to Prezenti (see below).
 
 ### Prezenti: Season 3
 
