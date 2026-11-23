@@ -3,7 +3,7 @@
 > Source: https://docs.celo.org/llms.txt
 > OpenAPI Spec: https://docs.celo.org/api-reference/openapi.json — **404 as of 2026-10-19**
 > (pre-existing, not something this run's restructuring caused; flagged, not otherwise acted on).
-> Last updated: 2026-11-16
+> Last updated: 2026-11-23
 
 Use this to find the right documentation page for any topic. Links go directly to docs.celo.org.
 
@@ -17,10 +17,12 @@ Use this to find the right documentation page for any topic. Links go directly t
 > added (not a restructuring) — three under `build/agents/*` (AI Resources, Give Your Agent a
 > Wallet and Test Funds, AskBots) and six under `build/tools/libraries-sdks/contractkit/*` (see
 > those sections below). **2026-11-02:** one page added — "Sponsor gas with Pimlico on
-> Celo" under `build/tools/wallets/pimlico` (see Build — Tools: Wallets below). **New on
-> 2026-11-16:** one page added — "x402: Add Celo to your endpoint" under
-> `build/agents/x402-add-celo` (see Build — Agents below). Every URL below reflects the
-> **2026-11-16** structure.
+> Celo" under `build/tools/wallets/pimlico` (see Build — Tools: Wallets below). **2026-11-16:**
+> one page added — "x402: Add Celo to your endpoint" under
+> `build/agents/x402-add-celo` (see Build — Agents below). **New on 2026-11-23:** two pages
+> added — "buy: Pay for APIs from an agent" under `build/agents/buy` (see Build — Agents below)
+> and "Pinax" under `build/tools/indexers/pinax` (see Build — Tools: Infrastructure below). Every
+> URL below reflects the **2026-11-23** structure.
 
 ---
 
@@ -135,6 +137,7 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Self Agent ID | https://docs.celo.org/build/agents/self-agent-id |
 | Agent Vault: Card Payments and Logins for Agents | https://docs.celo.org/build/agents/agent-vault |
 | Give Your Agent a Wallet and Test Funds | https://docs.celo.org/build/agents/agent-wallet |
+| buy: Pay for APIs from an agent | https://docs.celo.org/build/agents/buy |
 | x402: Agent Payments | https://docs.celo.org/build/agents/x402 |
 | x402: Add Celo to your endpoint | https://docs.celo.org/build/agents/x402-add-celo |
 | x402: Get your endpoint discovered | https://docs.celo.org/build/agents/x402-get-discovered |
@@ -156,7 +159,9 @@ Use this to find the right documentation page for any topic. Links go directly t
 > reference). **New on 2026-11-16: "x402: Add Celo to your endpoint"** — how to accept
 > USDC/USDT/USA₮ on Celo from an existing x402 endpoint by adding Celo offers and the Celo
 > facilitator alongside an already-supported network; distinct from the existing "x402: Get your
-> endpoint discovered" page. The standalone "Agent Skills" page remains removed.
+> endpoint discovered" page. **New on 2026-11-23: "buy: Pay for APIs from an agent"** — a CLI/x402
+> payment client (`buy`) that lets an AI agent or CLI pay for HTTP APIs, data, and compute in
+> stablecoins on Celo. The standalone "Agent Skills" page remains removed.
 
 ## Build — MiniPay
 
@@ -270,6 +275,7 @@ Use this to find the right documentation page for any topic. Links go directly t
 | GoldRush | https://docs.celo.org/build/tools/indexers/goldrush |
 | Indexing Co | https://docs.celo.org/build/tools/indexers/indexing-co |
 | Codex | https://docs.celo.org/build/tools/indexers/codex |
+| Pinax | https://docs.celo.org/build/tools/indexers/pinax |
 | Explorer Overview | https://docs.celo.org/build/tools/explorers/overview |
 | Block Explorer (Celoscan + Blockscout) | https://docs.celo.org/build/tools/explorers/block-explorers |
 | Analytics | https://docs.celo.org/build/tools/explorers/analytics |
