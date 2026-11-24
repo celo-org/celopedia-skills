@@ -312,7 +312,7 @@ Celo migrated from L1 to L2 on March 26, 2025 (block 31,056,500). Old tutorials 
 
 ### 8. `eth_getLogs` — 5,000 Block Range Limit
 
-Forno mainnet rejects `eth_getLogs` when `toBlock - fromBlock` is more than 5,000, with error `-32602 query exceeds range, retry smaller (max block range 5000, …)`. Any indexer or event-history feature must paginate. See `network-info.md` → _RPC Limits & Gotchas_ for the chunked viem workaround.
+Forno mainnet rejects `eth_getLogs` when `toBlock - fromBlock` is more than 5,000, with error `-32602 query exceeds range, retry smaller (max block range 5000, …)`. Any indexer or event-history feature must paginate. See `network-info.md` → _RPC Limits & Gotchas_ for the chunked viem workaround, and for two routes through buy: SQD streams a long range in one request with no payment, and Chainstack takes up to 2,000 chunked calls in one $0.01 batch.
 
 ### 9. viem strict EIP-55 checksum
 

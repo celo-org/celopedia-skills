@@ -167,3 +167,22 @@ async function getLogsChunked(params: {
 ```
 
 For very deep history, prefer a subgraph or Blockscout's `/api?module=logs` endpoint (see comparison above) over chunked `eth_getLogs`.
+
+**Two routes through buy** (`https://usebuy.ai`), measured 2026-11-23 against the gateway at `https://gateway.usebuy.ai`:
+
+| Route | How it handles history | Price | Measured |
+|---|---|---|---|
+| SQD Portal: `POST /sqd/datasets/celo-mainnet/stream` | Streams every matching log in a block range from one request, with no `eth_getLogs` range limit | No payment, no account; 120 requests a minute per IP | A 50,000-block USDC `Transfer` query (blocks 83,400,000 to 83,450,000) returned 2,349 logs in one request. Over blocks 83,400,000 to 83,405,000 it returned 219 logs, the same count as Forno. The upstream answered `529` ("Service is overloaded") on 4 of 5 calls that day: honour `Retry-After` and retry. |
+| Chainstack archive RPC: `POST /chainstack/celo` | Standard JSON-RPC. One payment covers a batch of up to 2,000 calls (per the gateway's 402), so a chunked `eth_getLogs` scan fits in one paid request | $0.01 per batch, in USDC, USD₮ or USA₮ | A 5,001-block `eth_getLogs` succeeded; 50,000 and 500,000 blocks returned `-32602 Block range limit exceeded` ([Chainstack range limits](https://docs.chainstack.com/docs/limits#evm-range-limits)). Keep each call at 5,000 blocks. |
+
+SQD request, no payment needed:
+
+```bash
+curl -X POST https://gateway.usebuy.ai/sqd/datasets/celo-mainnet/stream \
+  -H 'Content-Type: application/json' \
+  --data '{"type":"evm","fromBlock":83400000,"toBlock":83450000,"fields":{"block":{"number":true},"log":{"transactionHash":true,"topics":true,"data":true}},"logs":[{"address":["0xceba9300f2b948710d2653dd7b07f33a8b32118c"],"topic0":["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"]}]}'
+```
+
+The response is newline-delimited JSON, one line per block that has matching logs. Check the last block number in the response before treating a long range as complete.
+
+The Chainstack route is paid: set up a buy wallet and pay with `buy curl --max-amount 0.01` as described in `SKILL.md` → Capability 5 (buy) and `https://github.com/celo-org/buy-skill`. Payments are final.
