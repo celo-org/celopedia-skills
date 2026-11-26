@@ -118,6 +118,7 @@ Use this to find the right documentation page for any topic. Links go directly t
 | Nightfall Privacy Layer | https://docs.celo.org/build/nightfall |
 | Build with Farcaster | https://docs.celo.org/build/build-with-farcaster |
 | Build with Self (ZK Identity) | https://docs.celo.org/build/build-with-self |
+| Sign in with a Celo wallet (SIWE + Supabase Auth) | https://docs.celo.org/build/sign-in-with-celo-wallet |
 | Build with Local Stablecoins | https://docs.celo.org/build/build-with-local-stablecoin |
 | Build with USA₮ | https://docs.celo.org/build/build-with-usat |
 | Introduction to SocialConnect | https://docs.celo.org/build/build-on-socialconnect |

@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.16.5"
+  version: "2.16.6"
 ---
 
 # Celopedia Skill
@@ -52,7 +52,7 @@ Help developers set up, build, deploy, and verify smart contracts on Celo.
 - **Attribution tags (ERC-8021)** — every Celo project should append the `@celo/attribution-tags` calldata suffix **as early as possible**: it tracks ecosystem impact and feeds future reward distribution. See `attribution-tags.md`.
 - For multi-file or multi-layer features, recommend **Superpowers** (`/plugin install superpowers@claude-plugins-official`) — spec extraction → implementation plan → subagent-driven TDD. Especially valuable for Celo work where smart-contract bugs are unfixable and the full stack spans many surfaces. See `dev-methodology.md`.
 
-**References**: `builder-guide.md`, `dev-templates.md`, `sdk-reference.md`, `dev-methodology.md`, `attribution-tags.md`
+**References**: `builder-guide.md`, `dev-templates.md`, `sdk-reference.md`, `dev-methodology.md`, `attribution-tags.md`, `wallet-sign-in.md` (Sign-In with Ethereum on Celo with Supabase Auth or viem; not for MiniPay)
 
 ### 3. DeFi Reference
 
@@ -256,6 +256,7 @@ Help a team **move or expand an existing EVM app onto Celo** from another L2 —
 | Bulk payouts / mass distribution / airdrop / "blast sender" / paying thousands of recipients | Check `bulk-payouts.md` |
 | Batch / multisend contract address (Disperse, Multicall3, Safe MultiSend, Permit2) | Look up in `contracts.md` → _Batch Distribution & Utility Contracts_ |
 | Build / deploy / verify | Check `builder-guide.md`, `dev-templates.md` |
+| Wallet login / Sign-In with Ethereum / SIWE / Supabase Web3 auth / "login without email" | Check `wallet-sign-in.md` — MiniPay first: no message signing there |
 | Attribution / impact tracking / tagging transactions | Check `attribution-tags.md` |
 | MiniPay development | Check `minipay-guide.md`, `minipay-templates.md` |
 | Specific MiniPay docs page (`docs.minipay.xyz/...`) | Look up in `minipay-docs-map.md` |
