@@ -26,7 +26,7 @@ a single PR as the one place everything gets reviewed.
 | 5 | Grant programs | `curl -s https://www.prezenti.xyz/` (rendered page for status) | `grants-funding.md` |
 | 6 | MiniPay docs | `https://docs.minipay.xyz/` page tree + `getting-started/submit-your-miniapp.html` + `getting-started/best-practices.html` + `technical-references/deeplinks.html` (WebFetch) | `minipay-docs-map.md`, `minipay-requirements.md`, `minipay-common-mistakes.md` |
 | 7 | wFIAT access (Ripio tokens on Celo) | the commands in `wfiat-access.md` → _Re-verify_ (x402 `/supported` + `/api/config`, Ripio Ramp `/api/countries`, Textile RFQ levels, GeckoTerminal pools, LI.FI quotes, Aave `getReservesList`, CapyFi `eth_getCode`) | `wfiat-access.md`, plus the x402 token rows in `ai-agents.md` and `SKILL.md` |
-| 8 | Docs freshness run (monthly, celo-org/docs) | `gh pr list -R celo-org/docs --search "monthly freshness refresh in:title" --state all --limit 1 --json number,state,body,url` and `gh issue list -R celo-org/docs --search "Docs freshness in:title" --state all --limit 1 --json number,body,url`; page-to-file map in celo-org/docs `.github/freshness/pages.yml` (`celopedia` field) | every file the map names for a page the docs run changed |
+| 8 | Docs freshness run (monthly, celo-org/docs) | `gh pr list -R celo-org/docs --search "head:freshness/<YM>" --state all --limit 50 --json number,state,mergedAt,headRefName,body,url` (`<YM>` is this month as `YYYY-MM`; the prefix match returns `freshness/<YM>` and every re-run branch `freshness/<YM>-<run number>`) and `gh issue list -R celo-org/docs --search "Docs freshness in:title" --state all --limit 1 --json number,body,url`; page-to-file map in celo-org/docs `.github/freshness/pages.yml` (`celopedia` field) | every file the map names for a page the docs run changed |
 
 ### Source 6 — MiniPay: classify carefully
 
@@ -86,9 +86,13 @@ refresh (<Month YYYY>)` and an issue titled `Docs freshness: …` with open
 questions. Its registry, `.github/freshness/pages.yml`, maps each docs page to
 the Celopedia reference files that repeat its facts (`celopedia:` field).
 
-- **Merged** freshness PR: each change is a `reference update` for every
-  file the map names for that page. Skip it if the file already matches. Cite
-  the docs PR in this run's PR body.
+- A month can have several freshness PRs (a re-run opens
+  `freshness/<YM>-<run number>`). List all of them and handle each one; don't
+  stop at the newest.
+- **Merged** freshness PR: process every merged PR of the month, oldest merge
+  first, so a later run's value wins. Each change is a `reference update` for
+  every file the map names for that page. Skip it if the file already
+  matches. Cite each docs PR in this run's PR body.
 - **Unmerged** freshness PR: not confirmed yet. Mention it under
   **Needs review** with a link, and don't edit anything from it.
 - **Open docs questions** that affect a mapped file: list them under
