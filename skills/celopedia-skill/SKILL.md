@@ -10,7 +10,7 @@ homepage: https://celo.org
 license: Apache-2.0
 metadata:
   author: celo-org
-  version: "2.16.5"
+  version: "2.17.0"
 ---
 
 # Celopedia Skill
@@ -119,7 +119,7 @@ Build Mini Apps for MiniPay — Celo's stablecoin wallet with 20M+ wallet activa
 
 Build AI agents that transact on Celo.
 
-- **ERC-8004**: Agent Trust Protocol (identity + reputation registries)
+- **ERC-8004**: Agent Trust Protocol (identity + reputation registries). The Validation Registry is a spec preview with no Celo address listed: interface and on-chain check in `erc8004-validation-registry.md`
 - **Self Agent ID**: proof-of-human extension on ERC-8004 (soulbound NFT bound to a passport ZK proof) — sybil resistance; register at `https://app.ai.self.xyz`. See `self-agent-id.md`.
 - **Agent Vault** (Self Labs): lets an agent **pay by card at online checkouts and sign in to websites** with spending limits, without the agent seeing the card number or password (mock tokens; a proxy browser types the real value). Developer surface: hosted MCP server `https://mcp.agentvault.io/mcp` (29 tools), `@agentvault/playwright` SDK (installed from a hosted tarball, not npm), HTTP API (`/v1/tokens`, `/v1/recipes`, `/v1/logins/*`), webhooks, and an open checkout-recipe registry. It also pays **x402 services sold on buy** from a Celo wallet whose key it holds (USDC, USD₮, USA₮) — buy only, not arbitrary x402 endpoints; **wallet feature is preview** (Sepolia until mainnet clears — confirm at docs.agentvault.io/dashboard/wallet). Not a Celo protocol; for other x402 endpoints use x402/MPP/`buy`. See `agent-vault.md`.
 - **Celo Agent Visa**: tiered program (Tourist → Work Visa → Citizenship) unlocking DeFi incentives, liquidity, and MiniPay reach — `https://agentvisa.self.xyz/agents/visa`
@@ -134,7 +134,7 @@ Build AI agents that transact on Celo.
 - Use cases (push toward **onchain agents** that transact in stablecoins): consumer money (savings, remittance, bill-pay, FX hedging), agentic commerce, DeFAI, prediction markets, freelancer/invoice agents
 - **Securing an agent or chatbot**: `agent-security.md` — rendering model output safely, scoping by grounding rather than prompt instructions, treating tool output as untrusted, Denial of Wallet budgeting, and what changes once the agent holds a key (injection reaching a signing path, x402 spend, permanent ERC-8004 reputation). Read it before shipping anything public.
 
-**References**: `ai-agents.md`, `self-agent-id.md`, `agent-vault.md`, `agent-security.md`, `x402-seller-discoverability.md`
+**References**: `ai-agents.md`, `erc8004-validation-registry.md`, `self-agent-id.md`, `agent-vault.md`, `agent-security.md`, `x402-seller-discoverability.md`
 
 ### 6. Security & Audit Readiness
 
