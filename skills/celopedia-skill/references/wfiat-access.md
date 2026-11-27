@@ -28,8 +28,8 @@ have no market on Celo at all.
 exchange → Celo directly) → swap to wARS / wBRL (DEX) or wCOP / wBRL (Textile). There is no
 realistic path to wMXN, wPEN, or wCLP without a LatAm bank account or existing holdings on another chain.
 
-**Demo amounts:** the Google Cloud Web3 faucet gives USAT on Celo mainnet after a one-time Self
-verification; 1 USAT swaps to ~1,615 wARS via LI.FI.
+**Demo amounts:** a dollar is plenty: 1 USAT swaps to ~1,615 wARS via LI.FI. No faucet hands out
+USAT on Celo mainnet, so the stablecoin has to be bought or bridged first.
 
 Supply snapshot on Celo (2026-10-21): wARS ~281M (~$173k), wBRL ~3.85M (~$760k), wCOP ~34.5M (~$11k),
 wCLP ~1.0M (~$1k), wMXN ~13.2k (~$725), wPEN ~603 (~$180). For wMXN, wPEN, and wCLP every pool on every
